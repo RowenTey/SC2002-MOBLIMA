@@ -1,7 +1,7 @@
 package src.model;
 
 /**
- * The Class that handles the data of hotel's invoices.
+ * The class that records the seat of a showtime.
  * @author Kai Seong
  * @version 1.0
  * @since 2022-3-30
@@ -26,7 +26,7 @@ public class Seat {
    * Showtime of seat
    */
   private Showtime showtime;
-
+P
   /**
    * Constructor of Seat
    * @param row Row of seat
