@@ -117,8 +117,8 @@ Launch the index.html under ./javadoc/index.html
 
 # Contributors
 
-- @limivann
-- @MAXTAN3110
-- @kcz358
-- @HillSeahWQ
-- @lordAaron0121
+- [@RowenTey](https://github.com/RowenTey)
+- [@Horstann](https://github.com/Horstann)
+- [@SLAU925](https://github.com/SLAU925)
+- [@amiyang](https://github.com/amiyang)
+- [@ScatteredThunderstorms](https://github.com/ScatteredThunderstorms)
