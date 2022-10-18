@@ -26,7 +26,7 @@ public class Seat {
    * Showtime of seat
    */
   private Showtime showtime;
-P
+
   /**
    * Constructor of Seat
    * @param row Row of seat
