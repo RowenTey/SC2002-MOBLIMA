@@ -4,7 +4,7 @@ package src.model;
  * The class that records the seat of a showtime.
  * @author Kai Seong
  * @version 1.0
- * @since 2022-3-30
+ * @since 2022-10-18
  */
 public class Seat {
   /**
