@@ -1,8 +1,6 @@
-# SC2002_HRPS
+# SC2002_MOBLIMA
 
 Hotel Reservation and Payment System (HRPS) for SC2002 Project
-
-![HRPS preview](https://user-images.githubusercontent.com/71662324/184069519-65655f28-5b8d-4481-905a-38efbd3840ba.PNG)
 
 # Setup Instructions
 
