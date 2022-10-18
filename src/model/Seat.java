@@ -1,7 +1,7 @@
 package src.model;
 
 /**
- * The class that records the seat of a showtime.
+ * The class that records the seat of a {@code Showtime}.
  * @author Kai Seong
  * @version 1.0
  * @since 2022-10-18
@@ -23,7 +23,7 @@ public class Seat {
   private int col;
 
   /**
-   * Showtime of seat
+   * {@code Showtime} of seat
    */
   private Showtime showtime;
 
@@ -31,7 +31,7 @@ public class Seat {
    * Constructor of Seat
    * @param row Row of seat
    * @param col Column of seat
-   * @param showtime Showtime of seat
+   * @param showtime {@code Showtime} of seat
    * @param boooked Seat is booked
    */
   public Seat(int row, int col, Showtime showtime, boolean booked) {
@@ -59,8 +59,8 @@ public class Seat {
   }
   
   /**
-   * Sets the showtime of the seat
-   * @param showtime showtime of the seat
+   * Sets the {@code Showtime} of the seat
+   * @param showtime {@code Showtime} of the seat
    */
   public void setShowtime(Showtime showtime) {
     this.showtime = showtime;
@@ -83,8 +83,8 @@ public class Seat {
   }
   
   /**
-   * Gets the showtime of seat 
-   * @return showtime the seat belongs to
+   * Gets the {@code Showtime} of seat 
+   * @return {@code Showtime} the seat belongs to
    */
   public Showtime getShowtime() {
     return this.showtime;
