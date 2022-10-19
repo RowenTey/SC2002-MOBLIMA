@@ -1,8 +1,6 @@
-# SC2002-MOBLIMA
+# SC2002-MOBLIMA 🛌🏼
 
-Hotel Reservation and Payment System (HRPS) for SC2002 Project
-
-# Setup Instructions
+> Movie Booking and Listing Management Application (MOBLIMA) for SC2002 Project
 
 ## Project Folder Structure
 
@@ -115,7 +113,7 @@ javadoc -d ./docs/ ./src/*java ./src/controller/*java ./src/database/*java ./src
 
 Launch the index.html under ./javadoc/index.html
 
-# Contributors
+## Contributors
 
 - [@RowenTey](https://github.com/RowenTey)
 - [@Horstann](https://github.com/Horstann)
