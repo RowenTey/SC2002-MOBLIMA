@@ -25,15 +25,15 @@ public abstract class MainView {
   }
 
   /**
-   * Method to print breadcrumbs for navigation purposes
+   * Method to print route for navigation purposes
    * 
-   * @param breadcrumb breadcumbs description
+   * @param route current route description
    */
-  protected void printBreadCrumbs(String breadcrumb) {
-    String spaces = String.format("%" + (105 - breadcrumb.length()) + "s", "");
+  protected void printRoute(String route) {
+    String spaces = String.format("%" + (105 - route.length()) + "s", "");
     System.out.println(
         "╔══════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-    System.out.println("║ " + breadcrumb + spaces + "║");
+    System.out.println("║ " + route + spaces + "║");
     System.out.println(
         "╚══════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
   }
