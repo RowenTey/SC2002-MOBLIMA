@@ -1,7 +1,12 @@
+import helper.Helper;
+
 public class CineplexApp {
         public static void main(String[] args) throws Exception {
                 System.out.println("Hello, World!");
+                Helper.clearScreen();
                 printMOBLIMATitle();
+                Helper.pressAnyKeyToContinue();
+                System.out.println("Program closing ... Thank you for using MOBLIMA!");
         }
 
         /**
