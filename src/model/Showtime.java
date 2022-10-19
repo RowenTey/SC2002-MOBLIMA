@@ -1,8 +1,8 @@
-package src.model;
+package model;
 
 import java.util.Date;
 
-import src.model.enums.LayoutType;
+import model.enums.LayoutType;
 
 /**
  * The class that records the Showtime of a showtime.
