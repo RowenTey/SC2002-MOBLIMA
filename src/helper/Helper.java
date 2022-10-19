@@ -56,7 +56,6 @@ public class Helper {
    * Function to read an integer value from terminal that within the specified
    * minimum and maximum arguments.
    * <p>
-   * 
    * Repeatedly tries to read an integer until an integer within the specified
    * range is actually being read.
    * <p>
@@ -94,7 +93,6 @@ public class Helper {
   /**
    * Function to read a double value from terminal.
    * <p>
-   * 
    * Repeatedly tries to read a double until a double is actually being read.
    * Keeps catching the exception {@link InputMismatchException} when invalid
    * characters are entered
@@ -238,7 +236,7 @@ public class Helper {
    * @return {@code true} if the date does not exceed 1 hour. Otherwise,
    *         {@code false}.
    */
-  public static boolean LocalDateTimediff(String date) {
+  public static boolean localDateTimediff(String date) {
     DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     LocalDateTime from = getDate(date, format);
     LocalDateTime to = LocalDateTime.now();
