@@ -146,8 +146,6 @@ public class Showtime {
     return this.seats[row - 1][col - 1];
   }
 
-  // TODO: add in remaining methods and update constructor
-
   /**
    * Initialise the seats of the showtime
    * 
