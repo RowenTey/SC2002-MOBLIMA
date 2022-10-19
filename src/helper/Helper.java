@@ -171,7 +171,6 @@ public class Helper {
    * @return String object for the date in the format "yyyy-MM-dd HH:mm"
    */
   public static String setDate(boolean now) {
-
     DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     if (now) {
       return getTimeNow();
