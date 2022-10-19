@@ -14,9 +14,9 @@ import model.*;
 /**
  * Database class to read and write serialized data into .dat files.
  * 
- * @author Ivan, Max
+ * @author Kai Seong
  * @version 1.0
- * @since 2022-04-04
+ * @since 2022-10-18
  */
 public class Database {
   /**
@@ -123,7 +123,6 @@ public class Database {
       }
 
       // Read into database
-
       if (fileType == FileType.USERS) {
         USERS = (HashMap<String, User>) object;
       } else if (fileType == FileType.CINEMAS) {

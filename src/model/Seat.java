@@ -3,7 +3,7 @@ package model;
 import java.util.Map;
 
 /**
- * The class that records the seat of a {@code Showtime}.
+ * The class that records the seat of a {@link Showtime}.
  * 
  * @author Kai Seong
  * @version 1.0
@@ -26,17 +26,16 @@ public class Seat {
   private int col;
 
   /**
-   * {@code Showtime} of seat
+   * {@link Showtime} of seat
    */
   private Showtime showtime;
 
   /**
    * Constructor of Seat
    * 
-   * @param row      Row of seat
-   * @param col      Column of seat
-   * @param showtime {@code Showtime} of seat
-   * @param boooked  Seat is booked
+   * @param row      {@code row} of seat
+   * @param col      {@code col} of seat
+   * @param showtime {@link Showtime} of seat
    */
   public Seat(int row, int col, Showtime showtime) {
     this.setPos(row, col);
@@ -47,12 +46,12 @@ public class Seat {
   /**
    * Sets the position of seat
    * 
-   * @param row row of the seat
-   * @param col column of the seat
+   * @param row {@code row} of the seat
+   * @param col {@code col} of the seat
    */
-  public void setPos(int row, int column) {
+  public void setPos(int row, int col) {
     this.row = row;
-    this.col = column;
+    this.col = col;
   }
 
   /**
@@ -65,9 +64,9 @@ public class Seat {
   }
 
   /**
-   * Sets the {@code Showtime} of the seat
+   * Sets the {@link Showtime} of the seat
    * 
-   * @param showtime {@code Showtime} of the seat
+   * @param showtime {@link Showtime} of the seat
    */
   public void setShowtime(Showtime showtime) {
     this.showtime = showtime;
@@ -92,9 +91,9 @@ public class Seat {
   }
 
   /**
-   * Gets the {@code Showtime} of seat
+   * Gets the {@link Showtime} of seat
    * 
-   * @return {@code Showtime} the seat belongs to
+   * @return {@link Showtime} the seat belongs to
    */
   public Showtime getShowtime() {
     return this.showtime;

@@ -51,9 +51,9 @@ public class Showtime {
    * Constructor of Showtime
    * 
    * @param time       time of showtime
-   * @param movie      {@code Movie} of showtime
-   * @param cinema     {@code Cinema} of showtime
-   * @param layoutType {@code LayoutType} of showtime
+   * @param movie      {@link Movie} of showtime
+   * @param cinema     {@link Cinema} of showtime
+   * @param layoutType {@link LayoutType} of showtime
    */
   public Showtime(Date time, Movie movie, Cinema cinema, LayoutType layoutType) {
     this.setTime(time);
@@ -73,27 +73,27 @@ public class Showtime {
   }
 
   /**
-   * Sets the {@code Movie} of showtime
+   * Sets the {@link Movie} of showtime
    * 
-   * @param movie {@code Movie} of showtime
+   * @param movie {@link Movie} of showtime
    */
   public void setMovie(Movie movie) {
     this.movie = movie;
   }
 
   /**
-   * Sets the {@code Cinema} of showtime
+   * Sets the {@link Cinema} of showtime
    * 
-   * @param cinema {@code Cinema} of showtime
+   * @param cinema {@link Cinema} of showtime
    */
   public void setCinema(Cinema cinema) {
     this.cinema = cinema;
   }
 
   /**
-   * Sets the {@code LayoutType} of showtime
+   * Sets the {@link LayoutType} of showtime
    * 
-   * @param layoutType {@code LayoutType} of showtime
+   * @param layoutType {@link LayoutType} of showtime
    */
   public void setLayoutType(LayoutType layoutType) {
     this.layoutType = layoutType;
@@ -102,7 +102,7 @@ public class Showtime {
   /**
    * Gets the time of showtime
    * 
-   * @return time of showtime
+   * @return {@code time} of showtime
    */
   public Date getTime() {
     return this.time;
@@ -111,7 +111,7 @@ public class Showtime {
   /**
    * Gets the movie of showtime
    * 
-   * @return {@code Movie} that is assigned to this showtime
+   * @return {@link Movie} that is assigned to this showtime
    */
   public Movie getMovie() {
     return this.movie;
@@ -120,14 +120,14 @@ public class Showtime {
   /**
    * Gets the cinema of showtime
    * 
-   * @return {@code Cinema} that is assigned to this showtime
+   * @return {@link Cinema} that is assigned to this showtime
    */
   public Cinema getCinema() {
     return this.cinema;
   }
 
   /**
-   * Gets the {@code Seats} of showtime
+   * Gets the {@link Seats} of showtime
    * 
    * @return {@code Seats[][]} of this showtime
    */
@@ -140,7 +140,7 @@ public class Showtime {
    * 
    * @param row row no. of seat
    * @param col column no. of seat
-   * @return {@code Seats} at ({@code row}, {@code col})
+   * @return {@link Seats} at ({@code row}, {@code col})
    */
   public Seat getSeatAt(int row, int col) {
     return this.seats[row - 1][col - 1];
@@ -149,7 +149,7 @@ public class Showtime {
   /**
    * Initialise the seats of the showtime
    * 
-   * @param layoutType {@code LayoutType} of showtime
+   * @param layoutType {@link LayoutType} of showtime
    */
   private void initSeats() {
     switch (this.layoutType) {
