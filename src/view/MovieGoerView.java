@@ -10,20 +10,20 @@ import helper.Helper;
  * @since 2022-10-20
  */
 
-public class MovieGoerView extends MainView{
-        /**
+public class MovieGoerView extends MainView {
+    /**
      * Default contructor for the CineplexAppView
      */
-    public MovieGoerView(){
+    public MovieGoerView() {
         super();
     }
 
     /**
      * View Menu
      */
-    public void printMenu(){
+    public void printMenu() {
         Helper.clearScreen();
-        printRoute("MovieGoer View");
+        printRoute("... > MovieGoer View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
@@ -35,12 +35,12 @@ public class MovieGoerView extends MainView{
     /**
      * View App
      */
-    public void viewApp(){
+    public void viewApp() {
         int choice = -1;
-        do{
+        do {
             this.printMenu();
-            choice = Helper.readInt(1,5);
-            switch(choice){
+            choice = Helper.readInt(1, 5);
+            switch (choice) {
                 case 1:
                     CineplexView cineplexView = new CineplexView();
                     cineplexView.viewApp();
@@ -61,6 +61,6 @@ public class MovieGoerView extends MainView{
                 default:
                     break;
             }
-        }while(choice != 5);
+        } while (choice != 5);
     }
 }
