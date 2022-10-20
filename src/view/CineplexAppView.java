@@ -22,13 +22,11 @@ public class CineplexAppView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... >>> Cineplex App View");
-        System.out.println("What would you like to do ?");
-        System.out.println("(1) Show Cineplex List");
-        System.out.println("(2) Show Movie List");
-        System.out.println("(3) Choose a Cineplex");
-        System.out.println("(4) Choose a Movie");
-        System.out.println("(5) Exit");
+        printRoute("Cineplex App View");
+        System.out.println("Are you admin or MovieGoer ?");
+        System.out.println("(1) Admin");
+        System.out.println("(2) MovieGoer");
+        System.out.println("(0) Terminate Program");
     }
 
     /**
@@ -44,10 +42,12 @@ public class CineplexAppView extends MainView {
                     MovieGoerView movieGoerView = new MovieGoerView();
                     movieGoerView.viewApp();  
                     break;
+                case 0:
+                    break;
                 default:
                     break;      
             }
-        } while (choice != 5);
+        } while (choice != 0);
     }
 
 }

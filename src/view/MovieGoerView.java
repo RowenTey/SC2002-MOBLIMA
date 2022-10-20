@@ -39,7 +39,7 @@ public class MovieGoerView extends MainView{
         int choice = -1;
         do{
             this.printMenu();
-            choice = Helper.readInt(1,4);
+            choice = Helper.readInt(1,5);
             switch(choice){
                 case 1:
                     CineplexView cineplexView = new CineplexView();
