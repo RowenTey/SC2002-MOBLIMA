@@ -36,8 +36,20 @@ public class Cineplex {
     }
 
     /**
-     * Gets the location of the Cineplex
+     * initialise Cineplex
      * 
+     */
+    public void initCineplex(){
+        this.cinemaList = new ArrayList<Cinema>();
+        for(int i=0; i<this.numOfCinemas;i++){
+            Cinema newCinema = new Cinema(this,i, false, false);
+            this.cinemaList.add(newCinema);
+        }
+    }
+
+    /**
+     * Gets the location of the Cineplex
+     *     
      * @return location of the Cineplex
      */
     public String getLocation(){
@@ -54,10 +66,11 @@ public class Cineplex {
     }
 
     /**
-     * Displays the list of cinemas in the Cineplex
+     * Gets the list of cinemas in the Cineplex
      * 
+     * @return list of cinemas
      */
-    public void showCinemaList(){
-        System.out.println(this.cinemaList);
+    public ArrayList<Cinema> getCinemaList(){
+        return this.cinemaList;
     }
 }
