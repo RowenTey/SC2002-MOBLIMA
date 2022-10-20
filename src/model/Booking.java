@@ -10,7 +10,6 @@ package model;
 
 public class Booking {
 
-    // TODO
     /**
      * transaction ID for booking
      */
