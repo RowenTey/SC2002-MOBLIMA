@@ -1,4 +1,6 @@
 import helper.Helper;
+import view.CineplexAppView;
+
 
 public class CineplexApp {
         public static void main(String[] args) throws Exception {
@@ -6,6 +8,8 @@ public class CineplexApp {
                 Helper.clearScreen();
                 printMOBLIMATitle();
                 Helper.pressAnyKeyToContinue();
+                CineplexAppView cineplexAppView = new CineplexAppView();
+                cineplexAppView.viewApp();
                 System.out.println("Program closing ... Thank you for using MOBLIMA!");
         }
 
