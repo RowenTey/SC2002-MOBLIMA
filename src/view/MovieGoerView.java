@@ -41,8 +41,8 @@ public class MovieGoerView extends MainView{
             choice = Helper.readInt(1,4);
             switch(choice){
                 case 1:
-                    CineplexAppView cineplexAppView = new CineplexAppView();
-                    cineplexAppView.viewApp();
+                    CineplexView cineplexView = new CineplexView();
+                    cineplexView.viewApp();
                     break;
                 case 2:
                     ShowtimeView showtimeView = new ShowtimeView();
