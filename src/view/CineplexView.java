@@ -28,8 +28,9 @@ public class CineplexView extends MainView {
         System.out.println("(1) JEM");
         System.out.println("(2) Causeway Point");
         System.out.println("(3) AMK Hub");
+        System.out.println("(4) Exit");
 
-        System.out.println("Which location do you want ? (Type '0' to exit) ");
+        System.out.println("Which location do you want ? ");
     }
 
     /**
@@ -39,7 +40,7 @@ public class CineplexView extends MainView {
         int choice = -1;
         do{
             this.printMenu();
-            choice = Helper.readInt(0,3);
+            choice = Helper.readInt(1,4);
             switch(choice){
                 case 1:
                     System.out.println("JEM selected...");
@@ -53,12 +54,12 @@ public class CineplexView extends MainView {
                     System.out.println("AMK Hub selected...");
                     // TODO (showtimeView())
                     break;
-                case 0:
+                case 4:
                     break;
                 default:
                     break;
             }
-        }while(choice != 0);
+        }while(choice != 4);
     }
 
 }

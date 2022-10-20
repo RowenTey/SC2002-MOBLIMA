@@ -13,15 +13,24 @@ public enum Location {
   /**
    * Causeway Point
    */
-  CAUSEWAY_POINT,
+  CAUSEWAY_POINT("Causeway Point"),
 
   /**
    * Amk Hub
    */
-  AMK_HUB,
+  AMK_HUB("Amk Hub"),
 
   /**
    * Jem
    */
-  JEM
+  JEM("Jem");
+
+  public final String label;
+
+  private Location(String label){
+    this.label = label;
+  }
+  public String getLabel(){
+    return this.label;
+  }
 }

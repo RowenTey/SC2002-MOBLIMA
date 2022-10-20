@@ -47,7 +47,7 @@ public class Cineplex {
      */
     public void initCineplex() {
 
-        String cinemaCode = this.location.name().substring(0,3);
+        String cinemaCode = this.location.getLabel().substring(0,3).toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             Cinema newCinema = new Cinema(this, cinemaCode, false, false);
@@ -61,7 +61,7 @@ public class Cineplex {
      * @return location of the Cineplex
      */
     public String getLocation() {
-        return this.location.name();
+        return this.location.getLabel();
     }
 
     /**

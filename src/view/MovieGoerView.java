@@ -27,8 +27,8 @@ public class MovieGoerView extends MainView {
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
-        System.out.println("(3) View booking history");
-        System.out.println("(4) List of Top 5 Movies");
+        System.out.println("(3) Search or list Movies");
+        System.out.println("(4) View booking history");
         System.out.println("(5) Exit");
     }
 
@@ -50,11 +50,11 @@ public class MovieGoerView extends MainView {
                     showtimeView.viewApp();
                     break;
                 case 3:
-                    System.out.println("View Booking History");
-                    // TODO (Booking View)
+                    //TODO (MoviesView)
                     break;
                 case 4:
-                    System.out.println("Top 5");
+                    System.out.println("View Booking History");
+                    // TODO (Booking View)
                     break;
                 case 5:
                     break;
