@@ -39,11 +39,11 @@ public class CineplexAppView extends MainView {
             printMenu();
             choice = Helper.readInt(0,2);
             switch(choice){
-                    case 2:
-                        MovieGoerView movieGoerView = new MovieGoerView();
-                        movieGoerView.viewApp();  
-                        break;
-                    default:
+                case 2:
+                    MovieGoerView movieGoerView = new MovieGoerView();
+                    movieGoerView.viewApp();  
+                    break;
+                default:
                     break;      
             }
         }while(choice != 0);
