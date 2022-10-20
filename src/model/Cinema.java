@@ -32,41 +32,42 @@ public class Cinema {
     /**
      * Constructor of Cinema
      * 
-     * @param cinemaID ID of the cinema
+     * @param cinemaID   ID of the cinema
      * @param isPlatinum Type of cinema
-     * @param is3D Type of movies showed in cinema
+     * @param is3D       Type of movies showed in cinema
      */
 
-    public Cinema(Cineplex cineplex,int cinemaID, boolean isPlatinum, boolean is3D){
+    public Cinema(Cineplex cineplex, int cinemaID, boolean isPlatinum, boolean is3D) {
         this.cineplex = cineplex;
         this.cinemaID = cinemaID;
         this.isPlatinum = isPlatinum;
         this.is3D = is3D;
-     }
+    }
 
     /**
      * Gets the ID of the cinema
      * 
      * @return ID of cinema
      */
-    public int getCinemaID(){
+    public int getCinemaID() {
         return this.cinemaID;
     }
 
-     /**
+    /**
      * Gets the type of cinema (Platinum/Normal)
      * 
      * @return Type of cinema
      */
-    public boolean getIsPlatinum(){
+    public boolean getIsPlatinum() {
         return this.isPlatinum;
     }
-     /**
+
+    /**
      * Gets the type of movies showed in cinema (3D/2D)
      * 
      * @return Type of movies showed
      */
-    public boolean getIs3D(){
+    public boolean getIs3D() {
         return this.is3D;
     }
 }
