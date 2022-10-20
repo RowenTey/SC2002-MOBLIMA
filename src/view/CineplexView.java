@@ -47,11 +47,11 @@ public class CineplexView extends MainView {
                     break;
                 case 2:
                     System.out.println("Causeway Point selected...");
-                    // TODO (ShowtimesManager.showList)
+                    // TODO (showtimeView())
                     break;
                 case 3:
                     System.out.println("AMK Hub selected...");
-                    // TODO (CineplexManager.choose())
+                    // TODO (showtimeView())
                     break;
                 case 0:
                     break;
