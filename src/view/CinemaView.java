@@ -49,7 +49,7 @@ public class CinemaView extends MainView {
                     break;
                 case 3:
                     System.out.println("This cinema is located at JP");
-                    // TODO (CinemaManager.getCineplex())
+                    // TODO (CinemaManager.getLocation()?)
                     break;
                 case 4:
                     break;

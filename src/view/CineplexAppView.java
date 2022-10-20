@@ -26,7 +26,7 @@ public class CineplexAppView extends MainView {
         System.out.println("Are you admin or MovieGoer ?");
         System.out.println("(1) Admin");
         System.out.println("(2) MovieGoer");
-        System.out.println("(0) Terminate Program");
+        System.out.println("(3) Terminate Program");
     }
 
     /**
@@ -34,20 +34,24 @@ public class CineplexAppView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
-        do{
+        do {
             printMenu();
-            choice = Helper.readInt(0,2);
+            choice = Helper.readInt(1,3);
             switch(choice){
+                case 1:
+                    StaffView staffView = new StaffView();
+                    staffView.viewApp();
+                    break;
                 case 2:
                     MovieGoerView movieGoerView = new MovieGoerView();
-                    movieGoerView.viewApp();  
+                    movieGoerView.viewApp();
                     break;
-                case 0:
+                case 3:
                     break;
                 default:
-                    break;      
+                    break;
             }
-        } while (choice != 0);
+        } while (choice != 3);
     }
 
 }

@@ -10,37 +10,37 @@ import helper.Helper;
  * @since 2022-10-20
  */
 
-public class MovieGoerView extends MainView{
-        /**
+public class MovieGoerView extends MainView {
+    /**
      * Default contructor for the CineplexAppView
      */
-    public MovieGoerView(){
+    public MovieGoerView() {
         super();
     }
 
     /**
      * View Menu
      */
-    public void printMenu(){
+    public void printMenu() {
         Helper.clearScreen();
-        printRoute("MovieGoer View");
+        printRoute("... > MovieGoer View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
-        System.out.println("(3) View booking history");
-        System.out.println("(4) List of Top 5 Movies");
+        System.out.println("(3) Search or list Movies");
+        System.out.println("(4) View booking history");
         System.out.println("(5) Exit");
     }
 
     /**
      * View App
      */
-    public void viewApp(){
+    public void viewApp() {
         int choice = -1;
-        do{
+        do {
             this.printMenu();
-            choice = Helper.readInt(1,5);
-            switch(choice){
+            choice = Helper.readInt(1, 5);
+            switch (choice) {
                 case 1:
                     CineplexView cineplexView = new CineplexView();
                     cineplexView.viewApp();
@@ -50,17 +50,18 @@ public class MovieGoerView extends MainView{
                     showtimeView.viewApp();
                     break;
                 case 3:
-                    System.out.println("View Booking History");
-                    // TODO (Booking View)
+                    MovieView movieView = new MovieView();
+                    movieView.viewApp();
                     break;
                 case 4:
-                    System.out.println("Top 5");
+                    System.out.println("View Booking History");
+                    // TODO (Booking View)
                     break;
                 case 5:
                     break;
                 default:
                     break;
             }
-        }while(choice != 5);
+        } while (choice != 5);
     }
 }

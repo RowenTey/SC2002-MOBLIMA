@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import model.enums.Location;
 
 /**
  * The class that initialise a Cineplex.
@@ -13,7 +14,7 @@ public class Cineplex {
     /**
      * Location of the Cineplex
      */
-    private String location;
+    private Location location;
 
     /**
      * Number of cinemas in the Cineplex
@@ -35,7 +36,7 @@ public class Cineplex {
      * 
      * @param location Location of Cineplex
      */
-    public Cineplex(String location, int numOfCinemas) {
+    public Cineplex(Location location, int numOfCinemas) {
         this.location = location;
         this.numOfCinemas = numOfCinemas;
         this.initCineplex();
@@ -45,8 +46,8 @@ public class Cineplex {
      * Initialise Cineplex
      */
     public void initCineplex() {
-        String cinemaCode = this.location.substring(0,3);
-        cinemaCode.toUpperCase();
+
+        String cinemaCode = this.location.getLabel().substring(0,3).toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             Cinema newCinema = new Cinema(this, cinemaCode, false, false);
@@ -60,7 +61,7 @@ public class Cineplex {
      * @return location of the Cineplex
      */
     public String getLocation() {
-        return this.location;
+        return this.location.getLabel();
     }
 
     /**
