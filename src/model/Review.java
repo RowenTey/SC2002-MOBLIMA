@@ -1,7 +1,7 @@
 package model;
 
 /**
- * The class that customer review
+ * The class that stores customer review
  * 
  * @author Ace Ang
  * @version 1.0
