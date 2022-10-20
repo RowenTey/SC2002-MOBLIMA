@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Shao Wei
  * @version 1.0
- * @since 2022-10-19
+ * @since 2022-10-20
  */
 public class Cineplex {
     /**
@@ -26,6 +26,11 @@ public class Cineplex {
     private ArrayList<Cinema> cinemaList;
 
     /**
+     * List of ShowTimes in the Cineplex
+     */
+    private ArrayList<Showtime> showtimeList;
+
+    /**
      * Constructor of Cineplex
      * 
      * @param location Location of Cineplex
@@ -33,6 +38,7 @@ public class Cineplex {
     public Cineplex(String location, int numOfCinemas) {
         this.location = location;
         this.numOfCinemas = numOfCinemas;
+        this.initCineplex();
     }
 
     /**
@@ -71,5 +77,14 @@ public class Cineplex {
      */
     public ArrayList<Cinema> getCinemaList() {
         return this.cinemaList;
+    }
+
+    /**
+     * Gets the list of movies in the Cineplex
+     * 
+     * @return list of movies
+     */
+    public ArrayList<Showtime> getShowtimeList(){
+        return this.showtimeList;
     }
 }

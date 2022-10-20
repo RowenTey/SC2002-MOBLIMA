@@ -32,6 +32,7 @@ public class Cinema {
     /**
      * Constructor of Cinema
      * 
+     * @param cineplex   Cineplex
      * @param cinemaID   ID of the cinema
      * @param isPlatinum Type of cinema
      * @param is3D       Type of movies showed in cinema
@@ -42,6 +43,15 @@ public class Cinema {
         this.cinemaID = cinemaID;
         this.isPlatinum = isPlatinum;
         this.is3D = is3D;
+    }
+
+    /**
+     * Gets the Cineplex of the cinema
+     * 
+     * @return Cineplex of cinema
+     */
+    public Cineplex getCineplex() {
+        return this.cineplex;
     }
 
     /**
