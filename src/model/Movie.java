@@ -24,13 +24,13 @@ public class Movie implements Comparable<Movie> {
     private Review[] reviews;
     private String type;
 
-    public int getMovieId() {
-        return movieId;
-    }
+      public int getMovieId() {
+          return movieId;
+      }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
+      public void setMovieId(int movieId) {
+          this.movieId = movieId;
+      }
 
     public String getTitle() {
         return title;
