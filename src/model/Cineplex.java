@@ -45,9 +45,11 @@ public class Cineplex {
      * Initialise Cineplex
      */
     public void initCineplex() {
+        String cinemaCode = this.location.substring(0,3);
+        cinemaCode.toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
-            Cinema newCinema = new Cinema(this, i, false, false);
+            Cinema newCinema = new Cinema(this, cinemaCode, false, false);
             this.cinemaList.add(newCinema);
         }
     }

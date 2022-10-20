@@ -24,12 +24,12 @@ public class CineplexView extends MainView {
     public void printMenu(){
         Helper.clearScreen();
         printRoute("... >>> Cineplex App View");
-        System.out.println("What would you like to do ?");
-        System.out.println("(1) Show Cineplex Locations");
-        System.out.println("(2) Show Showtime List");
-        System.out.println("(3) Choose a Cineplex");
-        System.out.println("(4) Choose a Showtime");
-        System.out.println("(5) Exit");
+        System.out.println("We have 3 Cineplexes in Singapore");
+        System.out.println("(1) JEM");
+        System.out.println("(2) Causeway Point");
+        System.out.println("(3) AMK Hub");
+
+        System.out.println("Which location do you want ? (Type '0' to exit) ");
     }
 
     /**
@@ -39,28 +39,26 @@ public class CineplexView extends MainView {
         int choice = -1;
         do{
             this.printMenu();
-            choice = Helper.readInt(1,5);
+            choice = Helper.readInt(0,3);
             switch(choice){
                 case 1:
-                    System.out.println("List of Cineplexes");
-                    // TODO (CineplexManager.showList)
+                    System.out.println("JEM selected...");
+                    // TODO (showtimeView())
                     break;
                 case 2:
-                    System.out.println("List of Showtimes");
+                    System.out.println("Causeway Point selected...");
                     // TODO (ShowtimesManager.showList)
                     break;
                 case 3:
-                    System.out.println("Choose a Cineplex");
+                    System.out.println("AMK Hub selected...");
                     // TODO (CineplexManager.choose())
                     break;
-                case 4:
-                    System.out.println("Choose a Showtime");
-                    // TODO (ShowtimeManager.choose())
+                case 0:
                     break;
                 default:
                     break;
             }
-        }while(choice != 5);
+        }while(choice != 0);
     }
 
 }
