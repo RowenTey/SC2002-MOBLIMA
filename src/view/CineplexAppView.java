@@ -32,7 +32,6 @@ public class CineplexAppView extends MainView {
     }
 
     /**
-     * hello xiaoyue
      * View App
      */
     public void viewApp() {
