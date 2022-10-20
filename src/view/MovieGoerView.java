@@ -50,7 +50,8 @@ public class MovieGoerView extends MainView {
                     showtimeView.viewApp();
                     break;
                 case 3:
-                    //TODO (MoviesView)
+                    MovieView movieView = new MovieView();
+                    movieView.viewApp();
                     break;
                 case 4:
                     System.out.println("View Booking History");
