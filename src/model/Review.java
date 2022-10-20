@@ -44,7 +44,7 @@ public class Review {
     }
 
     /**
-     * Gets the review
+     * Gets the review for the movie
      *
      * @return the review
      */
@@ -52,14 +52,29 @@ public class Review {
         return review;
     }
 
+    /**
+     * Sets the review for the movie
+     *
+     * @param review review for the movie
+     */
     public void setReview(String review) {
         this.review = review;
     }
 
+    /**
+     * Gets the rating for the movie
+     *
+     * @return the rating
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * Sets the rating for the movie
+     *
+     * @param rating review for the movie
+     */
     public void setRating(double rating) {
         this.rating = rating;
     }
