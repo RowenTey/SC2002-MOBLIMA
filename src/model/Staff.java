@@ -1,4 +1,4 @@
-package model
+package model;
 
 /**
  * The class that represents a staff in the MOBLIMA system
@@ -7,8 +7,8 @@ package model
  * @version 1.0
  * @since 2022-10-19
  */
-public class Staff extends User{
-    
+public class Staff extends User {
+
     /**
      * Staff's password for enabling admin functions
      */
@@ -19,8 +19,7 @@ public class Staff extends User{
      * 
      * @param password Staff's password
      */
-    public Staff(String password)
-    {
+    public Staff(String password) {
         this.password = password;
     }
 
@@ -29,8 +28,7 @@ public class Staff extends User{
      * 
      * @param password Staff's password
      */
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -39,8 +37,7 @@ public class Staff extends User{
      * 
      * @return the password
      */
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.password;
     }
 }

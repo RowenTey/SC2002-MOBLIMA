@@ -28,9 +28,9 @@ public class Cineplex {
     /**
      * Constructor of Cineplex
      * 
-     * @param location    Location of Cineplex
+     * @param location Location of Cineplex
      */
-    public Cineplex(String location, int numOfCinemas){
+    public Cineplex(String location, int numOfCinemas) {
         this.location = location;
         this.numOfCinemas = numOfCinemas;
     }
@@ -40,7 +40,7 @@ public class Cineplex {
      * 
      * @return location of the Cineplex
      */
-    public String getLocation(){
+    public String getLocation() {
         return this.location;
     }
 
@@ -49,7 +49,7 @@ public class Cineplex {
      * 
      * @return number of cinemas in the Cineplex
      */
-    public int getNumOfCinemas(){
+    public int getNumOfCinemas() {
         return this.numOfCinemas;
     }
 
@@ -57,7 +57,7 @@ public class Cineplex {
      * Displays the list of cinemas in the Cineplex
      * 
      */
-    public void showCinemaList(){
+    public void showCinemaList() {
         System.out.println(this.cinemaList);
     }
 }

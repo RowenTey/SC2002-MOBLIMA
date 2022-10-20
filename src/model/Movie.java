@@ -10,9 +10,10 @@ public class Movie implements Comparable<Movie> {
     if (this == movie) {
       return 0;
     }
-    int thisOrderId = Integer.parseInt(this.getOrderId().substring(1));
-    int thatOrderId = Integer.parseInt(order.getOrderId().substring(1));
+    // int thisOrderId = Integer.parseInt(this.getOrderId().substring(1));
+    // int thatOrderId = Integer.parseInt(order.getOrderId().substring(1));
 
-    return thisOrderId - thatOrderId;
+    // return thisOrderId - thatOrderId;
+    return 1;
   }
 }
