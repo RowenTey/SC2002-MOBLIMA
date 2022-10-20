@@ -22,7 +22,7 @@ public class CineplexAppView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... >>> Cineplex App View");
+        printRoute("... > Cineplex App View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Show Cineplex List");
         System.out.println("(2) Show Movie List");
