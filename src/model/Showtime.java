@@ -18,22 +18,22 @@ public class Showtime {
   private Date time;
 
   /**
-   * {@code Movie} of showtime
+   * {@link Movie} of showtime
    */
   private Movie movie;
 
   /**
-   * {@code Cinema} of showtime
+   * {@link Cinema} of showtime
    */
   private Cinema cinema;
 
   /**
-   * layoutType of showtime
+   * {@link LayoutType} of showtime
    */
   private LayoutType layoutType;
 
   /**
-   * Seats of showtime based on layoutType
+   * {@link Seat} of showtime based on layoutType
    */
   private Seat[][] seats;
 
