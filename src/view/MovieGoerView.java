@@ -28,7 +28,8 @@ public class MovieGoerView extends MainView{
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
         System.out.println("(3) View booking history");
-        System.out.println("(4) Exit");
+        System.out.println("(4) List of Top 5 Movies");
+        System.out.println("(5) Exit");
     }
 
     /**
@@ -38,7 +39,7 @@ public class MovieGoerView extends MainView{
         int choice = -1;
         do{
             this.printMenu();
-            choice = Helper.readInt(1,4);
+            choice = Helper.readInt(1,5);
             switch(choice){
                 case 1:
                     CineplexView cineplexView = new CineplexView();
@@ -53,10 +54,13 @@ public class MovieGoerView extends MainView{
                     // TODO (Booking View)
                     break;
                 case 4:
+                    System.out.println("Top 5");
+                    break;
+                case 5:
                     break;
                 default:
                     break;
             }
-        }while(choice != 4);
+        }while(choice != 5);
     }
 }
