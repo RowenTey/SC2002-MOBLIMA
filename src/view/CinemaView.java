@@ -13,16 +13,16 @@ public class CinemaView extends MainView {
     /**
      * Default contructor for the CineplexAppView
      */
-    public CinemaView(){
+    public CinemaView() {
         super();
     }
 
     /**
      * View Menu
      */
-    public void printMenu(){
+    public void printMenu() {
         Helper.clearScreen();
-        printRoute("... >>> Cinema View");
+        printRoute("... > Cinema View");
         System.out.println("What would you like to check ?");
         System.out.println("(1) Is this a platinum Cinema");
         System.out.println("(2) What type of movies does this cinema show ?");
@@ -33,12 +33,12 @@ public class CinemaView extends MainView {
     /**
      * View App
      */
-    public void viewApp(){
+    public void viewApp() {
         int choice = -1;
-        do{
+        do {
             this.printMenu();
-            choice = Helper.readInt(1,4);
-            switch(choice){
+            choice = Helper.readInt(1, 4);
+            switch (choice) {
                 case 1:
                     System.out.println("This is a platinum cinema");
                     // TODO (CinemaManager.isPlatinum(()))
@@ -56,7 +56,7 @@ public class CinemaView extends MainView {
                 default:
                     break;
             }
-        }while(choice != 4);
+        } while (choice != 4);
     };
 
 }

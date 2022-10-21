@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * The class that initialise a Cineplex.
  * 
@@ -7,7 +9,11 @@ package model;
  * @version 1.0
  * @since 2022-10-19
  */
-public class Cinema {
+public class Cinema implements Serializable {
+    /**
+     * For Java Serializable.
+     */
+    private static final long serialVersionUID = 2L;
 
     /**
      * Its Cineplex
@@ -38,7 +44,7 @@ public class Cinema {
      * @param is3D       Type of movies showed in cinema
      */
 
-    public Cinema(Cineplex cineplex, String cinemaCode,boolean isPlatinum, boolean is3D) {
+    public Cinema(Cineplex cineplex, String cinemaCode, boolean isPlatinum, boolean is3D) {
         this.cineplex = cineplex;
         this.cinemaCode = cinemaCode;
         this.isPlatinum = isPlatinum;

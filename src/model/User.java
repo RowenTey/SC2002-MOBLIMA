@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * The base class that stores the name of the user
  * 
@@ -7,7 +9,12 @@ package model;
  * @version 1.0
  * @since 2022-10-19
  */
-public class User {
+public class User implements Serializable {
+    /**
+     * For Java Serializable.
+     */
+    private static final long serialVersionUID = 1L;
+
     /**
      * Name of the user
      */

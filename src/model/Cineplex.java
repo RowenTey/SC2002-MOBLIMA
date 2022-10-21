@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import model.enums.Location;
 
@@ -10,7 +11,12 @@ import model.enums.Location;
  * @version 1.0
  * @since 2022-10-20
  */
-public class Cineplex {
+public class Cineplex implements Serializable {
+    /**
+     * For Java Serializable.
+     */
+    private static final long serialVersionUID = 4L;
+
     /**
      * Location of the Cineplex
      */
@@ -46,8 +52,7 @@ public class Cineplex {
      * Initialise Cineplex
      */
     public void initCineplex() {
-
-        String cinemaCode = this.location.getLabel().substring(0,3).toUpperCase();
+        String cinemaCode = this.location.getLabel().substring(0, 3).toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             Cinema newCinema = new Cinema(this, cinemaCode, false, false);
@@ -87,7 +92,7 @@ public class Cineplex {
      * 
      * @return list of movies
      */
-    public ArrayList<Showtime> getShowtimeList(){
+    public ArrayList<Showtime> getShowtimeList() {
         return this.showtimeList;
     }
 }

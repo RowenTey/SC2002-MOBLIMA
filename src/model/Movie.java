@@ -1,4 +1,9 @@
 package model;
+
+import java.io.Serializable;
+
+import model.enums.ShowStatus;
+
 /**
  * The class that stores a movie
  *
@@ -7,23 +12,16 @@ package model;
  * @since 2022-10-20
  */
 
-public class Movie implements Comparable<Movie> {
+public class Movie implements Serializable, Comparable<Movie> {
     /**
-     * Override compareTo method to compare different Order objects according to
-     * order id
-    */
-
-    enum ShowStatus {
-        COMING_SOON,
-        NOW_SHOWING,
-        PREVIEW,
-        END_OF_SHOWING
-    }
+     * For java serializable
+     */
+    protected static final long serialVersionUID = 6L;
 
     /**
      * movie ID of movie
      */
-    private int movieId;
+    private String movieId;
 
     /**
      * title of movie
@@ -71,22 +69,31 @@ public class Movie implements Comparable<Movie> {
     private String type;
 
     /**
+     * Constructor of Movie
+     * 
+     */
+    public Movie(String title, ShowStatus showStatus) {
+        this.setTitle(title);
+        this.setStatus(showStatus);
+    }
+
+    /**
      * Gets the ID of the movie
      *
      * @return the ID of the movie
      */
-      public int getMovieId() {
-          return movieId;
-      }
+    public String getMovieId() {
+        return movieId;
+    }
 
     /**
      * Sets the ID of the movie
      *
      * @param movieId ID of the movie
      */
-      public void setMovieId(int movieId) {
-          this.movieId = movieId;
-      }
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
 
     /**
      * Gets the title of the movie
@@ -168,6 +175,7 @@ public class Movie implements Comparable<Movie> {
     public String[] getCast() {
         return cast;
     }
+
     /**
      * Sets the cast of the movie
      *
@@ -201,10 +209,10 @@ public class Movie implements Comparable<Movie> {
      * @return overall rating of the movie
      */
     public int getOverallRating() {
-        for (int i =0; i< reviews.length;i++){
-            this.overallRating+=reviews[i].getRating();
+        for (int i = 0; i < reviews.length; i++) {
+            this.overallRating += reviews[i].getRating();
         }
-        this.overallRating/= reviews.length;
+        this.overallRating /= reviews.length;
         return overallRating;
     }
 
@@ -256,7 +264,7 @@ public class Movie implements Comparable<Movie> {
     @Override
     public int compareTo(Movie movie) {
         if (this == movie) {
-        return 0;
+            return 0;
         }
         // int thisOrderId = Integer.parseInt(this.getOrderId().substring(1));
         // int thatOrderId = Integer.parseInt(order.getOrderId().substring(1));

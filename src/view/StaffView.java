@@ -9,15 +9,13 @@ import helper.Helper;
  * @version 1.0
  * @since 2022-10-20
  */
-public class StaffView extends MainView{
-    
-    public StaffView ()
-    {
+public class StaffView extends MainView {
+
+    public StaffView() {
         super();
     }
 
-    public void printMenu()
-    {
+    public void printMenu() {
         Helper.clearScreen();
         printRoute("Staff View");
         System.out.println("What would you like to do?");
@@ -28,21 +26,20 @@ public class StaffView extends MainView{
         System.out.println("(5) Exit");
     }
 
-
-    public void viewApp()
-    {
+    public void viewApp() {
         int choice = -1;
-        do{
+        do {
             this.printMenu();
-            choice = Helper.readInt(1,5);
-            switch(choice)
-            {
+            choice = Helper.readInt(1, 5);
+            switch (choice) {
                 case 1:
                     // StaffManager.login()
 
                     break;
                 case 2:
                     // StaffManager.editMovieListings()
+                    ShowtimeView showtimeView = new ShowtimeView();
+                    showtimeView.viewApp();
 
                     break;
                 case 3:
@@ -59,7 +56,7 @@ public class StaffView extends MainView{
                 default:
                     break;
             }
-        }while (choice != 5);
+        } while (choice != 5);
     }
 
 }

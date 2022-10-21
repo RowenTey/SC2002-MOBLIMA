@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * The class that stores a booking
  * 
@@ -8,7 +10,11 @@ package model;
  * @since 2022-10-20
  */
 
-public class Booking {
+public class Booking implements Serializable {
+    /**
+     * For Java Serializable.
+     */
+    private static final long serialVersionUID = 3L;
 
     /**
      * transaction ID for booking

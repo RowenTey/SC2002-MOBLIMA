@@ -27,10 +27,11 @@ public enum Location {
 
   public final String label;
 
-  private Location(String label){
+  private Location(String label) {
     this.label = label;
   }
-  public String getLabel(){
+
+  public String getLabel() {
     return this.label;
   }
 }

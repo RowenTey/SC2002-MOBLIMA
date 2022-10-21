@@ -62,6 +62,9 @@ public class MovieGoerView extends MainView {
                 default:
                     break;
             }
+            if (choice != 5) {
+                Helper.pressAnyKeyToContinue();
+            }
         } while (choice != 5);
     }
 }

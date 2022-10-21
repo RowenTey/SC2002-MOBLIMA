@@ -1,4 +1,5 @@
 package view;
+
 import helper.Helper;
 
 /**
@@ -11,10 +12,11 @@ import helper.Helper;
 
 public class ReviewView extends MainView {
     private String movieName;
+
     /**
      * Default contructor for the CineplexAppView
      */
-    public ReviewView(String movieName){
+    public ReviewView(String movieName) {
         super();
         this.movieName = movieName;
     }
@@ -22,9 +24,9 @@ public class ReviewView extends MainView {
     /**
      * View Menu
      */
-    public void printMenu(){
+    public void printMenu() {
         Helper.clearScreen();
-        printRoute("... >>> Review View >>> "+ this.movieName);
+        printRoute("... > Review View > " + this.movieName);
         System.out.println("What would you like to do ?");
         System.out.println("(1) See past reviews of this movie");
         System.out.println("(2) Leave a review");
@@ -34,12 +36,12 @@ public class ReviewView extends MainView {
     /**
      * View App
      */
-    public void viewApp(){
+    public void viewApp() {
         int choice = -1;
-        do{
+        do {
             this.printMenu();
-            choice = Helper.readInt(1,3);
-            switch(choice){
+            choice = Helper.readInt(1, 3);
+            switch (choice) {
                 case 1:
                     // TODO: MovieManager.getReviews();
                     break;
@@ -51,7 +53,7 @@ public class ReviewView extends MainView {
                 default:
                     break;
             }
-        }while(choice != 3);
+        } while (choice != 3);
     }
 
 }

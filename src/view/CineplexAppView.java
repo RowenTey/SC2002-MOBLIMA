@@ -36,8 +36,8 @@ public class CineplexAppView extends MainView {
         int choice = -1;
         do {
             printMenu();
-            choice = Helper.readInt(1,3);
-            switch(choice){
+            choice = Helper.readInt(1, 3);
+            switch (choice) {
                 case 1:
                     StaffView staffView = new StaffView();
                     staffView.viewApp();
@@ -50,6 +50,9 @@ public class CineplexAppView extends MainView {
                     break;
                 default:
                     break;
+            }
+            if (choice != 3) {
+                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 3);
     }
