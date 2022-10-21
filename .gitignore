@@ -25,4 +25,5 @@ hs_err_pid*
 SetupInstructions.md
 SetupInstructions.pdf
 .vscode/
+bin/
 *.txt
