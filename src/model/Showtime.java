@@ -1,17 +1,28 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import model.enums.LayoutType;
 
 /**
- * The class that records the Showtime of a showtime.
+ * The class that records the showtime of a {@link Movie}
  * 
  * @author Kai Seong
  * @version 1.0
  * @since 2022-10-18
  */
-public class Showtime {
+public class Showtime implements Serializable {
+  /**
+   * For Java Serializable.
+   */
+  private static final long serialVersionUID = 5L;
+
+  /**
+   * Id of the menu item
+   */
+  private String showtimeId;
+
   /**
    * Time of showtime
    */
@@ -51,11 +62,13 @@ public class Showtime {
    * Constructor of Showtime
    * 
    * @param time       time of showtime
+   * @param showtimeId id of showtime
    * @param movie      {@link Movie} of showtime
    * @param cinema     {@link Cinema} of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
-  public Showtime(Date time, Movie movie, Cinema cinema, LayoutType layoutType) {
+  public Showtime(String showtimeId, Date time, Movie movie, Cinema cinema, LayoutType layoutType) {
+    this.setShowtimeId(showtimeId);
     this.setTime(time);
     this.setMovie(movie);
     this.setCinema(cinema);
@@ -70,6 +83,16 @@ public class Showtime {
    */
   public void setTime(Date time) {
     this.time = time;
+  }
+
+  /**
+   * Sets the Id of showtime
+   * 
+   * @param showtimeId Id of the menu item
+   * @return id of showtime
+   */
+  public void setShowtimeId(String showtimeId) {
+    this.showtimeId = showtimeId;
   }
 
   /**
@@ -106,6 +129,15 @@ public class Showtime {
    */
   public Date getTime() {
     return this.time;
+  }
+
+  /**
+   * Gets the Id of the showtime
+   * 
+   * @return Id of the showtime
+   */
+  public String getShowtimeId() {
+    return this.showtimeId;
   }
 
   /**
