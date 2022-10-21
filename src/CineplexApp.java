@@ -1,15 +1,16 @@
+import database.Database;
 import helper.Helper;
 import view.CineplexAppView;
 
-
 public class CineplexApp {
         public static void main(String[] args) throws Exception {
-                System.out.println("Hello, World!");
+                CineplexAppView cineplexAppView = new CineplexAppView();
+                Database database = new Database();
                 Helper.clearScreen();
                 printMOBLIMATitle();
                 Helper.pressAnyKeyToContinue();
-                CineplexAppView cineplexAppView = new CineplexAppView();
                 cineplexAppView.viewApp();
+                Database.saveAllFiles();
                 System.out.println("Program closing ... Thank you for using MOBLIMA!");
         }
 
