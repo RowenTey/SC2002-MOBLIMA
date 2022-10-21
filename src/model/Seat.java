@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -9,7 +10,9 @@ import java.util.Map;
  * @version 1.0
  * @since 2022-10-18
  */
-public class Seat {
+public class Seat implements Serializable {
+  private static final long serialVersionUID = 6L;
+
   /**
    * Seat is booked
    */
