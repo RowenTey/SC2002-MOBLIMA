@@ -1,5 +1,6 @@
 package view;
 
+import controller.StaffManager;
 import helper.Helper;
 
 /**
@@ -34,44 +35,61 @@ public class StaffView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Staff");
         System.out.println("What would you like to do?");
-        System.out.println("(1) Login");
-        System.out.println("(2) Manage movies");
-        System.out.println("(3) Manage showtimes");
-        System.out.println("(4) Configure system settings");
-        System.out.println("(5) Exit");
+        System.out.println("(1) Manage movies");
+        System.out.println("(2) Manage showtimes");
+        System.out.println("(3) Configure system settings");
+        System.out.println("(4) Exit");
     }
 
     public void viewApp() {
+        if (!this.printLoginUI()) {
+            return;
+        }
         int choice = -1;
         do {
             this.printMenu();
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    // StaffManager.login()
-
-                    break;
-                case 2:
                     // StaffManager.editMovieListings()
-                    MovieView movieView = new MovieView(this.path + " > Staff");
+                    MovieView movieView = new MovieView(this.path + " > Staff", true);
                     movieView.viewApp();
                     break;
-                case 3:
+                case 2:
                     // StaffManager.editMovieShowtimes()
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff");
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", true);
                     showtimeView.viewApp();
                     break;
+                case 3:
+                    DatabaseView databaseView = new DatabaseView();
+                    databaseView.viewApp();
+                    break;
                 case 4:
-                    // StaffManager.editSystemSetting()
-
                     break;
-                case 5:
-                    break;
-
                 default:
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 4);
+    }
+
+    public boolean printLoginUI() {
+        Helper.clearScreen();
+        printRoute(this.path + " > Staff Login");
+        System.out.println("Please enter your staff username");
+        String username = Helper.readString();
+        System.out.println();
+        System.out.println("Please enter your staff password");
+        String password = Helper.readString();
+        System.out.println();
+        if (StaffManager.validateStaff(username, password)) {
+            System.out.println("Login successfully!");
+            Helper.pressAnyKeyToContinue();
+            return true;
+        } else {
+            System.out.println("Invalid staff!");
+            Helper.pressAnyKeyToContinue();
+            return false;
+        }
     }
 
 }
