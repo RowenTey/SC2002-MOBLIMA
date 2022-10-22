@@ -12,10 +12,20 @@ import helper.Helper;
 
 public class CineplexView extends MainView {
     /**
+     * Path of entry for showtime view
+     */
+    private String path;
+
+    /**
      * Default contructor for the CineplexAppView
      */
     public CineplexView() {
         super();
+    }
+
+    public CineplexView(String path) {
+        super();
+        this.path = path;
     }
 
     /**
@@ -23,7 +33,7 @@ public class CineplexView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Cineplex View");
+        printRoute(this.path + " > Cineplex");
         System.out.println("We have 3 Cineplexes in Singapore");
         System.out.println("(1) JEM");
         System.out.println("(2) Causeway Point");

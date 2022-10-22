@@ -43,7 +43,7 @@ public class CineplexAppView extends MainView {
                     staffView.viewApp();
                     break;
                 case 2:
-                    MovieGoerView movieGoerView = new MovieGoerView();
+                    MovieGoerView movieGoerView = new MovieGoerView("Cineplex App");
                     movieGoerView.viewApp();
                     break;
                 case 3:

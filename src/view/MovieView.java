@@ -12,23 +12,10 @@ import helper.Helper;
 
 public class MovieView extends MainView {
     /**
-     * Path of entry for showtime view
-     */
-    public String path;
-
-    /**
-     * Default contructor for the MovieView
+     * Default contructor for the CineplexAppView
      */
     public MovieView() {
         super();
-    }
-
-    /**
-     * Overrided contructor for the MovieView
-     */
-    public MovieView(String path) {
-        super();
-        this.path = path;
     }
 
     /**
@@ -36,7 +23,7 @@ public class MovieView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Movies View");
+        printRoute(this.path + " > Movies");
         System.out.println("List of movies (both \"NOW SHOWING\" and \"COMING SOON\")");
         // TODO: use for loop to list down the movies
         System.out.println("(1) One Piece Film Red");
