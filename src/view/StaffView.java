@@ -1,7 +1,11 @@
 package view;
 
+import java.util.ArrayList;
+
+import controller.CineplexManager;
 import controller.StaffManager;
 import helper.Helper;
+import model.Cineplex;
 
 /**
  * Viewing interface for Showtime
@@ -35,10 +39,11 @@ public class StaffView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Staff");
         System.out.println("What would you like to do?");
-        System.out.println("(1) Manage movies");
-        System.out.println("(2) Manage showtimes");
-        System.out.println("(3) Configure system settings");
-        System.out.println("(4) Exit");
+        System.out.println("(1) Login");
+        System.out.println("(2) Manage movies");
+        System.out.println("(3) Manage showtimes");
+        System.out.println("(4) Configure system settings");
+        System.out.println("(5) Exit");
     }
 
     public void viewApp() {
@@ -48,7 +53,7 @@ public class StaffView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 5);
+            choice = Helper.readInt(1, 8);
             switch (choice) {
                 case 1:
                     // StaffManager.editMovieListings()
@@ -65,6 +70,28 @@ public class StaffView extends MainView {
                     databaseView.viewApp();
                     break;
                 case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > Staff > Add New Cineplex");
+                    ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
+                    int total = CineplexManager.getTotalNumOfCineplex();
+                    if (total != 0) {
+                        System.out.println("Existing Cineplexes in Singapore");
+                        for (int i = 0; i < total; i++) {
+                            System.out.println("(" + (i + 1) + ") " + cineplex.get(i).getLocation());
+                        }
+                    }
+                    CineplexManager.addCineplex();
+                    Helper.pressAnyKeyToContinue();
+                    break;
+                case 7:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > Staff > Remove Cineplex");
+                    CineplexManager.removeCineplex();
+                    Helper.pressAnyKeyToContinue();
                     break;
                 default:
                     break;
