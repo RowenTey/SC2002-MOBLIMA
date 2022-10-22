@@ -74,6 +74,8 @@ public class StaffView extends MainView {
                 case 5:
                     break;
                 case 6:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > Staff > Add New Cineplex");
                     ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
                     int total = CineplexManager.getTotalNumOfCineplex();
                     if(total != 0){
@@ -83,14 +85,19 @@ public class StaffView extends MainView {
                         }
                     }
                     CineplexManager.addCineplex();
+                    Helper.pressAnyKeyToContinue();
                     break;
                 case 7:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > Staff > Remove Cineplex");
                     CineplexManager.removeCineplex();
+                    Helper.pressAnyKeyToContinue();
                     break;
                 default:
                     break;
             }
         } while (choice != 8);
+        Helper.pressAnyKeyToContinue();
     }
 
 }

@@ -79,5 +79,6 @@ public class MovieGoerView extends MainView {
                 Helper.pressAnyKeyToContinue();
             }
         } while (choice != 5);
+        Helper.pressAnyKeyToContinue();
     }
 }

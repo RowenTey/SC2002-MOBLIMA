@@ -60,6 +60,7 @@ public class ReviewView extends MainView {
                     break;
             }
         } while (choice != 3);
+        Helper.pressAnyKeyToContinue();
     }
 
 }

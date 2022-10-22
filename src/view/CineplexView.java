@@ -67,6 +67,7 @@ public class CineplexView extends MainView {
             }
             
         } while (choice != (total+1));
+        Helper.pressAnyKeyToContinue();
     }
 
 }
