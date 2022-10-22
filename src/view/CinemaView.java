@@ -11,10 +11,23 @@ import helper.Helper;
  */
 public class CinemaView extends MainView {
     /**
-     * Default contructor for the CineplexAppView
+     * Path of entry for showtime view
+     */
+    public String path;
+
+    /**
+     * Default contructor for the CinemaView
      */
     public CinemaView() {
         super();
+    }
+
+    /**
+     * Default contructor for the CinemaView
+     */
+    public CinemaView(String path) {
+        super();
+        this.path = path;
     }
 
     /**

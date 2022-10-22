@@ -23,7 +23,7 @@ public class CineplexView extends MainView {
         super();
     }
 
-    public CineplexView(String path){
+    public CineplexView(String path) {
         super();
         this.path = path;
     }
@@ -67,9 +67,6 @@ public class CineplexView extends MainView {
                     break;
                 default:
                     break;
-            }
-            if (choice != 4) {
-                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 4);
     }

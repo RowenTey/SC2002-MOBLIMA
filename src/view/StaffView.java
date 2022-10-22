@@ -10,18 +10,33 @@ import helper.Helper;
  * @since 2022-10-20
  */
 public class StaffView extends MainView {
+    /**
+     * Path of entry for showtime view
+     */
+    public String path;
 
+    /**
+     * Default contructor for the StaffView
+     */
     public StaffView() {
         super();
     }
 
+    /**
+     * Overrided contructor for the StaffView
+     */
+    public StaffView(String path) {
+        super();
+        this.path = path;
+    }
+
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("Staff View");
+        printRoute(this.path + " > Staff View");
         System.out.println("What would you like to do?");
         System.out.println("(1) Login");
-        System.out.println("(2) Create/Update/Remove movie listing");
-        System.out.println("(3) Create/Update/Remove cinema showtimes and the movies to be shown");
+        System.out.println("(2) Manage movies");
+        System.out.println("(3) Manage showtimes");
         System.out.println("(4) Configure system settings");
         System.out.println("(5) Exit");
     }
@@ -38,13 +53,13 @@ public class StaffView extends MainView {
                     break;
                 case 2:
                     // StaffManager.editMovieListings()
-                    ShowtimeView showtimeView = new ShowtimeView();
-                    showtimeView.viewApp();
-
+                    MovieView movieView = new MovieView(this.path + " > Staff View");
+                    movieView.viewApp();
                     break;
                 case 3:
                     // StaffManager.editMovieShowtimes()
-
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff View");
+                    showtimeView.viewApp();
                     break;
                 case 4:
                     // StaffManager.editSystemSetting()

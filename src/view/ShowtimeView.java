@@ -23,14 +23,14 @@ public class ShowtimeView extends MainView {
     public String path;
 
     /**
-     * Default contructor for the CineplexAppView
+     * Default contructor for the ShowtimeView
      */
     public ShowtimeView() {
         super();
     }
 
     /**
-     * Default contructor for the CineplexAppView
+     * Overrided contructor for the ShowtimeView
      */
     public ShowtimeView(String path) {
         super();
@@ -85,9 +85,6 @@ public class ShowtimeView extends MainView {
                     break;
                 default:
                     break;
-            }
-            if (choice != 3) {
-                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 3);
     }
