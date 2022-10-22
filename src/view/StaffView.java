@@ -1,6 +1,10 @@
 package view;
 
+import java.util.ArrayList;
+
+import controller.CineplexManager;
 import helper.Helper;
+import model.Cineplex;
 
 /**
  * Viewing interface for Showtime
@@ -38,14 +42,16 @@ public class StaffView extends MainView {
         System.out.println("(2) Manage movies");
         System.out.println("(3) Manage showtimes");
         System.out.println("(4) Configure system settings");
-        System.out.println("(5) Exit");
+        System.out.println("(6) Add Cineplex");
+        System.out.println("(7) Remove Cineplex");
+        System.out.println("(8) Exit");
     }
 
     public void viewApp() {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 5);
+            choice = Helper.readInt(1, 8);
             switch (choice) {
                 case 1:
                     // StaffManager.login()
@@ -67,11 +73,22 @@ public class StaffView extends MainView {
                     break;
                 case 5:
                     break;
-
+                case 6:
+                    ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
+                    int total = CineplexManager.getTotalNumOfCineplex();
+                    System.out.println("Existing Cineplexes in Singapore");
+                    for(int i=0; i<total; i++){
+                        System.out.println("(" + (i+1) + ") " + cineplex.get(i).getLocation());
+                    }
+                    CineplexManager.addCineplex();
+                    break;
+                case 7:
+                    CineplexManager.removeCineplex();
+                    break;
                 default:
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 8);
     }
 
 }

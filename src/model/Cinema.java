@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * The class that initialise a Cineplex.
+ * The class that initialise a Cinema.
  * 
  * @author Shao Wei
  * @version 1.0

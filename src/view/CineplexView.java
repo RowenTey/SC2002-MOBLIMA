@@ -1,8 +1,11 @@
 package view;
 
 
+import java.util.ArrayList;
+
 import controller.CineplexManager;
 import helper.Helper;
+import model.Cineplex;
 
 /**
  * Viewing interface for Cineplex
@@ -36,14 +39,14 @@ public class CineplexView extends MainView {
     public void printMenu() {
         Helper.clearScreen();
         printRoute(this.path + " > Cineplex");
-        System.out.println(CineplexManager.getCineplexList());
-        System.out.println("We have 3 Cineplexes in Singapore");
-        System.out.println("(1) JEM");
-        System.out.println("(2) Causeway Point");
-        System.out.println("(3) AMK Hub");
-        System.out.println("(4) Exit");
-        System.out.println("(5) Add Cineplex");
-        System.out.println("(6) View Cineplex");
+        ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
+        int total = CineplexManager.getTotalNumOfCineplex();
+        System.out.println("We have "+ total +" Cineplexes in Singapore");
+        for(int i=0; i<total; i++){
+            System.out.println("(" + (i+1) + ") " + cineplex.get(i).getLocation());
+        }
+        System.out.println();
+        System.out.println("("+ (total+1) + ") Exit");
         System.out.println("Which location would you like to choose? ");
     }
 
@@ -51,32 +54,19 @@ public class CineplexView extends MainView {
      * View App
      */
     public void viewApp() {
+        ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
+        int total = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 6);
-            switch (choice) {
-                case 1:
-                    System.out.println("JEM selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 2:
-                    System.out.println("Causeway Point selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 3:
-                    System.out.println("AMK Hub selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    CineplexManager.addCineplex();
-                    break;
-                default:
-                    break;
+            choice = Helper.readInt(1, total+1);
+            if(choice == total+1){
+                break;
+            }else{
+                System.out.println(cineplex.get(choice-1).getLocation()+ " selected");
             }
-        } while (choice != 4);
+            
+        } while (choice != (total+1));
     }
 
 }
