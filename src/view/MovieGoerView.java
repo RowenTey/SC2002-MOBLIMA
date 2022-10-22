@@ -12,10 +12,21 @@ import helper.Helper;
 
 public class MovieGoerView extends MainView {
     /**
+     * Path of entry for showtime view
+     */
+    private String path;
+    /**
      * Default contructor for the CineplexAppView
      */
     public MovieGoerView() {
         super();
+    }
+    /**
+     * Default contructor for the CineplexAppView
+     */
+    public MovieGoerView(String path) {
+        super();
+        this.path = path;
     }
 
     /**
@@ -23,7 +34,7 @@ public class MovieGoerView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > MovieGoer View");
+        printRoute(this.path +" > MovieGoer");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
@@ -42,15 +53,15 @@ public class MovieGoerView extends MainView {
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView();
+                    CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer");
                     cineplexView.viewApp();
                     break;
                 case 2:
-                    ShowtimeView showtimeView = new ShowtimeView();
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer");
                     showtimeView.viewApp();
                     break;
                 case 3:
-                    MovieView movieView = new MovieView();
+                    MovieView movieView = new MovieView(this.path +" > MovieGoer");
                     movieView.viewApp();
                     break;
                 case 4:

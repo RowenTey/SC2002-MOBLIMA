@@ -26,7 +26,7 @@ public class ReviewView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Review View > " + this.movieName);
+        printRoute("... > Review > " + this.movieName);
         System.out.println("What would you like to do ?");
         System.out.println("(1) See past reviews of this movie");
         System.out.println("(2) Leave a review");

@@ -42,7 +42,7 @@ public class ShowtimeView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Showtime View");
+        printRoute(this.path + " > Showtime View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) List current showtimes");
         System.out.println("(2) List upcoming showtimes");
@@ -54,7 +54,7 @@ public class ShowtimeView extends MainView {
      */
     public void printMenuStaff() {
         Helper.clearScreen();
-        printRoute("... > Showtime View");
+        printRoute(this.path + " > Showtime View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Create showtime");
         System.out.println("(2) List showtimes");
