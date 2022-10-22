@@ -76,9 +76,11 @@ public class StaffView extends MainView {
                 case 6:
                     ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
                     int total = CineplexManager.getTotalNumOfCineplex();
-                    System.out.println("Existing Cineplexes in Singapore");
-                    for(int i=0; i<total; i++){
-                        System.out.println("(" + (i+1) + ") " + cineplex.get(i).getLocation());
+                    if(total != 0){
+                        System.out.println("Existing Cineplexes in Singapore");
+                        for(int i=0; i<total; i++){
+                            System.out.println("(" + (i+1) + ") " + cineplex.get(i).getLocation());
+                        }
                     }
                     CineplexManager.addCineplex();
                     break;
