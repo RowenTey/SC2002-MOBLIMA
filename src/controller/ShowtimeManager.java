@@ -34,5 +34,6 @@ public class ShowtimeManager {
       System.out.println("Movie: " + showtime.getMovie().getTitle());
       System.out.println("Time: " + showtime.getTime());
     }
+    System.out.println();
   }
 }

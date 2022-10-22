@@ -23,7 +23,7 @@ public class CineplexView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Cineplex App View");
+        printRoute("... > Cineplex View");
         System.out.println("We have 3 Cineplexes in Singapore");
         System.out.println("(1) JEM");
         System.out.println("(2) Causeway Point");
@@ -57,9 +57,6 @@ public class CineplexView extends MainView {
                     break;
                 default:
                     break;
-            }
-            if (choice != 4) {
-                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 4);
     }

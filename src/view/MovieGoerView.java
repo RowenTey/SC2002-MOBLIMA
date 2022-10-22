@@ -23,7 +23,7 @@ public class MovieGoerView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > MovieGoer View");
+        printRoute("MovieGoer View");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or list Cineplexes");
         System.out.println("(2) Search or list Showtimes");
