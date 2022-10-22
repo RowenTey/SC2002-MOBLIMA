@@ -60,7 +60,7 @@ public class MovieView extends MainView {
                     // TODO: MovieManager.showDetails() -> Synopsis, director, cast, overall rating,
                     // showtimes
                     // TODO: Prompt for BookView() or ReviewView()
-                    ReviewView reviewView = new ReviewView("One Piece Film Red");
+                    ReviewView reviewView = new ReviewView("One Piece Film Red", this.path+" > Movies");
                     reviewView.viewApp();
                     break;
                 case 2:
