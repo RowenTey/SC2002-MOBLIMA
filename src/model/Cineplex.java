@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import controller.CineplexManager;
 import model.enums.Location;
 
 /**

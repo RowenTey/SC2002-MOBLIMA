@@ -1,11 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-
-import controller.CineplexManager;
 import controller.StaffManager;
 import helper.Helper;
-import model.Cineplex;
 
 /**
  * Viewing interface for Showtime
