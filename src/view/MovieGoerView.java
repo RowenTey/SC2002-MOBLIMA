@@ -59,11 +59,11 @@ public class MovieGoerView extends MainView {
                     cineplexView.viewApp();
                     break;
                 case 2:
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer");
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer", false);
                     showtimeView.viewApp();
                     break;
                 case 3:
-                    MovieView movieView = new MovieView(this.path + " > MovieGoer");
+                    MovieView movieView = new MovieView(this.path + " > MovieGoer", false);
                     movieView.viewApp();
                     break;
                 case 4:
@@ -74,9 +74,6 @@ public class MovieGoerView extends MainView {
                     break;
                 default:
                     break;
-            }
-            if (choice != 5) {
-                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 5);
     }

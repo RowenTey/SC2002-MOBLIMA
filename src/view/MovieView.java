@@ -18,18 +18,26 @@ public class MovieView extends MainView {
      * path
      */
     private String path;
+
+    /**
+     * Current user is staff
+     */
+    public boolean isStaff;
+
     /**
      * Default contructor for the CineplexAppView
      */
     public MovieView() {
         super();
     }
+
     /**
      * Default contructor for the CineplexAppView
      */
-    public MovieView(String path) {
+    public MovieView(String path, boolean isStaff) {
         super();
         this.path = path;
+        this.isStaff = isStaff;
     }
 
     /**
@@ -39,22 +47,21 @@ public class MovieView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Movies");
         // TODO Movies.getList()
-        List<String> list=new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("One Piece Film Red");
         list.add("Black Adam");
         list.add("Fall");
         list.add("Thor: Love and Thunder");
 
-
         System.out.println("List of movies (both \"NOW SHOWING\" and \"COMING SOON\")");
         // TODO: use for loop to list down the movies
-        for(int i=0; i<list.size(); i++){
-            System.out.println("("+(i+1)+") "+ list.get(i));
-            if(i+1 == list.size()){
-                System.out.println("("+(i+2)+") Exit");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("(" + (i + 1) + ") " + list.get(i));
+            if (i + 1 == list.size()) {
+                System.out.println("(" + (i + 2) + ") Exit");
             }
         }
-        
+
         System.out.println("Which movie do you want to choose?");
     }
 
@@ -63,7 +70,7 @@ public class MovieView extends MainView {
      */
     public void viewApp() {
         // TODO Movies.getList()
-        List<String> list=new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("One Piece Film Red");
         list.add("Black Adam");
         list.add("Fall");
@@ -72,19 +79,19 @@ public class MovieView extends MainView {
 
         do {
             this.printMenu();
-            choice = Helper.readInt(0, (list.size()+1));
-            if(choice == list.size()+1){
+            choice = Helper.readInt(0, (list.size() + 1));
+            if (choice == list.size() + 1) {
                 break;
-            }else{
-                System.out.println(list.get(choice-1));
-                    // TODO: MovieManager.showDetails() -> Synopsis, director, cast, overall rating,
-                    // showtimes
-                    // TODO: Prompt for BookView() or ReviewView()
-                    ReviewView reviewView = new ReviewView(list.get(choice-1), this.path+" > Movies");
-                    reviewView.viewApp();
+            } else {
+                System.out.println(list.get(choice - 1));
+                // TODO: MovieManager.showDetails() -> Synopsis, director, cast, overall rating,
+                // showtimes
+                // TODO: Prompt for BookView() or ReviewView()
+                ReviewView reviewView = new ReviewView(list.get(choice - 1), this.path + " > Movies");
+                reviewView.viewApp();
             }
-            
-        } while (choice != list.size()+1);
+
+        } while (choice != list.size() + 1);
     }
 
 }
