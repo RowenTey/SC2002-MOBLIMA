@@ -11,12 +11,12 @@ public abstract class MainView {
   /**
    * Abstract method for view menu
    */
-  protected abstract void printMenu();
+  protected abstract void printMenu(String forUser);
 
   /**
    * Abstract method for view app
    */
-  public abstract void viewApp();
+  public abstract void viewApp(String fromView);
 
   /**
    * Default constructor for main view
