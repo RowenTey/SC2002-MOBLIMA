@@ -22,7 +22,7 @@ public class CineplexAppView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("Cineplex App View");
+        printRoute("Cineplex App");
         System.out.println("Are you an Admin or a MovieGoer?");
         System.out.println("(1) Admin");
         System.out.println("(2) MovieGoer");
@@ -39,7 +39,7 @@ public class CineplexAppView extends MainView {
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
-                    StaffView staffView = new StaffView("Cineplex App View");
+                    StaffView staffView = new StaffView("Cineplex App");
                     staffView.viewApp();
                     break;
                 case 2:

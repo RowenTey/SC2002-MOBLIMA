@@ -12,10 +12,21 @@ import helper.Helper;
 
 public class MovieView extends MainView {
     /**
+     * path
+     */
+    private String path;
+    /**
      * Default contructor for the CineplexAppView
      */
     public MovieView() {
         super();
+    }
+    /**
+     * Default contructor for the CineplexAppView
+     */
+    public MovieView(String path) {
+        super();
+        this.path = path;
     }
 
     /**

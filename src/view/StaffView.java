@@ -32,7 +32,7 @@ public class StaffView extends MainView {
 
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Staff View");
+        printRoute(this.path + " > Staff");
         System.out.println("What would you like to do?");
         System.out.println("(1) Login");
         System.out.println("(2) Manage movies");
@@ -53,12 +53,12 @@ public class StaffView extends MainView {
                     break;
                 case 2:
                     // StaffManager.editMovieListings()
-                    MovieView movieView = new MovieView(this.path + " > Staff View");
+                    MovieView movieView = new MovieView(this.path + " > Staff");
                     movieView.viewApp();
                     break;
                 case 3:
                     // StaffManager.editMovieShowtimes()
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff View");
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff");
                     showtimeView.viewApp();
                     break;
                 case 4:
