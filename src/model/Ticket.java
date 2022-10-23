@@ -25,6 +25,16 @@ public class Ticket {
     private Cineplex cineplex;
 
     /**
+     * Constructor of Ticket
+     *
+     */
+    public Ticket(double price, Seat seat, Cineplex cineplex) {
+        this.price = price;
+        this.seat = seat;
+        this.cineplex = cineplex;
+    }
+
+    /**
      * Gets the price of the ticket
      *
      * @return the price of the booking
