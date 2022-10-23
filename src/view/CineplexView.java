@@ -82,6 +82,7 @@ public class CineplexView extends MainView {
                 }
                 Helper.pressAnyKeyToContinue();
             } while (choice != 3);
+            Helper.pressAnyKeyToContinue();
         }
 
         else {
@@ -97,6 +98,7 @@ public class CineplexView extends MainView {
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != (numOfCineplex + 1));
+            Helper.pressAnyKeyToContinue();
         }
     }
 }
