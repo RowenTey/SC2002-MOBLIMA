@@ -1,6 +1,10 @@
 package view;
 
+import java.util.ArrayList;
+
 import helper.Helper;
+import controller.MovieManager;
+import model.Review;
 
 /**
  * Viewing interface for Reviews
@@ -34,8 +38,8 @@ public class ReviewView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > " + this.movieName);
         System.out.println("What would you like to do ?");
-        System.out.println("(1) See past reviews of this movie");
-        System.out.println("(2) Leave a review");
+        System.out.println("(1) View past reviews");
+        System.out.println("(2) Make a review");
         System.out.println("(3) Exit");
     }
 
@@ -50,6 +54,12 @@ public class ReviewView extends MainView {
             switch (choice) {
                 case 1:
                     // TODO: MovieManager.getReviews();
+                    ArrayList<Review> reviewsList = MovieManager.getReviews();
+                    System.out.println("Reviews:");
+                    for (int i=0; i<reviewsList.size(); i+=1){
+                        System.out.println("\t" + Double.toString(reviewsList.get(i).getRating()) + ": " + reviewsList.get(i).getReview());
+                    }
+                    System.out.println();
                     break;
                 case 2:
                     // TODO: MovieManager.addReview();
