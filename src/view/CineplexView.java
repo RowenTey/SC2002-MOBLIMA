@@ -108,12 +108,11 @@ public class CineplexView extends MainView {
                             System.out.println(
                                     "(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
                         }
-                        System.out.println("("+(numOfCineplex+1)+") Exit");
-                        opt = Helper.readInt(1,numOfCineplex+1);
-                        if(opt == numOfCineplex+1){
-                        }
-                        else{
-                            Cineplex old = CineplexManager.getCineplexList().get(opt-1);
+                        System.out.println("(" + (numOfCineplex + 1) + ") Exit");
+                        opt = Helper.readInt(1, numOfCineplex + 1);
+                        if (opt == numOfCineplex + 1) {
+                        } else {
+                            Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
                             CineplexManager.removeCineplex(old);
                             numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                         }
@@ -123,7 +122,9 @@ public class CineplexView extends MainView {
                 }
                 Helper.pressAnyKeyToContinue();
             } while (choice != 3);
-        } else {
+        }
+
+        else {
             do {
                 this.printMenu();
                 choice = Helper.readInt(1, numOfCineplex + 1);
@@ -132,10 +133,10 @@ public class CineplexView extends MainView {
                 } else {
                     System.out.println(cineplex.get(choice - 1).getLocation() + " selected");
                 }
-
+                if (choice != (numOfCineplex + 1)) {
+                    Helper.pressAnyKeyToContinue();
+                }
             } while (choice != (numOfCineplex + 1));
-            Helper.pressAnyKeyToContinue();
         }
-        Helper.pressAnyKeyToContinue();
     }
 }
