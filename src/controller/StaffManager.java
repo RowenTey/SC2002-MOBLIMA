@@ -39,7 +39,7 @@ public class StaffManager {
   }
 
   /**
-   * Initializer for staffs in the hotel.
+   * Initializer for cinema staffs
    */
   public static void initializeStaff() {
     createStaff("ks123", "ks123");

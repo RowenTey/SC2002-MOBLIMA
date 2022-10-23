@@ -87,7 +87,7 @@ public class StaffView extends MainView {
         String password = Helper.readString();
         System.out.println();
         if (StaffManager.validateStaff(username, password)) {
-            System.out.println("Login successfully!");
+            System.out.println("Login successfully! Welcome " + username + " to the MOBLIMA system.");
             Helper.pressAnyKeyToContinue();
             return true;
         } else {

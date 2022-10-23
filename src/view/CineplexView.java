@@ -14,7 +14,6 @@ import model.enums.Location;
  * @version 1.0
  * @since 2022-10-22
  */
-
 public class CineplexView extends MainView {
     /**
      * Path of entry for cineplex view
@@ -83,7 +82,9 @@ public class CineplexView extends MainView {
                 }
                 Helper.pressAnyKeyToContinue();
             } while (choice != 3);
-        } else {
+        }
+
+        else {
             do {
                 this.printMenu();
                 choice = Helper.readInt(1, numOfCineplex + 1);
@@ -92,10 +93,10 @@ public class CineplexView extends MainView {
                 } else {
                     System.out.println(cineplex.get(choice - 1).getLocation() + " selected");
                 }
-
+                if (choice != (numOfCineplex + 1)) {
+                    Helper.pressAnyKeyToContinue();
+                }
             } while (choice != (numOfCineplex + 1));
-            Helper.pressAnyKeyToContinue();
         }
-        Helper.pressAnyKeyToContinue();
     }
 }
