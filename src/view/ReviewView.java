@@ -3,7 +3,7 @@ package view;
 import helper.Helper;
 
 /**
- * Viewing interface for Cineplex
+ * Viewing interface for Reviews
  * 
  * @author Shao Wei
  * @version 1.0
@@ -11,14 +11,20 @@ import helper.Helper;
  */
 
 public class ReviewView extends MainView {
+    /**
+     * Path of entry for ReviewView
+     */
+    private String path;
+
     private String movieName;
 
     /**
      * Default contructor for the CineplexAppView
      */
-    public ReviewView(String movieName) {
+    public ReviewView(String movieName, String path) {
         super();
         this.movieName = movieName;
+        this.path = path;
     }
 
     /**
@@ -26,7 +32,7 @@ public class ReviewView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Review View > " + this.movieName);
+        printRoute(this.path + " > " + this.movieName);
         System.out.println("What would you like to do ?");
         System.out.println("(1) See past reviews of this movie");
         System.out.println("(2) Leave a review");
@@ -52,6 +58,9 @@ public class ReviewView extends MainView {
                     break;
                 default:
                     break;
+            }
+            if (choice != 3) {
+                Helper.pressAnyKeyToContinue();
             }
         } while (choice != 3);
     }

@@ -34,9 +34,9 @@ public class Showtime implements Serializable {
   private Movie movie;
 
   /**
-   * {@link Cinema} of showtime
+   * cinema code of showtime
    */
-  private Cinema cinema;
+  private String cinemaCode;
 
   /**
    * {@link LayoutType} of showtime
@@ -64,14 +64,14 @@ public class Showtime implements Serializable {
    * @param time       time of showtime
    * @param showtimeId id of showtime
    * @param movie      {@link Movie} of showtime
-   * @param cinema     {@link Cinema} of showtime
+   * @param cinemaCode cinema code of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
-  public Showtime(String showtimeId, Date time, Movie movie, Cinema cinema, LayoutType layoutType) {
+  public Showtime(String showtimeId, Date time, Movie movie, String cinemaCode, LayoutType layoutType) {
     this.setShowtimeId(showtimeId);
     this.setTime(time);
     this.setMovie(movie);
-    this.setCinema(cinema);
+    this.setCinemaCode(cinemaCode);
     this.setLayoutType(layoutType);
     this.initSeats();
   }
@@ -105,12 +105,12 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Sets the {@link Cinema} of showtime
+   * Sets the cinema code of showtime
    * 
-   * @param cinema {@link Cinema} of showtime
+   * @param cinemaCode cinemaCode of showtime
    */
-  public void setCinema(Cinema cinema) {
-    this.cinema = cinema;
+  public void setCinemaCode(String cinemaCode) {
+    this.cinemaCode = cinemaCode;
   }
 
   /**
@@ -150,12 +150,12 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Gets the cinema of showtime
+   * Gets the cinema code of showtime
    * 
-   * @return {@link Cinema} that is assigned to this showtime
+   * @return cinemaCode that is assigned to this showtime
    */
-  public Cinema getCinema() {
-    return this.cinema;
+  public String getCinemaCode() {
+    return this.cinemaCode;
   }
 
   /**

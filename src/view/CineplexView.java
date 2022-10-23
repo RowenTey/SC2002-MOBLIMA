@@ -1,5 +1,6 @@
 package view;
 
+import controller.CineplexManager;
 import helper.Helper;
 
 /**
@@ -7,61 +8,99 @@ import helper.Helper;
  * 
  * @author Shao Wei
  * @version 1.0
- * @since 2022-10-19
+ * @since 2022-10-22
  */
-
 public class CineplexView extends MainView {
     /**
-     * Default contructor for the CineplexAppView
+     * Path of entry for cineplex view
+     */
+    private String path;
+
+    /**
+     * Current user is staff
+     */
+    private boolean isStaff;
+
+    /**
+     * Default contructor for the CineplexView
      */
     public CineplexView() {
         super();
+    }
+
+    public CineplexView(String path, boolean isStaff) {
+        super();
+        this.path = path;
+        this.isStaff = isStaff;
     }
 
     /**
      * View Menu
      */
     public void printMenu() {
-        Helper.clearScreen();
-        printRoute("... > Cineplex App View");
-        System.out.println("We have 3 Cineplexes in Singapore");
-        System.out.println("(1) JEM");
-        System.out.println("(2) Causeway Point");
-        System.out.println("(3) AMK Hub");
-        System.out.println("(4) Exit");
-        System.out.println("Which location would you like to choose? ");
+        if (!this.isStaff) {
+            Helper.clearScreen();
+            printRoute(this.path + " > Cineplex");
+            if(CineplexManager.getTotalNumOfCineplex() == 0){
+                System.out.println("We don't have any Cineplex at this time");
+                System.out.println("(1) Exit");
+            }else{
+                CineplexManager.displayExistingCineplex();
+                System.out.println("Which location would you like to choose? ");
+            }
+
+        } else {
+            Helper.clearScreen();
+            printRoute(this.path + " > Cineplex");
+            System.out.println("Which would you like to do ?");
+            System.out.println("(1) Add Cineplex");
+            System.out.println("(2) Remove Cineplex");
+            System.out.println("(3) Exit");
+        }
     }
 
     /**
      * View App
      */
     public void viewApp() {
+        int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
-        do {
-            this.printMenu();
-            choice = Helper.readInt(1, 4);
-            switch (choice) {
-                case 1:
-                    System.out.println("JEM selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 2:
-                    System.out.println("Causeway Point selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 3:
-                    System.out.println("AMK Hub selected...");
-                    // TODO (showtimeView())
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
-            }
-            if (choice != 4) {
+        if (this.isStaff) {
+            do {
+                this.printMenu();
+                numOfCineplex = CineplexManager.getTotalNumOfCineplex();
+                choice = Helper.readInt(1, 3);
+                switch(choice){
+                    case 1:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Cineplex > Add New Cineplex");
+                        CineplexManager.addCineplex();
+                        break;
+                    case 2:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Cineplex > Remove Cineplex");
+                        CineplexManager.removeCineplex();
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
                 Helper.pressAnyKeyToContinue();
-            }
-        } while (choice != 4);
-    }
+            } while (choice != 3);
+            Helper.pressAnyKeyToContinue();
+        }
 
+        else {
+            do {
+                this.printMenu();
+                choice = Helper.readInt(1, numOfCineplex + 1);
+                if (choice != numOfCineplex + 1) {
+                    System.out.println(CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
+                    Helper.pressAnyKeyToContinue();
+                }
+            } while (choice != (numOfCineplex + 1));
+            Helper.pressAnyKeyToContinue();
+        }
+    }
 }

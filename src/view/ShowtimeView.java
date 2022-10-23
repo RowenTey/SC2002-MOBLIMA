@@ -4,7 +4,6 @@ import java.util.Date;
 
 import controller.ShowtimeManager;
 import helper.Helper;
-import model.Cinema;
 import model.Movie;
 import model.enums.ShowStatus;
 
@@ -23,18 +22,24 @@ public class ShowtimeView extends MainView {
     public String path;
 
     /**
-     * Default contructor for the CineplexAppView
+     * Current user is staff
+     */
+    public boolean isStaff;
+
+    /**
+     * Default contructor for the ShowtimeView
      */
     public ShowtimeView() {
         super();
     }
 
     /**
-     * Default contructor for the CineplexAppView
+     * Overrided contructor for the ShowtimeView
      */
-    public ShowtimeView(String path) {
+    public ShowtimeView(String path, boolean isStaff) {
         super();
         this.path = path;
+        this.isStaff = isStaff;
     }
 
     /**
@@ -42,23 +47,17 @@ public class ShowtimeView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute("... > Showtime View");
+        printRoute(this.path + " > Showtime View");
         System.out.println("What would you like to do ?");
-        System.out.println("(1) List current showtimes");
-        System.out.println("(2) List upcoming showtimes");
-        System.out.println("(3) Exit");
-    }
-
-    /**
-     * View Menu for {@code Staff}
-     */
-    public void printMenuStaff() {
-        Helper.clearScreen();
-        printRoute("... > Showtime View");
-        System.out.println("What would you like to do ?");
-        System.out.println("(1) Create showtime");
-        System.out.println("(2) List showtimes");
-        System.out.println("(3) Exit");
+        if (this.isStaff) {
+            System.out.println("(1) Create showtime");
+            System.out.println("(2) List showtimes");
+            System.out.println("(3) Exit");
+        } else {
+            System.out.println("(1) List current showtimes");
+            System.out.println("(2) List upcoming showtimes");
+            System.out.println("(3) Exit");
+        }
     }
 
     /**
@@ -67,15 +66,27 @@ public class ShowtimeView extends MainView {
     public void viewApp() {
         int choice = -1;
         do {
-            this.printMenuStaff();
+            this.printMenu();
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
                     // TODO (ShowtimeManager.getCurrentList())
-                    ShowtimeManager.createShowtime(new Date(), new Movie("One Piece FILM RED", ShowStatus.NOW_SHOWING),
-                            new Cinema(null, null, false, false));
+
+                    // Which movie would you like to create a showtime for?
+                    // get movie list
+
+                    // Enter the showtime for this movie
+                    // date + time
+
+                    // Enter the cinema for this movie
+                    // get cinema list
+
+                    // Date date = (Date) Helper.setDate(false)
+                    Date date = new Date();
+                    ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED", ShowStatus.NOW_SHOWING),
+                            "AM1");
                     ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam", ShowStatus.NOW_SHOWING),
-                            new Cinema(null, null, false, false));
+                            "JE2");
                     break;
                 case 2:
                     // TODO (ShowtimeManager.getUpcomingList())
@@ -87,6 +98,7 @@ public class ShowtimeView extends MainView {
                     break;
             }
             if (choice != 3) {
+                System.out.println();
                 Helper.pressAnyKeyToContinue();
             }
         } while (choice != 3);

@@ -180,7 +180,6 @@ public class Helper {
       date = format.format(Date);
       if (validateDate(date, format)) {
         return date;
-
       } else {
         System.out.println("Invalid Date");
       }

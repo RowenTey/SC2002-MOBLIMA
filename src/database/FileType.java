@@ -10,9 +10,14 @@ package database;
  */
 public enum FileType {
   /**
-   * File type corresponding to the {@link User} file.
+   * File type corresponding to the {@link Staff} file.
    */
-  USERS("Users"),
+  STAFF("Staff"),
+
+  /**
+   * File type corresponding to the {@link MovieGoer} file.
+   */
+  MOVIE_GOERS("MovieGoer"),
 
   /**
    * File type corresponding to the {@link Cinema} file.

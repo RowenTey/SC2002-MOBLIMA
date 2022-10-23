@@ -34,11 +34,13 @@ public class MovieGoer extends User {
     /**
      * Constructor of MovieGoer
      * 
+     * @param username This MovieGoer's username
      * @param mobile   This MovieGoer's mobile number
      * @param email    This MovieGoer's email address
      * @param ageGroup This MovieGoer's age group
      */
-    public MovieGoer(String mobile, String email, AgeGroup ageGroup) {
+    public MovieGoer(String username, String mobile, String email, AgeGroup ageGroup) {
+        super(username);
         this.mobile = mobile;
         this.email = email;
         this.ageGroup = ageGroup;

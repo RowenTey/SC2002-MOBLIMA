@@ -2,6 +2,8 @@ package database;
 
 import java.util.HashMap;
 
+import controller.StaffManager;
+
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -25,9 +27,14 @@ public class Database {
   private static final String folder = "data";
 
   /**
-   * HashMap to contain {@link User} objects.
+   * HashMap to contain {@link Staff} objects.
    */
-  public static HashMap<String, User> USERS = new HashMap<String, User>();
+  public static HashMap<String, Staff> STAFF = new HashMap<String, Staff>();
+
+  /**
+   * HashMap to contain {@link MovieGoer} objects.
+   */
+  public static HashMap<String, MovieGoer> MOVIE_GOER = new HashMap<String, MovieGoer>();
 
   /**
    * HashMap to contain {@link Cinema} objects.
@@ -59,8 +66,11 @@ public class Database {
    * of program.
    */
   public Database() {
-    if (!readSerializedObject(FileType.USERS)) {
-      System.out.println("Read into Users failed!");
+    if (!readSerializedObject(FileType.STAFF)) {
+      System.out.println("Read into Staffs failed!");
+    }
+    if (!readSerializedObject(FileType.MOVIE_GOERS)) {
+      System.out.println("Read into MovieGoers failed!");
     }
     if (!readSerializedObject(FileType.CINEMAS)) {
       System.out.println("Read into Cinema failed!");
@@ -93,7 +103,8 @@ public class Database {
    * A method to save all files into database.
    */
   public static void saveAllFiles() {
-    saveFileIntoDatabase(FileType.USERS);
+    saveFileIntoDatabase(FileType.STAFF);
+    saveFileIntoDatabase(FileType.MOVIE_GOERS);
     saveFileIntoDatabase(FileType.CINEMAS);
     saveFileIntoDatabase(FileType.BOOKINGS);
     saveFileIntoDatabase(FileType.CINEPLEX);
@@ -123,8 +134,10 @@ public class Database {
       }
 
       // Read into database
-      if (fileType == FileType.USERS) {
-        USERS = (HashMap<String, User>) object;
+      if (fileType == FileType.STAFF) {
+        STAFF = (HashMap<String, Staff>) object;
+      } else if (fileType == FileType.MOVIE_GOERS) {
+        MOVIE_GOER = (HashMap<String, MovieGoer>) object;
       } else if (fileType == FileType.CINEMAS) {
         CINEMAS = (HashMap<String, Cinema>) object;
       } else if (fileType == FileType.BOOKINGS) {
@@ -141,8 +154,10 @@ public class Database {
       fileInputStream.close();
     } catch (EOFException err) {
       System.out.println("Warning: " + err.getMessage());
-      if (fileType == FileType.USERS) {
-        USERS = new HashMap<String, User>();
+      if (fileType == FileType.STAFF) {
+        STAFF = new HashMap<String, Staff>();
+      } else if (fileType == FileType.MOVIE_GOERS) {
+        MOVIE_GOER = new HashMap<String, MovieGoer>();
       } else if (fileType == FileType.CINEMAS) {
         CINEMAS = new HashMap<String, Cinema>();
       } else if (fileType == FileType.BOOKINGS) {
@@ -180,8 +195,10 @@ public class Database {
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(filePath);
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-      if (fileType == FileType.USERS) {
-        objectOutputStream.writeObject(USERS);
+      if (fileType == FileType.STAFF) {
+        objectOutputStream.writeObject(STAFF);
+      } else if (fileType == FileType.MOVIE_GOERS) {
+        objectOutputStream.writeObject(MOVIE_GOER);
       } else if (fileType == FileType.CINEMAS) {
         objectOutputStream.writeObject(CINEMAS);
       } else if (fileType == FileType.BOOKINGS) {
@@ -204,14 +221,35 @@ public class Database {
   }
 
   /**
+   * A method to initialize {@link Staff} data when the database is empty.
+   * <p>
+   * Calls {@link StaffManager} to initialize the dummy guests.
+   * 
+   * @return {@code true} if initialized successfully. Otherwise, {@code false} if
+   *         database is not empty.
+   */
+  public static boolean initializeStaff() {
+    if (STAFF.size() != 0) {
+      System.out.println("The database already has staffs. Reset database first to initialize staffs");
+      return false;
+    }
+    StaffManager.initializeStaff();
+    return true;
+  }
+
+  /**
    * A method to clear out all the data in database.
    * 
    * @return {@code true} if data is cleared successfully.
    */
   public static boolean clearDatabase() {
     // Initialize empty data
-    USERS = new HashMap<String, User>();
-    writeSerializedObject(FileType.USERS);
+    STAFF = new HashMap<String, Staff>();
+    Database.initializeStaff();
+    writeSerializedObject(FileType.STAFF);
+
+    MOVIE_GOER = new HashMap<String, MovieGoer>();
+    writeSerializedObject(FileType.MOVIE_GOERS);
 
     CINEMAS = new HashMap<String, Cinema>();
     // Database.initializeRooms();

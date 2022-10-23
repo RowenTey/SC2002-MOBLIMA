@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import model.enums.Location;
 
 /**
@@ -42,9 +43,9 @@ public class Cineplex implements Serializable {
      * 
      * @param location Location of Cineplex
      */
-    public Cineplex(Location location, int numOfCinemas) {
+    public Cineplex(Location location) {
         this.location = location;
-        this.numOfCinemas = numOfCinemas;
+        this.numOfCinemas = 10;
         this.initCineplex();
     }
 
@@ -52,10 +53,11 @@ public class Cineplex implements Serializable {
      * Initialise Cineplex
      */
     public void initCineplex() {
-        String cinemaCode = this.location.getLabel().substring(0, 3).toUpperCase();
+        String cinemaCode = this.location.getLabel().substring(0, 2).toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
-            Cinema newCinema = new Cinema(this, cinemaCode, false, false);
+            String s = "" + i;
+            Cinema newCinema = new Cinema(this, cinemaCode+s, false, false);
             this.cinemaList.add(newCinema);
         }
     }

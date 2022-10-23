@@ -15,10 +15,10 @@ public class ShowtimeManager {
   public static void getUpcomingList() {
   }
 
-  public static boolean createShowtime(Date time, Movie movie, Cinema cinema) {
+  public static boolean createShowtime(Date time, Movie movie, String cinemaCode) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
     String showtimeId = String.format("S%04d", sId);
-    Showtime newShowtime = new Showtime(showtimeId, time, movie, cinema, LayoutType.MEDIUM);
+    Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
     return true;

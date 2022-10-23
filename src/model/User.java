@@ -18,7 +18,17 @@ public class User implements Serializable {
     /**
      * Name of the user
      */
-    private String userName;
+    private String username;
+
+    /**
+     * Constructor of User
+     * 
+     * @param username user's username
+     */
+    public User(String username) {
+        setName(username);
+        ;
+    }
 
     /**
      * Sets the name of the user
@@ -26,7 +36,7 @@ public class User implements Serializable {
      * @param name name of the user
      */
     public void setName(String name) {
-        this.userName = name;
+        this.username = name;
     }
 
     /**
@@ -35,6 +45,6 @@ public class User implements Serializable {
      * @return the name of the user
      */
     public String getName() {
-        return this.userName;
+        return this.username;
     }
 }
