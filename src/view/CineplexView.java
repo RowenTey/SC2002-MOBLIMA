@@ -118,7 +118,7 @@ public class CineplexView extends MainView {
                         if(opt == numOfCineplex+1){
                         }
                         else{
-                            Cineplex old = CineplexManager.getCineplexList().get(choice-1);
+                            Cineplex old = CineplexManager.getCineplexList().get(opt-1);
                             CineplexManager.removeCineplex(old);
                             numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                         }
