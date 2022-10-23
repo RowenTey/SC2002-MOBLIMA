@@ -56,6 +56,7 @@ public class CineplexManager {
         } else {
             System.out.println("Which cineplex do you want to remove ?");
             CineplexManager.displayExistingCineplex();
+            System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
             opt = Helper.readInt(1,CineplexManager.getTotalNumOfCineplex()+1);
             if(opt != CineplexManager.getTotalNumOfCineplex()+1){
                 Cineplex old = CineplexManager.getCineplexList().get(opt-1);
@@ -80,12 +81,10 @@ public class CineplexManager {
      * Display existing Cineplexes
      */
     public static void displayExistingCineplex(){
-        System.out.println("We have " + CineplexManager.getTotalNumOfCineplex() + " Cineplexes in Singapore");
+        System.out.println("Current Cineplex(es) we have: ");
             for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
                 System.out.println("(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
             }
-            System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
-            System.out.println();
     }
 
     /**
@@ -95,6 +94,7 @@ public class CineplexManager {
         int opt =1;
         if (CineplexManager.getTotalNumOfCineplex() != 0) {
             CineplexManager.displayExistingCineplex();
+            System.out.println();
         }
         System.out.println("Where do you want to add a new Cineplex ?");
         for (int i = 0; i < Location.values().length; i++) {

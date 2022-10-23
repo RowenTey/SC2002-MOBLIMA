@@ -1,6 +1,5 @@
 package view;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import controller.ShowtimeManager;

@@ -1,11 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-
 import controller.CineplexManager;
 import helper.Helper;
-import model.Cineplex;
-import model.enums.Location;
 
 /**
  * Viewing interface for Cineplex
@@ -45,8 +41,14 @@ public class CineplexView extends MainView {
         if (!this.isStaff) {
             Helper.clearScreen();
             printRoute(this.path + " > Cineplex");
-            CineplexManager.displayExistingCineplex();
-            System.out.println("Which location would you like to choose? ");
+            if(CineplexManager.getTotalNumOfCineplex() == 0){
+                System.out.println("We don't have any Cineplex at this time");
+                System.out.println("(1) Exit");
+            }else{
+                CineplexManager.displayExistingCineplex();
+                System.out.println("Which location would you like to choose? ");
+            }
+
         } else {
             Helper.clearScreen();
             printRoute(this.path + " > Cineplex");
@@ -61,7 +63,6 @@ public class CineplexView extends MainView {
      * View App
      */
     public void viewApp() {
-        ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
         int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
         if (this.isStaff) {
@@ -69,16 +70,21 @@ public class CineplexView extends MainView {
                 this.printMenu();
                 numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                 choice = Helper.readInt(1, 3);
-                if (choice == 1) {
-                    Helper.clearScreen();
-                    printRoute(this.path + " > Cineplex > Add New Cineplex");
-                    CineplexManager.addCineplex();
-                } else if (choice == 2) {
-                    Helper.clearScreen();
-                    printRoute(this.path + " > Cineplex > Remove Cineplex");
-                    CineplexManager.removeCineplex();
-                } else {
-                    break;
+                switch(choice){
+                    case 1:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Cineplex > Add New Cineplex");
+                        CineplexManager.addCineplex();
+                        break;
+                    case 2:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Cineplex > Remove Cineplex");
+                        CineplexManager.removeCineplex();
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
                 }
                 Helper.pressAnyKeyToContinue();
             } while (choice != 3);
@@ -89,12 +95,8 @@ public class CineplexView extends MainView {
             do {
                 this.printMenu();
                 choice = Helper.readInt(1, numOfCineplex + 1);
-                if (choice == numOfCineplex + 1) {
-                    break;
-                } else {
-                    System.out.println(cineplex.get(choice - 1).getLocation() + " selected");
-                }
-                if (choice != (numOfCineplex + 1)) {
+                if (choice != numOfCineplex + 1) {
+                    System.out.println(CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != (numOfCineplex + 1));
