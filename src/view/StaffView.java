@@ -1,11 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-
-import controller.CineplexManager;
 import controller.StaffManager;
 import helper.Helper;
-import model.Cineplex;
 
 /**
  * Viewing interface for Showtime
@@ -39,12 +35,11 @@ public class StaffView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Staff");
         System.out.println("What would you like to do?");
-        System.out.println("(1) Manage movies");
-        System.out.println("(2) Manage showtimes");
-        System.out.println("(3) Configure system settings");
-        System.out.println("(4) Add Cineplex");
-        System.out.println("(5) Remove Cineplex");
-        System.out.println("(6) Exit");
+        System.out.println("(1) Manage Cineplex");
+        System.out.println("(2) Manage Movies");
+        System.out.println("(3) Manage Showtimes");
+        System.out.println("(4) Configure System Settings");
+        System.out.println("(5) Exit");
     }
 
     public void viewApp() {
@@ -54,48 +49,32 @@ public class StaffView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 8);
+            choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
+                    CineplexView cineplexView = new CineplexView(this.path + " > Staff", true);
+                    cineplexView.viewApp();
+                    break;
+                case 2:
                     // StaffManager.editMovieListings()
                     MovieView movieView = new MovieView(this.path + " > Staff", true);
                     movieView.viewApp();
                     break;
-                case 2:
+                case 3:
                     // StaffManager.editMovieShowtimes()
                     ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", true);
                     showtimeView.viewApp();
                     break;
-                case 3:
+                case 4:
                     DatabaseView databaseView = new DatabaseView();
                     databaseView.viewApp();
                     break;
-                case 4:
-                    Helper.clearScreen();
-                    printRoute(this.path + " > Staff > Add New Cineplex");
-                    ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
-                    int total = CineplexManager.getTotalNumOfCineplex();
-                    if (total != 0) {
-                        System.out.println("Existing Cineplexes in Singapore");
-                        for (int i = 0; i < total; i++) {
-                            System.out.println("(" + (i + 1) + ") " + cineplex.get(i).getLocation());
-                        }
-                    }
-                    CineplexManager.addCineplex();
-                    Helper.pressAnyKeyToContinue();
-                    break;
                 case 5:
-                    Helper.clearScreen();
-                    printRoute(this.path + " > Staff > Remove Cineplex");
-                    CineplexManager.removeCineplex();
-                    Helper.pressAnyKeyToContinue();
-                    break;
-                case 6:
                     break;
                 default:
                     break;
             }
-        } while (choice != 6);
+        } while (choice != 5);
     }
 
     public boolean printLoginUI() {

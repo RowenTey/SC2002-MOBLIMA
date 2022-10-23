@@ -92,6 +92,7 @@ public class MovieView extends MainView {
             }
 
         } while (choice != list.size() + 1);
+        Helper.pressAnyKeyToContinue();
     }
 
 }

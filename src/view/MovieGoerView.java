@@ -55,7 +55,7 @@ public class MovieGoerView extends MainView {
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer");
+                    CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer", false);
                     cineplexView.viewApp();
                     break;
                 case 2:
