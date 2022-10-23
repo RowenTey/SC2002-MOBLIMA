@@ -86,7 +86,7 @@ public class CineplexView extends MainView {
                         }
                         System.out.println();
                     }
-                    System.out.println("Where do you want add a new Cineplex ?");
+                    System.out.println("Where do you want to add a new Cineplex ?");
                     for (int i = 0; i < Location.values().length; i++) {
                         System.out.println("(" + (i + 1) + ") " + Location.values()[i].getLabel());
                     }
