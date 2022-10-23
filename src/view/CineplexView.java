@@ -14,7 +14,6 @@ import model.enums.Location;
  * @version 1.0
  * @since 2022-10-22
  */
-
 public class CineplexView extends MainView {
     /**
      * Path of entry for cineplex view
