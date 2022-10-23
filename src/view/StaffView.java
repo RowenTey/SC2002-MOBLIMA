@@ -39,11 +39,12 @@ public class StaffView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Staff");
         System.out.println("What would you like to do?");
-        System.out.println("(1) Login");
-        System.out.println("(2) Manage movies");
-        System.out.println("(3) Manage showtimes");
-        System.out.println("(4) Configure system settings");
-        System.out.println("(5) Exit");
+        System.out.println("(1) Manage movies");
+        System.out.println("(2) Manage showtimes");
+        System.out.println("(3) Configure system settings");
+        System.out.println("(4) Add Cineplex");
+        System.out.println("(5) Remove Cineplex");
+        System.out.println("(6) Exit");
     }
 
     public void viewApp() {
@@ -70,10 +71,6 @@ public class StaffView extends MainView {
                     databaseView.viewApp();
                     break;
                 case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
                     Helper.clearScreen();
                     printRoute(this.path + " > Staff > Add New Cineplex");
                     ArrayList<Cineplex> cineplex = CineplexManager.getCineplexList();
@@ -87,16 +84,18 @@ public class StaffView extends MainView {
                     CineplexManager.addCineplex();
                     Helper.pressAnyKeyToContinue();
                     break;
-                case 7:
+                case 5:
                     Helper.clearScreen();
                     printRoute(this.path + " > Staff > Remove Cineplex");
                     CineplexManager.removeCineplex();
                     Helper.pressAnyKeyToContinue();
                     break;
+                case 6:
+                    break;
                 default:
                     break;
             }
-        } while (choice != 4);
+        } while (choice != 6);
     }
 
     public boolean printLoginUI() {

@@ -3,7 +3,7 @@ package view;
 import helper.Helper;
 
 /**
- * Viewing interface for Cineplex
+ * Viewing interface for Reviews
  * 
  * @author Shao Wei
  * @version 1.0
@@ -12,7 +12,7 @@ import helper.Helper;
 
 public class ReviewView extends MainView {
     /**
-     * Path of entry for showtime view
+     * Path of entry for ReviewView
      */
     private String path;
 
@@ -21,7 +21,7 @@ public class ReviewView extends MainView {
     /**
      * Default contructor for the CineplexAppView
      */
-    public ReviewView(String movieName,String path) {
+    public ReviewView(String movieName, String path) {
         super();
         this.movieName = movieName;
         this.path = path;
@@ -59,8 +59,10 @@ public class ReviewView extends MainView {
                 default:
                     break;
             }
+            if (choice != 3) {
+                Helper.pressAnyKeyToContinue();
+            }
         } while (choice != 3);
-        Helper.pressAnyKeyToContinue();
     }
 
 }
