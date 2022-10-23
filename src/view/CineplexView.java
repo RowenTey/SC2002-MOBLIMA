@@ -108,11 +108,12 @@ public class CineplexView extends MainView {
                             System.out.println(
                                     "(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
                         }
-                        System.out.println("(" + (numOfCineplex + 1) + ") Exit");
-                        opt = Helper.readInt(1, numOfCineplex + 1);
-                        if (opt == numOfCineplex + 1) {
-                        } else {
-                            Cineplex old = CineplexManager.getCineplexList().get(choice - 1);
+                        System.out.println("("+(numOfCineplex+1)+") Exit");
+                        opt = Helper.readInt(1,numOfCineplex+1);
+                        if(opt == numOfCineplex+1){
+                        }
+                        else{
+                            Cineplex old = CineplexManager.getCineplexList().get(opt-1);
                             CineplexManager.removeCineplex(old);
                             numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                         }
