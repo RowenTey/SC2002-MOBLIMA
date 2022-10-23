@@ -72,9 +72,18 @@ public class Movie implements Serializable, Comparable<Movie> {
      * Constructor of Movie
      * 
      */
-    public Movie(String title, ShowStatus showStatus) {
-        this.setTitle(title);
-        this.setStatus(showStatus);
+
+    public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast, int ticketSales, int overallRating, Review[] reviews, String type) {
+        this.movieId = movieId;
+        this.title = title;
+        this.status = status;
+        this.synopsis = synopsis;
+        this.director = director;
+        this.cast = cast;
+        this.ticketSales = ticketSales;
+        this.overallRating = overallRating;
+        this.reviews = reviews;
+        this.type = type;
     }
 
     /**

@@ -26,6 +26,16 @@ public class Review {
     private double rating;
 
     /**
+     * Constructor of Review
+     *
+     */
+    public Review(int reviewId, String review, double rating) {
+        this.reviewId = reviewId;
+        this.review = review;
+        this.rating = rating;
+    }
+
+    /**
      * Gets the ID of the booking
      *
      * @return the ID of the booking

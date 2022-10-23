@@ -42,6 +42,18 @@ public class Booking implements Serializable {
     private String emailAddr;
 
     /**
+     * Constructor of Booking
+     *
+     */
+    public Booking(String transactionId, Ticket ticket, String name, String mobileNum, String emailAddr) {
+        this.transactionId = transactionId;
+        this.ticket = ticket;
+        this.name = name;
+        this.mobileNum = mobileNum;
+        this.emailAddr = emailAddr;
+    }
+
+    /**
      * Gets the transaction ID of the booking
      *
      * @return the transaction ID of the booking
