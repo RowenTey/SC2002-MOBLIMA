@@ -51,6 +51,8 @@ public class BookingView extends MainView {
           // CineplexManager.getCineplexList();
           System.out.println("Select a showtime");
           // ShowtimeManager.getCurrentList
+          System.out.println("Select a seat");
+          // ShowtimeManager.selectSeat
           break;
         case 2:
           System.out.println("Booking history");

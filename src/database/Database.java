@@ -3,6 +3,7 @@ package database;
 import java.util.HashMap;
 
 import controller.CineplexManager;
+import controller.MovieManager;
 import controller.StaffManager;
 
 import java.io.IOException;
@@ -247,11 +248,28 @@ public class Database {
    *         database is not empty.
    */
   public static boolean initializeCineplex() {
-    if (CineplexManager.getTotalNumOfCineplex() != 0) {
+    if (CINEPLEX.size() != 0) {
       System.out.println("The database already has cineplexes. Reset database first to initialize Cineplex");
       return false;
     }
     CineplexManager.initializeCineplex();
+    return true;
+  }
+
+  /**
+   * A method to initialize {@link Cineplex} data when the database is empty.
+   * <p>
+   * Calls {@link CineplexManager} to initialize the cineplex.
+   * 
+   * @return {@code true} if initialized successfully. Otherwise, {@code false} if
+   *         database is not empty.
+   */
+  public static boolean initializeMovies() {
+    if (MOVIES.size() != 0) {
+      System.out.println("The database already has movies. Reset database first to initialize Movies");
+      return false;
+    }
+    MovieManager.initializeMovies();
     return true;
   }
 
@@ -277,7 +295,6 @@ public class Database {
     writeSerializedObject(FileType.BOOKINGS);
 
     CINEPLEX = new HashMap<String, Cineplex>();
-    Database.initializeCineplex();
     writeSerializedObject(FileType.CINEPLEX);
 
     SHOWTIME = new HashMap<String, Showtime>();

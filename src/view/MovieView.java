@@ -2,12 +2,17 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.lang.model.type.TypeMirror;
 
 import controller.MovieManager;
 import model.Movie;
 import helper.Helper;
 import view.ReviewView;
 import view.BookingView;
+import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 
 /**
  * Viewing interface for Cineplex
@@ -42,32 +47,13 @@ public class MovieView extends MainView {
         super();
         this.path = path;
         this.isStaff = isStaff;
+        new MovieManager();
     }
 
     /**
      * View Menu
      */
     public void printMenu() {
-        Helper.clearScreen();
-        printRoute(this.path + " > Movies");
-        // ArrayList<Movie> movieList = MovieManager.getMovies();
-
-        System.out.println("List of movies");
-        // TODO: use for loop to list down the movies
-        // if (movieList.size() == 0) {
-        // System.out.println("We don't have any movies at this time");
-        // System.out.println("(1) Exit");
-        // } else {
-        // for (int i = 0; i < movieList.size(); i++) {
-        // System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
-        // if (i + 1 == movieList.size()) {
-        // System.out.println("(" + (i + 2) + ") Exit");
-        // }
-        // }
-        // }
-        System.out.println();
-        Helper.pressAnyKeyToContinue();
-
         Helper.clearScreen();
         printRoute(this.path + " > Movie");
         System.out.println("What would you like to do ?");
@@ -80,11 +66,10 @@ public class MovieView extends MainView {
             System.out.println("(6) Exit");
         } else {
             System.out.println("(1) Book Movie");
-            System.out.println("(2) Review Movie");
-            System.out.println("(3) View Past Movie Reviews");
-            System.out.println("(4) List Top 5 Movies by Ticket Sales");
-            System.out.println("(5) List Top 5 Movies by Overall Rating");
-            System.out.println("(6) Exit");
+            System.out.println("(2) View Past Movie Reviews");
+            System.out.println("(3) List Top 5 Movies by Ticket Sales");
+            System.out.println("(4) List Top 5 Movies by Overall Rating");
+            System.out.println("(5) Exit");
         }
     }
 
@@ -94,6 +79,7 @@ public class MovieView extends MainView {
     public void viewApp() {
         // TODO Movies.getList()
         // ArrayList<Movie> movieList = MovieManager.getMovies();
+        Scanner sc = new Scanner(System.in);
         this.printMenu();
         int choice;
         if (this.isStaff) {
@@ -105,8 +91,32 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
-                        // TODO: Prompt for BookingView()
-                        // BookingView.viewApp();
+
+                        System.out.println("Enter movie title: ");
+                        String title = sc.next();
+                        System.out.println("Enter show status: ");
+                        String status = sc.next();
+                        ShowStatus showStatus = ShowStatus.valueOf(status);
+                        System.out.println("Enter synopsis: ");
+                        String synopsis = sc.next();
+                        System.out.println("Enter director's name: ");
+                        String director = sc.next();
+
+                        System.out.println("Enter cast member names line-by-line: (Enter '0' to stop)");
+                        ArrayList<String> castMembers = new ArrayList<String>();
+                        String castMember;
+                        castMember = sc.next();
+                        while(castMember != "0"){
+                            castMembers.add(castMember);
+                        }
+                        String[] cast = new String[castMembers.size()];
+                        cast = castMembers.toArray(cast);
+
+                        System.out.println("Enter movie type: ");
+                        String movieType = sc.next();
+                        TypeMovies type= TypeMovies.valueOf(movieType);
+
+                        MovieManager.addMovie(title, showStatus, synopsis, director, cast, type);
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
@@ -142,37 +152,27 @@ public class MovieView extends MainView {
 
         else {
             do {
-                choice = Helper.readInt(1, 6);
+                choice = Helper.readInt(1, 5);
                 String selectedMovieId;
                 switch (choice) {
                     case 1:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
-                        // TODO: Prompt for BookingView()
-                        // TODO: BookingView.viewApp();
+                        handleBookMovie();
                         break;
                     case 2:
-                        // selectedMovieId = selectMovie();
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Review Movie");
-                        // TODO: Prompt for BookView()
-                        // ReviewView reviewView = new ReviewView(movieList.get(choice - 1), this.path +
-                        // " > Movies");
-                        // reviewView.viewApp();
-                        break;
-                    case 3:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Past Movie Reviews");
                         // TODO
                         break;
-                    case 4:
+                    case 3:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Ticket Sales");
                         // TODO
                         break;
-                    case 5:
+                    case 4:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
                         // TODO
@@ -180,12 +180,33 @@ public class MovieView extends MainView {
                     default:
                         break;
                 }
-                if (choice != 6) {
+                if (choice != 5) {
                     System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 6);
         }
+    }
+
+    private void displayListOfMovies() {
+        Helper.clearScreen();
+        printRoute(this.path + " > Movies");
+        ArrayList<Movie> movieList = MovieManager.getMovieList();
+
+        System.out.println("List of movies");
+        if (movieList.size() == 0) {
+            System.out.println("We don't have any movies at this time");
+        } else {
+            for (int i = 0; i < movieList.size(); i++) {
+                System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
+            }
+        }
+        System.out.println();
+    }
+
+    private void handleBookMovie() {
+        System.out.println("Which movie would you like to book?");
+        displayListOfMovies();
     }
 
     /**

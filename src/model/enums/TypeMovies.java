@@ -9,23 +9,23 @@ package model.enums;
  */
 public enum TypeMovies {
     /**
-    * ShowStatus type corresponding to "coming soon"
-    */
+     * ShowStatus type corresponding to "coming soon"
+     */
     TWO_D("2D"),
 
     /**
-    * Layout type corresponding to "now showing"
-    */
+     * Layout type corresponding to "now showing"
+     */
     THREE_D("3D"),
 
     /**
-    * Layout type corresponding to "preview"
-    */
-    BLOCKBUSTER("preview");
+     * Layout type corresponding to "preview"
+     */
+    BLOCKBUSTER("Blockbuster");
 
     /**
-    * A String value for the Layout type for retrieving purposes
-    */
+     * A String value for the Layout type for retrieving purposes
+     */
     public final String layoutTypeAsStr;
 
     /**

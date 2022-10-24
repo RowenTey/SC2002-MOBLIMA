@@ -50,6 +50,7 @@ public class CineplexManager {
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
+
     /**
      * get the number of cineplexes
      * 
