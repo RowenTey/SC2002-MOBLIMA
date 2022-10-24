@@ -1,5 +1,9 @@
 package helper;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -322,4 +326,45 @@ public class Helper {
     } catch (Exception err) {
     }
   }
+
+  public static void promptDate(){
+    try {
+      System.out.println("Please enter a date in the format: dd-mm-yy");
+      String dateInput = sc.next();
+      System.out.println("Please enter a time in the format: hh-mm");
+      String timeInput = sc.next();
+
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy hh:mm");
+      String dateInString = dateInput+" "+timeInput;
+      Date date = sdf.parse(dateInString);
+    } catch (ParseException e){
+    }
+  }
+  public static Date convertDate(){
+
+    final String DATE_FORMAT = "dd-MM-yy mm:ss"; //specify final output format
+    Date date = new Date();
+
+
+    System.out.println("Please input a date in the format: dd-MM-yy");
+    String dateInput = sc.next();
+    sc.nextLine();
+    System.out.println("Please input a time in the format: mm:ss");
+    String timeInput = sc.next();
+    sc.nextLine();
+
+    try {
+      DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+      df.setLenient(false); //makes input follow the given format strictly
+      String finalDate = dateInput + " " + timeInput; //concatenates data to the final format
+      date = df.parse(finalDate); //parses the string into the Date class
+      //System.out.println(date);
+    }catch (ParseException e) {
+      System.out.println("Error! Please input data in the correct format.");
+      convertData();
+    }
+    return date;
+  }
+
 }
+
