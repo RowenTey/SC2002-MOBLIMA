@@ -19,6 +19,11 @@ public class Cineplex implements Serializable {
     private static final long serialVersionUID = 4L;
 
     /**
+     * Cineplex ID
+     */
+    private String cineplexID;
+
+    /**
      * Location of the Cineplex
      */
     private Location location;
@@ -60,6 +65,14 @@ public class Cineplex implements Serializable {
             Cinema newCinema = new Cinema(this, cinemaCode+s, false, false);
             this.cinemaList.add(newCinema);
         }
+    }
+
+    /**
+     * Gets the ID of the cineplex
+     * @return cineplexID
+     */
+    public String getCineplexID(){
+        return this.cineplexID;
     }
 
     /**
