@@ -42,9 +42,12 @@ public class ShowtimeManager {
   public static void printShowtime() {
     for (Showtime showtime : Database.SHOWTIME.values()) {
       System.out.println();
-      System.out.println("Showtime ID: " + showtime.getShowtimeId());
-      System.out.println("Movie: " + showtime.getMovie().getTitle());
-      System.out.println("Time: " + showtime.getTime());
+      System.out.println(String.format("%-40s", "").replace(" ", "-"));
+      System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
+      System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
+      System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
+      System.out.println(String.format("%-40s", "").replace(" ", "-"));
+      System.out.println();
     }
   }
 
