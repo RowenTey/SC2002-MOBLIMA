@@ -70,7 +70,7 @@ public class CineplexManager {
      * Add new cineplex
      */
     public static void addCineplex(int opt) {
-        if (opt != (Location.values().length+ 1)) {
+        if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);
             Cineplex newCineplex = new Cineplex(Location.values()[opt]);
@@ -132,33 +132,31 @@ public class CineplexManager {
             CineplexManager.displayExistingCineplex();
             System.out.println();
         }
-        
+
         ArrayList<Integer> available_locations = new ArrayList<Integer>();
-        available_locations.add(0); //Causeway
-        available_locations.add(1); //Amk
-        available_locations.add(2);// Jem
-        for(int i=0; i<CineplexManager.getTotalNumOfCineplex(); i++){
-            if(CineplexManager.cineplexList.get(i).getLocation() == "Causeway Point"){
+        available_locations.add(0); // Causeway
+        available_locations.add(1); // Amk
+        available_locations.add(2); // Jem
+        for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
+            if (CineplexManager.cineplexList.get(i).getLocation() == "Causeway Point") {
                 available_locations.remove(Integer.valueOf(0));
-            }
-            else if(CineplexManager.cineplexList.get(i).getLocation() == "Amk Hub"){
+            } else if (CineplexManager.cineplexList.get(i).getLocation() == "Amk Hub") {
                 available_locations.remove(Integer.valueOf(1));
-            }
-            else if(CineplexManager.cineplexList.get(i).getLocation() == "Jem"){
+            } else if (CineplexManager.cineplexList.get(i).getLocation() == "Jem") {
                 available_locations.remove(Integer.valueOf(2));
             }
         }
 
         System.out.println("Where do you want to add a new Cineplex ?");
         for (int i = 0; i < available_locations.size(); i++) {
-            System.out.println("(" + (i+1) + ") " + Location.values()[available_locations.get(i)].getLabel());
+            System.out.println("(" + (i + 1) + ") " + Location.values()[available_locations.get(i)].getLabel());
         }
 
         System.out.println("(" + (available_locations.size() + 1) + ") Exit");
-        opt = Helper.readInt(1, available_locations.size()+1);
-        if(opt == available_locations.size()+1){
+        opt = Helper.readInt(1, available_locations.size() + 1);
+        if (opt == available_locations.size() + 1) {
             return -1;
         }
-        return available_locations.get(opt-1);
+        return available_locations.get(opt - 1);
     }
 }
