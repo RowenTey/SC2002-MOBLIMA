@@ -7,6 +7,7 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
+import model.Showtime;
 import model.enums.Location;
 
 /**
@@ -184,10 +185,12 @@ public class CineplexManager {
         int choice = Helper.readInt(1, (selectedCineplex.getCinemaList().size() + 1));
         Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
         System.out.println("\nYou selected: " + cinema.getCinemaCode());
-        Helper.pressAnyKeyToContinue();
         return cinema.getCinemaCode();
     }
 
+    /**
+     * Displays the list of cinemas for this cineplex
+     */
     private static void displayCinema(Cineplex selectedCineplex) {
         System.out.println("List of cinema(s):");
         for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
@@ -195,5 +198,4 @@ public class CineplexManager {
                     "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
         }
     }
-
 }

@@ -71,15 +71,12 @@ public class MovieView extends MainView {
      * View App
      */
     public void viewApp() {
-        // TODO Movies.getList()
-        // ArrayList<Movie> movieList = MovieManager.getMovies();
         Scanner sc = new Scanner(System.in);
         this.printMenu();
         int choice;
         if (this.isStaff) {
             do {
                 choice = Helper.readInt(1, 6);
-                String selectedMovieId;
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
@@ -90,13 +87,13 @@ public class MovieView extends MainView {
 
                         System.out.println("Select show status: ");
                         int count = 0;
-                        for (ShowStatus status : ShowStatus.values()){
+                        for (ShowStatus status : ShowStatus.values()) {
                             count += 1;
                             System.out.println("(" + (count) + ") " + status);
                         }
                         int opt = Helper.readInt(1, count);
-                        ShowStatus showStatus = ShowStatus.values()[opt-1];
-                        
+                        ShowStatus showStatus = ShowStatus.values()[opt - 1];
+
                         System.out.println("Enter synopsis: ");
                         String synopsis = sc.next();
                         System.out.println("Enter director's name: ");

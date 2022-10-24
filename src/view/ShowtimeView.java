@@ -68,15 +68,6 @@ public class ShowtimeView extends MainView {
                 choice = Helper.readInt(1, 3);
                 switch (choice) {
                     case 1:
-                        // Which movie would you like to create a showtime for?
-                        // get movie list
-
-                        // Enter the showtime for this movie
-                        // date + time
-
-                        // Enter the cinema for this movie
-                        // get cinema list
-
                         if (handleCreateShowtime()) {
                             System.out.println("Showtime created successfully!");
                         } else {
@@ -92,7 +83,6 @@ public class ShowtimeView extends MainView {
                         break;
                 }
                 if (choice != 3) {
-                    System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 3);
