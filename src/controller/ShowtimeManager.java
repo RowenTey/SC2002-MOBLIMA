@@ -63,6 +63,7 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
+      System.out.println(String.format("%-20s: %s", "CinemaCode", showtime.getCinemaCode()));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }

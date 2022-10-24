@@ -1,11 +1,9 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import controller.MovieManager;
-import model.Movie;
 import helper.Helper;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
@@ -184,7 +182,7 @@ public class MovieView extends MainView {
                     System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }
-            } while (choice != 6);
+            } while (choice != 5);
         }
     }
 
