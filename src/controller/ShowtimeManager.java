@@ -30,6 +30,11 @@ public class ShowtimeManager {
   private static HashMap<String, String> CinematoCineplexLocation = new HashMap<String, String>();
 
   /**
+   * HashMap to get row number from alphabets
+   */
+  private static HashMap<Integer, String> alphaRow = new HashMap<Integer, String>();
+
+  /**
    * Constructor of ShowtimeManager
    */
   public ShowtimeManager() {
@@ -39,6 +44,15 @@ public class ShowtimeManager {
     CinematoCineplexLocation.put("AM", "Amk Hub");
     CinematoCineplexLocation.put("JE", "Jem");
     CinematoCineplexLocation.put("CA", "Causeway Point");
+    alphaRow.put(0, "A");
+    alphaRow.put(1, "B");
+    alphaRow.put(2, "C");
+    alphaRow.put(3, "D");
+    alphaRow.put(4, "E");
+    alphaRow.put(5, "F");
+    alphaRow.put(6, "G");
+    alphaRow.put(7, "H");
+    alphaRow.put(8, "I");
   }
 
   /**
@@ -95,7 +109,7 @@ public class ShowtimeManager {
   public static void displayShowtime(ArrayList<Showtime> showtimes) {
     System.out.println("List of showtimes(s) for this movie:");
     for (int i = 0; i < showtimes.size(); i++) {
-      System.out.println("Showtime " + "(" + i + 1 + ")");
+      System.out.println("\nShowtime " + "(" + (i + 1) + ")");
       printShowtimeDetails(showtimes.get(i));
     }
   }
@@ -145,10 +159,9 @@ public class ShowtimeManager {
    */
   public static String selectShowtime(ArrayList<Showtime> showtimes) {
     Showtime selectedShowtime;
-    System.out.println("Select a movie by entering it's index:");
+    System.out.println("Select a showtime by entering it's index:");
     int choice = Helper.readInt(1, (showtimes.size() + 1));
     selectedShowtime = showtimes.get(choice - 1);
-    Helper.pressAnyKeyToContinue();
     return selectedShowtime.getShowtimeId();
   }
 
@@ -176,22 +189,11 @@ public class ShowtimeManager {
    * Display the cinema layout of current showtime
    */
   public static void displayShowtimeLayout(Showtime showtime) {
-    HashMap<Integer, String> alpaRow = new HashMap<Integer, String>();
-    alpaRow.put(0, "A");
-    alpaRow.put(1, "B");
-    alpaRow.put(2, "C");
-    alpaRow.put(3, "D");
-    alpaRow.put(4, "E");
-    alpaRow.put(5, "F");
-    alpaRow.put(6, "G");
-    alpaRow.put(7, "H");
-    alpaRow.put(8, "I");
-
     System.out.println();
-    System.out.println("                    -------Screen------");
+    System.out.println("                      -------Screen------");
     System.out.println("     1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17");
     for (int row = 0; row <= 8; row++) {
-      System.out.print(alpaRow.get(row) + "   ");
+      System.out.print(alphaRow.get(row) + "   ");
       for (int col = 0; col <= 16; col++) {
         if (showtime.getSeatAt(row + 1, col + 1) == null)
           System.out.print("   ");
@@ -216,13 +218,13 @@ public class ShowtimeManager {
     displayShowtimeLayout(showtimeShowtime);
     System.out.println("Please enter the desired seat coordinates (e.g A6):");
     String position = Helper.readString();
+    System.out.println("position " + position);
   }
 
   /**
    * Print details of showtime
    */
   public static void printShowtimeDetails(Showtime showtime) {
-    System.out.println();
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
@@ -238,4 +240,5 @@ public class ShowtimeManager {
     }
     return null;
   }
+
 }
