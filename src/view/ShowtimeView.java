@@ -60,49 +60,51 @@ public class ShowtimeView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
-        do {
-            this.printMenu();
-            choice = Helper.readInt(1, 3);
-            switch (choice) {
-                case 1:
-                    // TODO (ShowtimeManager.getCurrentList())
+        if (this.isStaff) {
+            do {
+                this.printMenu();
+                choice = Helper.readInt(1, 3);
+                switch (choice) {
+                    case 1:
+                        // Which movie would you like to create a showtime for?
+                        // get movie list
 
-                    // Which movie would you like to create a showtime for?
-                    // get movie list
+                        // Enter the showtime for this movie
+                        // date + time
 
-                    // Enter the showtime for this movie
-                    // date + time
+                        // Enter the cinema for this movie
+                        // get cinema list
 
-                    // Enter the cinema for this movie
-                    // get cinema list
+                        if (handleCreateShowtime()) {
+                            System.out.println("Showtime created successfully!");
+                        } else {
+                            System.out.println("Showtime created unsuccessfully!");
+                        }
+                        break;
+                    case 2:
+                        ShowtimeManager.printAllShowtime();
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+                if (choice != 3) {
+                    System.out.println();
+                    Helper.pressAnyKeyToContinue();
+                }
+            } while (choice != 3);
+        }
 
-                    // Date date = (Date) Helper.setDate(false)
-                    Date date = new Date();
-                    // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
-                    // ShowStatus.NOW_SHOWING),
-                    // "AM1");
-                    // ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam",
-                    // ShowStatus.NOW_SHOWING),
-                    // "JE2");
-                    break;
-                case 2:
-                    // TODO (ShowtimeManager.getUpcomingList())
-                    ShowtimeManager.printShowtime();
-                    break;
-                case 3:
-                    break;
-                default:
-                    break;
-            }
-            if (choice != 3) {
-                System.out.println();
-                Helper.pressAnyKeyToContinue();
-            }
-        } while (choice != 3);
+        else {
+            System.out.println("(1) List current showtimes");
+            System.out.println("(2) Exit");
+        }
+
     }
 
     /**
-     * Overrided View App - from movie view
+     * Overrided View App - from movie view (user)
      */
     public void viewApp(Movie movie) {
         int choice = -1;
@@ -110,8 +112,6 @@ public class ShowtimeView extends MainView {
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
-                    // TODO (ShowtimeManager.getCurrentList())
-
                     // Which movie would you like to create a showtime for?
                     // get movie list
 
@@ -121,19 +121,11 @@ public class ShowtimeView extends MainView {
                     // Enter the cinema for this movie
                     // get cinema list
 
-                    // Date date = (Date) Helper.setDate(false)
-                    Date date = Helper.promptDate();
-
-                    // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
-                    // ShowStatus.NOW_SHOWING),
-                    // "AM1");
-                    // ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam",
-                    // ShowStatus.NOW_SHOWING),
-                    // "JE2");
+                    handleCreateShowtime();
                     break;
                 case 2:
                     // TODO (ShowtimeManager.getUpcomingList())
-                    ShowtimeManager.printShowtime();
+                    ShowtimeManager.printAllShowtime();
                     break;
                 case 3:
                     break;
@@ -147,15 +139,7 @@ public class ShowtimeView extends MainView {
         } while (choice != 3);
     }
 
-    private void printShowtimeSelection(Movie movie) {
-
-    }
-
     private boolean handleCreateShowtime() {
-        if (MovieManager.displayListOfMovies()) {
-
-        }
-
-        return false;
+        return ShowtimeManager.onCreateShowtime();
     }
 }

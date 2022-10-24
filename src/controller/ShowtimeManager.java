@@ -36,10 +36,27 @@ public class ShowtimeManager {
     return true;
   }
 
+  public static boolean onCreateShowtime() {
+    System.out.println("\nWhich movie would you like to creata a showtime for?");
+    // movie list not empty
+    if (MovieManager.displayListOfMovies()) {
+      Movie selectedMovie = MovieManager.selectMovie();
+      Date date = Helper.promptDate();
+      System.out.println("Which cineplex would you like to air this movie?\n");
+      CineplexManager.displayExistingCineplex();
+      Cineplex selectedCineplex = CineplexManager.selectCineplex();
+      System.out.println("Which ciname in this cineplex would you like to pick?\n");
+      String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
+      ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Prints the showtime with details
    */
-  public static void printShowtime() {
+  public static void printAllShowtime() {
     for (Showtime showtime : Database.SHOWTIME.values()) {
       System.out.println();
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -54,9 +71,9 @@ public class ShowtimeManager {
   /**
    * Display the cinema layout of current showtime
    */
-  public static void displayShowtimeLayout(Showtime showtime){
+  public static void displayShowtimeLayout(Showtime showtime) {
     HashMap<Integer, String> alpaRow = new HashMap<Integer, String>();
-    alpaRow.put(0,"A");
+    alpaRow.put(0, "A");
     alpaRow.put(1, "B");
     alpaRow.put(2, "C");
     alpaRow.put(3, "D");
@@ -68,21 +85,22 @@ public class ShowtimeManager {
 
     System.out.println();
     System.out.println("                    -------Screen------");
-        System.out.println("     1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17");
-        for (int row = 0; row <= 8; row++) {
-            System.out.print(alpaRow.get(row) + "   ");
-            for (int col = 0; col <= 16; col++) {
-                if (showtime.getSeatAt(row+1, col+1) == null) System.out.print("   ");
-                else {
-                  if(showtime.getSeatAt(row+1, col+1).getBooked()){
-                    System.out.println(" X ");
-                  }else{
-                    System.out.print(" O ");
-                  }
-                }
-            }
-            System.out.println();
+    System.out.println("     1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17");
+    for (int row = 0; row <= 8; row++) {
+      System.out.print(alpaRow.get(row) + "   ");
+      for (int col = 0; col <= 16; col++) {
+        if (showtime.getSeatAt(row + 1, col + 1) == null)
+          System.out.print("   ");
+        else {
+          if (showtime.getSeatAt(row + 1, col + 1).getBooked()) {
+            System.out.println(" X ");
+          } else {
+            System.out.print(" O ");
+          }
         }
-        System.out.println();
+      }
+      System.out.println();
+    }
+    System.out.println();
   }
 }
