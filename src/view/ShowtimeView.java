@@ -14,7 +14,6 @@ import model.enums.ShowStatus;
  * @version 1.0
  * @since 2022-10-20
  */
-
 public class ShowtimeView extends MainView {
     /**
      * Path of entry for showtime view
@@ -28,13 +27,6 @@ public class ShowtimeView extends MainView {
 
     /**
      * Default contructor for the ShowtimeView
-     */
-    public ShowtimeView() {
-        super();
-    }
-
-    /**
-     * Overrided contructor for the ShowtimeView
      */
     public ShowtimeView(String path, boolean isStaff) {
         super();
