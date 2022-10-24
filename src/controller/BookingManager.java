@@ -5,6 +5,10 @@ import database.FileType;
 import helper.Helper;
 import model.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Booking Manager
  *
@@ -36,7 +40,16 @@ public class BookingManager {
      */
     public static void createBooking(double price, Seat seat, Cineplex cineplex, String name) {
         int uId = Helper.generateUniqueId(Database.BOOKINGS);
-        String transactionId = String.format("B%04d", uId);
+
+        //String transactionId = String.format("B%04d", uId);
+        String cinemacode = seat.getShowtime().getCinemaCode().substring(0, 2); //first two letters of location
+        Date timeShow = seat.getShowtime().getTime();   //get the date and time of the show
+        DateFormat targetFormat = new SimpleDateFormat("yyyyMMddhhmm"); //target config to parse into
+        String formattedDate = targetFormat.format(timeShow);   //parses the date and time of the show into the above target config
+
+        String transactionId = String.format(cinemacode+"%d"+formattedDate,uId);
+        //formats the transaction id as XXXYYYYMMDDhhmm (Y : year, M : month, D : day, h : hour, m : minutes, XXX : cinema code in letters).
+
         Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), name);
         Database.BOOKINGS.put(transactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
