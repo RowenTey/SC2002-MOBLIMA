@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import database.Database;
@@ -27,7 +28,7 @@ public class MovieManager {
     private static ArrayList<Movie> movieList = new ArrayList<Movie>();
 
     /**
-     * Total number of movies
+     * Total number of cineplex
      */
     private static int totalMovies;
 
@@ -79,17 +80,17 @@ public class MovieManager {
     public static void printMovieDetails(Movie movie) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-30s: %s", "MovieId", movie.getMovieId()));
-        System.out.println(String.format("%-30s: %s", "Title", movie.getTitle()));
-        System.out.println(String.format("%-30s: %s", "Show Status", movie.getStatus().name()));
-        System.out.println(String.format("%-30s: %s", "Movie Type", movie.getType().name()));
+        System.out.println(String.format("%-20s: %s", "MovieId", movie.getMovieId()));
+        System.out.println(String.format("%-20s: %s", "Title", movie.getTitle()));
+        System.out.println(String.format("%-20s: %s", "Show Status", movie.getStatus().name()));
+        System.out.println(String.format("%-20s: %s", "Movie Type", movie.getType().name()));
         String[] castMembers = movie.getCast();
         String cast = String.join(", ", castMembers);
-        System.out.println(String.format("%-30s: %s", "Director", movie.getDirector()));
-        System.out.println(String.format("%-30s: %s", "Cast", cast));
-        System.out.println(String.format("%-30s: %s", "Synopsis", movie.getSynopsis()));
-        System.out.println(String.format("%-30s: %s", "Number of Ticket Sales", movie.getTicketSales()));
-        System.out.println(String.format("%-30s: %s", "Overall Rating", movie.getOverallRating()));
+        System.out.println(String.format("%-20s: %s", "Director", movie.getDirector()));
+        System.out.println(String.format("%-20s: %s", "Cast", cast));
+        System.out.println(String.format("%-20s: %s", "Synopsis", movie.getSynopsis()));
+        System.out.println(String.format("%-20s: %s", "Number of Ticket Sales", movie.getTicketSales()));
+        System.out.println(String.format("%-20s: %s", "Overall Rating", movie.getOverallRating()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -140,7 +141,7 @@ public class MovieManager {
             System.out.println("No movies found!");
         } else {
             System.out.println("Which movie do you want to remove ?");
-            MovieManager.displayListOfMovies();
+            MovieManager.displayExistingMovie();
             System.out.println("(" + (MovieManager.getTotalNumOfMovie() + 1) + ") Exit");
             opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
@@ -155,42 +156,6 @@ public class MovieManager {
     }
 
     /**
-     * Display a list of movies
-     */
-    public static boolean displayListOfMovies() {
-        System.out.println("List of movies");
-        if (MovieManager.getTotalNumOfMovie() == 0) {
-            System.out.println("We don't have any movies at this time");
-            return false;
-        } else {
-            for (int i = 0; i < movieList.size(); i++) {
-                System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
-            }
-        }
-        System.out.println();
-        return true;
-    }
-
-    /**
-     * Allow user to select a specific movie by index, and returns its movieId
-     */
-    public static Movie selectMovie() {
-        ArrayList<Movie> movieList = MovieManager.getMovieList();
-        Movie selectedMovie;
-        System.out.println("Select a movie by entering it's index:");
-        int choice = Helper.readInt(0, (movieList.size() + 1));
-        if (choice == movieList.size() + 1) {
-            return null;
-        } else {
-            selectedMovie = movieList.get(choice - 1);
-            System.out.println("\nYou selected:");
-            MovieManager.printMovieDetails(selectedMovie);
-            Helper.pressAnyKeyToContinue();
-            return selectedMovie;
-        }
-    }
-
-    /**
      * Update a movie
      */
     public static void updateMovie() {
@@ -201,7 +166,7 @@ public class MovieManager {
             System.out.println("No movies found!");
         } else {
             System.out.println("Which movie do you want to update ?");
-            MovieManager.displayListOfMovies();
+            MovieManager.displayExistingMovie();
             System.out.println("(" + (MovieManager.getTotalNumOfMovie() + 1) + ") Exit");
             opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
@@ -225,11 +190,77 @@ public class MovieManager {
     }
 
     /**
+     * Print Top 5 Movies by Ticket Sales
+     */
+    public static void printTop5ByTicketSales() {
+        if (MovieManager.getTotalNumOfMovie() == 0) System.out.println("No movies found!");
+        ArrayList<Movie> movieList = MovieManager.movieList;
+
+        int len = movieList.size();
+        for (int i=1; i<len; i+=1){
+            Movie right = movieList.get(i);
+            for (int j=i; j>0; j-=1){
+                Movie left = movieList.get(i-1);
+                if (left.getTicketSales() > right.getTicketSales()){
+                    movieList.set(j-1, right);
+                    movieList.set(j, left);
+                } else break;
+            }
+        }
+
+        int resSize = 5;
+        if (MovieManager.getTotalNumOfMovie() < 5) resSize = MovieManager.getTotalNumOfMovie();
+        List<Movie> res = movieList.subList(len-resSize, len);
+        System.out.println("Top" + (resSize) + "Movies by Ticket Sales: ");
+        for (int i = resSize-1; i >= 0; i--) {
+            System.out.println("(" + (i + 1) + ") " + res.get(i));
+        }
+    }
+
+    /**
+     * Print Top 5 Movies by Overall Rating
+     */
+    public static void printTop5ByOverallRating() {
+        if (MovieManager.getTotalNumOfMovie() == 0) System.out.println("No movies found!");
+        ArrayList<Movie> movieList = MovieManager.movieList;
+
+        int len = movieList.size();
+        for (int i=1; i<len; i+=1){
+            Movie right = movieList.get(i);
+            for (int j=i; j>0; j-=1){
+                Movie left = movieList.get(i-1);
+                if (left.getOverallRating() > right.getOverallRating()){
+                    movieList.set(j-1, right);
+                    movieList.set(j, left);
+                } else break;
+            }
+        }
+
+        int resSize = 5;
+        if (MovieManager.getTotalNumOfMovie() < 5) resSize = MovieManager.getTotalNumOfMovie();
+        List<Movie> res = movieList.subList(len-resSize, len);
+        System.out.println("Top" + (resSize) + "Movies by Overall Rating: ");
+        for (int i = resSize-1; i >= 0; i--) {
+            System.out.println("(" + (i + 1) + ") " + res.get(i));
+        }
+    }
+
+    /**
      * Get the list of movies
      * 
      * @return an array of movies
      */
     public static ArrayList<Movie> getMovieList() {
         return MovieManager.movieList;
+    }
+
+    /**
+     * Display existing Movies
+     */
+    public static void displayExistingMovie() {
+        System.out.println("Current Movie(es) we have: ");
+        for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
+            System.out.println("(" + (i + 1) + ") " + MovieManager.getMovieList().get(i).getTitle());
+        }
     }
 }
