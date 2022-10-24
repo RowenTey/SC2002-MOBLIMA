@@ -88,7 +88,6 @@ public class MovieView extends MainView {
                 String selectedMovieId;
                 switch (choice) {
                     case 1:
-                        // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
 
@@ -106,7 +105,7 @@ public class MovieView extends MainView {
                         ArrayList<String> castMembers = new ArrayList<String>();
                         String castMember;
                         castMember = sc.next();
-                        while(castMember != "0"){
+                        while (castMember != "0") {
                             castMembers.add(castMember);
                         }
                         String[] cast = new String[castMembers.size()];
@@ -114,7 +113,7 @@ public class MovieView extends MainView {
 
                         System.out.println("Enter movie type: ");
                         String movieType = sc.next();
-                        TypeMovies type= TypeMovies.valueOf(movieType);
+                        TypeMovies type = TypeMovies.valueOf(movieType);
 
                         MovieManager.addMovie(title, showStatus, synopsis, director, cast, type);
                         break;
@@ -209,7 +208,9 @@ public class MovieView extends MainView {
     private void handleBookMovie() {
         System.out.println("Which movie would you like to book?");
         if (displayListOfMovies()) {
-            String selectedMovieId = selectMovie();
+            ShowtimeView showtimeView = new ShowtimeView(this.path, false);
+            showtimeView.viewApp(selectMovie());
+            Helper.pressAnyKeyToContinue();
         }
     }
 
@@ -226,21 +227,7 @@ public class MovieView extends MainView {
         } else {
             selectedMovie = movieList.get(choice - 1);
             System.out.println("\nYou selected:");
-            // TODO: MovieManager.showDetails()
-            System.out.println(selectedMovie.getTitle());
-            System.out.println("Synopsis:\n\t" + selectedMovie.getSynopsis());
-            System.out.println("Movie Type: " + selectedMovie.getType());
-            System.out.println("Show Status: " + selectedMovie.getStatus());
-            System.out.println("Director: " + selectedMovie.getDirector());
-            System.out.println("Cast:");
-            String[] cast = selectedMovie.getCast();
-            for (int i = 0; i < cast.length; i += 1)
-                System.out.println("\t" + cast[i]);
-            System.out.println("Overall Rating: " +
-                    Integer.toString(selectedMovie.getOverallRating()));
-            System.out.println("Ticket Sales:" +
-                    Integer.toString(selectedMovie.getTicketSales()));
-
+            MovieManager.printMovieDetails(selectedMovie);
             return selectedMovie.getMovieId();
         }
     }
