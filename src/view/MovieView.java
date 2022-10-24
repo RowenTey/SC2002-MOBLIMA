@@ -123,10 +123,8 @@ public class MovieView extends MainView {
         else {
             do {
                 choice = Helper.readInt(1, 5);
-                String selectedMovieId;
                 switch (choice) {
                     case 1:
-                        // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
                         handleBookMovie();
@@ -147,6 +145,8 @@ public class MovieView extends MainView {
                         printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
                         // TODO
                         break;
+                    case 5:
+                        break;
                     default:
                         break;
                 }
@@ -158,7 +158,7 @@ public class MovieView extends MainView {
         }
     }
 
-    private void displayListOfMovies() {
+    private boolean displayListOfMovies() {
         Helper.clearScreen();
         printRoute(this.path + " > Movies");
         ArrayList<Movie> movieList = MovieManager.getMovieList();
@@ -166,60 +166,52 @@ public class MovieView extends MainView {
         System.out.println("List of movies");
         if (movieList.size() == 0) {
             System.out.println("We don't have any movies at this time");
+            return false;
         } else {
             for (int i = 0; i < movieList.size(); i++) {
                 System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
             }
         }
         System.out.println();
+        return true;
     }
 
     private void handleBookMovie() {
         System.out.println("Which movie would you like to book?");
-        displayListOfMovies();
+        if (displayListOfMovies()) {
+            String selectedMovieId = selectMovie();
+        }
     }
 
     /**
      * Allow user to select a specific movie by index, and returns its movieId
      */
-    // public String selectMovie() {
-    // ArrayList<Movie> movieList = MovieManager.getMovies();
-    // System.out.println();
+    private String selectMovie() {
+        ArrayList<Movie> movieList = MovieManager.getMovieList();
+        Movie selectedMovie;
+        System.out.println("Select a movie by entering it's index:");
+        int choice = Helper.readInt(0, (movieList.size() + 1));
+        if (choice == movieList.size() + 1) {
+            return "";
+        } else {
+            selectedMovie = movieList.get(choice - 1);
+            System.out.println("\nYou selected:");
+            // TODO: MovieManager.showDetails()
+            System.out.println(selectedMovie.getTitle());
+            System.out.println("Synopsis:\n\t" + selectedMovie.getSynopsis());
+            System.out.println("Movie Type: " + selectedMovie.getType());
+            System.out.println("Show Status: " + selectedMovie.getStatus());
+            System.out.println("Director: " + selectedMovie.getDirector());
+            System.out.println("Cast:");
+            String[] cast = selectedMovie.getCast();
+            for (int i = 0; i < cast.length; i += 1)
+                System.out.println("\t" + cast[i]);
+            System.out.println("Overall Rating: " +
+                    Integer.toString(selectedMovie.getOverallRating()));
+            System.out.println("Ticket Sales:" +
+                    Integer.toString(selectedMovie.getTicketSales()));
 
-    // printRoute(this.path + " > Movie");
-
-    // if (MovieManager.getTotalNumofMovies() == 0) {
-    // System.out.println("We don't have any movies at this time");
-    // System.out.println();
-    // } else {
-    // Movie selectedMovie;
-    // System.out.println("Select a movie by entering it's index:");
-    // int choice = Helper.readInt(0, (movieList.size() + 1));
-    // if (choice == movieList.size() + 1) {
-    // break;
-    // } else {
-    // selectedMovie = movieList.get(choice - 1);
-    // System.out.println("\nYou selected:");
-    // // TODO: MovieManager.showDetails()
-    // System.out.println(selectedMovie.getTitle());
-    // System.out.println("Synopsis:\n\t" + selectedMovie.getTitle());
-    // System.out.println("Movie Type: " + selectedMovie.getType());
-    // System.out.println("Show Status: " + selectedMovie.getStatus());
-    // System.out.println("Director: " + selectedMovie.getDirector());
-    // System.out.println("Cast:");
-    // String[] cast = selectedMovie.getCast();
-    // for (int i = 0; i < cast.length; i += 1)
-    // System.out.println("\t" + cast[i]);
-    // System.out.println("Overall Rating: " +
-    // Integer.toString(selectedMovie.getOverallRating()));
-    // System.out.println("Ticket Sales:" +
-    // Integer.toString(selectedMovie.getTicketSales()));
-
-    // // showtimes
-    // System.out.println();
-
-    // return selectedMovie.getMovieId();
-    // }
-    // }
-    // }
+            return selectedMovie.getMovieId();
+        }
+    }
 }
