@@ -35,10 +35,27 @@ public class ShowtimeManager {
     return true;
   }
 
+  public static boolean onCreateShowtime() {
+    System.out.println("\nWhich movie would you like to creata a showtime for?");
+    // movie list not empty
+    if (MovieManager.displayListOfMovies()) {
+      Movie selectedMovie = MovieManager.selectMovie();
+      Date date = Helper.promptDate();
+      System.out.println("Which cineplex would you like to air this movie?\n");
+      CineplexManager.displayExistingCineplex();
+      Cineplex selectedCineplex = CineplexManager.selectCineplex();
+      System.out.println("Which ciname in this cineplex would you like to pick?\n");
+      String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
+      ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Prints the showtime with details
    */
-  public static void printShowtime() {
+  public static void printAllShowtime() {
     for (Showtime showtime : Database.SHOWTIME.values()) {
       System.out.println();
       System.out.println("Showtime ID: " + showtime.getShowtimeId());
@@ -46,4 +63,5 @@ public class ShowtimeManager {
       System.out.println("Time: " + showtime.getTime());
     }
   }
+
 }

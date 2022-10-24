@@ -172,10 +172,9 @@ public class MovieManager {
     }
 
     /**
-     * Allow user to select a specific movie by index, and returns its movieId
+     * Allow user to select a specific movie by index
      */
     public static Movie selectMovie() {
-        ArrayList<Movie> movieList = MovieManager.getMovieList();
         Movie selectedMovie;
         System.out.println("Select a movie by entering it's index:");
         int choice = Helper.readInt(0, (movieList.size() + 1));
@@ -210,12 +209,12 @@ public class MovieManager {
                 System.out.println("Update Show Status to: ");
                 System.out.println("Select show status: ");
                 int count = 0;
-                for (ShowStatus status : ShowStatus.values()){
+                for (ShowStatus status : ShowStatus.values()) {
                     count += 1;
                     System.out.println("(" + (count) + ") " + status);
                 }
                 opt = Helper.readInt(1, count);
-                ShowStatus newShowStatus = ShowStatus.values()[opt-1];
+                ShowStatus newShowStatus = ShowStatus.values()[opt - 1];
                 movie.setStatus(newShowStatus);
                 Database.MOVIES.put(movieId, movie);
                 Database.saveFileIntoDatabase(FileType.MOVIES);

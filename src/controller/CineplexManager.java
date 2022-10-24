@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import database.Database;
 import database.FileType;
+import model.Cinema;
 import model.Cineplex;
 import model.enums.Location;
 
@@ -161,9 +162,9 @@ public class CineplexManager {
     }
 
     /**
-     * Allow user to select a specific movie by index, and returns its movieId
+     * Allow user to select a specific cineplex by index
      */
-    public static Cineplex selectMovie() {
+    public static Cineplex selectCineplex() {
         Cineplex selectedCineplex;
         System.out.println("Select a cineplex by entering it's index:");
         int choice = Helper.readInt(0, (cineplexList.size() + 1));
@@ -177,4 +178,29 @@ public class CineplexManager {
             return selectedCineplex;
         }
     }
+
+    /**
+     * Allow user to select a specific cinema from a cineplex
+     */
+    public static String selectCinema(Cineplex selectedCineplex) {
+        displayCinema(selectedCineplex);
+        int choice = Helper.readInt(0, (cineplexList.size() + 1));
+        if (choice == cineplexList.size() + 1) {
+            return null;
+        } else {
+            Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
+            System.out.println("\nYou selected: " + cinema.getCinemaCode());
+            Helper.pressAnyKeyToContinue();
+            return cinema.getCinemaCode();
+        }
+    }
+
+    private static void displayCinema(Cineplex selectedCineplex) {
+        System.out.println("List of cinema(s):");
+        for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
+            System.out.println(
+                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
+        }
+    }
+
 }
