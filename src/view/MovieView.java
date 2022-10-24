@@ -8,7 +8,6 @@ import helper.Helper;
 import model.Movie;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
-import model.Movie;
 
 /**
  * Viewing interface for Cineplex

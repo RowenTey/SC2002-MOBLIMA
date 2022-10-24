@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
-import model.Review;
 
 /**
  * The class that stores a movie

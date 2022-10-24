@@ -66,9 +66,10 @@ public class MovieManager {
                 new String[] { "Luffy" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
                 new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
-        // MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
-        // "Ace",
-        // new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
+        "Ace",
+        new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING, "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.", "Kaiseong", new String[]{"Chris Hemsworth", "Natalie Portman", "Tessa Thompson"}, TypeMovies.TWO_D);
     }
 
     /**
