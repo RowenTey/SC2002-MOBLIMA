@@ -83,10 +83,12 @@ public class ShowtimeView extends MainView {
 
                     // Date date = (Date) Helper.setDate(false)
                     Date date = new Date();
-                    ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED", ShowStatus.NOW_SHOWING),
-                            "AM1");
-                    ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam", ShowStatus.NOW_SHOWING),
-                            "JE2");
+                    // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
+                    // ShowStatus.NOW_SHOWING),
+                    // "AM1");
+                    // ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam",
+                    // ShowStatus.NOW_SHOWING),
+                    // "JE2");
                     break;
                 case 2:
                     // TODO (ShowtimeManager.getUpcomingList())

@@ -21,13 +21,27 @@ public class User implements Serializable {
     private String username;
 
     /**
+     * user ID of user
+     */
+    private String userId;
+
+    /**
      * Constructor of User
      * 
      * @param username user's username
      */
-    public User(String username) {
+    public User(String userId, String username) {
+        setUserId(userId);
         setName(username);
-        ;
+    }
+
+    /**
+     * Sets the ID of the user
+     *
+     * @param userId ID of the user
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
@@ -37,6 +51,15 @@ public class User implements Serializable {
      */
     public void setName(String name) {
         this.username = name;
+    }
+
+    /**
+     * Gets the ID of the user
+     *
+     * @return the ID of the user
+     */
+    public String getUserId() {
+        return userId;
     }
 
     /**

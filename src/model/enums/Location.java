@@ -7,7 +7,6 @@ package model.enums;
  * @version 1.0
  * @since 2022-10-20
  */
-
 public enum Location {
 
   /**

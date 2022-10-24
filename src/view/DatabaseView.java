@@ -1,6 +1,5 @@
 package view;
 
-import controller.StaffManager;
 import database.Database;
 import helper.Helper;
 
@@ -72,7 +71,6 @@ public class DatabaseView extends MainView {
           if (resetDatabase()) {
             System.out.println("Database cleared");
           }
-          StaffManager.printAllStaff();
           break;
         case 5:
           break;

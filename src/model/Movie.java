@@ -72,8 +72,8 @@ public class Movie implements Serializable, Comparable<Movie> {
      * Constructor of Movie
      * 
      */
-
-    public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast, int ticketSales, int overallRating, Review[] reviews, String type) {
+    public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
+            int ticketSales, int overallRating, Review[] reviews, String type) {
         this.movieId = movieId;
         this.title = title;
         this.status = status;
@@ -92,7 +92,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      * @return the ID of the movie
      */
     public String getMovieId() {
-        return movieId;
+        return this.movieId;
     }
 
     /**
