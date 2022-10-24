@@ -27,6 +27,7 @@ public class CineplexAppView extends MainView {
         System.out.println("(1) Admin");
         System.out.println("(2) MovieGoer");
         System.out.println("(3) Terminate Program");
+        System.out.println("(4) Reset Database");
     }
 
     /**
@@ -36,7 +37,7 @@ public class CineplexAppView extends MainView {
         int choice = -1;
         do {
             printMenu();
-            choice = Helper.readInt(1, 3);
+            choice = Helper.readInt(1, 4);
             switch (choice) {
                 case 1:
                     StaffView staffView = new StaffView("Cineplex App");
@@ -47,6 +48,13 @@ public class CineplexAppView extends MainView {
                     movieGoerView.viewApp();
                     break;
                 case 3:
+                    break;
+                case 4:
+                    System.out.println();
+                    printRoute("Cineplex App > Staff > Database > Reset Database");
+                    if (DatabaseView.resetDatabase()) {
+                    System.out.println("Database cleared");
+                    }
                     break;
                 default:
                     break;
