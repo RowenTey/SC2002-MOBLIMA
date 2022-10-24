@@ -122,23 +122,23 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Update Movie");
-                        // TODO
+                        MovieManager.updateMovie();
                         break;
                     case 3:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Remove Movie");
-                        // TODO
+                        MovieManager.removeMovie();
                         break;
                     case 4:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Ticket Sales");
-                        // TODO
+                        MovieManager.printTop5ByTicketSales();
                         break;
                     case 5:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
-                        // TODO
+                        MovieManager.printTop5ByOverallRating();
                         break;
                     default:
                         break;
@@ -168,12 +168,12 @@ public class MovieView extends MainView {
                     case 3:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Ticket Sales");
-                        // TODO
+                        MovieManager.printTop5ByTicketSales();
                         break;
                     case 4:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
-                        // TODO
+                        MovieManager.printTop5ByOverallRating();
                         break;
                     case 5:
                         break;
