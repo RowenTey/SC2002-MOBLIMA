@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import database.Database;
 import database.FileType;
@@ -131,7 +132,7 @@ public class MovieManager {
     }
 
     /**
-     * Remove a cineplex
+     * Remove a movie
      */
     public static void removeMovie() {
         int opt = -1;
@@ -186,6 +187,34 @@ public class MovieManager {
             MovieManager.printMovieDetails(selectedMovie);
             Helper.pressAnyKeyToContinue();
             return selectedMovie;
+        }
+    }
+
+    /**
+     * Update a movie
+     */
+    public static void updateMovie() {
+        Scanner sc = new Scanner(System.in);
+
+        int opt = -1;
+        if (MovieManager.getTotalNumOfMovie() == 0) {
+            System.out.println("No movies found!");
+        } else {
+            System.out.println("Which movie do you want to update ?");
+            MovieManager.displayListOfMovies();
+            System.out.println("(" + (MovieManager.getTotalNumOfMovie() + 1) + ") Exit");
+            opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
+            if (opt != MovieManager.getTotalNumOfMovie() + 1) {
+                Movie movie = MovieManager.getMovieList().get(opt - 1);
+                String movieId = movie.getMovieId();
+                System.out.println("Update Show Status to: ");
+                String newStatus = sc.next();
+                ShowStatus newShowStatus = ShowStatus.valueOf(newStatus);
+                movie.setStatus(newShowStatus);
+                Database.MOVIES.put(movieId, movie);
+                Database.saveFileIntoDatabase(FileType.MOVIES);
+                System.out.println("Show Status successfully updated!");
+            }
         }
     }
 
