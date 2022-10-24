@@ -26,10 +26,10 @@ public class DatabaseView extends MainView {
     Helper.clearScreen();
     printRoute("Cineplex App > Staff > Database");
     System.out.println("What would you like to do ?");
-    System.out.println("(1) Initialize movies");
-    System.out.println("(2) Initialize showtimes");
-    System.out.println("(3) Initialize cineplex");
-    System.out.println("(4) Reset database");
+    System.out.println("(1) Initialize Cineplex");
+    System.out.println("(2) Initialize Movies");
+    System.out.println("(3) Initialize Showtimes");
+    System.out.println("(4) Reset Database");
     System.out.println("(5) Exit");
   }
 
@@ -47,6 +47,14 @@ public class DatabaseView extends MainView {
       System.out.println();
       switch (choice) {
         case 1:
+          printRoute("Cineplex App > Staff > Database > Initialise Cineplex");
+          if (initializeCineplex()) {
+            System.out.println("Cineplex initialization successful");
+          } else {
+            System.out.println("Cineplex initialization unsuccessful");
+          }
+          break;
+        case 2:
           printRoute("Cineplex App > Staff > Database > Initialise Movies");
           if (initializeMovies()) {
             System.out.println("Movie initialization successful");
@@ -54,20 +62,12 @@ public class DatabaseView extends MainView {
             System.out.println("Movie initialization unsuccessful");
           }
           break;
-        case 2:
+        case 3:
           printRoute("Cineplex App > Staff > Database > Initialise Showtimes");
           if (initializeShowtime()) {
             System.out.println("Showtimes initialization successful");
           } else {
             System.out.println("Showtimes initialization unsuccessful");
-          }
-          break;
-        case 3:
-          printRoute("Cineplex App > Staff > Database > Initialise Cineplex");
-          if (initializeCineplex()) {
-            System.out.println("Cineplex initialization successful");
-          } else {
-            System.out.println("Cineplex initialization unsuccessful");
           }
           break;
         case 4:

@@ -7,7 +7,6 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
-import model.Showtime;
 import model.enums.Location;
 
 /**
