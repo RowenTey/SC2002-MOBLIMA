@@ -16,9 +16,9 @@ public class BookingView extends MainView {
   public String path;
 
   /**
-   * Default contructor for the CinemaView
+   * Default contructor for the BookingView
    */
-  public CinemaView(String path) {
+  public BookingView(String path) {
     super();
     this.path = path;
   }
@@ -46,11 +46,11 @@ public class BookingView extends MainView {
       switch (choice) {
         case 1:
           System.out.println("Select a movie");
-          movieView.viewApp();
+          MovieView.viewApp();
           System.out.println("Select a cineplex");
-          CineplexManager.getCineplexList();
+          CineplexManager.getCurrentList();
           System.out.println("Select a showtime");
-          ShowtimeManager.getCurrentList
+          ShowtimeManager.getCurrentList();
           break;
         case 2:
           System.out.println("Booking history");
