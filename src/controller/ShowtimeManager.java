@@ -22,23 +22,31 @@ public class ShowtimeManager {
   private static int totalShowtimes;
 
   /**
+   * HashMap to get cinema location from cinema code
+   */
+  private static HashMap<String, String> CinematoCineplexLocation = new HashMap<String, String>();
+
+  /**
    * Constructor of ShowtimeManager
    */
   public ShowtimeManager() {
     ShowtimeManager.showtimeList.clear();
     ShowtimeManager.readShowtime();
     ShowtimeManager.totalShowtimes = showtimeList.size();
-
+    CinematoCineplexLocation.put("AM", "Amk Hub");
+    CinematoCineplexLocation.put("JE", "Jem");
+    CinematoCineplexLocation.put("CA", "Causeway Point");
   }
+
   /**
-    * Initializer for cineplex
-    */
-    public static void initializeShowtime() {
-      Movie newMovie = MovieManager.getMovieList().get(0);
-      String cinemaCode = CineplexManager.getCineplexList().get(0).getCinemaList().get(0).getCinemaCode();
-      Date today = new Date();
-      ShowtimeManager.createShowtime(today, newMovie, cinemaCode);
-      ShowtimeManager.printAllShowtime();
+   * Initializer for cineplex
+   */
+  public static void initializeShowtime() {
+    Movie newMovie = MovieManager.getMovieList().get(0);
+    String cinemaCode = CineplexManager.getCineplexList().get(0).getCinemaList().get(0).getCinemaCode();
+    Date today = new Date();
+    ShowtimeManager.createShowtime(today, newMovie, cinemaCode);
+    ShowtimeManager.printAllShowtime();
   }
 
   public static void getCurrentList() {
@@ -59,12 +67,13 @@ public class ShowtimeManager {
     return toReturn;
   }
 
-  // public static void displayShowtime(ArrayList<Showtime> showtimes) {
-  // System.out.println("List of showtimes(s) for this movie:");
-  // for (int i = 0; i < showtimes.size(); i++) {
-  // prin
-  // }
-  // }
+  public static void displayShowtime(ArrayList<Showtime> showtimes) {
+    System.out.println("List of showtimes(s) for this movie:");
+    for (int i = 0; i < showtimes.size(); i++) {
+      System.out.println("Showtime " + "(" + i + 1 + ")");
+      printShowtimeDetails(showtimes.get(i));
+    }
+  }
 
   public static boolean createShowtime(Date time, Movie movie, String cinemaCode) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
@@ -107,22 +116,32 @@ public class ShowtimeManager {
   }
 
   /**
+   * Allow user to select a specific showtime by index
+   */
+  public static String selectShowtime(ArrayList<Showtime> showtimes) {
+    Showtime selectedShowtime;
+    System.out.println("Select a movie by entering it's index:");
+    int choice = Helper.readInt(1, (showtimes.size() + 1));
+    selectedShowtime = showtimes.get(choice - 1);
+    Helper.pressAnyKeyToContinue();
+    return selectedShowtime.getShowtimeId();
+  }
+
+  /**
    * Prints the showtime with details
    */
   public static void printAllShowtime() {
     String cinemaCode;
-    HashMap<String, String> getCineplex = new HashMap<String,String>();
-      getCineplex.put("AM", "Amk Hub");
-      getCineplex.put("JE","Jem");
-      getCineplex.put("CA","Causeway Point");
+
     for (Showtime showtime : Database.SHOWTIME.values()) {
-      cinemaCode = showtime.getCinemaCode().substring(0,2);
+      cinemaCode = showtime.getCinemaCode().substring(0, 2);
       System.out.println();
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-      System.out.println(String.format("%-20s: %s", "Location", getCineplex.get(cinemaCode)));
+      System.out
+          .println(String.format("%-20s: %s", "Location", CinematoCineplexLocation.get(cinemaCode)));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }
@@ -162,5 +181,36 @@ public class ShowtimeManager {
       System.out.println();
     }
     System.out.println();
+  }
+
+  /**
+   * Prompt user to select a seat
+   */
+  public static void promptSeatSelection(String showtimeId) {
+    Showtime showtimeShowtime = getShowtimebyId(showtimeId);
+    displayShowtimeLayout(showtimeShowtime);
+    System.out.println("Please enter the desired seat coordinates (e.g A6):");
+    String position = Helper.readString();
+  }
+
+  /**
+   * Print details of showtime
+   */
+  public static void printShowtimeDetails(Showtime showtime) {
+    System.out.println();
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
+    System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
+    System.out.println(
+        String.format("%-20s: %s", "Location", CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    System.out.println();
+  }
+
+  private static Showtime getShowtimebyId(String showtimeId) {
+    if (Database.SHOWTIME.containsKey(showtimeId)) {
+      return Database.SHOWTIME.get(showtimeId);
+    }
+    return null;
   }
 }

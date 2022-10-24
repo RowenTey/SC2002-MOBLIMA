@@ -185,16 +185,15 @@ public class MovieView extends MainView {
 
     private boolean displayListOfMovies() {
         Helper.clearScreen();
-        printRoute(this.path + " > Movies");
+        printRoute(this.path + " > Movie > Book Movie");
         System.out.println("Which movie would you like to book?\n");
         return MovieManager.displayListOfMovies();
     }
 
     private void handleBookMovie() {
         if (displayListOfMovies()) {
-            ShowtimeView showtimeView = new ShowtimeView(this.path, false);
+            ShowtimeView showtimeView = new ShowtimeView(this.path + " > Movie ", false);
             showtimeView.viewApp(MovieManager.selectMovie());
-            Helper.pressAnyKeyToContinue();
         }
     }
 }
