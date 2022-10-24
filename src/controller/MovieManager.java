@@ -66,6 +66,9 @@ public class MovieManager {
                 new String[] { "Luffy" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
                 new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
+        // MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
+        // "Ace",
+        // new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
     }
 
     /**
@@ -244,7 +247,7 @@ public class MovieManager {
         List<Movie> res = movieList.subList(len - resSize, len);
         System.out.println("Top " + (resSize) + " Movies by Ticket Sales: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
+            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
         }
     }
 
@@ -277,7 +280,7 @@ public class MovieManager {
         List<Movie> res = movieList.subList(len - resSize, len);
         System.out.println("Top " + (resSize) + " Movies by Overall Rating: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
+            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
         }
     }
 
@@ -303,10 +306,10 @@ public class MovieManager {
     /**
      * Display past movie reviews
      */
-    public static void displayReviews(Movie movie){
+    public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
-        
-        for (Review review : reviews){
+
+        for (Review review : reviews) {
             System.out.println();
             System.out.println(String.format("%-40s", "").replace(" ", "-"));
             System.out.println(String.format("%-30s: %s", "Rating", Double.toString(review.getRating())));
@@ -316,7 +319,7 @@ public class MovieManager {
         }
     }
 
-    public static void addReview(Movie movie, double rating, String review){
+    public static void addReview(Movie movie, double rating, String review) {
         Review newReview = new Review(review, rating);
         movie.addReview(newReview);
         Database.MOVIES.put(movie.getMovieId(), movie);

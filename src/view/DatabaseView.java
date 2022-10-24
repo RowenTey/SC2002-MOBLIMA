@@ -101,7 +101,7 @@ public class DatabaseView extends MainView {
   }
 
   /**
-   * A method that initialize dummy data for Cineplex.
+   * A method that initialize dummy data for Movies.
    *
    * @return {@code true} if initialized successfully. Otherwise, {@code false}
    *         <p>
@@ -112,7 +112,7 @@ public class DatabaseView extends MainView {
   }
 
   /**
-   * A method that initialize dummy data for Cineplex.
+   * A method that initialize dummy data for Showtime.
    *
    * @return {@code true} if initialized successfully. Otherwise, {@code false}
    *         <p>
@@ -140,7 +140,7 @@ public class DatabaseView extends MainView {
    *         <p>
    *         see {@link Database} for more details.
    */
-  public static boolean resetDatabase() { //To be changed back to private boolean
+  public static boolean resetDatabase() { // To be changed back to private boolean
     if (Helper.promptConfirmation("reset the database")) {
       return Database.clearDatabase();
     } else {

@@ -185,7 +185,6 @@ public class MovieView extends MainView {
                 }
                 if (choice != 5) {
                     System.out.println();
-
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 5);
