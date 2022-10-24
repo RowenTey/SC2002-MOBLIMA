@@ -210,6 +210,7 @@ public class MovieView extends MainView {
         if (displayListOfMovies()) {
             ShowtimeView showtimeView = new ShowtimeView(this.path, false);
             showtimeView.viewApp(selectMovie());
+            Helper.pressAnyKeyToContinue();
         }
     }
 
@@ -226,7 +227,7 @@ public class MovieView extends MainView {
         } else {
             selectedMovie = movieList.get(choice - 1);
             System.out.println("\nYou selected:");
-
+            MovieManager.printMovieDetails(selectedMovie);
             return selectedMovie.getMovieId();
         }
     }
