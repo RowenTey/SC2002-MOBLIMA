@@ -1,4 +1,5 @@
 package model;
+
 /**
  * The class that stores the movie ticket
  *
@@ -8,7 +9,6 @@ package model;
  */
 
 public class Ticket {
-
     /**
      * price of ticket
      */
