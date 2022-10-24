@@ -120,6 +120,7 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Update Movie");
+                        MovieManager.displayExistingMovies();
                         MovieManager.updateMovie();
                         break;
                     case 3:
@@ -161,7 +162,8 @@ public class MovieView extends MainView {
                     case 2:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Past Movie Reviews");
+                        printRoute(this.path + " > Movie > Movie Reviews");
+                        MovieManager.displayExistingMovies();
                         Movie selectedMovie = MovieManager.selectMovie();
                         ReviewView reviewView = new ReviewView(selectedMovie, path);
                         reviewView.viewApp();
