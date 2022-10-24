@@ -1,7 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
 import model.Movie;
@@ -32,6 +34,8 @@ public class ShowtimeView extends MainView {
         super();
         this.path = path;
         this.isStaff = isStaff;
+        new MovieManager();
+        new ShowtimeManager();
     }
 
     /**
@@ -47,8 +51,7 @@ public class ShowtimeView extends MainView {
             System.out.println("(3) Exit");
         } else {
             System.out.println("(1) List current showtimes");
-            System.out.println("(2) List upcoming showtimes");
-            System.out.println("(3) Exit");
+            System.out.println("(2) Exit");
         }
     }
 
@@ -101,10 +104,9 @@ public class ShowtimeView extends MainView {
     /**
      * Overrided View App - from movie view
      */
-    public void viewApp(String movieId) {
+    public void viewApp(Movie movie) {
         int choice = -1;
         do {
-            this.printMenu();
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
@@ -120,7 +122,8 @@ public class ShowtimeView extends MainView {
                     // get cinema list
 
                     // Date date = (Date) Helper.setDate(false)
-                    Date date = new Date();
+                    Date date = Helper.convertDate();
+
                     // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
                     // ShowStatus.NOW_SHOWING),
                     // "AM1");
@@ -142,5 +145,17 @@ public class ShowtimeView extends MainView {
                 Helper.pressAnyKeyToContinue();
             }
         } while (choice != 3);
+    }
+
+    private void printShowtimeSelection(Movie movie) {
+
+    }
+
+    private boolean handleCreateShowtime() {
+        if (MovieManager.displayListOfMovies()) {
+
+        }
+
+        return false;
     }
 }

@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.lang.model.type.TypeMirror;
-
 import controller.MovieManager;
 import model.Movie;
 import helper.Helper;
-import view.ReviewView;
-import view.BookingView;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
 
@@ -190,45 +186,15 @@ public class MovieView extends MainView {
     private boolean displayListOfMovies() {
         Helper.clearScreen();
         printRoute(this.path + " > Movies");
-        ArrayList<Movie> movieList = MovieManager.getMovieList();
-
-        System.out.println("List of movies");
-        if (movieList.size() == 0) {
-            System.out.println("We don't have any movies at this time");
-            return false;
-        } else {
-            for (int i = 0; i < movieList.size(); i++) {
-                System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
-            }
-        }
-        System.out.println();
-        return true;
+        System.out.println("Which movie would you like to book?\n");
+        return MovieManager.displayListOfMovies();
     }
 
     private void handleBookMovie() {
-        System.out.println("Which movie would you like to book?");
         if (displayListOfMovies()) {
             ShowtimeView showtimeView = new ShowtimeView(this.path, false);
-            showtimeView.viewApp(selectMovie());
+            showtimeView.viewApp(MovieManager.selectMovie());
             Helper.pressAnyKeyToContinue();
-        }
-    }
-
-    /**
-     * Allow user to select a specific movie by index, and returns its movieId
-     */
-    private String selectMovie() {
-        ArrayList<Movie> movieList = MovieManager.getMovieList();
-        Movie selectedMovie;
-        System.out.println("Select a movie by entering it's index:");
-        int choice = Helper.readInt(0, (movieList.size() + 1));
-        if (choice == movieList.size() + 1) {
-            return "";
-        } else {
-            selectedMovie = movieList.get(choice - 1);
-            System.out.println("\nYou selected:");
-            MovieManager.printMovieDetails(selectedMovie);
-            return selectedMovie.getMovieId();
         }
     }
 }

@@ -87,9 +87,9 @@ public class Helper {
         }
       } catch (InputMismatchException e) {
         sc.nextLine();
-        System.out.println("Invalid Input, Enter an integer!");
+        System.out.println("\nInvalid Input, Enter an integer!");
       } catch (OutOfRange e) {
-        System.out.println("Input is out of allowed range");
+        System.out.println("\nInput is out of allowed range");
       }
     }
   }
@@ -112,7 +112,7 @@ public class Helper {
         return userInput;
       } catch (InputMismatchException e) {
         sc.nextLine();
-        System.out.println("Invalid Input, Enter an double!!");
+        System.out.println("\nInvalid Input, Enter a double!!");
       }
     }
   }
@@ -342,7 +342,6 @@ public class Helper {
   }
 
   public static Date convertDate() {
-
     final String DATE_FORMAT = "dd-MM-yy mm:ss"; // specify final output format
     Date date = new Date();
 
