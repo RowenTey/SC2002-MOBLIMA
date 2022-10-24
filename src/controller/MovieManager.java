@@ -327,5 +327,6 @@ public class MovieManager {
         Review newReview = new Review(review, rating);
         movie.addReview(newReview);
         Database.MOVIES.put(movie.getMovieId(), movie);
+        System.out.println("Successfully added review!");
     }
 }
