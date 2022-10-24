@@ -208,8 +208,14 @@ public class MovieManager {
                 Movie movie = MovieManager.getMovieList().get(opt - 1);
                 String movieId = movie.getMovieId();
                 System.out.println("Update Show Status to: ");
-                String newStatus = sc.next();
-                ShowStatus newShowStatus = ShowStatus.valueOf(newStatus);
+                System.out.println("Select show status: ");
+                int count = 0;
+                for (ShowStatus status : ShowStatus.values()){
+                    count += 1;
+                    System.out.println("(" + (count) + ") " + status);
+                }
+                opt = Helper.readInt(1, count);
+                ShowStatus newShowStatus = ShowStatus.values()[opt-1];
                 movie.setStatus(newShowStatus);
                 Database.MOVIES.put(movieId, movie);
                 Database.saveFileIntoDatabase(FileType.MOVIES);
