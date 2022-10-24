@@ -122,7 +122,7 @@ public class ShowtimeView extends MainView {
                     // get cinema list
 
                     // Date date = (Date) Helper.setDate(false)
-                    Date date = Helper.convertDate();
+                    Date date = Helper.promptDate();
 
                     // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
                     // ShowStatus.NOW_SHOWING),
