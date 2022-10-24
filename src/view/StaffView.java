@@ -74,8 +74,10 @@ public class StaffView extends MainView {
                 default:
                     break;
             }
+            if (choice != 5) {
+                Helper.pressAnyKeyToContinue();
+            }
         } while (choice != 5);
-        Helper.pressAnyKeyToContinue();
     }
 
     public boolean printLoginUI() {

@@ -28,7 +28,7 @@ public class BookingView extends MainView {
    */
   public void printMenu() {
     Helper.clearScreen();
-    printRoute("... > Booking View");
+    printRoute(this.path + " > Booking View");
     System.out.println("What would you like to do ?");
     System.out.println("(1) Make a new booking.");
     System.out.println("(2) View booking history.");
@@ -46,15 +46,15 @@ public class BookingView extends MainView {
       switch (choice) {
         case 1:
           System.out.println("Select a movie");
-          MovieView.viewApp();
+          // movieView.viewApp();
           System.out.println("Select a cineplex");
-          CineplexManager.getCurrentList();
+          // CineplexManager.getCineplexList();
           System.out.println("Select a showtime");
-          ShowtimeManager.getCurrentList();
+          // ShowtimeManager.getCurrentList
           break;
         case 2:
           System.out.println("Booking history");
-          //TODO list bookings
+          // TODO list bookings
 
           break;
         case 3:

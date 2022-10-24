@@ -16,10 +16,10 @@ public class StaffManager {
   public static void createStaff(String username, String password) {
     int uId = Helper.generateUniqueId(Database.STAFF);
     String userId = String.format("U%04d", uId);
-    Staff newStaff = new Staff(username, password);
+    Staff newStaff = new Staff(userId, username, password);
     Database.STAFF.put(userId, newStaff);
     Database.saveFileIntoDatabase(FileType.STAFF);
-    System.out.println("Staff Created! Staff Details: ");
+    System.out.println("Staff created! Staff Details: ");
     printStaffDetails(newStaff);
   }
 
@@ -57,6 +57,7 @@ public class StaffManager {
   public static void printStaffDetails(Staff staff) {
     System.out.println();
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    System.out.println(String.format("%-20s: %s", "UserId", staff.getUserId()));
     System.out.println(String.format("%-20s: %s", "Username", staff.getName()));
     System.out.println(String.format("%-20s: %s", "Password", staff.getPassword()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -69,8 +70,7 @@ public class StaffManager {
   public static void printAllStaff() {
     for (Staff staff : Database.STAFF.values()) {
       System.out.println();
-      System.out.println(String.format("%-20s: %s", "Username", staff.getName()));
-      System.out.println(String.format("%-20s: %s", "Password", staff.getPassword()));
+      printStaffDetails(staff);
     }
   }
 }

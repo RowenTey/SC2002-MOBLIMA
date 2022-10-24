@@ -3,6 +3,10 @@ package controller;
 import helper.Helper;
 import java.util.ArrayList;
 
+import javax.xml.crypto.Data;
+
+import database.Database;
+import database.FileType;
 import model.Cineplex;
 import model.enums.Location;
 
@@ -22,10 +26,18 @@ public class CineplexManager {
     /**
      * total number of cineplex
      */
-    private static int totalCineplex = 0;
+    private static int totalCineplex;
 
     /**
-     * get the number of cineplexes
+     * Constructor of CineplxManager
+     */
+    public CineplexManager() {
+        readCineplexes();
+        CineplexManager.totalCineplex = cineplexList.size();
+    }
+
+    /**
+     * Get the number of cineplexes
      * 
      * @return the total number of cineplexes
      */
@@ -34,14 +46,28 @@ public class CineplexManager {
     }
 
     /**
+     * Read cineplex data from database
+     * 
+     */
+    public static void readCineplexes() {
+        for (Cineplex cineplex : Database.CINEPLEX.values()) {
+            cineplexList.add(cineplex);
+        }
+    }
+
+    /**
      * Add new cineplex
      */
     public static void addCineplex() {
         int opt = CineplexManager.promptLocation();
-        if (opt != (Location.values().length + 1)){
-            Cineplex newCineplex = new Cineplex(Location.values()[opt - 1]);
+        if (opt != (Location.values().length + 1)) {
+            int cId = Helper.generateUniqueId(Database.CINEPLEX);
+            String cineplexId = String.format("C%04d", cId);
+            Cineplex newCineplex = new Cineplex(cineplexId, Location.values()[opt - 1]);
+            Database.CINEPLEX.put(cineplexId, newCineplex);
+            Database.saveFileIntoDatabase(FileType.CINEPLEX);
             CineplexManager.cineplexList.add(newCineplex);
-            System.out.println("New cineplex added!");
+            System.out.println("Cineplex created!");
             CineplexManager.totalCineplex += 1;
         }
     }
@@ -57,15 +83,16 @@ public class CineplexManager {
             System.out.println("Which cineplex do you want to remove ?");
             CineplexManager.displayExistingCineplex();
             System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
-            opt = Helper.readInt(1,CineplexManager.getTotalNumOfCineplex()+1);
-            if(opt != CineplexManager.getTotalNumOfCineplex()+1){
-                Cineplex old = CineplexManager.getCineplexList().get(opt-1);
+            opt = Helper.readInt(1, CineplexManager.getTotalNumOfCineplex() + 1);
+            if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
+                Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
                 CineplexManager.cineplexList.remove(old);
+                Database.CINEPLEX.remove(old.getCineplexId());
+                Database.saveFileIntoDatabase(FileType.CINEPLEX);
                 System.out.println("Removed cineplex!");
                 CineplexManager.totalCineplex -= 1;
             }
         }
-        
     }
 
     /**
@@ -80,26 +107,28 @@ public class CineplexManager {
     /**
      * Display existing Cineplexes
      */
-    public static void displayExistingCineplex(){
+    public static void displayExistingCineplex() {
         System.out.println("Current Cineplex(es) we have: ");
-            for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-                System.out.println("(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
-            }
+        for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
+            System.out.println("(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
+        }
     }
 
     /**
      * Prompt which Cineplex to add
      */
-    public static int promptLocation(){
-        int opt =1;
+    public static int promptLocation() {
+        int opt = 1;
         if (CineplexManager.getTotalNumOfCineplex() != 0) {
             CineplexManager.displayExistingCineplex();
             System.out.println();
         }
+
         System.out.println("Where do you want to add a new Cineplex ?");
         for (int i = 0; i < Location.values().length; i++) {
             System.out.println("(" + (i + 1) + ") " + Location.values()[i].getLabel());
         }
+
         System.out.println("(" + (Location.values().length + 1) + ") Exit");
         opt = Helper.readInt(1, Location.values().length + 1);
         return opt;

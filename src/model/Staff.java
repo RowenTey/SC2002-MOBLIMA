@@ -17,11 +17,12 @@ public class Staff extends User {
     /**
      * Constructor of Staff
      * 
+     * @param userId   Staff's userId
      * @param username Staff's username
      * @param password Staff's password
      */
-    public Staff(String username, String password) {
-        super(username);
+    public Staff(String userId, String username, String password) {
+        super(userId, username);
         setPassword(password);
     }
 
