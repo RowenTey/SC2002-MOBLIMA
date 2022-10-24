@@ -58,7 +58,9 @@ public class ReviewView extends MainView {
                     MovieManager.displayReviews(this.movie);
                     break;
                 case 2:
+                    System.out.println("Enter your rating (1 - 5 [best]):");
                     double rating = Helper.readDouble(1, 5);
+                    System.out.println("Enter your review in words:");
                     String review = Helper.readString();
                     MovieManager.addReview(this.movie, rating, review);
                     break;
