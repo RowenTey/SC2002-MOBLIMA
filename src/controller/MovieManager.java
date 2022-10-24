@@ -58,7 +58,9 @@ public class MovieManager {
     /**
      * Add new cineplex
      */
-    public static void addMovie() {
+    public static void addMovie(String title, ShowStatus status, String synopsis, String director, String[] cast,
+    int ticketSales, TypeMovies type) {
+        System.out.println("Please ");
         int mId = Helper.generateUniqueId(Database.MOVIES);
         String cineplexId = String.format("M%04d", mId);
         Movie newMovie = new Movie(cineplexId, Location.values()[opt - 1]);
@@ -110,5 +112,4 @@ public class MovieManager {
             System.out.println("(" + (i + 1) + ") " + MovieManager.getMovieList().get(i).getTitle());
         }
     }
-
 }

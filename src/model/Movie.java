@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 
 /**
  * The class that stores a movie
@@ -74,7 +75,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      * 
      */
     public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            int ticketSales, String type) {
+            int ticketSales, TypeMovies type) {
         this.movieId = movieId;
         this.title = title;
         this.status = status;

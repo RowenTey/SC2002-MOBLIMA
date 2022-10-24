@@ -2,12 +2,17 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.lang.model.type.TypeMirror;
 
 import controller.MovieManager;
 import model.Movie;
 import helper.Helper;
 import view.ReviewView;
 import view.BookingView;
+import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 
 /**
  * Viewing interface for Cineplex
@@ -94,6 +99,7 @@ public class MovieView extends MainView {
     public void viewApp() {
         // TODO Movies.getList()
         // ArrayList<Movie> movieList = MovieManager.getMovies();
+        Scanner sc = new Scanner(System.in);
         this.printMenu();
         int choice;
         if (this.isStaff) {
@@ -105,8 +111,32 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
-                        // TODO: Prompt for BookingView()
-                        // BookingView.viewApp();
+
+                        System.out.println("Enter movie title: ");
+                        String title = sc.next();
+                        System.out.println("Enter show status: ");
+                        String status = sc.next();
+                        ShowStatus showStatus = ShowStatus.valueOf(status);
+                        System.out.println("Enter synopsis: ");
+                        String synopsis = sc.next();
+                        System.out.println("Enter director's name: ");
+                        String director = sc.next();
+
+                        System.out.println("Enter cast member names line-by-line: (Enter '0' to stop)");
+                        ArrayList<String> castMembers = new ArrayList<String>();
+                        String castMember;
+                        castMember = sc.next();
+                        while(castMember != "0"){
+                            castMembers.add(castMember);
+                        }
+                        String[] cast = new String[castMembers.size()];
+                        cast = castMembers.toArray(cast);
+
+                        System.out.println("Enter movie type: ");
+                        String movieType = sc.next();
+                        TypeMovies type= TypeMovies.valueOf(movieType);
+
+                        MovieManager.addMovie(title, status, synopsis, director, cast, 0, type);
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
@@ -151,6 +181,7 @@ public class MovieView extends MainView {
                         printRoute(this.path + " > Movie > Book Movie");
                         // TODO: Prompt for BookingView()
                         // TODO: BookingView.viewApp();
+
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
