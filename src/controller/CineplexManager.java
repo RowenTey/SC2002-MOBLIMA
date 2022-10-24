@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import database.Database;
 import database.FileType;
+import model.Cinema;
 import model.Cineplex;
 import model.enums.Location;
 
@@ -73,7 +74,7 @@ public class CineplexManager {
         if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);
-            Cineplex newCineplex = new Cineplex(Location.values()[opt],cineplexId);
+            Cineplex newCineplex = new Cineplex(cineplexId, Location.values()[opt]);
             Database.CINEPLEX.put(cineplexId, newCineplex);
             Database.saveFileIntoDatabase(FileType.CINEPLEX);
             CineplexManager.cineplexList.add(newCineplex);
@@ -159,4 +160,39 @@ public class CineplexManager {
         }
         return available_locations.get(opt - 1);
     }
+
+    /**
+     * Allow user to select a specific cineplex by index
+     */
+    public static Cineplex selectCineplex() {
+        Cineplex selectedCineplex;
+        System.out.println("Select a cineplex by entering it's index:");
+        int choice = Helper.readInt(1, (cineplexList.size() + 1));
+        selectedCineplex = cineplexList.get(choice - 1);
+        System.out.println("\nYou selected:");
+        CineplexManager.printCineplexDetails(selectedCineplex);
+        Helper.pressAnyKeyToContinue();
+        return selectedCineplex;
+    }
+
+    /**
+     * Allow user to select a specific cinema from a cineplex
+     */
+    public static String selectCinema(Cineplex selectedCineplex) {
+        displayCinema(selectedCineplex);
+        int choice = Helper.readInt(1, (selectedCineplex.getCinemaList().size() + 1));
+        Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
+        System.out.println("\nYou selected: " + cinema.getCinemaCode());
+        Helper.pressAnyKeyToContinue();
+        return cinema.getCinemaCode();
+    }
+
+    private static void displayCinema(Cineplex selectedCineplex) {
+        System.out.println("List of cinema(s):");
+        for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
+            System.out.println(
+                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
+        }
+    }
+
 }

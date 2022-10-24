@@ -1,17 +1,13 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-import database.Database;
-import database.FileType;
+import database.*;
 import helper.Helper;
-import model.BlockbusterMovie;
-import model.Movie;
-import model.ThreeDMovie;
-import model.TwoDMovie;
-import model.enums.ShowStatus;
-import model.enums.TypeMovies;
+import model.*;
+import model.enums.*;
 
 /**
  * Movie Manager
@@ -36,7 +32,7 @@ public class MovieManager {
      */
     public MovieManager() {
         MovieManager.movieList.clear();
-        MovieManager.readMoviees();
+        MovieManager.readMovies();
         MovieManager.totalMovies = movieList.size();
     }
 
@@ -51,9 +47,8 @@ public class MovieManager {
 
     /**
      * Read movie data from database
-     * 
      */
-    public static void readMoviees() {
+    public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
             MovieManager.movieList.add(movie);
         }
@@ -128,6 +123,7 @@ public class MovieManager {
         Database.saveFileIntoDatabase(FileType.MOVIES);
         MovieManager.movieList.add(newMovie);
         System.out.println("Movie created! Movie Details: ");
+        MovieManager.printMovieDetails(newMovie);
         MovieManager.totalMovies += 1;
     }
 
@@ -140,7 +136,7 @@ public class MovieManager {
             System.out.println("No movies found!");
         } else {
             System.out.println("Which movie do you want to remove ?");
-            MovieManager.displayExistingMovie();
+            MovieManager.displayExistingMovies();
             System.out.println("(" + (MovieManager.getTotalNumOfMovie() + 1) + ") Exit");
             opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
@@ -155,6 +151,37 @@ public class MovieManager {
     }
 
     /**
+     * Display a list of movies
+     */
+    public static boolean displayListOfMovies() {
+        System.out.println("List of movies");
+        if (MovieManager.getTotalNumOfMovie() == 0) {
+            System.out.println("We don't have any movies at this time");
+            return false;
+        } else {
+            for (int i = 0; i < movieList.size(); i++) {
+                System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
+            }
+        }
+        System.out.println();
+        return true;
+    }
+
+    /**
+     * Allow user to select a specific movie by index
+     */
+    public static Movie selectMovie() {
+        Movie selectedMovie;
+        System.out.println("Select a movie by entering it's index:");
+        int choice = Helper.readInt(1, (movieList.size() + 1));
+        selectedMovie = movieList.get(choice - 1);
+        System.out.println("\nYou selected:");
+        MovieManager.printMovieDetails(selectedMovie);
+        Helper.pressAnyKeyToContinue();
+        return selectedMovie;
+    }
+
+    /**
      * Update a movie
      */
     public static void updateMovie() {
@@ -165,20 +192,92 @@ public class MovieManager {
             System.out.println("No movies found!");
         } else {
             System.out.println("Which movie do you want to update ?");
-            MovieManager.displayExistingMovie();
+            MovieManager.displayExistingMovies();
             System.out.println("(" + (MovieManager.getTotalNumOfMovie() + 1) + ") Exit");
             opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
                 Movie movie = MovieManager.getMovieList().get(opt - 1);
                 String movieId = movie.getMovieId();
                 System.out.println("Update Show Status to: ");
-                String newStatus = sc.next();
-                ShowStatus newShowStatus = ShowStatus.valueOf(newStatus);
+                System.out.println("Select show status: ");
+                int count = 0;
+                for (ShowStatus status : ShowStatus.values()) {
+                    count += 1;
+                    System.out.println("(" + (count) + ") " + status);
+                }
+                opt = Helper.readInt(1, count);
+                ShowStatus newShowStatus = ShowStatus.values()[opt - 1];
                 movie.setStatus(newShowStatus);
                 Database.MOVIES.put(movieId, movie);
                 Database.saveFileIntoDatabase(FileType.MOVIES);
                 System.out.println("Show Status successfully updated!");
             }
+        }
+    }
+
+    /**
+     * Print Top 5 Movies by Ticket Sales
+     */
+    public static void printTop5ByTicketSales() {
+        if (MovieManager.getTotalNumOfMovie() == 0) {
+            System.out.println("No movies found!");
+            return;
+        }
+        ArrayList<Movie> movieList = MovieManager.movieList;
+
+        int len = movieList.size();
+        for (int i = 1; i < len; i += 1) {
+            Movie right = movieList.get(i);
+            for (int j = i; j > 0; j -= 1) {
+                Movie left = movieList.get(i - 1);
+                if (left.getTicketSales() > right.getTicketSales()) {
+                    movieList.set(j - 1, right);
+                    movieList.set(j, left);
+                } else
+                    break;
+            }
+        }
+
+        int resSize = 5;
+        if (MovieManager.getTotalNumOfMovie() < 5)
+            resSize = MovieManager.getTotalNumOfMovie();
+        List<Movie> res = movieList.subList(len - resSize, len);
+        System.out.println("Top" + (resSize) + "Movies by Ticket Sales: ");
+        for (int i = resSize - 1; i >= 0; i--) {
+            System.out.println("(" + (i + 1) + ") " + res.get(i));
+        }
+    }
+
+    /**
+     * Print Top 5 Movies by Overall Rating
+     */
+    public static void printTop5ByOverallRating() {
+        if (MovieManager.getTotalNumOfMovie() == 0) {
+            System.out.println("No movies found!");
+            return;
+        }
+        ArrayList<Movie> movieList = MovieManager.movieList;
+
+        int len = movieList.size();
+        for (int i = 1; i < len; i += 1) {
+            Movie right = movieList.get(i);
+            for (int j = i; j > 0; j -= 1) {
+                Movie left = movieList.get(i - 1);
+                if (left.getOverallRating() > right.getOverallRating()) {
+                    movieList.set(j - 1, right);
+                    movieList.set(j, left);
+                } else
+                    break;
+            }
+        }
+
+        int resSize = 5;
+        if (MovieManager.getTotalNumOfMovie() < 5)
+            resSize = MovieManager.getTotalNumOfMovie();
+        List<Movie> res = movieList.subList(len - resSize, len);
+        System.out.println("Top" + (resSize) + "Movies by Overall Rating: ");
+        for (int i = resSize - 1; i >= 0; i--) {
+            System.out.println("(" + (i + 1) + ") " + res.get(i));
         }
     }
 
@@ -194,7 +293,7 @@ public class MovieManager {
     /**
      * Display existing Movies
      */
-    public static void displayExistingMovie() {
+    public static void displayExistingMovies() {
         System.out.println("Current Movie(es) we have: ");
         for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
             System.out.println("(" + (i + 1) + ") " + MovieManager.getMovieList().get(i).getTitle());

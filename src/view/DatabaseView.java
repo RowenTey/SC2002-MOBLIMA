@@ -43,8 +43,8 @@ public class DatabaseView extends MainView {
     int choice = -1;
     do {
       printMenu();
-      System.out.println();
       choice = Helper.readInt(1, 5);
+      System.out.println();
       switch (choice) {
         case 1:
           printRoute("Cineplex App > Staff > Database > Initialise Movies");
