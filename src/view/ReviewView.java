@@ -58,10 +58,9 @@ public class ReviewView extends MainView {
                     MovieManager.displayReviews(this.movie);
                     break;
                 case 2:
-                    Movie selectedMovie = MovieManager.selectMovie();
                     double rating = Helper.readDouble(1, 5);
                     String review = Helper.readString();
-                    MovieManager.addReview(selectedMovie, rating, review);
+                    MovieManager.addReview(this.movie, rating, review);
                     break;
                 case 3:
                     break;

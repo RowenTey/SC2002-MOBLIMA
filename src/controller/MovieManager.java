@@ -308,6 +308,10 @@ public class MovieManager {
      */
     public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
+        if (reviews.size() == 0){
+            System.out.println("No reviews found!");
+            return;
+        }
 
         for (Review review : reviews) {
             System.out.println();
