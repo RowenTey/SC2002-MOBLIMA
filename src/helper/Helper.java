@@ -361,7 +361,7 @@ public class Helper {
       // System.out.println(date);
     } catch (ParseException e) {
       System.out.println("Error! Please input data in the correct format.");
-      convertData();
+      convertDate();
     }
     return date;
   }
