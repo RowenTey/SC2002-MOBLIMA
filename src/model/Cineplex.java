@@ -49,7 +49,6 @@ public class Cineplex implements Serializable {
      * @param location Location of Cineplex
      */
     public Cineplex(Location location) {
-        this.cineplexID = location.getLabel().substring(0,3).toUpperCase();
         this.location = location;
         this.numOfCinemas = 10;
         this.initCineplex();
