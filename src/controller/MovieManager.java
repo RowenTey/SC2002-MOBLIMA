@@ -150,5 +150,4 @@ public class MovieManager {
             System.out.println("(" + (i + 1) + ") " + MovieManager.getMovieList().get(i).getTitle());
         }
     }
-
 }
