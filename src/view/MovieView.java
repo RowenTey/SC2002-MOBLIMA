@@ -51,13 +51,6 @@ public class MovieView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Movies");
         // ArrayList<Movie> movieList = MovieManager.getMovies();
-        /*
-         * List<String> list = new ArrayList<String>();
-         * list.add("One Piece Film Red");
-         * list.add("Black Adam");
-         * list.add("Fall");
-         * list.add("Thor: Love and Thunder");
-         */
 
         System.out.println("List of movies");
         // TODO: use for loop to list down the movies
@@ -73,24 +66,22 @@ public class MovieView extends MainView {
         // }
         // }
         System.out.println();
+        Helper.pressAnyKeyToContinue();
 
-        if (!this.isStaff) {
-            Helper.clearScreen();
-            printRoute(this.path + " > Movie");
-            System.out.println("What would you like to do ?");
-            System.out.println("(1) Book Movie");
-            System.out.println("(2) Review Movie");
-            System.out.println("(3) View Past Movie Reviews");
+        Helper.clearScreen();
+        printRoute(this.path + " > Movie");
+        System.out.println("What would you like to do ?");
+        if (this.isStaff) {
+            System.out.println("(1) Add Movie");
+            System.out.println("(2) Update Movie");
+            System.out.println("(3) Remove Movie");
             System.out.println("(4) List Top 5 Movies by Ticket Sales");
             System.out.println("(5) List Top 5 Movies by Overall Rating");
             System.out.println("(6) Exit");
         } else {
-            Helper.clearScreen();
-            printRoute(this.path + " > Movie");
-            System.out.println("What would you like to do ?");
-            System.out.println("(1) Add Movie");
-            System.out.println("(2) Update Movie");
-            System.out.println("(3) Remove Movie");
+            System.out.println("(1) Book Movie");
+            System.out.println("(2) Review Movie");
+            System.out.println("(3) View Past Movie Reviews");
             System.out.println("(4) List Top 5 Movies by Ticket Sales");
             System.out.println("(5) List Top 5 Movies by Overall Rating");
             System.out.println("(6) Exit");
@@ -103,19 +94,9 @@ public class MovieView extends MainView {
     public void viewApp() {
         // TODO Movies.getList()
         // ArrayList<Movie> movieList = MovieManager.getMovies();
-        /*
-         * List<String> list = new ArrayList<String>();
-         * list.add("One Piece Film Red");
-         * list.add("Black Adam");
-         * list.add("Fall");
-         * list.add("Thor: Love and Thunder");
-         */
         this.printMenu();
         int choice;
-
-        this.printMenu();
-
-        if (!this.isStaff) {
+        if (this.isStaff) {
             do {
                 choice = Helper.readInt(1, 6);
                 String selectedMovieId;
@@ -123,23 +104,20 @@ public class MovieView extends MainView {
                     case 1:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Book Movie");
+                        printRoute(this.path + " > Movie > Add Movie");
                         // TODO: Prompt for BookingView()
-                        // TODO: BookingView.viewApp();
+                        // BookingView.viewApp();
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Review Movie");
-                        // TODO: Prompt for BookView()
-                        // ReviewView reviewView = new ReviewView(movieList.get(choice - 1), this.path +
-                        // " > Movies");
-                        // reviewView.viewApp();
+                        printRoute(this.path + " > Movie > Update Movie");
+                        // TODO
                         break;
                     case 3:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Past Movie Reviews");
+                        printRoute(this.path + " > Movie > Remove Movie");
                         // TODO
                         break;
                     case 4:
@@ -170,20 +148,23 @@ public class MovieView extends MainView {
                     case 1:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Add Movie");
+                        printRoute(this.path + " > Movie > Book Movie");
                         // TODO: Prompt for BookingView()
-                        // BookingView.viewApp();
+                        // TODO: BookingView.viewApp();
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Update Movie");
-                        // TODO
+                        printRoute(this.path + " > Movie > Review Movie");
+                        // TODO: Prompt for BookView()
+                        // ReviewView reviewView = new ReviewView(movieList.get(choice - 1), this.path +
+                        // " > Movies");
+                        // reviewView.viewApp();
                         break;
                     case 3:
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Remove Movie");
+                        printRoute(this.path + " > Movie > Past Movie Reviews");
                         // TODO
                         break;
                     case 4:

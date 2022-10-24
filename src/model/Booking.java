@@ -59,7 +59,7 @@ public class Booking implements Serializable {
      * @return the transaction ID of the booking
      */
     public String getTransactionId() {
-        return transactionId;
+        return this.transactionId;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Booking implements Serializable {
      * @return the ticket of the booking
      */
     public Ticket getTicket() {
-        return ticket;
+        return this.ticket;
     }
 
     /**
@@ -95,7 +95,7 @@ public class Booking implements Serializable {
      * @return the name of the booking
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -113,7 +113,7 @@ public class Booking implements Serializable {
      * @return the mobile number of the customer
      */
     public String getMobileNum() {
-        return mobileNum;
+        return this.mobileNum;
     }
 
     /**
@@ -131,7 +131,7 @@ public class Booking implements Serializable {
      * @return the email address of the customer
      */
     public String getEmailAddr() {
-        return emailAddr;
+        return this.emailAddr;
     }
 
     /**

@@ -24,7 +24,7 @@ public class CineplexManager {
     private static ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
 
     /**
-     * total number of cineplex
+     * Total number of cineplex
      */
     private static int totalCineplex;
 
