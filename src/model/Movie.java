@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 
 /**
  * The class that stores a movie
@@ -67,21 +68,20 @@ public class Movie implements Serializable, Comparable<Movie> {
     /**
      * type of movie
      */
-    private String type;
+    private TypeMovies type;
 
     /**
      * Constructor of Movie
      * 
      */
     public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            int ticketSales, String type) {
+            TypeMovies type) {
         this.movieId = movieId;
         this.title = title;
         this.status = status;
         this.synopsis = synopsis;
         this.director = director;
         this.cast = cast;
-        this.ticketSales = ticketSales;
         this.type = type;
     }
 
@@ -243,7 +243,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @return the type
      */
-    public String getType() {
+    public TypeMovies getType() {
         return type;
     }
 
@@ -252,7 +252,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @param type type for the movie
      */
-    public void setType(String type) {
+    public void setType(TypeMovies type) {
         this.type = type;
     }
 
