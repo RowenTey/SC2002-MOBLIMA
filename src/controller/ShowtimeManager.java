@@ -28,6 +28,17 @@ public class ShowtimeManager {
     ShowtimeManager.showtimeList.clear();
     ShowtimeManager.readShowtime();
     ShowtimeManager.totalShowtimes = showtimeList.size();
+
+  }
+  /**
+    * Initializer for cineplex
+    */
+    public static void initializeShowtime() {
+      Movie newMovie = MovieManager.getMovieList().get(0);
+      String cinemaCode = CineplexManager.getCineplexList().get(0).getCinemaList().get(0).getCinemaCode();
+      Date today = new Date();
+      ShowtimeManager.createShowtime(today, newMovie, cinemaCode);
+      ShowtimeManager.printAllShowtime();
   }
 
   public static void getCurrentList() {
@@ -80,13 +91,19 @@ public class ShowtimeManager {
    * Prints the showtime with details
    */
   public static void printAllShowtime() {
+    String cinemaCode;
+    HashMap<String, String> getCineplex = new HashMap<String,String>();
+      getCineplex.put("AM", "Amk Hub");
+      getCineplex.put("JE","Jem");
+      getCineplex.put("CA","Causeway Point");
     for (Showtime showtime : Database.SHOWTIME.values()) {
+      cinemaCode = showtime.getCinemaCode().substring(0,2);
       System.out.println();
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-      System.out.println(String.format("%-20s: %s", "CinemaCode", showtime.getCinemaCode()));
+      System.out.println(String.format("%-20s: %s", "Location", getCineplex.get(cinemaCode)));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }

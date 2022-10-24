@@ -55,13 +55,12 @@ public class DatabaseView extends MainView {
           }
           break;
         case 2:
-          // Helper.clearScreen();
-          // printBreadCrumbs("Hotel App View > Database View > Initialize menu");
-          // if (initializeMenu()) {
-          // System.out.println("Menu initialization successful");
-          // } else {
-          // System.out.println("Menu initialization unsuccessful");
-          // }
+          printRoute("Cineplex App > Staff > Database > Initialise Showtimes");
+          if (initializeShowtime()) {
+            System.out.println("Showtimes initialization successful");
+          } else {
+            System.out.println("Showtimes initialization unsuccessful");
+          }
           break;
         case 3:
           printRoute("Cineplex App > Staff > Database > Initialise Cineplex");
@@ -112,6 +111,17 @@ public class DatabaseView extends MainView {
     return Database.initializeMovies();
   }
 
+  /**
+   * A method that initialize dummy data for Cineplex.
+   *
+   * @return {@code true} if initialized successfully. Otherwise, {@code false}
+   *         <p>
+   *         see {@link Database} for more initialization details.
+   */
+  private boolean initializeShowtime() {
+    return Database.initializeShowtime();
+  }
+
   // /**
   // * A method that initialize dummy data for Menu.
   // *
@@ -130,7 +140,7 @@ public class DatabaseView extends MainView {
    *         <p>
    *         see {@link Database} for more details.
    */
-  private boolean resetDatabase() {
+  public static boolean resetDatabase() { //To be changed back to private boolean
     if (Helper.promptConfirmation("reset the database")) {
       return Database.clearDatabase();
     } else {
