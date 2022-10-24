@@ -7,7 +7,6 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
-import model.Showtime;
 import model.enums.Location;
 
 /**
@@ -39,6 +38,7 @@ public class CineplexManager {
      */
     public static void initializeCineplex() {
         CineplexManager.addCineplex(1);
+        CineplexManager.addCineplex(2);
     }
 
     /**

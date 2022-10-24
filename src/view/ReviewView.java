@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import helper.Helper;
 import controller.MovieManager;
 import model.Review;
+import model.Movie;
 
 /**
  * Viewing interface for Reviews
@@ -20,14 +21,14 @@ public class ReviewView extends MainView {
      */
     private String path;
 
-    private String movieName;
+    private Movie movie;
 
     /**
      * Default contructor for the CineplexAppView
      */
-    public ReviewView(String movieName, String path) {
+    public ReviewView(Movie movie, String path) {
         super();
-        this.movieName = movieName;
+        this.movie = movie;
         this.path = path;
     }
 
@@ -36,7 +37,7 @@ public class ReviewView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > " + this.movieName);
+        printRoute(this.path + " > " + this.movie.getTitle());
         System.out.println("What would you like to do ?");
         System.out.println("(1) View past reviews");
         System.out.println("(2) Make a review");
@@ -56,6 +57,7 @@ public class ReviewView extends MainView {
                     // TODO: MovieManager.getReviews();
                     // ArrayList<Review> reviewsList = MovieManager.getReviews();
                     System.out.println("Reviews:");
+                    ArrayList<Review> reviews = MovieManager.getReviews(this.movie);
                     // for (int i = 0; i < reviewsList.size(); i += 1) {
                     // System.out.println("\t" + Double.toString(reviewsList.get(i).getRating()) +
                     // ": "

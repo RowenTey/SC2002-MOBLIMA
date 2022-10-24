@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import controller.MovieManager;
 import helper.Helper;
+import model.Movie;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
 
@@ -158,7 +159,9 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Past Movie Reviews");
-                        // TODO
+                        Movie selectedMovie = MovieManager.selectMovie();
+                        ReviewView reviewView = new ReviewView(selectedMovie, path);
+                        reviewView.viewApp();
                         break;
                     case 3:
                         Helper.clearScreen();
