@@ -52,6 +52,7 @@ public class Cineplex implements Serializable {
         setCineplexId(cineplexId);
         this.location = location;
         this.numOfCinemas = 10;
+        this.cineplexID = cineplexId;
         this.initCineplex();
     }
 
