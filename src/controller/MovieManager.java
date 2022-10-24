@@ -37,7 +37,7 @@ public class MovieManager {
      */
     public MovieManager() {
         MovieManager.movieList.clear();
-        MovieManager.readMoviees();
+        MovieManager.readMovies();
         MovieManager.totalMovies = movieList.size();
     }
 
@@ -54,7 +54,7 @@ public class MovieManager {
      * Read movie data from database
      * 
      */
-    public static void readMoviees() {
+    public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
             MovieManager.movieList.add(movie);
         }
