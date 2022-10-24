@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import javax.swing.DefaultBoundedRangeModel;
 
 import controller.CineplexManager;
