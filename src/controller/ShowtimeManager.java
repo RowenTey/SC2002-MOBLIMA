@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -10,6 +11,16 @@ import model.enums.LayoutType;
 import helper.Helper;
 
 public class ShowtimeManager {
+  /**
+   * List of showtime
+   */
+  private static ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
+
+  /**
+   * Total number of showtime
+   */
+  private static int totalShowtimes;
+
   public static void getCurrentList() {
   }
 

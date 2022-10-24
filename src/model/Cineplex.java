@@ -48,7 +48,8 @@ public class Cineplex implements Serializable {
      * 
      * @param location Location of Cineplex
      */
-    public Cineplex(Location location, String cineplexId) {
+    public Cineplex(String cineplexId, Location location) {
+        setCineplexId(cineplexId);
         this.location = location;
         this.numOfCinemas = 10;
         this.cineplexID = cineplexId;
@@ -63,24 +64,26 @@ public class Cineplex implements Serializable {
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             String s = "" + i;
-            Cinema newCinema = new Cinema(this, cinemaCode+s, false, false);
+            Cinema newCinema = new Cinema(this, cinemaCode + s, false, false);
             this.cinemaList.add(newCinema);
         }
     }
 
     /**
      * Gets the ID of the cineplex
+     * 
      * @return cineplexID
      */
-    public String getCineplexId(){
+    public String getCineplexId() {
         return this.cineplexID;
     }
 
     /**
      * Sets the ID of the cineplex
+     * 
      * @param cineplexID
      */
-    public void setCineplexId(String newID){
+    public void setCineplexId(String newID) {
         this.cineplexID = newID;
     }
 
@@ -104,9 +107,10 @@ public class Cineplex implements Serializable {
 
     /**
      * Sets the number of cinemas in the Cineplex
+     * 
      * @param numberOfCinemas
      */
-    public void setNumOfCinemas(int newNum){
+    public void setNumOfCinemas(int newNum) {
         this.numOfCinemas = newNum;
     }
 
@@ -121,9 +125,10 @@ public class Cineplex implements Serializable {
 
     /**
      * Sets the list of cinemas in the Cineplex
+     * 
      * @param cinemaList
      */
-    public void setCinemaList(ArrayList<Cinema> newList){
+    public void setCinemaList(ArrayList<Cinema> newList) {
         this.cinemaList = newList;
     }
 
@@ -138,9 +143,10 @@ public class Cineplex implements Serializable {
 
     /**
      * Sets the list of showtimes
+     * 
      * @param newList
      */
-    public void setShowtimeList(ArrayList<Showtime> newList){
+    public void setShowtimeList(ArrayList<Showtime> newList) {
         this.showtimeList = newList;
     }
 }

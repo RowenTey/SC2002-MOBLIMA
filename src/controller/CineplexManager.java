@@ -73,7 +73,7 @@ public class CineplexManager {
         if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);
-            Cineplex newCineplex = new Cineplex(Location.values()[opt],cineplexId);
+            Cineplex newCineplex = new Cineplex(cineplexId, Location.values()[opt]);
             Database.CINEPLEX.put(cineplexId, newCineplex);
             Database.saveFileIntoDatabase(FileType.CINEPLEX);
             CineplexManager.cineplexList.add(newCineplex);
@@ -158,5 +158,23 @@ public class CineplexManager {
             return -1;
         }
         return available_locations.get(opt - 1);
+    }
+
+    /**
+     * Allow user to select a specific movie by index, and returns its movieId
+     */
+    public static Cineplex selectMovie() {
+        Cineplex selectedCineplex;
+        System.out.println("Select a cineplex by entering it's index:");
+        int choice = Helper.readInt(0, (cineplexList.size() + 1));
+        if (choice == cineplexList.size() + 1) {
+            return null;
+        } else {
+            selectedCineplex = cineplexList.get(choice - 1);
+            System.out.println("\nYou selected:");
+            CineplexManager.printCineplexDetails(selectedCineplex);
+            Helper.pressAnyKeyToContinue();
+            return selectedCineplex;
+        }
     }
 }
