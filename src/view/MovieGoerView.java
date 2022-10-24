@@ -1,5 +1,6 @@
 package view;
 
+import controller.ShowtimeManager;
 import helper.Helper;
 
 /**

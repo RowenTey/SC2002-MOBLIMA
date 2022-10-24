@@ -80,7 +80,7 @@ public class StaffView extends MainView {
         } while (choice != 5);
     }
 
-    public boolean printLoginUI() {
+    private boolean printLoginUI() {
         Helper.clearScreen();
         printRoute(this.path + " > Staff Login");
         System.out.println("Please enter your staff username");

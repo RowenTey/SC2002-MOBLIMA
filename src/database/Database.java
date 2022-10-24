@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import controller.CineplexManager;
 import controller.MovieManager;
+import controller.ShowtimeManager;
 import controller.StaffManager;
 
 import java.io.IOException;
@@ -257,9 +258,9 @@ public class Database {
   }
 
   /**
-   * A method to initialize {@link Cineplex} data when the database is empty.
+   * A method to initialize {@link Movie} data when the database is empty.
    * <p>
-   * Calls {@link CineplexManager} to initialize the cineplex.
+   * Calls {@link MovieManager} to initialize the cineplex.
    * 
    * @return {@code true} if initialized successfully. Otherwise, {@code false} if
    *         database is not empty.
@@ -270,6 +271,23 @@ public class Database {
       return false;
     }
     MovieManager.initializeMovies();
+    return true;
+  }
+
+  /**
+   * A method to initialize {@link Showtime} data when the database is empty.
+   * <p>
+   * Calls {@link ShowtimeManager} to initialize the cineplex.
+   * 
+   * @return {@code true} if initialized successfully. Otherwise, {@code false} if
+   *         database is not empty.
+   */
+  public static boolean initializeShowtime() {
+    if (SHOWTIME.size() != 0) {
+      System.out.println("The database already has showtimes. Reset database first to initialize Showtimes");
+      return false;
+    }
+    ShowtimeManager.initializeShowtime();
     return true;
   }
 

@@ -7,6 +7,7 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
+import model.Showtime;
 import model.enums.Location;
 
 /**
@@ -38,6 +39,7 @@ public class CineplexManager {
      */
     public static void initializeCineplex() {
         CineplexManager.addCineplex(1);
+        CineplexManager.addCineplex(2);
     }
 
     /**
@@ -167,16 +169,12 @@ public class CineplexManager {
     public static Cineplex selectCineplex() {
         Cineplex selectedCineplex;
         System.out.println("Select a cineplex by entering it's index:");
-        int choice = Helper.readInt(0, (cineplexList.size() + 1));
-        if (choice == cineplexList.size() + 1) {
-            return null;
-        } else {
-            selectedCineplex = cineplexList.get(choice - 1);
-            System.out.println("\nYou selected:");
-            CineplexManager.printCineplexDetails(selectedCineplex);
-            Helper.pressAnyKeyToContinue();
-            return selectedCineplex;
-        }
+        int choice = Helper.readInt(1, (cineplexList.size() + 1));
+        selectedCineplex = cineplexList.get(choice - 1);
+        System.out.println("\nYou selected:");
+        CineplexManager.printCineplexDetails(selectedCineplex);
+        Helper.pressAnyKeyToContinue();
+        return selectedCineplex;
     }
 
     /**
@@ -184,17 +182,15 @@ public class CineplexManager {
      */
     public static String selectCinema(Cineplex selectedCineplex) {
         displayCinema(selectedCineplex);
-        int choice = Helper.readInt(0, (cineplexList.size() + 1));
-        if (choice == cineplexList.size() + 1) {
-            return null;
-        } else {
-            Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
-            System.out.println("\nYou selected: " + cinema.getCinemaCode());
-            Helper.pressAnyKeyToContinue();
-            return cinema.getCinemaCode();
-        }
+        int choice = Helper.readInt(1, (selectedCineplex.getCinemaList().size() + 1));
+        Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
+        System.out.println("\nYou selected: " + cinema.getCinemaCode());
+        return cinema.getCinemaCode();
     }
 
+    /**
+     * Displays the list of cinemas for this cineplex
+     */
     private static void displayCinema(Cineplex selectedCineplex) {
         System.out.println("List of cinema(s):");
         for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
@@ -202,5 +198,4 @@ public class CineplexManager {
                     "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
         }
     }
-
 }
