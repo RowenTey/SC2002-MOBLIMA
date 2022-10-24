@@ -83,6 +83,8 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.director = director;
         this.cast = cast;
         this.type = type;
+        this.setTicketSales(0);
+        this.reviews = new ArrayList<Review>();
     }
 
     /**
