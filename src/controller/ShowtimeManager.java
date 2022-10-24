@@ -36,6 +36,25 @@ public class ShowtimeManager {
   public static void getUpcomingList() {
   }
 
+  public static ArrayList<Showtime> getMovieShowtime(Movie movie) {
+    ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
+
+    for (Showtime showtime : showtimeList) {
+      if (showtime.getMovie().getTitle().equals(movie.getTitle())) {
+        toReturn.add(showtime);
+      }
+    }
+
+    return toReturn;
+  }
+
+  // public static void displayShowtime(ArrayList<Showtime> showtimes) {
+  // System.out.println("List of showtimes(s) for this movie:");
+  // for (int i = 0; i < showtimes.size(); i++) {
+  // prin
+  // }
+  // }
+
   public static boolean createShowtime(Date time, Movie movie, String cinemaCode) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
     String showtimeId = String.format("S%04d", sId);

@@ -74,17 +74,17 @@ public class MovieManager {
     public static void printMovieDetails(Movie movie) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-20s: %s", "MovieId", movie.getMovieId()));
-        System.out.println(String.format("%-20s: %s", "Title", movie.getTitle()));
-        System.out.println(String.format("%-20s: %s", "Show Status", movie.getStatus().name()));
-        System.out.println(String.format("%-20s: %s", "Movie Type", movie.getType().name()));
+        System.out.println(String.format("%-30s: %s", "MovieId", movie.getMovieId()));
+        System.out.println(String.format("%-30s: %s", "Title", movie.getTitle()));
+        System.out.println(String.format("%-30s: %s", "Show Status", movie.getStatus().name()));
+        System.out.println(String.format("%-30s: %s", "Movie Type", movie.getType().name()));
         String[] castMembers = movie.getCast();
         String cast = String.join(", ", castMembers);
-        System.out.println(String.format("%-20s: %s", "Director", movie.getDirector()));
-        System.out.println(String.format("%-20s: %s", "Cast", cast));
-        System.out.println(String.format("%-20s: %s", "Synopsis", movie.getSynopsis()));
-        System.out.println(String.format("%-20s: %s", "Number of Ticket Sales", movie.getTicketSales()));
-        System.out.println(String.format("%-20s: %s", "Overall Rating", movie.getOverallRating()));
+        System.out.println(String.format("%-30s: %s", "Director", movie.getDirector()));
+        System.out.println(String.format("%-30s: %s", "Cast", cast));
+        System.out.println(String.format("%-30s: %s", "Synopsis", movie.getSynopsis()));
+        System.out.println(String.format("%-30s: %s", "Number of Ticket Sales", movie.getTicketSales()));
+        System.out.println(String.format("%-30s: %s", "Overall Rating", movie.getOverallRating()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
