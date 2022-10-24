@@ -1,8 +1,12 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import database.Database;
 import database.FileType;
@@ -34,10 +38,31 @@ public class ShowtimeManager {
     * Initializer for cineplex
     */
     public static void initializeShowtime() {
-      Movie newMovie = MovieManager.getMovieList().get(0);
-      String cinemaCode = CineplexManager.getCineplexList().get(0).getCinemaList().get(0).getCinemaCode();
-      Date today = new Date();
-      ShowtimeManager.createShowtime(today, newMovie, cinemaCode);
+      ArrayList<Movie> newMovies = MovieManager.getMovieList();
+      ArrayList<Cineplex> newCineplex = CineplexManager.getCineplexList();
+      ArrayList<String> newCinemaCode = new ArrayList<String>();
+      ArrayList<Date> newDate = new ArrayList<Date>();
+      Random random = new Random();
+      int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
+      int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
+      long randomDay = minDay + random.nextInt(maxDay - minDay);
+      LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+      ZoneId defaultZoneId = ZoneId.systemDefault();
+      Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
+
+      for(int i=0; i<CineplexManager.getTotalNumOfCineplex();i++){
+        newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i).getCinemaCode());
+        newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i+1).getCinemaCode());
+      }
+      for(int i=0; i<newMovies.size();i++){
+        randomDay = minDay + random.nextInt(maxDay - minDay);
+        randomDate = LocalDate.ofEpochDay(randomDay);
+        date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
+        newDate.add(date);
+      }
+      for(int i=0; i<newMovies.size();i++){
+        createShowtime(newDate.get(i),newMovies.get(i),newCinemaCode.get(i));
+      }
       ShowtimeManager.printAllShowtime();
 
   }
@@ -116,7 +141,7 @@ public class ShowtimeManager {
       getCineplex.put("AM", "Amk Hub");
       getCineplex.put("JE","Jem");
       getCineplex.put("CA","Causeway Point");
-      
+
     for (Showtime showtime : Database.SHOWTIME.values()) {
       cinemaCode = showtime.getCinemaCode().substring(0,2);
       System.out.println();
