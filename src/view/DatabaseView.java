@@ -43,14 +43,15 @@ public class DatabaseView extends MainView {
     int choice = -1;
     do {
       printMenu();
+      System.out.println();
       choice = Helper.readInt(1, 5);
       switch (choice) {
         case 1:
           printRoute("Cineplex App > Staff > Database > Initialise Movies");
           if (initializeMovies()) {
-            System.out.println("Cineplex initialization successful");
+            System.out.println("Movie initialization successful");
           } else {
-            System.out.println("Cineplex initialization unsuccessful");
+            System.out.println("Movie initialization unsuccessful");
           }
           break;
         case 2:

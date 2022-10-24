@@ -75,7 +75,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      * 
      */
     public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            TypeMovies type) {
+            int ticketSales, TypeMovies type) {
         this.movieId = movieId;
         this.title = title;
         this.status = status;
@@ -83,6 +83,8 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.director = director;
         this.cast = cast;
         this.type = type;
+        this.setTicketSales(0);
+        this.reviews = new ArrayList<Review>();
     }
 
     /**
