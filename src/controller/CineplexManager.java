@@ -38,13 +38,7 @@ public class CineplexManager {
      * Initializer for cineplex
      */
     public static void initializeCineplex() {
-        int cId = Helper.generateUniqueId(Database.CINEPLEX);
-        String cineplexId = String.format("U%04d", cId);
-        Cineplex newCineplex = new Cineplex(Location.JEM);
-        Database.CINEPLEX.put(cineplexId, newCineplex);
-        Database.saveFileIntoDatabase(FileType.CINEPLEX);
-        System.out.println("Cineplex created! Cineplex Details: ");
-        printCineplexDetails(newCineplex);
+        CineplexManager.addCineplex(1);
     }
 
     /**
@@ -76,8 +70,7 @@ public class CineplexManager {
     /**
      * Add new cineplex
      */
-    public static void addCineplex() {
-        int opt = CineplexManager.promptLocation();
+    public static void addCineplex(int opt) {
         if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);

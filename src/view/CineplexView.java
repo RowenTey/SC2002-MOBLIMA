@@ -63,6 +63,7 @@ public class CineplexView extends MainView {
     public void viewApp() {
         int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
+        int opt = -1;
         if (this.isStaff) {
             do {
                 this.printMenu();
@@ -72,7 +73,8 @@ public class CineplexView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Add New Cineplex");
-                        CineplexManager.addCineplex();
+                        opt = CineplexManager.promptLocation();
+                        CineplexManager.addCineplex(opt);
                         break;
                     case 2:
                         Helper.clearScreen();
