@@ -74,6 +74,9 @@ public class CineplexView extends MainView {
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Add New Cineplex");
                         opt = CineplexManager.promptLocation();
+                        if(opt == -1){
+                            break;
+                        }
                         CineplexManager.addCineplex(opt);
                         break;
                     case 2:
