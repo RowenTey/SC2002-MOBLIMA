@@ -28,7 +28,7 @@ public class DatabaseView extends MainView {
     System.out.println("What would you like to do ?");
     System.out.println("(1) Initialize movies");
     System.out.println("(2) Initialize showtimes");
-    System.out.println("(3) Initialize cinemas");
+    System.out.println("(3) Initialize cineplex");
     System.out.println("(4) Reset database");
     System.out.println("(5) Exit");
   }
@@ -46,13 +46,12 @@ public class DatabaseView extends MainView {
       choice = Helper.readInt(1, 5);
       switch (choice) {
         case 1:
-          // Helper.clearScreen();
-          // printBreadCrumbs("Hotel App View > Initialize guests");
-          // if (initializeGuest()) {
-          // System.out.println("Guest initialization successful");
-          // } else {
-          // System.out.println("Guest initialization unsuccessful");
-          // }
+          printRoute("Cineplex App > Staff > Database > Initialise Movies");
+          if (initializeMovies()) {
+            System.out.println("Cineplex initialization successful");
+          } else {
+            System.out.println("Cineplex initialization unsuccessful");
+          }
           break;
         case 2:
           // Helper.clearScreen();
@@ -64,6 +63,12 @@ public class DatabaseView extends MainView {
           // }
           break;
         case 3:
+          printRoute("Cineplex App > Staff > Database > Initialise Cineplex");
+          if (initializeCineplex()) {
+            System.out.println("Cineplex initialization successful");
+          } else {
+            System.out.println("Cineplex initialization unsuccessful");
+          }
           break;
         case 4:
           System.out.println();
@@ -84,16 +89,27 @@ public class DatabaseView extends MainView {
     } while (choice != 5);
   }
 
-  // /**
-  // * A method that initialize dummy data for Guest.
-  // *
-  // * @return {@code true} if initialized successfully. Otherwise, {@code false}
-  // * <p>
-  // * see {@link Database} for more initialization details.
-  // */
-  // private boolean initializeGuest() {
-  // return Database.initializeDummyGuests();
-  // }
+  /**
+   * A method that initialize dummy data for Cineplex.
+   *
+   * @return {@code true} if initialized successfully. Otherwise, {@code false}
+   *         <p>
+   *         see {@link Database} for more initialization details.
+   */
+  private boolean initializeCineplex() {
+    return Database.initializeCineplex();
+  }
+
+  /**
+   * A method that initialize dummy data for Cineplex.
+   *
+   * @return {@code true} if initialized successfully. Otherwise, {@code false}
+   *         <p>
+   *         see {@link Database} for more initialization details.
+   */
+  private boolean initializeMovies() {
+    return Database.initializeMovies();
+  }
 
   // /**
   // * A method that initialize dummy data for Menu.

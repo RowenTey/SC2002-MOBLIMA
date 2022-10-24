@@ -1,8 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 
 /**
  * The class that stores a movie
@@ -59,54 +61,28 @@ public class Movie implements Serializable, Comparable<Movie> {
     private int overallRating;
 
     /**
-     * {@link Review[]} for movie
+     * {@link Review} for movie
      */
-    private Review[] reviews;
+    private ArrayList<Review> reviews;
 
     /**
      * type of movie
      */
-    private String type;
-
-    /**
-     * price of movie
-     */
-    private double price;
+    private TypeMovies type;
 
     /**
      * Constructor of Movie
      * 
      */
     public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            int ticketSales, int overallRating, Review[] reviews, String type) {
+            TypeMovies type) {
         this.movieId = movieId;
         this.title = title;
         this.status = status;
         this.synopsis = synopsis;
         this.director = director;
         this.cast = cast;
-        this.ticketSales = ticketSales;
-        this.overallRating = overallRating;
-        this.reviews = reviews;
         this.type = type;
-    }
-    /**
-     * Gets the price of the movie
-     *
-     * @return the price of the movie
-     */
-
-    public double getPrice() {
-        return price;
-    }
-
-    /**
-     * Sets the price of the movie
-     *
-     * @param price price of the movie
-     */
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     /**
@@ -241,20 +217,16 @@ public class Movie implements Serializable, Comparable<Movie> {
      * @return overall rating of the movie
      */
     public int getOverallRating() {
-        for (int i = 0; i < reviews.length; i++) {
-            this.overallRating += reviews[i].getRating();
+        if (reviews.size() == 0) {
+            this.overallRating = -1;
+            return this.overallRating;
         }
-        this.overallRating /= reviews.length;
-        return overallRating;
-    }
 
-    /**
-     * Sets the overall rating of the movie
-     *
-     * @param overallRating overall rating of the movie
-     */
-    public void setOverallRating(int overallRating) {
-        this.overallRating = overallRating;
+        for (int i = 0; i < reviews.size(); i++) {
+            this.overallRating += reviews.get(i).getRating();
+        }
+        this.overallRating /= reviews.size();
+        return this.overallRating;
     }
 
     /**
@@ -262,17 +234,8 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @return {@link Review[]} that is assigned to this movie
      */
-    public Review[] getReviews() {
+    public ArrayList<Review> getReviews() {
         return reviews;
-    }
-
-    /**
-     * Sets the {@link Review[]} of movie
-     *
-     * @param reviews {@link Review[]} of movie
-     */
-    public void setReviews(Review[] reviews) {
-        this.reviews = reviews;
     }
 
     /**
@@ -280,7 +243,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @return the type
      */
-    public String getType() {
+    public TypeMovies getType() {
         return type;
     }
 
@@ -289,7 +252,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @param type type for the movie
      */
-    public void setType(String type) {
+    public void setType(TypeMovies type) {
         this.type = type;
     }
 

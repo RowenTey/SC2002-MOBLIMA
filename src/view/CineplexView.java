@@ -49,7 +49,9 @@ public class CineplexView extends MainView {
                 System.out.println("We don't have any Cineplex at this time");
                 System.out.println("(1) Exit");
             } else {
+                int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                 CineplexManager.displayExistingCineplex();
+                System.out.println("("+ (numOfCineplex+1) +") Exit");
                 System.out.println("Which location would you like to choose? ");
             }
         }
@@ -61,6 +63,7 @@ public class CineplexView extends MainView {
     public void viewApp() {
         int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
+        int opt = -1;
         if (this.isStaff) {
             do {
                 this.printMenu();
@@ -70,7 +73,8 @@ public class CineplexView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Add New Cineplex");
-                        CineplexManager.addCineplex();
+                        opt = CineplexManager.promptLocation();
+                        CineplexManager.addCineplex(opt);
                         break;
                     case 2:
                         Helper.clearScreen();
@@ -82,7 +86,10 @@ public class CineplexView extends MainView {
                     default:
                         break;
                 }
-                Helper.pressAnyKeyToContinue();
+                if (choice != 3) {
+                    System.out.println();
+                    Helper.pressAnyKeyToContinue();
+                }
             } while (choice != 3);
         }
 
@@ -95,7 +102,6 @@ public class CineplexView extends MainView {
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != (numOfCineplex + 1));
-            Helper.pressAnyKeyToContinue();
         }
     }
 }
