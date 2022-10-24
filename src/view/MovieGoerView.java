@@ -44,7 +44,6 @@ public class MovieGoerView extends MainView {
         System.out.println("(3) Search or list Movies");
         System.out.println("(4) View booking history");
         System.out.println("(5) Exit");
-        System.out.println("(6) Display Showtime");
     }
 
     /**
@@ -54,7 +53,7 @@ public class MovieGoerView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 6);
+            choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
                     CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer", false);
@@ -73,9 +72,6 @@ public class MovieGoerView extends MainView {
                     // TODO (Booking View)
                     break;
                 case 5:
-                    break;
-                case 6:
-                    ShowtimeManager.printAllShowtime();
                     break;
                 default:
                     break;

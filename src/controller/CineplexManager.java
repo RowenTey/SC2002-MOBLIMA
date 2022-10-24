@@ -38,6 +38,7 @@ public class CineplexManager {
      */
     public static void initializeCineplex() {
         CineplexManager.addCineplex(1);
+        CineplexManager.addCineplex(2);
     }
 
     /**

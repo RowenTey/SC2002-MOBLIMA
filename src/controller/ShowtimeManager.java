@@ -39,6 +39,7 @@ public class ShowtimeManager {
       Date today = new Date();
       ShowtimeManager.createShowtime(today, newMovie, cinemaCode);
       ShowtimeManager.printAllShowtime();
+
   }
 
   public static void getCurrentList() {
@@ -96,6 +97,7 @@ public class ShowtimeManager {
       getCineplex.put("AM", "Amk Hub");
       getCineplex.put("JE","Jem");
       getCineplex.put("CA","Causeway Point");
+      
     for (Showtime showtime : Database.SHOWTIME.values()) {
       cinemaCode = showtime.getCinemaCode().substring(0,2);
       System.out.println();
