@@ -245,7 +245,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @param {@link Review[]} that is added to this movie
      */
-    public void addReview(ArrayList<Review> reviews)
+    public void setReview(ArrayList<Review> reviews)
     {
         this.reviews = reviews;
     }
