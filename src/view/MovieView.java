@@ -93,14 +93,20 @@ public class MovieView extends MainView {
 
                         System.out.println("Enter movie title: ");
                         String title = sc.next();
-                        System.out.println("Enter show status: ");
-                        String status = sc.next();
-                        ShowStatus showStatus = ShowStatus.valueOf(status);
+
+                        System.out.println("Select show status: ");
+                        int count = 0;
+                        for (ShowStatus status : ShowStatus.values()){
+                            count += 1;
+                            System.out.println("(" + (count) + ") " + status);
+                        }
+                        int opt = Helper.readInt(1, count);
+                        ShowStatus showStatus = ShowStatus.values()[opt-1];
+                        
                         System.out.println("Enter synopsis: ");
                         String synopsis = sc.next();
                         System.out.println("Enter director's name: ");
                         String director = sc.next();
-
                         System.out.println("Enter cast member names line-by-line: (Enter '0' to stop)");
                         ArrayList<String> castMembers = new ArrayList<String>();
                         String castMember;
@@ -110,7 +116,6 @@ public class MovieView extends MainView {
                         }
                         String[] cast = new String[castMembers.size()];
                         cast = castMembers.toArray(cast);
-
                         System.out.println("Enter movie type: ");
                         String movieType = sc.next();
                         TypeMovies type = TypeMovies.valueOf(movieType);
