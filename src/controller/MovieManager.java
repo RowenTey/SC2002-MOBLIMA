@@ -242,9 +242,9 @@ public class MovieManager {
         if (MovieManager.getTotalNumOfMovie() < 5)
             resSize = MovieManager.getTotalNumOfMovie();
         List<Movie> res = movieList.subList(len - resSize, len);
-        System.out.println("Top" + (resSize) + "Movies by Ticket Sales: ");
+        System.out.println("Top " + (resSize) + " Movies by Ticket Sales: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (i + 1) + ") " + res.get(i));
+            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
         }
     }
 
@@ -275,9 +275,9 @@ public class MovieManager {
         if (MovieManager.getTotalNumOfMovie() < 5)
             resSize = MovieManager.getTotalNumOfMovie();
         List<Movie> res = movieList.subList(len - resSize, len);
-        System.out.println("Top" + (resSize) + "Movies by Overall Rating: ");
+        System.out.println("Top " + (resSize) + " Movies by Overall Rating: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (i + 1) + ") " + res.get(i));
+            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
         }
     }
 

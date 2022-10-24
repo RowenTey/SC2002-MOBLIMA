@@ -7,6 +7,7 @@ import controller.MovieManager;
 import helper.Helper;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
+import model.Movie;
 
 /**
  * Viewing interface for Cineplex
