@@ -159,4 +159,22 @@ public class CineplexManager {
         }
         return available_locations.get(opt - 1);
     }
+
+    /**
+     * Allow user to select a specific movie by index, and returns its movieId
+     */
+    public static Cineplex selectMovie() {
+        Cineplex selectedCineplex;
+        System.out.println("Select a cineplex by entering it's index:");
+        int choice = Helper.readInt(0, (cineplexList.size() + 1));
+        if (choice == cineplexList.size() + 1) {
+            return null;
+        } else {
+            selectedCineplex = cineplexList.get(choice - 1);
+            System.out.println("\nYou selected:");
+            CineplexManager.printCineplexDetails(selectedCineplex);
+            Helper.pressAnyKeyToContinue();
+            return selectedCineplex;
+        }
+    }
 }
