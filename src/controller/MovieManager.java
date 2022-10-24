@@ -11,6 +11,7 @@ import model.BlockbusterMovie;
 import model.Movie;
 import model.ThreeDMovie;
 import model.TwoDMovie;
+import model.Review;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
 
@@ -225,7 +226,7 @@ public class MovieManager {
     }
 
     /**
-     * Print Top 5 Movies by Ticket Sales
+     * Display Top 5 Movies by Ticket Sales
      */
     public static void printTop5ByTicketSales() {
         if (MovieManager.getTotalNumOfMovie() == 0) {
@@ -258,7 +259,7 @@ public class MovieManager {
     }
 
     /**
-     * Print Top 5 Movies by Overall Rating
+     * Display Top 5 Movies by Overall Rating
      */
     public static void printTop5ByOverallRating() {
         if (MovieManager.getTotalNumOfMovie() == 0) {
@@ -307,5 +308,14 @@ public class MovieManager {
         for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
             System.out.println("(" + (i + 1) + ") " + MovieManager.getMovieList().get(i).getTitle());
         }
+    }
+
+    /**
+     * Get past movie reviews
+     * 
+     * @return an array of Strings
+     */
+    public static ArrayList<Review> getReviews(Movie movie){
+        return movie.getReviews();
     }
 }
