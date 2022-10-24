@@ -155,9 +155,11 @@ public class MovieView extends MainView {
                     default:
                         break;
                 }
-                Helper.pressAnyKeyToContinue();
+                if (choice != 6) {
+                    System.out.println();
+                    Helper.pressAnyKeyToContinue();
+                }
             } while (choice != 6);
-            Helper.pressAnyKeyToContinue();
         }
 
         else {
@@ -197,9 +199,11 @@ public class MovieView extends MainView {
                     default:
                         break;
                 }
-                Helper.pressAnyKeyToContinue();
+                if (choice != 6) {
+                    System.out.println();
+                    Helper.pressAnyKeyToContinue();
+                }
             } while (choice != 6);
-            Helper.pressAnyKeyToContinue();
         }
     }
 

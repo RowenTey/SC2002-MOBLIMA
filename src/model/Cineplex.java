@@ -21,7 +21,7 @@ public class Cineplex implements Serializable {
     /**
      * Cineplex ID
      */
-    private String cineplexId;
+    private String cineplexID;
 
     /**
      * Location of the Cineplex
@@ -48,8 +48,7 @@ public class Cineplex implements Serializable {
      * 
      * @param location Location of Cineplex
      */
-    public Cineplex(String cineplexId, Location location) {
-        this.cineplexId = cineplexId;
+    public Cineplex(Location location) {
         this.location = location;
         this.numOfCinemas = 10;
         this.initCineplex();
@@ -63,18 +62,25 @@ public class Cineplex implements Serializable {
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             String s = "" + i;
-            Cinema newCinema = new Cinema(this, cinemaCode + s, false, false);
+            Cinema newCinema = new Cinema(this, cinemaCode+s, false, false);
             this.cinemaList.add(newCinema);
         }
     }
 
     /**
      * Gets the ID of the cineplex
-     * 
      * @return cineplexID
      */
-    public String getCineplexId() {
-        return this.cineplexId;
+    public String getCineplexId(){
+        return this.cineplexID;
+    }
+
+    /**
+     * Sets the ID of the cineplex
+     * @param cineplexID
+     */
+    public void setCineplexId(String newID){
+        this.cineplexID = newID;
     }
 
     /**
@@ -96,6 +102,14 @@ public class Cineplex implements Serializable {
     }
 
     /**
+     * Sets the number of cinemas in the Cineplex
+     * @param numberOfCinemas
+     */
+    public void setNumOfCinemas(int newNum){
+        this.numOfCinemas = newNum;
+    }
+
+    /**
      * Gets the list of cinemas in the Cineplex
      * 
      * @return list of cinemas
@@ -105,11 +119,27 @@ public class Cineplex implements Serializable {
     }
 
     /**
-     * Gets the list of movies in the Cineplex
+     * Sets the list of cinemas in the Cineplex
+     * @param cinemaList
+     */
+    public void setCinemaList(ArrayList<Cinema> newList){
+        this.cinemaList = newList;
+    }
+
+    /**
+     * Gets the list of showtimes in the Cineplex
      * 
-     * @return list of movies
+     * @return list of showtimes
      */
     public ArrayList<Showtime> getShowtimeList() {
         return this.showtimeList;
+    }
+
+    /**
+     * Sets the list of showtimes
+     * @param newList
+     */
+    public void setShowtimeList(ArrayList<Showtime> newList){
+        this.showtimeList = newList;
     }
 }

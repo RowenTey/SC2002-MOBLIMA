@@ -1,5 +1,6 @@
 package view;
 
+import controller.CineplexManager;
 import database.Database;
 import helper.Helper;
 
@@ -28,7 +29,7 @@ public class DatabaseView extends MainView {
     System.out.println("What would you like to do ?");
     System.out.println("(1) Initialize movies");
     System.out.println("(2) Initialize showtimes");
-    System.out.println("(3) Initialize cinemas");
+    System.out.println("(3) Initialize cineplex");
     System.out.println("(4) Reset database");
     System.out.println("(5) Exit");
   }
@@ -64,6 +65,8 @@ public class DatabaseView extends MainView {
           // }
           break;
         case 3:
+          printRoute("Cineplex App > Staff > Database > Initialise Cineplex");
+          CineplexManager.initializeCineplex();
           break;
         case 4:
           System.out.println();
