@@ -21,6 +21,15 @@ public class ShowtimeManager {
    */
   private static int totalShowtimes;
 
+  /**
+   * Constructor of ShowtimeManager
+   */
+  public ShowtimeManager() {
+    ShowtimeManager.showtimeList.clear();
+    ShowtimeManager.readShowtime();
+    ShowtimeManager.totalShowtimes = showtimeList.size();
+  }
+
   public static void getCurrentList() {
   }
 
@@ -33,11 +42,14 @@ public class ShowtimeManager {
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
+    ShowtimeManager.showtimeList.add(newShowtime);
+    ShowtimeManager.totalShowtimes += 1;
     return true;
   }
 
   public static boolean onCreateShowtime() {
     System.out.println("\nWhich movie would you like to creata a showtime for?");
+
     // movie list not empty
     if (MovieManager.displayListOfMovies()) {
       Movie selectedMovie = MovieManager.selectMovie();
@@ -48,9 +60,20 @@ public class ShowtimeManager {
       System.out.println("Which ciname in this cineplex would you like to pick?\n");
       String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
       ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
+      Helper.pressAnyKeyToContinue();
       return true;
     }
+
     return false;
+  }
+
+  /**
+   * Read movie data from database
+   */
+  public static void readShowtime() {
+    for (Showtime showtime : Database.SHOWTIME.values()) {
+      ShowtimeManager.showtimeList.add(showtime);
+    }
   }
 
   /**

@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.Date;
 
+import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
@@ -36,6 +37,7 @@ public class ShowtimeView extends MainView {
         this.isStaff = isStaff;
         new MovieManager();
         new ShowtimeManager();
+        new CineplexManager();
     }
 
     /**

@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import database.Database;
-import database.FileType;
+import database.*;
 import helper.Helper;
-import model.BlockbusterMovie;
-import model.Movie;
-import model.ThreeDMovie;
-import model.TwoDMovie;
-import model.enums.ShowStatus;
-import model.enums.TypeMovies;
+import model.*;
+import model.enums.*;
 
 /**
  * Movie Manager
@@ -37,7 +32,7 @@ public class MovieManager {
      */
     public MovieManager() {
         MovieManager.movieList.clear();
-        MovieManager.readMoviees();
+        MovieManager.readMovies();
         MovieManager.totalMovies = movieList.size();
     }
 
@@ -52,9 +47,8 @@ public class MovieManager {
 
     /**
      * Read movie data from database
-     * 
      */
-    public static void readMoviees() {
+    public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
             MovieManager.movieList.add(movie);
         }
@@ -129,6 +123,7 @@ public class MovieManager {
         Database.saveFileIntoDatabase(FileType.MOVIES);
         MovieManager.movieList.add(newMovie);
         System.out.println("Movie created! Movie Details: ");
+        MovieManager.printMovieDetails(newMovie);
         MovieManager.totalMovies += 1;
     }
 
@@ -178,16 +173,12 @@ public class MovieManager {
     public static Movie selectMovie() {
         Movie selectedMovie;
         System.out.println("Select a movie by entering it's index:");
-        int choice = Helper.readInt(0, (movieList.size() + 1));
-        if (choice == movieList.size() + 1) {
-            return null;
-        } else {
-            selectedMovie = movieList.get(choice - 1);
-            System.out.println("\nYou selected:");
-            MovieManager.printMovieDetails(selectedMovie);
-            Helper.pressAnyKeyToContinue();
-            return selectedMovie;
-        }
+        int choice = Helper.readInt(1, (movieList.size() + 1));
+        selectedMovie = movieList.get(choice - 1);
+        System.out.println("\nYou selected:");
+        MovieManager.printMovieDetails(selectedMovie);
+        Helper.pressAnyKeyToContinue();
+        return selectedMovie;
     }
 
     /**
