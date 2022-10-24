@@ -1,14 +1,12 @@
 package view;
 
-import java.util.ArrayList;
-import java.util.Date;
+import javax.swing.DefaultBoundedRangeModel;
 
 import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
 import model.Movie;
-import model.enums.ShowStatus;
 
 /**
  * Viewing interface for Showtime
@@ -64,10 +62,11 @@ public class ShowtimeView extends MainView {
         int choice = -1;
         if (this.isStaff) {
             do {
-                this.printMenu();
+                printMenu();
                 choice = Helper.readInt(1, 3);
                 switch (choice) {
                     case 1:
+                        Helper.clearScreen();
                         if (handleCreateShowtime()) {
                             System.out.println("Showtime created successfully!");
                         } else {
@@ -75,6 +74,8 @@ public class ShowtimeView extends MainView {
                         }
                         break;
                     case 2:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing");
                         ShowtimeManager.printAllShowtime();
                         break;
                     case 3:
@@ -89,8 +90,22 @@ public class ShowtimeView extends MainView {
         }
 
         else {
-            System.out.println("(1) List current showtimes");
-            System.out.println("(2) Exit");
+            do{
+                printMenu();
+                choice = Helper.readInt(1,2);
+                switch(choice){
+                    case 1:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing");
+                        ShowtimeManager.printAllShowtime();
+                        break;
+                    default:
+                        break;
+                }
+                if(choice !=2){
+                    Helper.pressAnyKeyToContinue();
+                }
+            }while(choice!= 2);
         }
 
     }
@@ -124,7 +139,7 @@ public class ShowtimeView extends MainView {
                 default:
                     break;
             }
-            if (choice != 3) {
+            if (choice == 3) {
                 System.out.println();
                 Helper.pressAnyKeyToContinue();
             }

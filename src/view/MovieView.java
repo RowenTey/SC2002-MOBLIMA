@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import controller.MovieManager;
 import helper.Helper;
+import model.Movie;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
 
