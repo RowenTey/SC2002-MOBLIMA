@@ -73,7 +73,7 @@ public class CineplexManager {
         if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);
-            Cineplex newCineplex = new Cineplex(Location.values()[opt]);
+            Cineplex newCineplex = new Cineplex(Location.values()[opt],cineplexId);
             Database.CINEPLEX.put(cineplexId, newCineplex);
             Database.saveFileIntoDatabase(FileType.CINEPLEX);
             CineplexManager.cineplexList.add(newCineplex);
