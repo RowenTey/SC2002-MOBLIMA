@@ -28,16 +28,38 @@ public class CineplexManager {
      */
     private static int totalCineplex;
 
-    /**
-     * Constructor of CineplxManager
-     */
     public CineplexManager() {
+        cineplexList.clear();
         readCineplexes();
         CineplexManager.totalCineplex = cineplexList.size();
     }
 
     /**
-     * Get the number of cineplexes
+     * Initializer for cineplex
+     */
+    public static void initializeCineplex() {
+        int cId = Helper.generateUniqueId(Database.CINEPLEX);
+        String cineplexId = String.format("U%04d", cId);
+        Cineplex newCineplex = new Cineplex(Location.JEM);
+        Database.CINEPLEX.put(cineplexId, newCineplex);
+        Database.saveFileIntoDatabase(FileType.CINEPLEX);
+        System.out.println("Cineplex created! Cineplex Details: ");
+        printCineplexDetails(newCineplex);
+    }
+
+    /**
+     * Print details of cineplex
+     */
+    public static void printCineplexDetails(Cineplex cineplex) {
+        System.out.println();
+        System.out.println(String.format("%-40s", "").replace(" ", "-"));
+        System.out.println(String.format("%-20s: %s", "CineplexId", cineplex.getCineplexId()));
+        System.out.println(String.format("%-20s: %s", "Location", cineplex.getLocation()));
+        System.out.println(String.format("%-40s", "").replace(" ", "-"));
+        System.out.println();
+    }
+    /**
+     * get the number of cineplexes
      * 
      * @return the total number of cineplexes
      */
@@ -45,10 +67,6 @@ public class CineplexManager {
         return CineplexManager.totalCineplex;
     }
 
-    /**
-     * Read cineplex data from database
-     * 
-     */
     public static void readCineplexes() {
         for (Cineplex cineplex : Database.CINEPLEX.values()) {
             cineplexList.add(cineplex);
@@ -63,11 +81,12 @@ public class CineplexManager {
         if (opt != (Location.values().length + 1)) {
             int cId = Helper.generateUniqueId(Database.CINEPLEX);
             String cineplexId = String.format("C%04d", cId);
-            Cineplex newCineplex = new Cineplex(cineplexId, Location.values()[opt - 1]);
+            Cineplex newCineplex = new Cineplex(Location.values()[opt - 1]);
             Database.CINEPLEX.put(cineplexId, newCineplex);
             Database.saveFileIntoDatabase(FileType.CINEPLEX);
             CineplexManager.cineplexList.add(newCineplex);
-            System.out.println("Cineplex created!");
+            System.out.println("Cineplex created! Cineplex Details: ");
+            printCineplexDetails(newCineplex);
             CineplexManager.totalCineplex += 1;
         }
     }
@@ -87,8 +106,6 @@ public class CineplexManager {
             if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
                 Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
                 CineplexManager.cineplexList.remove(old);
-                Database.CINEPLEX.remove(old.getCineplexId());
-                Database.saveFileIntoDatabase(FileType.CINEPLEX);
                 System.out.println("Removed cineplex!");
                 CineplexManager.totalCineplex -= 1;
             }

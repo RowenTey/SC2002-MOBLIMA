@@ -70,11 +70,6 @@ public class Movie implements Serializable, Comparable<Movie> {
     private String type;
 
     /**
-     * price of movie
-     */
-    private double price;
-
-    /**
      * Constructor of Movie
      * 
      */
@@ -88,25 +83,6 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.cast = cast;
         this.ticketSales = ticketSales;
         this.type = type;
-    }
-
-    /**
-     * Gets the price of the movie
-     *
-     * @return the price of the movie
-     */
-
-    public double getPrice() {
-        return price;
-    }
-
-    /**
-     * Sets the price of the movie
-     *
-     * @param price price of the movie
-     */
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     /**
