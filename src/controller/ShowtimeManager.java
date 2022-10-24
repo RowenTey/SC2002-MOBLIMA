@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import database.Database;
 import database.FileType;
@@ -75,17 +76,18 @@ public class ShowtimeManager {
       newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i).getCinemaCode());
       newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i + 1).getCinemaCode());
     }
-    for (int i = 0; i < newMovies.size(); i++) {
+
+    for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       randomDay = minDay + random.nextInt(maxDay - minDay);
       randomDate = LocalDate.ofEpochDay(randomDay);
       date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
       newDate.add(date);
     }
-    for (int i = 0; i < newMovies.size(); i++) {
+
+    for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
     }
     ShowtimeManager.printAllShowtime();
-
   }
 
   public static void getCurrentList() {
@@ -94,6 +96,9 @@ public class ShowtimeManager {
   public static void getUpcomingList() {
   }
 
+  /**
+   * Get all showtimes for this movie
+   */
   public static ArrayList<Showtime> getMovieShowtime(Movie movie) {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
@@ -106,6 +111,9 @@ public class ShowtimeManager {
     return toReturn;
   }
 
+  /**
+   * Display showtimes given an array of showtimes
+   */
   public static void displayShowtime(ArrayList<Showtime> showtimes) {
     System.out.println("List of showtimes(s) for this movie:");
     for (int i = 0; i < showtimes.size(); i++) {
@@ -114,6 +122,9 @@ public class ShowtimeManager {
     }
   }
 
+  /**
+   * Create a showtime and store in database
+   */
   public static boolean createShowtime(Date time, Movie movie, String cinemaCode) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
     String showtimeId = String.format("S%04d", sId);
@@ -125,6 +136,9 @@ public class ShowtimeManager {
     return true;
   }
 
+  /**
+   * Action function to run on create showtime
+   */
   public static boolean onCreateShowtime() {
     System.out.println("\nWhich movie would you like to creata a showtime for?");
 
@@ -199,7 +213,7 @@ public class ShowtimeManager {
           System.out.print("   ");
         else {
           if (showtime.getSeatAt(row + 1, col + 1).getBooked()) {
-            System.out.println(" X ");
+            System.out.print(" X ");
           } else {
             System.out.print(" O ");
           }
@@ -211,14 +225,20 @@ public class ShowtimeManager {
   }
 
   /**
-   * Prompt user to select a seat
+   * Prompt user to select a seat for booking
    */
   public static void promptSeatSelection(String showtimeId) {
-    Showtime showtimeShowtime = getShowtimebyId(showtimeId);
-    displayShowtimeLayout(showtimeShowtime);
+    Showtime showtime = getShowtimebyId(showtimeId);
+    displayShowtimeLayout(showtime);
     System.out.println("Please enter the desired seat coordinates (e.g A6):");
     String position = Helper.readString();
-    System.out.println("position " + position);
+    int row = getSeatRow(position);
+    int col = Integer.parseInt(position.substring(1));
+    System.out.println("Row " + row + " Col " + col);
+    if (bookSeat(row + 1, col, showtime)) {
+      System.out.println("Seat " + position + " booked successfully");
+    }
+    Helper.pressAnyKeyToContinue();
   }
 
   /**
@@ -234,11 +254,40 @@ public class ShowtimeManager {
     System.out.println();
   }
 
+  /**
+   * Gets a showtime by showtime ID from database
+   */
   private static Showtime getShowtimebyId(String showtimeId) {
     if (Database.SHOWTIME.containsKey(showtimeId)) {
       return Database.SHOWTIME.get(showtimeId);
     }
     return null;
+  }
+
+  /**
+   * Gets the row from position
+   */
+  private static int getSeatRow(String position) {
+    String rowStr = position.substring(0, 1);
+    int row = 0;
+
+    for (Entry<Integer, String> entry : alphaRow.entrySet()) {
+      if (entry.getValue().equals(rowStr)) {
+        row = entry.getKey();
+      }
+    }
+
+    return row;
+  }
+
+  /**
+   * Books the seat at that position for that showtime
+   */
+  private static boolean bookSeat(int row, int column, Showtime showtime) {
+    showtime.getSeatAt(row, column).setBooked(true);
+    Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
+    Database.saveFileIntoDatabase(FileType.SHOWTIME);
+    return true;
   }
 
 }

@@ -66,6 +66,9 @@ public class MovieManager {
                 new String[] { "Luffy" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
                 new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
+        // MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
+        // "Ace",
+        // new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
     }
 
     /**
@@ -244,7 +247,7 @@ public class MovieManager {
         List<Movie> res = movieList.subList(len - resSize, len);
         System.out.println("Top " + (resSize) + " Movies by Ticket Sales: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
+            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
         }
     }
 
@@ -277,7 +280,7 @@ public class MovieManager {
         List<Movie> res = movieList.subList(len - resSize, len);
         System.out.println("Top " + (resSize) + " Movies by Overall Rating: ");
         for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize-i) + ") " + res.get(i).getTitle());
+            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
         }
     }
 
@@ -305,7 +308,7 @@ public class MovieManager {
      * 
      * @return an array of Strings
      */
-    public static ArrayList<Review> getReviews(Movie movie){
+    public static ArrayList<Review> getReviews(Movie movie) {
         return movie.getReviews();
     }
 }
