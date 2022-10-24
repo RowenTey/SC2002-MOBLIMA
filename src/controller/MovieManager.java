@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import database.Database;
 import database.FileType;
 import helper.Helper;
+import model.BlockbusterMovie;
 import model.Movie;
+import model.ThreeDMovie;
+import model.TwoDMovie;
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
 
@@ -46,28 +49,63 @@ public class MovieManager {
     }
 
     /**
-     * Read cineplex data from database
+     * Read movie data from database
      * 
      */
     public static void readMoviees() {
-        for (Movie cineplex : Database.MOVIES.values()) {
-            MovieManager.movieList.add(cineplex);
+        for (Movie movie : Database.MOVIES.values()) {
+            MovieManager.movieList.add(movie);
         }
     }
 
     /**
-     * Add new cineplex
+     * Initializer for movies
      */
-    public static void addMovie(String title, ShowStatus status, String synopsis, String director, String[] cast,
-    int ticketSales, TypeMovies type) {
-        System.out.println("Please ");
+    public static void initializeMovies() {
+        MovieManager.addMovie("Black Adam", ShowStatus.NOW_SHOWING, "Fake superman", "Shao Wei",
+                new String[] { "The Rock" }, TypeMovies.BLOCKBUSTER);
+        MovieManager.addMovie("Smile", ShowStatus.NOW_SHOWING, "A girl kills herself", "Horstann",
+                new String[] { "Horstann" }, TypeMovies.TWO_D);
+        MovieManager.addMovie("One Piece FILM RED", ShowStatus.NOW_SHOWING, "Singing and dancing", "Oda",
+                new String[] { "Luffy" }, TypeMovies.TWO_D);
+        MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
+                new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
+    }
+
+    /**
+     * Add new movie
+     */
+    public static void addMovie(String title, ShowStatus status, String synopsis, String director,
+            String[] cast, TypeMovies type) {
         int mId = Helper.generateUniqueId(Database.MOVIES);
-        String cineplexId = String.format("M%04d", mId);
-        Movie newMovie = new Movie(cineplexId, Location.values()[opt - 1]);
-        Database.MOVIES.put(cineplexId, newMovie);
+        String movieId = String.format("M%04d", mId);
+
+        double TWODMovieDefaultPrice = 13;
+        double THREEDMovieDefaultPrice = 20;
+        double BlockbusterMovieDefaultPrice = 16;
+
+        Movie newMovie = null;
+        switch (type) {
+            case TWO_D:
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                        TWODMovieDefaultPrice);
+                break;
+            case THREE_D:
+                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                        THREEDMovieDefaultPrice);
+                break;
+            case BLOCKBUSTER:
+                newMovie = new BlockbusterMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                        BlockbusterMovieDefaultPrice);
+                break;
+            default:
+                break;
+        }
+
+        Database.MOVIES.put(movieId, newMovie);
         Database.saveFileIntoDatabase(FileType.MOVIES);
         MovieManager.movieList.add(newMovie);
-        System.out.println("Movie created!");
+        System.out.println("Movie created! Movie Details: ");
         MovieManager.totalMovies += 1;
     }
 

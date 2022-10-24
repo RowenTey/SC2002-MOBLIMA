@@ -3,8 +3,6 @@ package controller;
 import helper.Helper;
 import java.util.ArrayList;
 
-import javax.xml.crypto.Data;
-
 import database.Database;
 import database.FileType;
 import model.Cineplex;
@@ -52,6 +50,7 @@ public class CineplexManager {
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
+
     /**
      * get the number of cineplexes
      * 
