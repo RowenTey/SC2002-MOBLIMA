@@ -39,7 +39,7 @@ public class ShowtimeView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Showtime View");
+        printRoute(this.path + " > Showtime");
         System.out.println("What would you like to do ?");
         if (this.isStaff) {
             System.out.println("(1) Create showtime");
@@ -56,6 +56,52 @@ public class ShowtimeView extends MainView {
      * View App
      */
     public void viewApp() {
+        int choice = -1;
+        do {
+            this.printMenu();
+            choice = Helper.readInt(1, 3);
+            switch (choice) {
+                case 1:
+                    // TODO (ShowtimeManager.getCurrentList())
+
+                    // Which movie would you like to create a showtime for?
+                    // get movie list
+
+                    // Enter the showtime for this movie
+                    // date + time
+
+                    // Enter the cinema for this movie
+                    // get cinema list
+
+                    // Date date = (Date) Helper.setDate(false)
+                    Date date = new Date();
+                    // ShowtimeManager.createShowtime(date, new Movie("One Piece FILM RED",
+                    // ShowStatus.NOW_SHOWING),
+                    // "AM1");
+                    // ShowtimeManager.createShowtime(new Date(), new Movie("Black Adam",
+                    // ShowStatus.NOW_SHOWING),
+                    // "JE2");
+                    break;
+                case 2:
+                    // TODO (ShowtimeManager.getUpcomingList())
+                    ShowtimeManager.printShowtime();
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+            if (choice != 3) {
+                System.out.println();
+                Helper.pressAnyKeyToContinue();
+            }
+        } while (choice != 3);
+    }
+
+    /**
+     * Overrided View App - from movie view
+     */
+    public void viewApp(String movieId) {
         int choice = -1;
         do {
             this.printMenu();
