@@ -304,11 +304,24 @@ public class MovieManager {
     }
 
     /**
-     * Get past movie reviews
-     * 
-     * @return an array of Strings
+     * Display past movie reviews
      */
-    public static ArrayList<Review> getReviews(Movie movie) {
-        return movie.getReviews();
+    public static void displayReviews(Movie movie) {
+        ArrayList<Review> reviews = movie.getReviews();
+
+        for (Review review : reviews) {
+            System.out.println();
+            System.out.println(String.format("%-40s", "").replace(" ", "-"));
+            System.out.println(String.format("%-30s: %s", "Rating", Double.toString(review.getRating())));
+            System.out.println(String.format("%-30s: %s", "Review", review.getReview()));
+            System.out.println(String.format("%-40s", "").replace(" ", "-"));
+            System.out.println();
+        }
+    }
+
+    public static void addReview(Movie movie, double rating, String review) {
+        Review newReview = new Review(review, rating);
+        movie.addReview(newReview);
+        Database.MOVIES.put(movie.getMovieId(), movie);
     }
 }

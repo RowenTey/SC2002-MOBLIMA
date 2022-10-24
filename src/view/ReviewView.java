@@ -54,19 +54,14 @@ public class ReviewView extends MainView {
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
-                    // TODO: MovieManager.getReviews();
-                    // ArrayList<Review> reviewsList = MovieManager.getReviews();
                     System.out.println("Reviews:");
-                    ArrayList<Review> reviews = MovieManager.getReviews(this.movie);
-                    // for (int i = 0; i < reviewsList.size(); i += 1) {
-                    // System.out.println("\t" + Double.toString(reviewsList.get(i).getRating()) +
-                    // ": "
-                    // + reviewsList.get(i).getReview());
-                    // }
-                    System.out.println();
+                    MovieManager.displayReviews(this.movie);
                     break;
                 case 2:
-                    // TODO: MovieManager.addReview();
+                    Movie selectedMovie = MovieManager.selectMovie();
+                    double rating = Helper.readDouble(1, 5);
+                    String review = Helper.readString();
+                    MovieManager.addReview(selectedMovie, rating, review);
                     break;
                 case 3:
                     break;

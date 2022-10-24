@@ -11,11 +11,6 @@ package model;
 public class Review {
 
     /**
-     * review ID for review
-     */
-    private int reviewId;
-
-    /**
      * string that contains the actual review
      */
     private String review;
@@ -29,28 +24,9 @@ public class Review {
      * Constructor of Review
      *
      */
-    public Review(int reviewId, String review, double rating) {
-        this.reviewId = reviewId;
+    public Review(String review, double rating) {
         this.review = review;
         this.rating = rating;
-    }
-
-    /**
-     * Gets the ID of the booking
-     *
-     * @return the ID of the booking
-     */
-    public int getReviewId() {
-        return reviewId;
-    }
-
-    /**
-     * Sets the ID of the booking
-     *
-     * @param reviewId ID of the booking
-     */
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
     }
 
     /**

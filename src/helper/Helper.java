@@ -103,16 +103,22 @@ public class Helper {
    * 
    * @return returns the read double entered in the terminal.
    */
-  public static double readDouble() {
+  public static double readDouble(double min, double max) {
     while (true) {
       try {
         double userInput = -1;
         userInput = sc.nextDouble();
         sc.nextLine(); // Consume newline left-over
-        return userInput;
+        if (userInput < min || userInput > max) {
+          throw new OutOfRange();
+        } else {
+          return userInput;
+        }
       } catch (InputMismatchException e) {
         sc.nextLine();
         System.out.println("\nInvalid Input, Enter a double!!");
+      } catch (OutOfRange e) {
+        System.out.println("\nInput is out of allowed range");
       }
     }
   }

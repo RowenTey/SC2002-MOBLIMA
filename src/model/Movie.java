@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.enums.ShowStatus;
 import model.enums.TypeMovies;
+import model.Review;
 
 /**
  * The class that stores a movie
@@ -245,9 +246,9 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @param {@link Review[]} that is added to this movie
      */
-    public void setReview(ArrayList<Review> reviews)
+    public void addReview(Review review)
     {
-        this.reviews = reviews;
+        this.reviews.add(review);
     }
 
     /**
