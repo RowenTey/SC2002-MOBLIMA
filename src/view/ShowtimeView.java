@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import javax.swing.DefaultBoundedRangeModel;
 
 import controller.CineplexManager;
@@ -119,17 +121,17 @@ public class ShowtimeView extends MainView {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
         handleShowtimeSelection(movie);
+        return;
     }
 
     private boolean handleCreateShowtime() {
         return ShowtimeManager.onCreateShowtime();
     }
 
-    private boolean handleShowtimeSelection(Movie movie) {
+    private void handleShowtimeSelection(Movie movie) {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
         ShowtimeManager.displayShowtime(movieShowtimes);
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
         ShowtimeManager.promptSeatSelection(showtimeId);
-        return true;
     }
 }

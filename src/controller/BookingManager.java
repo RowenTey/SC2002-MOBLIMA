@@ -53,8 +53,8 @@ public class BookingManager {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-20s: %s", "Price", booking.getTicket().getPrice()));
-        System.out.println(String.format("%-20s: %s", "Seat", booking.getTicket().getSeat()));
-        System.out.println(String.format("%-20s: %s", "Cineplex", booking.getTicket().getCineplex()));
+        System.out.println(String.format("%-20s: %s", "Seat", booking.getTicket().getSeat().getPos()));
+        System.out.println(String.format("%-20s: %s", "Cineplex", booking.getTicket().getCineplex().getLocation()));
         System.out.println(String.format("%-20s: %s", "Name", booking.getName()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();

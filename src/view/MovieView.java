@@ -73,10 +73,11 @@ public class MovieView extends MainView {
      */
     public void viewApp() {
         Scanner sc = new Scanner(System.in);
-        this.printMenu();
+
         int choice;
         if (this.isStaff) {
             do {
+                this.printMenu();
                 choice = Helper.readInt(1, 6);
                 switch (choice) {
                     case 1:
@@ -148,6 +149,7 @@ public class MovieView extends MainView {
 
         else {
             do {
+                this.printMenu();
                 choice = Helper.readInt(1, 5);
                 switch (choice) {
                     case 1:
@@ -180,6 +182,7 @@ public class MovieView extends MainView {
                 }
                 if (choice != 5) {
                     System.out.println();
+
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 5);
@@ -195,7 +198,7 @@ public class MovieView extends MainView {
 
     private void handleBookMovie() {
         if (displayListOfMovies()) {
-            ShowtimeView showtimeView = new ShowtimeView(this.path + " > Movie ", false);
+            ShowtimeView showtimeView = new ShowtimeView(this.path + " > Movie", false);
             showtimeView.viewApp(MovieManager.selectMovie());
         }
     }
