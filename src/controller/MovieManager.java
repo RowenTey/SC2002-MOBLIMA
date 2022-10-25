@@ -50,7 +50,7 @@ public class MovieManager {
      */
     public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
-            if (movie.getStatus() == ShowStatus.NOW_SHOWING) {
+            if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
                 MovieManager.movieList.add(movie);
             }
         }
@@ -86,9 +86,6 @@ public class MovieManager {
         MovieManager.addMovie("Black Panther", ShowStatus.COMING_SOON, "Sick show",
                 "Wakanda",
                 new String[] { "Reggie Jackson" }, TypeMovies.BLOCKBUSTER);
-        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING,
-                "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.",
-                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, TypeMovies.TWO_D);
     }
 
     /**
@@ -144,12 +141,12 @@ public class MovieManager {
 
         Database.MOVIES.put(movieId, newMovie);
         Database.saveFileIntoDatabase(FileType.MOVIES);
-        if (status == ShowStatus.NOW_SHOWING) {
+        if ((status == ShowStatus.PREVIEW) || (status == ShowStatus.NOW_SHOWING)) {
             MovieManager.movieList.add(newMovie);
             MovieManager.totalMovies += 1;
+            System.out.println("Movie created! Movie Details: ");
+            MovieManager.printMovieDetails(newMovie);
         }
-        System.out.println("Movie created! Movie Details: ");
-        MovieManager.printMovieDetails(newMovie);
     }
 
     /**

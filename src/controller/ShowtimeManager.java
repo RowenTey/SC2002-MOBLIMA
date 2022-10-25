@@ -13,7 +13,6 @@ import database.FileType;
 import model.*;
 import model.enums.LayoutType;
 import model.enums.ShowStatus;
-import view.ShowtimeView;
 import helper.Helper;
 
 public class ShowtimeManager {
@@ -328,31 +327,14 @@ public class ShowtimeManager {
   /**
    * Print showtimes based on Status
    */
-  public static void printShowtimeBasedOnStatus(int opt){
+  public static void printShowtimeBasedOnStatus(ShowStatus status){
     ArrayList<Movie> movies = MovieManager.getMovieList();
-    ShowStatus status = ShowStatus.NOW_SHOWING;
-    switch(opt){
-      case 1:
-        status = ShowStatus.NOW_SHOWING;
-        break;
-      case 2:
-        status = ShowStatus.PREVIEW;
-        break;
-      case 3:
-        status = ShowStatus.COMING_SOON;
-        break;
-      case 4:
-        status = ShowStatus.END_OF_SHOWING;
-        break;        
-      default:
-        break;
-    }
     for(int i=0; i < movies.size(); i++){
-      if(movies.get(i).getStatus() == status){
+      if(movies.get(i).getStatus().equals(status)){
         MovieManager.printMovieDetails(movies.get(i));
       }
     }
-    }
+  }
 
   /**
    * Get list of showtimes for a specific cineplex

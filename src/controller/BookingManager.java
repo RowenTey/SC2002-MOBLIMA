@@ -2,7 +2,6 @@ package controller;
 
 import database.Database;
 import database.FileType;
-import helper.Helper;
 import model.*;
 
 import java.text.DateFormat;
