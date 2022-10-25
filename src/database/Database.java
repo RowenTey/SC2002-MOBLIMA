@@ -1,6 +1,8 @@
 package database;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import controller.CineplexManager;
 import controller.MovieManager;
@@ -65,6 +67,11 @@ public class Database {
   public static HashMap<String, Movie> MOVIES = new HashMap<String, Movie>();
 
   /**
+   * HashSet to contain {@link Date} objects.
+   */
+  public static HashSet<Date> HOLIDAYS = new HashSet<Date>();
+
+  /**
    * Number of movies in database
    */
   public static int numOfMovies = 0;
@@ -95,6 +102,9 @@ public class Database {
     if (!readSerializedObject(FileType.MOVIES)) {
       System.out.println("Read into Movies failed!");
     }
+    if (!readSerializedObject(FileType.HOLIDAYS)) {
+      System.out.println("Read into Holidays failed!");
+    }
   }
 
   /**
@@ -118,6 +128,7 @@ public class Database {
     saveFileIntoDatabase(FileType.CINEPLEX);
     saveFileIntoDatabase(FileType.SHOWTIME);
     saveFileIntoDatabase(FileType.MOVIES);
+    saveFileIntoDatabase(FileType.HOLIDAYS);
   }
 
   /**
@@ -157,6 +168,8 @@ public class Database {
       } else if (fileType == FileType.MOVIES) {
         MOVIES = (HashMap<String, Movie>) object;
         numOfMovies = MOVIES.size();
+      } else if (fileType == FileType.HOLIDAYS) {
+        HOLIDAYS = (HashSet<Date>) object;
       }
 
       objectInputStream.close();
@@ -177,6 +190,8 @@ public class Database {
         SHOWTIME = new HashMap<String, Showtime>();
       } else if (fileType == FileType.MOVIES) {
         MOVIES = new HashMap<String, Movie>();
+      } else if (fileType == FileType.HOLIDAYS) {
+        HOLIDAYS = new HashSet<Date>();
       }
     } catch (IOException err) {
       err.printStackTrace();
@@ -218,6 +233,8 @@ public class Database {
         objectOutputStream.writeObject(SHOWTIME);
       } else if (fileType == FileType.MOVIES) {
         objectOutputStream.writeObject(MOVIES);
+      } else if (fileType == FileType.HOLIDAYS) {
+        objectOutputStream.writeObject(HOLIDAYS);
       }
 
       objectOutputStream.close();
@@ -326,6 +343,9 @@ public class Database {
     MOVIES = new HashMap<String, Movie>();
     numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);
+
+    HOLIDAYS = new HashSet<Date>();
+    writeSerializedObject(FileType.HOLIDAYS);
 
     return true;
   }

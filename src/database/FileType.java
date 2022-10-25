@@ -42,7 +42,12 @@ public enum FileType {
   /**
    * File type corresponding to the {@link Movie} file.
    */
-  MOVIES("Movies");
+  MOVIES("Movies"),
+
+  /**
+   * File type corresponding to the Holidays file.
+   */
+  HOLIDAYS("Holidays");
 
   /**
    * A String value for the FileType for retrieving purposes.
