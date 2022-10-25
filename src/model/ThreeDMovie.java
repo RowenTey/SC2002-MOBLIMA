@@ -11,7 +11,6 @@ import model.enums.TypeMovies;
  * @since 2022-10-24
  */
 public class ThreeDMovie extends Movie {
-
     /**
      * the base price of the 3D movie
      */
@@ -25,7 +24,7 @@ public class ThreeDMovie extends Movie {
     public ThreeDMovie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
             TypeMovies type, double price) {
         super(movieId, title, status, synopsis, director, cast, type);
-        this.price = price;
+        setPrice(price);
     }
 
     /**

@@ -25,7 +25,7 @@ public class BlockbusterMovie extends Movie {
     public BlockbusterMovie(String movieId, String title, ShowStatus status, String synopsis, String director,
             String[] cast, TypeMovies type, double price) {
         super(movieId, title, status, synopsis, director, cast, type);
-        this.price = price;
+        setPrice(price);
     }
 
     /**
