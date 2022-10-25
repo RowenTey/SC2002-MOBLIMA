@@ -17,12 +17,12 @@ public enum Location {
   /**
    * Amk Hub
    */
-  AMK_HUB("Amk Hub"),
+  AMK_HUB("AMK Hub"),
 
   /**
    * Jem
    */
-  JEM("Jem");
+  JEM("JEM");
 
   public final String label;
 

@@ -9,17 +9,17 @@ package model.enums;
  */
 public enum TypeMovies {
     /**
-     * ShowStatus type corresponding to "coming soon"
+     * Movie type corresponding to "2D"
      */
     TWO_D("2D"),
 
     /**
-     * Layout type corresponding to "now showing"
+     * Movie type corresponding to "3D"
      */
     THREE_D("3D"),
 
     /**
-     * Layout type corresponding to "preview"
+     * Movie type corresponding to "Blockbuster"
      */
     BLOCKBUSTER("Blockbuster");
 

@@ -14,7 +14,7 @@ import model.enums.TypeMovies;
  * @since 2022-10-20
  */
 
-public class Movie implements Serializable, Comparable<Movie> {
+public abstract class Movie implements Serializable, Comparable<Movie> {
     /**
      * For java serializable
      */
@@ -86,6 +86,16 @@ public class Movie implements Serializable, Comparable<Movie> {
         this.setTicketSales(0);
         this.reviews = new ArrayList<Review>();
     }
+
+    /**
+     * Abstract method - Gets the price of the movie
+     */
+    public abstract double getPrice();
+
+    /**
+     * Abstract method - Sets the ID of the movie
+     */
+    public abstract void setPrice(double price);
 
     /**
      * Gets the ID of the movie
@@ -245,8 +255,7 @@ public class Movie implements Serializable, Comparable<Movie> {
      *
      * @param {@link Review[]} that is added to this movie
      */
-    public void addReview(Review review)
-    {
+    public void addReview(Review review) {
         this.reviews.add(review);
     }
 
