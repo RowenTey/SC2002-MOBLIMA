@@ -7,6 +7,7 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
+import model.Showtime;
 import model.enums.Location;
 
 /**
@@ -196,5 +197,22 @@ public class CineplexManager {
             System.out.println(
                     "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
         }
+    }
+
+
+    /**
+     * Get cineplex by showtime
+     */
+    public static Cineplex getCineplexByShowtime(Showtime showtime){
+        String cinemaCode = showtime.getCinemaCode().substring(0,2);
+        ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
+        String cineplexName;
+        for(int i=0; i< CineplexManager.getTotalNumOfCineplex(); i++){
+            cineplexName = cineplexList.get(i).getLocation().substring(0,2).toUpperCase();
+            if(cineplexName.equals(cinemaCode)){
+                return cineplexList.get(i);
+            }
+        }
+        return null;
     }
 }

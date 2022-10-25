@@ -40,7 +40,7 @@ public class Ticket {
      * @return the price of the booking
      */
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Ticket {
      * @return ticket {@link Seat}
      */
     public Seat getSeat() {
-        return seat;
+        return this.seat;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Ticket {
      * @return ticket {@link Cineplex}
      */
     public Cineplex getCineplex() {
-        return cineplex;
+        return this.cineplex;
     }
 
     /**

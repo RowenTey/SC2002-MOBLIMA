@@ -14,7 +14,9 @@ import database.Database;
 import database.FileType;
 import model.*;
 import model.enums.LayoutType;
+import model.enums.Location;
 import model.enums.ShowStatus;
+import model.enums.TypeMovies;
 import helper.Helper;
 
 public class ShowtimeManager {
@@ -31,7 +33,7 @@ public class ShowtimeManager {
   /**
    * HashMap to get cinema location from cinema code
    */
-  private static HashMap<String, String> CinematoCineplexLocation = new HashMap<String, String>();
+  private static HashMap<String, Location> CinematoCineplexLocation = new HashMap<String, Location>();
 
   /**
    * HashMap to get row number from alphabets
@@ -52,9 +54,9 @@ public class ShowtimeManager {
    * Initialise HashMap
    */
   public static void initializeHashMap() {
-    CinematoCineplexLocation.put("AM", "Amk Hub");
-    CinematoCineplexLocation.put("JE", "Jem");
-    CinematoCineplexLocation.put("CA", "Causeway Point");
+    CinematoCineplexLocation.put("AM", Location.AMK_HUB);
+    CinematoCineplexLocation.put("JE", Location.JEM);
+    CinematoCineplexLocation.put("CA", Location.CAUSEWAY_POINT);
     alphaRow.put(0, "A");
     alphaRow.put(1, "B");
     alphaRow.put(2, "C");
@@ -145,7 +147,7 @@ public class ShowtimeManager {
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
-    if (movie.getStatus() == ShowStatus.NOW_SHOWING) {
+    if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
       ShowtimeManager.showtimeList.add(newShowtime);
       ShowtimeManager.totalShowtimes += 1;
     }
@@ -252,10 +254,11 @@ public class ShowtimeManager {
     int row = 3;
     int col = 4;
     Showtime showtime = getShowtimebyId(showtimeId);
+    Cineplex cineplex = CineplexManager.getCineplexByShowtime(showtime);
     displayShowtimeLayout(showtime);
 
     do {
-      System.out.println("Please enter the desired seat coordinates (e.g A6):");
+      System.out.println("Please enter the desired seat coordinates (e.g A6): ");
       position = Helper.readString();
       row = getSeatRow(position);
       col = Integer.parseInt(position.substring(1));
@@ -267,10 +270,36 @@ public class ShowtimeManager {
 
     System.out.println("Row " + row + " Col " + col);
     if (showtime.getSeatAt(row + 1, col).getBooked()) {
-      System.out.println("Booking failed! Seat is occupied");
+      System.out.println("Booking failed! Seat is occupied...");
     } else {
-      if (bookSeat(row + 1, col, showtime)) {
-        System.out.println("Seat " + position + " booked successfully");
+      System.out.println("Seat "+position+" selected...");
+      System.out.println("(1) Confirm Payment");
+      System.out.println("(2) Back");
+      int pay;
+      pay = Helper.readInt(1,2);
+      switch(pay){
+        case 1:
+          MovieGoer newMovieGoer = BookingManager.promptUserDetails();
+          if (bookSeat(row + 1, col, showtime)) {
+            System.out.println("Seat " + position + " is booked successfully");
+            System.out.println("Your Ticket is generated below: ");
+          }
+          if(showtime.getMovie().getType() == TypeMovies.BLOCKBUSTER){
+            BlockbusterMovie curMovie = (BlockbusterMovie) showtime.getMovie();
+            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
+          }else if(showtime.getMovie().getType() == TypeMovies.TWO_D){
+            TwoDMovie curMovie = (TwoDMovie) showtime.getMovie();
+            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
+          }else if(showtime.getMovie().getType() == TypeMovies.THREE_D){
+            ThreeDMovie curMovie = (ThreeDMovie) showtime.getMovie();
+            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
+          }
+          break;
+        case 2:
+          System.out.println("Booking failed!");
+          break;
+        default:
+          break;
       }
     }
 

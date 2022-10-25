@@ -66,7 +66,7 @@ public class MovieManager {
                 new String[] { "Horstann" }, TypeMovies.TWO_D);
         MovieManager.addMovie("One Piece FILM RED", ShowStatus.NOW_SHOWING, "Singing and dancing", "Oda",
                 new String[] { "Luffy" }, TypeMovies.TWO_D);
-        MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
+        MovieManager.addMovie("Transformer", ShowStatus.COMING_SOON, "Car turns to robot", "Michael Bay",
                 new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
         MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
                 "Ace",
@@ -82,9 +82,9 @@ public class MovieManager {
                 new String[] { "T-Rex", "Kentrosaurus" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Minions: The Rise of Gru", ShowStatus.COMING_SOON, "Mini Yellow Alien", "Michael Bay",
                 new String[] { "Gru" }, TypeMovies.BLOCKBUSTER);
-        MovieManager.addMovie("Top Gun: Maverick", ShowStatus.END_OF_SHOWING, "Airforce",
+        MovieManager.addMovie("Top Gun: Maverick", ShowStatus.PREVIEW, "Airforce",
                 "Ace", new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
-        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong",
+        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.PREVIEW, "Rasengan and Chidori", "Kaiseong",
                 new String[] { "Naruto", "Sasuke" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Black Panther", ShowStatus.COMING_SOON, "Sick show",
                 "Wakanda",
