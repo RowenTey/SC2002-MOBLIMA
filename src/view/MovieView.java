@@ -26,7 +26,7 @@ public class MovieView extends MainView {
     /**
      * Current user is staff
      */
-    public boolean isStaff;
+    private boolean isStaff;
 
     /**
      * Default contructor for the MovieAppView

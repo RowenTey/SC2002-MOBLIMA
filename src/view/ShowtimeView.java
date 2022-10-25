@@ -6,6 +6,7 @@ import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
+import model.Cineplex;
 import model.Movie;
 import model.Showtime;
 
@@ -121,13 +122,35 @@ public class ShowtimeView extends MainView {
         return;
     }
 
+    /**
+     * Overrided View App - from cineplex view (user)
+     */
+    public void viewApp(Cineplex cineplex) {
+        Helper.clearScreen();
+        printRoute(path + " > " + cineplex.getLocation());
+        handleShowtimeSelection(cineplex);
+        return;
+    }
+
     private boolean handleCreateShowtime() {
         return ShowtimeManager.onCreateShowtime();
     }
 
     private void handleShowtimeSelection(Movie movie) {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
-        ShowtimeManager.displayShowtime(movieShowtimes);
+        ShowtimeManager.displayShowtime(movieShowtimes, "movie");
+        String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
+        ShowtimeManager.promptSeatSelection(showtimeId);
+    }
+
+    private void handleShowtimeSelection(Cineplex cineplex) {
+        ArrayList<Showtime> movieShowtimes = ShowtimeManager.getShowtimeByCineplex(cineplex);
+        if (movieShowtimes.size() == 0) {
+            System.out.println("No showtimes available for this cineplex...");
+            Helper.pressAnyKeyToContinue();
+        } else {
+            ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
+        }
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
         ShowtimeManager.promptSeatSelection(showtimeId);
     }

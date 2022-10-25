@@ -1,17 +1,25 @@
+import java.io.Console;
+import java.util.NoSuchElementException;
+
 import database.Database;
 import helper.Helper;
 import view.CineplexAppView;
 
 public class CineplexApp {
         public static void main(String[] args) throws Exception {
-                CineplexAppView cineplexAppView = new CineplexAppView();
-                new Database();
-                Helper.clearScreen();
-                printMOBLIMATitle();
-                Helper.pressAnyKeyToContinue();
-                cineplexAppView.viewApp();
-                Database.saveAllFiles();
-                System.out.println("Program closing ... Thank you for using MOBLIMA!");
+                try {
+                        CineplexAppView cineplexAppView = new CineplexAppView();
+                        new Database();
+                        Helper.clearScreen();
+                        printMOBLIMATitle();
+                        Helper.pressAnyKeyToContinue();
+                        cineplexAppView.viewApp();
+                } catch (Exception e) {
+                        System.out.println("Error " + e);
+                } finally {
+                        Database.saveAllFiles();
+                        System.out.println("Program closing ... Thank you for using MOBLIMA!");
+                }
         }
 
         /**
