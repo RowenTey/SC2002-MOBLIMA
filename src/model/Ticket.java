@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * The class that stores the movie ticket
  *
@@ -8,7 +10,12 @@ package model;
  * @since 2022-10-20
  */
 
-public class Ticket {
+public class Ticket implements Serializable {
+    /**
+     * For java serializable
+     */
+    protected static final long serialVersionUID = 9L;
+    
     /**
      * price of ticket
      */

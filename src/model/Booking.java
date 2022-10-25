@@ -62,7 +62,6 @@ public class Booking implements Serializable {
         this.transactionId = transactionId;
         this.ticket = ticket;
         this.name = name;
-
     }
 
     /**

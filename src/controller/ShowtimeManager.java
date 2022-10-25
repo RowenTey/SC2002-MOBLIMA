@@ -268,10 +268,10 @@ public class ShowtimeManager {
       System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14);
 
-    System.out.println("Row " + row + " Col " + col);
     if (showtime.getSeatAt(row + 1, col).getBooked()) {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
+      System.out.println();
       System.out.println("Seat "+position+" selected...");
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
@@ -281,19 +281,11 @@ public class ShowtimeManager {
         case 1:
           MovieGoer newMovieGoer = BookingManager.promptUserDetails();
           if (bookSeat(row + 1, col, showtime)) {
+            System.out.println();
             System.out.println("Seat " + position + " is booked successfully");
-            System.out.println("Your Ticket is generated below: ");
+            System.out.println("Your Ticket will be generated in a short time... ");
           }
-          if(showtime.getMovie().getType() == TypeMovies.BLOCKBUSTER){
-            BlockbusterMovie curMovie = (BlockbusterMovie) showtime.getMovie();
-            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
-          }else if(showtime.getMovie().getType() == TypeMovies.TWO_D){
-            TwoDMovie curMovie = (TwoDMovie) showtime.getMovie();
-            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
-          }else if(showtime.getMovie().getType() == TypeMovies.THREE_D){
-            ThreeDMovie curMovie = (ThreeDMovie) showtime.getMovie();
-            BookingManager.createBooking(curMovie.getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer.getName(),position);
-          }
+          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer,position);
           break;
         case 2:
           System.out.println("Booking failed!");

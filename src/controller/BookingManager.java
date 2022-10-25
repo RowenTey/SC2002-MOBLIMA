@@ -38,7 +38,7 @@ public class BookingManager {
      * @param cineplex the cineplex of the ticket
      * @param name     the user associated with the ticket
      */
-    public static void createBooking(double price, Seat seat, Cineplex cineplex, String name,String position) {
+    public static void createBooking(double price, Seat seat, Cineplex cineplex, MovieGoer movieGoer,String position) {
         String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
         String timeShow = seat.getShowtime().getTime(); // get the date and time of the show
         timeShow = formateDate(timeShow);
@@ -49,10 +49,11 @@ public class BookingManager {
          * h : hour, m : minutes, XXX : cinema code in letters)
          */
 
-        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), name);
+        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer.getName(), movieGoer.getMobile(), movieGoer.getEmail());
         Database.BOOKINGS.put(transactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
-        System.out.println("Booking created! Booking Details: ");
+        System.out.println();
+        System.out.println("Booking created! Your ticket is printed below: ");
         printBookingDetails(newBooking,position);
     }
 
@@ -64,10 +65,12 @@ public class BookingManager {
     public static void printBookingDetails(Booking booking, String position) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-20s: %s", "Price", booking.getTicket().getPrice()));
-        System.out.println(String.format("%-20s: %s", "Seat", position));
-        System.out.println(String.format("%-20s: %s", "Cineplex", booking.getTicket().getCineplex().getLocation()));
         System.out.println(String.format("%-20s: %s", "Name", booking.getName()));
+        System.out.println(String.format("%-20s: %s", "Mobile Number", booking.getMobileNum()));
+        System.out.println(String.format("%-20s: %s", "Email", booking.getEmailAddr()));
+        System.out.println(String.format("%-20s: %s", "Location", booking.getTicket().getCineplex().getLocation()));
+        System.out.println(String.format("%-20s: %s", "Seat", position));
+        System.out.println(String.format("%-20s: %s", "Price", booking.getTicket().getPrice()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
