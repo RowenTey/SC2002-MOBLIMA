@@ -43,7 +43,7 @@ public class StaffView extends MainView {
     }
 
     public void viewApp() {
-        if (!this.printLoginUI()) {
+        if (!this.handleLogin()) {
             return;
         }
         int choice = -1;
@@ -54,21 +54,19 @@ public class StaffView extends MainView {
                 case 1:
                     CineplexView cineplexView = new CineplexView(this.path + " > Staff", true);
                     cineplexView.viewApp();
-                    break;
+                    continue;
                 case 2:
-                    // StaffManager.editMovieListings()
                     MovieView movieView = new MovieView(this.path + " > Staff", true);
                     movieView.viewApp();
-                    break;
+                    continue;
                 case 3:
-                    // StaffManager.editMovieShowtimes()
                     ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", true);
                     showtimeView.viewApp();
-                    break;
+                    continue;
                 case 4:
                     DatabaseView databaseView = new DatabaseView();
                     databaseView.viewApp();
-                    break;
+                    continue;
                 case 5:
                     break;
                 default:
@@ -80,7 +78,7 @@ public class StaffView extends MainView {
         } while (choice != 5);
     }
 
-    private boolean printLoginUI() {
+    private boolean handleLogin() {
         Helper.clearScreen();
         printRoute(this.path + " > Staff Login");
         System.out.println("Please enter your staff username");

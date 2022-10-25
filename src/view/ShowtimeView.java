@@ -65,6 +65,8 @@ public class ShowtimeView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
+
+        // staff
         if (this.isStaff) {
             do {
                 printMenu();
@@ -72,6 +74,7 @@ public class ShowtimeView extends MainView {
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
+                        printRoute(path + " > Create Showtime");
                         if (handleCreateShowtime()) {
                             System.out.println("Showtime created successfully!");
                         } else {
@@ -94,6 +97,7 @@ public class ShowtimeView extends MainView {
             } while (choice != 3);
         }
 
+        // user
         else {
             do {
                 printMenu();
@@ -106,7 +110,7 @@ public class ShowtimeView extends MainView {
                         ShowtimeManager.printShowtimeBasedOnStatus(1);
                         break;
                     case 2:
-                        //PREVIEW
+                        // PREVIEW
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (PREVIEW)");
                         ShowtimeManager.printShowtimeBasedOnStatus(2);
@@ -159,10 +163,16 @@ public class ShowtimeView extends MainView {
         return;
     }
 
+    /**
+     * action function to handle creating a showtime
+     */
     private boolean handleCreateShowtime() {
         return ShowtimeManager.onCreateShowtime();
     }
 
+    /**
+     * action function to handle showtime selection - from movie view
+     */
     private void handleShowtimeSelection(Movie movie) {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
         ShowtimeManager.displayShowtime(movieShowtimes, "movie");
@@ -170,6 +180,9 @@ public class ShowtimeView extends MainView {
         ShowtimeManager.promptSeatSelection(showtimeId);
     }
 
+    /**
+     * action function to handle showtime selection - from cineplex view
+     */
     private void handleShowtimeSelection(Cineplex cineplex) {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getShowtimeByCineplex(cineplex);
         if (movieShowtimes.size() == 0) {

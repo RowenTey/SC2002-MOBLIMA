@@ -65,6 +65,11 @@ public class Database {
   public static HashMap<String, Movie> MOVIES = new HashMap<String, Movie>();
 
   /**
+   * Number of movies in database
+   */
+  public static int numOfMovies = 0;
+
+  /**
    * Constructor that reads all the data from the data file during initialization
    * of program.
    */
@@ -151,6 +156,7 @@ public class Database {
         SHOWTIME = (HashMap<String, Showtime>) object;
       } else if (fileType == FileType.MOVIES) {
         MOVIES = (HashMap<String, Movie>) object;
+        numOfMovies = MOVIES.size();
       }
 
       objectInputStream.close();
@@ -297,7 +303,7 @@ public class Database {
    * @return {@code true} if data is cleared successfully.
    */
   public static boolean clearDatabase() {
-    // Initialize empty data
+    // Initialize staff data
     STAFF = new HashMap<String, Staff>();
     Database.initializeStaff();
     writeSerializedObject(FileType.STAFF);
@@ -306,7 +312,6 @@ public class Database {
     writeSerializedObject(FileType.MOVIE_GOERS);
 
     CINEMAS = new HashMap<String, Cinema>();
-    // Database.initializeRooms();
     writeSerializedObject(FileType.CINEMAS);
 
     BOOKINGS = new HashMap<String, Booking>();
@@ -319,6 +324,7 @@ public class Database {
     writeSerializedObject(FileType.SHOWTIME);
 
     MOVIES = new HashMap<String, Movie>();
+    numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);
 
     return true;

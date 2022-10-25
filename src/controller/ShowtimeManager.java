@@ -257,7 +257,7 @@ public class ShowtimeManager {
       if (row != 3 && row != 7 && col != 5 && col != 14) {
         break;
       }
-      System.out.println("Invalid row and column!");
+      System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14);
 
     System.out.println("Row " + row + " Col " + col);
@@ -328,10 +328,10 @@ public class ShowtimeManager {
   /**
    * Print showtimes based on Status
    */
-  public static void printShowtimeBasedOnStatus(int opt){
+  public static void printShowtimeBasedOnStatus(int opt) {
     ArrayList<Movie> movies = MovieManager.getMovieList();
     ShowStatus status = ShowStatus.NOW_SHOWING;
-    switch(opt){
+    switch (opt) {
       case 1:
         status = ShowStatus.NOW_SHOWING;
         break;
@@ -343,16 +343,16 @@ public class ShowtimeManager {
         break;
       case 4:
         status = ShowStatus.END_OF_SHOWING;
-        break;        
+        break;
       default:
         break;
     }
-    for(int i=0; i < movies.size(); i++){
-      if(movies.get(i).getStatus() == status){
+    for (int i = 0; i < movies.size(); i++) {
+      if (movies.get(i).getStatus() == status) {
         MovieManager.printMovieDetails(movies.get(i));
       }
     }
-    }
+  }
 
   /**
    * Get list of showtimes for a specific cineplex

@@ -334,23 +334,31 @@ public class Helper {
   }
 
   public static Date promptDate() {
-
-    final String DATE_FORMAT = "dd-MM-yy mm:ss"; // specify final output format
+    final String DATE_FORMAT = "yyyy-MM-dd HH:mm"; // specify final output format
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     Date date = new Date();
+    String dateInput, timeInput;
 
-    System.out.println("Please input a date in the format: dd-MM-yy");
-    String dateInput = sc.next();
-    sc.nextLine();
-    System.out.println("Please input a time in the format: mm:ss");
-    String timeInput = sc.next();
-    sc.nextLine();
+    do {
+      System.out.println("Please input a date in the format: yyyy-MM-dd");
+      dateInput = sc.next();
+      sc.nextLine();
+      System.out.println("Please input a time in the format: HH:mm");
+      timeInput = sc.next();
+      sc.nextLine();
+
+      if (validateDate(dateInput + " " + timeInput, format)) {
+        break;
+      }
+
+      System.out.println("\nPlease input a valid date and time!\n");
+    } while (true);
 
     try {
       DateFormat df = new SimpleDateFormat(DATE_FORMAT);
       df.setLenient(false); // makes input follow the given format strictly
       String finalDate = dateInput + " " + timeInput; // concatenates data to the final format
       date = df.parse(finalDate); // parses the string into the Date class
-      // System.out.println(date);
     } catch (ParseException e) {
       System.out.println("Error! Please input data in the correct format.");
       promptDate();

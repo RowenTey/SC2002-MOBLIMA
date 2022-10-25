@@ -69,26 +69,29 @@ public class MovieManager {
         MovieManager.addMovie("Transformer", ShowStatus.NOW_SHOWING, "Car turns to robot", "Michael Bay",
                 new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
         MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
-        "Ace",
-        new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
-        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING, "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.", "Kaiseong", new String[]{"Chris Hemsworth", "Natalie Portman", "Tessa Thompson"}, TypeMovies.TWO_D);
+                "Ace",
+                new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING,
+                "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.",
+                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Iron Man", ShowStatus.PREVIEW, "I am Iron Man", "Shao Wei",
                 new String[] { "Tony Stark" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Spider Man", ShowStatus.PREVIEW, "I got bitten by spider", "Horstann",
                 new String[] { "Peter Parker" }, TypeMovies.THREE_D);
         MovieManager.addMovie("Jurassic World", ShowStatus.COMING_SOON, "Stupid dinosaurs", "Oda",
-                new String[] { "T-Rex","Kentrosaurus" }, TypeMovies.TWO_D);
+                new String[] { "T-Rex", "Kentrosaurus" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Minions: The Rise of Gru", ShowStatus.COMING_SOON, "Mini Yellow Alien", "Michael Bay",
                 new String[] { "Gru" }, TypeMovies.BLOCKBUSTER);
         MovieManager.addMovie("Top Gun: Maverick", ShowStatus.END_OF_SHOWING, "Airforce",
-        "Ace",new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
-        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong", new String[]{"Naruto", "Sasuke"}, TypeMovies.TWO_D);                
+                "Ace", new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong",
+                new String[] { "Naruto", "Sasuke" }, TypeMovies.TWO_D);
         MovieManager.addMovie("Black Panther", ShowStatus.COMING_SOON, "Sick show",
                 "Wakanda",
                 new String[] { "Reggie Jackson" }, TypeMovies.BLOCKBUSTER);
-        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING,
-                "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.",
-                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, TypeMovies.TWO_D);
+        MovieManager.addMovie("Thor: Scarlet Witch", ShowStatus.NOW_SHOWING,
+                "Another Thor movie",
+                "Shaowei", new String[] { "Chris Hemsworth" }, TypeMovies.TWO_D);
     }
 
     /**
@@ -131,22 +134,27 @@ public class MovieManager {
                         TWODMovieDefaultPrice);
                 break;
             case THREE_D:
-                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.THREE_D,
                         THREEDMovieDefaultPrice);
                 break;
             case BLOCKBUSTER:
-                newMovie = new BlockbusterMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                newMovie = new BlockbusterMovie(movieId, title, status, synopsis, director, cast,
+                        TypeMovies.BLOCKBUSTER,
                         BlockbusterMovieDefaultPrice);
                 break;
             default:
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                        TWODMovieDefaultPrice);
                 break;
         }
 
         Database.MOVIES.put(movieId, newMovie);
+        Database.numOfMovies++;
+        System.out.println("There are " + Database.numOfMovies + " movies in the database");
         Database.saveFileIntoDatabase(FileType.MOVIES);
         if (status == ShowStatus.NOW_SHOWING) {
             MovieManager.movieList.add(newMovie);
-            MovieManager.totalMovies += 1;
+            MovieManager.totalMovies++;
         }
         System.out.println("Movie created! Movie Details: ");
         MovieManager.printMovieDetails(newMovie);
@@ -168,9 +176,10 @@ public class MovieManager {
                 Movie oldMovie = MovieManager.getMovieList().get(opt - 1);
                 if (oldMovie.getStatus() == ShowStatus.NOW_SHOWING) {
                     MovieManager.movieList.remove(oldMovie);
-                    MovieManager.totalMovies -= 1;
+                    MovieManager.totalMovies--;
                 }
                 Database.MOVIES.remove(oldMovie.getMovieId());
+                Database.numOfMovies--;
                 Database.saveFileIntoDatabase(FileType.MOVIES);
                 System.out.println("Removed movie!");
             }
@@ -212,8 +221,6 @@ public class MovieManager {
      * Update a movie
      */
     public static void updateMovie() {
-        Scanner sc = new Scanner(System.in);
-
         int opt = -1;
         if (MovieManager.getTotalNumOfMovie() == 0) {
             System.out.println("No movies found!");
