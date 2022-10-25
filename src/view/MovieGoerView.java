@@ -1,5 +1,6 @@
 package view;
 
+import controller.BookingManager;
 import helper.Helper;
 
 /**
@@ -68,7 +69,10 @@ public class MovieGoerView extends MainView {
                     break;
                 case 4:
                     System.out.println("View Booking History");
-                    // TODO (Booking View)
+                    Helper.clearScreen();
+                    printRoute(this.path + " > MovieGoer > View Booking History");
+                    String transactionId = BookingManager.promptTransactionId();
+                    BookingManager.findBooking(transactionId);
                     break;
                 case 5:
                     break;

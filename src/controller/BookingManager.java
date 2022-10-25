@@ -6,8 +6,7 @@ import helper.Helper;
 import model.*;
 import model.enums.AgeGroup;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  * Booking Manager
@@ -18,6 +17,45 @@ import java.text.SimpleDateFormat;
  */
 
 public class BookingManager {
+    /**
+     * List of bookings
+     */
+    private static ArrayList<Booking> bookingList = new ArrayList<Booking>();
+
+    /**
+     * Total number of bookings
+     */
+    private static int totalBookings;
+
+    /**
+     * Constructor of BookingManager
+     */
+    public BookingManager() {
+        BookingManager.bookingList.clear();
+        BookingManager.readBookings();
+        BookingManager.totalBookings = bookingList.size();
+    }
+    /**
+     * Get the number of bookings
+     * 
+     * @return the total number of bookings
+     */
+    public static int getTotalNumOfBooking() {
+        return BookingManager.totalBookings;
+    }
+
+    public static ArrayList<Booking> getBookingList(){
+        return BookingManager.bookingList;
+    }
+
+    /**
+     * Read bookings data from database
+     */
+    public static void readBookings() {
+        for (Booking booking : Database.BOOKINGS.values()) {
+            BookingManager.bookingList.add(booking);
+        }
+    }
     /**
      * Constructor for booking in BookingManager
      *
@@ -37,30 +75,31 @@ public class BookingManager {
          * h : hour, m : minutes, XXX : cinema code in letters)
          */
 
-        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer.getName(),
-                movieGoer.getMobile(), movieGoer.getEmail());
+        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer,position);
+        BookingManager.bookingList.add(newBooking);
         Database.BOOKINGS.put(transactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
         System.out.println();
         System.out.println("Booking created! Your ticket is printed below: ");
-        printBookingDetails(newBooking, position, movieGoer.getAgeGroup().getLabel());
+        printBookingDetails(newBooking);
     }
-
+    
     /**
      * Print the complete details of the booking
      *
      * @param guest {@link Booking} object to print
      */
-    public static void printBookingDetails(Booking booking, String position, String ageGroup) {
+    public static void printBookingDetails(Booking booking) {
+        MovieGoer movieGoer = booking.getMovieGoer();
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-30s: %s", "Transaction ID", booking.getTransactionId()));
-        System.out.println(String.format("%-30s: %s", "Name", booking.getName()));
-        System.out.println(String.format("%-30s: %s", "Mobile Number", booking.getMobileNum()));
-        System.out.println(String.format("%-30s: %s", "Email", booking.getEmailAddr()));
-        System.out.println(String.format("%-30s: %s", "Age Group", ageGroup));
+        System.out.println(String.format("%-30s: %s", "Name", movieGoer.getName()));
+        System.out.println(String.format("%-30s: %s", "Mobile Number", movieGoer.getMobile()));
+        System.out.println(String.format("%-30s: %s", "Email", movieGoer.getEmail()));
+        System.out.println(String.format("%-30s: %s", "Age Group", movieGoer.getAgeGroup().getLabel()));
         System.out.println(String.format("%-30s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
-        System.out.println(String.format("%-30s: %s", "Seat", position));
+        System.out.println(String.format("%-30s: %s", "Seat", booking.getPosition()));
         System.out.println(String.format("%-30s: %s", "Price", booking.getTicket().getPrice()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
@@ -100,6 +139,27 @@ public class BookingManager {
         date = date.replaceAll("-", "");
         date = date.replace(" ", "");
         return date;
+    }
+
+    public static String promptTransactionId(){
+        System.out.println("Enter your transaction ID: ");
+        String transactionId = Helper.readString();
+        return transactionId;
+    }
+
+
+    /**
+     * Find booking by transactionId
+     */
+    public static void findBooking(String transactionId){
+        ArrayList<Booking> curList = BookingManager.getBookingList();
+        for(int i=0 ;i < curList.size(); i++){
+            System.out.println(curList.get(i).getTransactionId());
+            if(curList.get(i).getTransactionId().equals(transactionId)){
+                printBookingDetails(curList.get(i));
+                Helper.pressAnyKeyToContinue();
+            }
+        }
     }
 
 }
