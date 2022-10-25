@@ -9,6 +9,7 @@ import helper.Helper;
 import model.Cineplex;
 import model.Movie;
 import model.Showtime;
+import model.enums.ShowStatus;
 
 /**
  * Viewing interface for Showtime
@@ -107,32 +108,30 @@ public class ShowtimeView extends MainView {
                         // NOW_SHOWING
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (NOW SHOWING)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(1);
+                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
+
                         break;
                     case 2:
                         // PREVIEW
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (PREVIEW)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(2);
+                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 3:
                         // COMING SOON
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (COMING SOON)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(3);
+                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 4:
                         // END OF SHOWING
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (END OF SHOWING)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(4);
+                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.END_OF_SHOWING);
                         break;
                     case 5:
                         break;
                     default:
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing");
-                        ShowtimeManager.printAllShowtime();
                         break;
                 }
                 if (choice != 5) {

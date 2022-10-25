@@ -2,7 +2,6 @@ package view;
 
 import controller.CineplexManager;
 import helper.Helper;
-import model.Showtime;
 
 /**
  * Viewing interface for Cineplex

@@ -50,7 +50,7 @@ public class MovieManager {
      */
     public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
-            if (movie.getStatus() == ShowStatus.NOW_SHOWING) {
+            if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
                 MovieManager.movieList.add(movie);
             }
         }
@@ -152,7 +152,7 @@ public class MovieManager {
         Database.numOfMovies++;
         System.out.println("There are " + Database.numOfMovies + " movies in the database");
         Database.saveFileIntoDatabase(FileType.MOVIES);
-        if (status == ShowStatus.NOW_SHOWING) {
+        if ((status == ShowStatus.PREVIEW) || (status == ShowStatus.NOW_SHOWING)) {
             MovieManager.movieList.add(newMovie);
             MovieManager.totalMovies++;
         }

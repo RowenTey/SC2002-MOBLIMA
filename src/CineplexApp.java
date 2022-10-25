@@ -1,6 +1,3 @@
-import java.io.Console;
-import java.util.NoSuchElementException;
-
 import database.Database;
 import helper.Helper;
 import view.CineplexAppView;
