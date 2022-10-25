@@ -100,7 +100,7 @@ public class MovieManager {
     public static void printMovieDetails(Movie movie) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-30s: %s", "MovieId", movie.getMovieId()));
+        System.out.println(String.format("%-30s: %s", "Movie ID", movie.getMovieId()));
         System.out.println(String.format("%-30s: %s", "Title", movie.getTitle()));
         System.out.println(String.format("%-30s: %s", "Show Status", movie.getStatus().name()));
         System.out.println(String.format("%-30s: %s", "Movie Type", movie.getType().name()));

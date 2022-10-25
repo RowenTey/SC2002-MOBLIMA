@@ -83,13 +83,11 @@ public class MovieView extends MainView {
                         handleAddMovie();
                         break;
                     case 2:
-                        // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Update Movie");
                         MovieManager.updateMovie();
                         break;
                     case 3:
-                        // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Remove Movie");
                         MovieManager.removeMovie();
@@ -125,12 +123,11 @@ public class MovieView extends MainView {
                         handleBookMovie();
                         break;
                     case 2:
-                        // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Movie Reviews");
                         MovieManager.displayExistingMovies();
                         Movie selectedMovie = MovieManager.selectMovie();
-                        ReviewView reviewView = new ReviewView(selectedMovie, path);
+                        ReviewView reviewView = new ReviewView(selectedMovie, this.path);
                         reviewView.viewApp();
                         break;
                     case 3:
