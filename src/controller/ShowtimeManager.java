@@ -13,6 +13,8 @@ import database.Database;
 import database.FileType;
 import model.*;
 import model.enums.LayoutType;
+import model.enums.ShowStatus;
+import view.ShowtimeView;
 import helper.Helper;
 
 public class ShowtimeManager {
@@ -82,7 +84,7 @@ public class ShowtimeManager {
     ZoneId defaultZoneId = ZoneId.systemDefault();
     Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
 
-    for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
+    for (int i = 0; i < 10; i++) {
       newCinemaCode.add(newCineplex.get(0).getCinemaList().get(i).getCinemaCode());
       newCinemaCode.add(newCineplex.get(1).getCinemaList().get(i).getCinemaCode());
     }
@@ -273,6 +275,7 @@ public class ShowtimeManager {
   public static void printShowtimeDetails(Showtime showtime) {
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
+    System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
     System.out.println(
         String.format("%-20s: %s", "Location", ShowtimeManager.CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
@@ -314,6 +317,37 @@ public class ShowtimeManager {
     Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
     return true;
+  }
+
+  /**
+   * Print showtimes based on Status
+   */
+  public static void printShowtimeBasedOnStatus(int opt){
+    ArrayList<Movie> movies = MovieManager.getMovieList();
+    ShowStatus status = ShowStatus.NOW_SHOWING;
+    switch(opt){
+      case 1:
+        status = ShowStatus.NOW_SHOWING;
+        break;
+      case 2:
+        status = ShowStatus.PREVIEW;
+        break;
+      case 3:
+        status = ShowStatus.COMING_SOON;
+        break;
+      case 4:
+        status = ShowStatus.END_OF_SHOWING;
+        break;        
+      default:
+        break;
+    }
+    for(int i=0; i < movies.size(); i++){
+      if(movies.get(i).getStatus() == status){
+        MovieManager.printMovieDetails(movies.get(i));
+      }
+    }
+
+
   }
 
 }

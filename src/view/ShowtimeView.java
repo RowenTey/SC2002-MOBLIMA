@@ -47,12 +47,15 @@ public class ShowtimeView extends MainView {
         printRoute(this.path + " > Showtime");
         System.out.println("What would you like to do ?");
         if (this.isStaff) {
-            System.out.println("(1) Create showtime");
-            System.out.println("(2) List showtimes");
+            System.out.println("(1) Create Showtime");
+            System.out.println("(2) List Showtimes");
             System.out.println("(3) Exit");
         } else {
-            System.out.println("(1) List current showtimes");
-            System.out.println("(2) Exit");
+            System.out.println("(1) List \"NOW SHOWING\" Showtimes");
+            System.out.println("(2) List \"PREVIEW\" Showtimes");
+            System.out.println("(3) List \"COMING SOON\" Showtimes");
+            System.out.println("(4) List \"END OF SHOWING\" Showtimes");
+            System.out.println("(5) Exit");
         }
     }
 
@@ -93,20 +96,44 @@ public class ShowtimeView extends MainView {
         else {
             do {
                 printMenu();
-                choice = Helper.readInt(1, 2);
+                choice = Helper.readInt(1, 5);
                 switch (choice) {
                     case 1:
+                        // NOW_SHOWING
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing (NOW SHOWING)");
+                        ShowtimeManager.printShowtimeBasedOnStatus(1);
+                        break;
+                    case 2:
+                        //PREVIEW
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing (PREVIEW)");
+                        ShowtimeManager.printShowtimeBasedOnStatus(2);
+                        break;
+                    case 3:
+                        // COMING SOON
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing (COMING SOON)");
+                        ShowtimeManager.printShowtimeBasedOnStatus(3);
+                        break;
+                    case 4:
+                        // END OF SHOWING
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Showtime > Showtime Listing (END OF SHOWING)");
+                        ShowtimeManager.printShowtimeBasedOnStatus(4);
+                        break;
+                    case 5:
+                        break;
+                    default:
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing");
                         ShowtimeManager.printAllShowtime();
                         break;
-                    default:
-                        break;
                 }
-                if (choice != 2) {
+                if (choice != 5) {
                     Helper.pressAnyKeyToContinue();
                 }
-            } while (choice != 2);
+            } while (choice != 5);
         }
 
     }

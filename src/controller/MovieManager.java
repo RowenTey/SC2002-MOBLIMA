@@ -70,6 +70,18 @@ public class MovieManager {
         "Ace",
         new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
         MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING, "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.", "Kaiseong", new String[]{"Chris Hemsworth", "Natalie Portman", "Tessa Thompson"}, TypeMovies.TWO_D);
+        MovieManager.addMovie("Iron Man", ShowStatus.PREVIEW, "I am Iron Man", "Shao Wei",
+                new String[] { "Tony Stark" }, TypeMovies.TWO_D);
+        MovieManager.addMovie("Spider Man", ShowStatus.PREVIEW, "I got bitten by spider", "Horstann",
+                new String[] { "Peter Parker" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Jurassic World", ShowStatus.COMING_SOON, "Stupid dinosaurs", "Oda",
+                new String[] { "T-Rex","Kentrosaurus" }, TypeMovies.TWO_D);
+        MovieManager.addMovie("Minions: The Rise of Gru", ShowStatus.COMING_SOON, "Mini Yellow Alien", "Michael Bay",
+                new String[] { "Gru" }, TypeMovies.BLOCKBUSTER);
+        MovieManager.addMovie("Top Gun: Maverick", ShowStatus.END_OF_SHOWING, "Airforce",
+        "Ace",
+        new String[] { "Maverick","Rooster" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong", new String[]{"Naruto", "Sasuke"}, TypeMovies.TWO_D);
     }
 
     /**
