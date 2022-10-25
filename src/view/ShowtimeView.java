@@ -75,24 +75,19 @@ public class ShowtimeView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(path + " > Create Showtime");
-                        if (handleCreateShowtime()) {
-                            System.out.println("Showtime created successfully!");
-                        } else {
-                            System.out.println("Showtime created unsuccessfully!");
-                        }
+                        handleCreateShowtime();
+                        Helper.pressAnyKeyToContinue();
                         break;
                     case 2:
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing");
                         ShowtimeManager.printAllShowtime();
+                        Helper.pressAnyKeyToContinue();
                         break;
                     case 3:
                         break;
                     default:
                         break;
-                }
-                if (choice != 3) {
-                    Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 3);
         }
@@ -108,7 +103,6 @@ public class ShowtimeView extends MainView {
                         Helper.clearScreen();
                         printRoute(this.path + " > Showtime > Showtime Listing (NOW SHOWING)");
                         ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
-
                         break;
                     case 2:
                         // PREVIEW
@@ -158,8 +152,12 @@ public class ShowtimeView extends MainView {
     /**
      * action function to handle creating a showtime
      */
-    private boolean handleCreateShowtime() {
-        return ShowtimeManager.onCreateShowtime();
+    private void handleCreateShowtime() {
+        if (ShowtimeManager.onCreateShowtime()) {
+            System.out.println("\nShowtime created successfully!");
+        } else {
+            System.out.println("\nShowtime created unsuccessfully!");
+        }
     }
 
     /**

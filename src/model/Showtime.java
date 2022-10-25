@@ -26,7 +26,7 @@ public class Showtime implements Serializable {
   /**
    * Time of showtime
    */
-  private Date time;
+  private String time;
 
   /**
    * {@link Movie} of showtime
@@ -67,7 +67,7 @@ public class Showtime implements Serializable {
    * @param cinemaCode cinema code of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
-  public Showtime(String showtimeId, Date time, Movie movie, String cinemaCode, LayoutType layoutType) {
+  public Showtime(String showtimeId, String time, Movie movie, String cinemaCode, LayoutType layoutType) {
     this.setShowtimeId(showtimeId);
     this.setTime(time);
     this.setMovie(movie);
@@ -81,7 +81,7 @@ public class Showtime implements Serializable {
    * 
    * @param time time of showtime
    */
-  public void setTime(Date time) {
+  public void setTime(String time) {
     this.time = time;
   }
 
@@ -127,7 +127,7 @@ public class Showtime implements Serializable {
    * 
    * @return {@code time} of showtime
    */
-  public Date getTime() {
+  public String getTime() {
     return this.time;
   }
 

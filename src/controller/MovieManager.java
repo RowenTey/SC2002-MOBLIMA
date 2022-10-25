@@ -232,7 +232,7 @@ public class MovieManager {
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
                 Movie movie = MovieManager.getMovieList().get(opt - 1);
                 String movieId = movie.getMovieId();
-                System.out.println("Update Show Status to: ");
+                System.out.println("\nUpdate Show Status to: ");
                 System.out.println("Select show status: ");
                 int count = 0;
                 for (ShowStatus status : ShowStatus.values()) {

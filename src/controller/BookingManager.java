@@ -39,7 +39,7 @@ public class BookingManager {
      */
     public static void createBooking(double price, Seat seat, Cineplex cineplex, String name) {
         String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
-        Date timeShow = seat.getShowtime().getTime(); // get the date and time of the show
+        String timeShow = seat.getShowtime().getTime(); // get the date and time of the show
         DateFormat targetFormat = new SimpleDateFormat("yyyyMMddhhmm"); // target config to parse into
         String formattedDate = targetFormat.format(timeShow); // parses the date and time of the show into the above
 

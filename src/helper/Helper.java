@@ -9,6 +9,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -116,7 +117,7 @@ public class Helper {
         }
       } catch (InputMismatchException e) {
         sc.nextLine();
-        System.out.println("\nInvalid Input, Enter a double!!");
+        System.out.println("\nInvalid Input, enter a double!");
       } catch (OutOfRange e) {
         System.out.println("\nInput is out of allowed range");
       }
@@ -183,18 +184,25 @@ public class Helper {
     if (now) {
       return getTimeNow();
     }
-    System.out.println("Please enter the date in this format: 'yyyy-MM-dd HH:mm'");
-    String date = sc.nextLine();
+
+    System.out.println("Please input a date in the format: yyyy-MM-dd");
+    String dateInput = sc.next();
+    sc.nextLine();
+    System.out.println("Please input a time in the format: HH:mm");
+    String timeInput = sc.next();
+    sc.nextLine();
+    String date = dateInput + " " + timeInput;
+
     try {
       LocalDateTime Date = LocalDateTime.parse(date, format);
       date = format.format(Date);
       if (validateDate(date, format)) {
         return date;
       } else {
-        System.out.println("Invalid Date");
+        System.out.println("\nInvalid Date");
       }
     } catch (DateTimeParseException e) {
-      System.out.println("Invalid Date format");
+      System.out.println("\nInvalid Date format");
     }
     return "";
   }

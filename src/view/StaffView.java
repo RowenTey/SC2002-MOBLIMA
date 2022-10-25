@@ -72,9 +72,6 @@ public class StaffView extends MainView {
                 default:
                     break;
             }
-            if (choice != 5) {
-                Helper.pressAnyKeyToContinue();
-            }
         } while (choice != 5);
     }
 
@@ -88,7 +85,7 @@ public class StaffView extends MainView {
         String password = Helper.readString();
         System.out.println();
         if (StaffManager.validateStaff(username, password)) {
-            System.out.println("Login successfully! Welcome " + username + " to the MOBLIMA system.");
+            System.out.println("Login successfully! Welcome " + username + " to the MOBLIMA system.\n");
             Helper.pressAnyKeyToContinue();
             return true;
         } else {

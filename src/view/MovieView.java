@@ -86,7 +86,6 @@ public class MovieView extends MainView {
                         // selectedMovieId = selectMovie();
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Update Movie");
-                        MovieManager.displayExistingMovies();
                         MovieManager.updateMovie();
                         break;
                     case 3:

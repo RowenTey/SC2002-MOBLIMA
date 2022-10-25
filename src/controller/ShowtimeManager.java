@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -73,14 +75,14 @@ public class ShowtimeManager {
     ArrayList<Movie> newMovies = MovieManager.getMovieList();
     ArrayList<Cineplex> newCineplex = CineplexManager.getCineplexList();
     ArrayList<String> newCinemaCode = new ArrayList<String>();
-    ArrayList<Date> newDate = new ArrayList<Date>();
+    ArrayList<String> newDate = new ArrayList<String>();
+
     Random random = new Random();
     int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
     int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
     long randomDay = minDay + random.nextInt(maxDay - minDay);
     LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
     ZoneId defaultZoneId = ZoneId.systemDefault();
-    Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
 
     for (int i = 0; i < 10; i++) {
       newCinemaCode.add(newCineplex.get(0).getCinemaList().get(i).getCinemaCode());
@@ -90,8 +92,10 @@ public class ShowtimeManager {
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       randomDay = minDay + random.nextInt(maxDay - minDay);
       randomDate = LocalDate.ofEpochDay(randomDay);
-      date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
-      newDate.add(date);
+      Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+      String strDate = dateFormat.format(date);
+      newDate.add(strDate);
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
@@ -135,7 +139,7 @@ public class ShowtimeManager {
   /**
    * Create a showtime and store in database
    */
-  public static boolean createShowtime(Date time, Movie movie, String cinemaCode) {
+  public static boolean createShowtime(String time, Movie movie, String cinemaCode) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
     String showtimeId = String.format("S%04d", sId);
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
@@ -152,19 +156,21 @@ public class ShowtimeManager {
    * Action function to run on create showtime
    */
   public static boolean onCreateShowtime() {
-    System.out.println("\nWhich movie would you like to creata a showtime for?");
+    System.out.println("Which movie would you like to create a showtime for?\n");
 
     // movie list not empty
     if (MovieManager.displayListOfMovies()) {
       Movie selectedMovie = MovieManager.selectMovie();
-      Date date = Helper.promptDate();
-      System.out.println("Which cineplex would you like to air this movie?\n");
+      String date;
+      do {
+        date = Helper.setDate(false);
+      } while (date.equals(""));
+      System.out.println("\nWhich cineplex would you like to air this movie?\n");
       CineplexManager.displayExistingCineplex();
       Cineplex selectedCineplex = CineplexManager.selectCineplex();
       System.out.println("Which ciname in this cineplex would you like to pick?\n");
       String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
       ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
-      Helper.pressAnyKeyToContinue();
       return true;
     }
 
