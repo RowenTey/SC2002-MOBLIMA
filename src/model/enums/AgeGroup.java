@@ -24,9 +24,4 @@ public enum AgeGroup {
    * SENIOR AGEGROUP
    */
   SENIOR_CITIZEN,
-
-  /**
-   * STUDENT AGEGROUP
-   */
-  STUDENT
 }
