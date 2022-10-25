@@ -2,15 +2,12 @@ package view;
 
 import java.util.ArrayList;
 
-import javax.swing.DefaultBoundedRangeModel;
-
 import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
 import model.Movie;
 import model.Showtime;
-import model.enums.ShowStatus;
 
 /**
  * Viewing interface for Showtime

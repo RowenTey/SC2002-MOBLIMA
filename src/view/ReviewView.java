@@ -1,10 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-
 import helper.Helper;
 import controller.MovieManager;
-import model.Review;
 import model.Movie;
 
 /**

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
+
 import database.Database;
 import database.FileType;
 import model.*;
@@ -42,6 +43,13 @@ public class ShowtimeManager {
     ShowtimeManager.showtimeList.clear();
     ShowtimeManager.readShowtime();
     ShowtimeManager.totalShowtimes = showtimeList.size();
+    ShowtimeManager.initializeHashMap();
+  }
+
+  /**
+   * Initialise HashMap
+   */
+  public static void initializeHashMap(){
     CinematoCineplexLocation.put("AM", "Amk Hub");
     CinematoCineplexLocation.put("JE", "Jem");
     CinematoCineplexLocation.put("CA", "Causeway Point");
@@ -60,6 +68,8 @@ public class ShowtimeManager {
    * Initializer for showtime
    */
   public static void initializeShowtime() {
+    ShowtimeManager.initializeHashMap();
+
     ArrayList<Movie> newMovies = MovieManager.getMovieList();
     ArrayList<Cineplex> newCineplex = CineplexManager.getCineplexList();
     ArrayList<String> newCinemaCode = new ArrayList<String>();
@@ -72,9 +82,9 @@ public class ShowtimeManager {
     ZoneId defaultZoneId = ZoneId.systemDefault();
     Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
 
-    for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-      newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i).getCinemaCode());
-      newCinemaCode.add(newCineplex.get(i).getCinemaList().get(i + 1).getCinemaCode());
+    for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
+      newCinemaCode.add(newCineplex.get(0).getCinemaList().get(i).getCinemaCode());
+      newCinemaCode.add(newCineplex.get(1).getCinemaList().get(i).getCinemaCode());
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
@@ -193,7 +203,7 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
       System.out
-          .println(String.format("%-20s: %s", "Location", CinematoCineplexLocation.get(cinemaCode)));
+          .println(String.format("%-20s: %s", "Location", ShowtimeManager.CinematoCineplexLocation.get(cinemaCode)));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }
@@ -228,16 +238,32 @@ public class ShowtimeManager {
    * Prompt user to select a seat for booking
    */
   public static void promptSeatSelection(String showtimeId) {
+    String position;
+    int row = 3;
+    int col = 4;
     Showtime showtime = getShowtimebyId(showtimeId);
     displayShowtimeLayout(showtime);
-    System.out.println("Please enter the desired seat coordinates (e.g A6):");
-    String position = Helper.readString();
-    int row = getSeatRow(position);
-    int col = Integer.parseInt(position.substring(1));
+    
+    do{
+      System.out.println("Please enter the desired seat coordinates (e.g A6):");
+      position = Helper.readString();
+      row = getSeatRow(position);
+      col = Integer.parseInt(position.substring(1));
+      if(row != 3 && row != 7 && col != 5 && col != 14){
+        break;
+      }
+      System.out.println("Invalid row and column!!");
+    }while(row == 3 || row == 7 || col == 5 || col == 14);
+    
     System.out.println("Row " + row + " Col " + col);
-    if (bookSeat(row + 1, col, showtime)) {
+    if(showtime.getSeatAt(row+1, col).getBooked()){
+      System.out.println("Booking failed! Seat is occupied");
+    }else{
+      if (bookSeat(row + 1, col, showtime)) {
       System.out.println("Seat " + position + " booked successfully");
     }
+    }
+    
     Helper.pressAnyKeyToContinue();
   }
 
@@ -249,7 +275,7 @@ public class ShowtimeManager {
     System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
     System.out.println(
-        String.format("%-20s: %s", "Location", CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
+        String.format("%-20s: %s", "Location", ShowtimeManager.CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
   }
