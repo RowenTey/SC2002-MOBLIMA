@@ -80,7 +80,7 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
-                        handleAddMovie();
+                        MovieManager.handleAddMovie();
                         break;
                     case 2:
                         Helper.clearScreen();
@@ -120,15 +120,13 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
-                        handleBookMovie();
+                        MovieManager.handleBookMovie(this.path + " > Movie > Book Movie");
                         break;
                     case 2:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Movie Reviews");
                         MovieManager.displayExistingMovies();
-                        Movie selectedMovie = MovieManager.selectMovie();
-                        ReviewView reviewView = new ReviewView(selectedMovie, this.path);
-                        reviewView.viewApp();
+                        MovieManager.handleViewPastMovieReviews(this.path + " > Movie");
                         break;
                     case 3:
                         Helper.clearScreen();
@@ -153,58 +151,4 @@ public class MovieView extends MainView {
         }
     }
 
-    private boolean displayListOfMovies() {
-        Helper.clearScreen();
-        printRoute(this.path + " > Movie > Book Movie");
-        System.out.println("Which movie would you like to book?\n");
-        return MovieManager.displayListOfMovies();
-    }
-
-    private void handleBookMovie() {
-        if (displayListOfMovies()) {
-            ShowtimeView showtimeView = new ShowtimeView(this.path + " > Movie", false);
-            showtimeView.viewApp(MovieManager.selectMovie());
-        }
-    }
-
-    private void handleAddMovie() {
-        System.out.println("Enter movie title: ");
-        String title = Helper.readString();
-
-        System.out.println("\nSelect show status: ");
-        int count = 0;
-        for (ShowStatus status : ShowStatus.values()) {
-            count += 1;
-            System.out.println("(" + (count) + ") " + status);
-        }
-        int opt = Helper.readInt(1, count);
-        ShowStatus showStatus = ShowStatus.values()[opt - 1];
-
-        System.out.println("\nEnter synopsis: ");
-        String synopsis = Helper.readString();
-
-        System.out.println("\nEnter director's name: ");
-        String director = Helper.readString();
-
-        System.out.println("\nEnter cast member names line-by-line: (Enter '0' to stop)");
-        ArrayList<String> castMembers = new ArrayList<String>();
-        String castMember = Helper.readString();
-        while (!castMember.equals("0")) {
-            castMembers.add(castMember);
-            castMember = Helper.readString();
-        }
-        String[] cast = new String[castMembers.size()];
-        cast = castMembers.toArray(cast);
-
-        System.out.println("\nEnter movie type: ");
-        count = 0;
-        for (TypeMovies type : TypeMovies.values()) {
-            count += 1;
-            System.out.println("(" + (count) + ") " + type);
-        }
-        opt = Helper.readInt(1, count);
-        TypeMovies movieType = TypeMovies.values()[opt - 1];
-
-        MovieManager.addMovie(title, showStatus, synopsis, director, cast, movieType);
-    }
 }

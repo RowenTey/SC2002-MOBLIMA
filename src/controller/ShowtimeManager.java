@@ -269,6 +269,7 @@ public class ShowtimeManager {
       System.out.println("Seat " + position + " selected...");
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
+      System.out.print("Which would you like to do: ");
       int pay;
       pay = Helper.readInt(1, 2);
       switch (pay) {

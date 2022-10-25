@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -188,7 +189,8 @@ public class Helper {
     DateTimeFormatter format = isHoliday ? DateTimeFormatter.ofPattern("yyyy-MM-dd")
         : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    String dateInput = "", timeInput = "";
+    String dateInput="";
+    String timeInput="";
     System.out.println("Please input a date in the format: yyyy-MM-dd");
     dateInput = sc.next();
     sc.nextLine();
@@ -198,10 +200,10 @@ public class Helper {
       timeInput = sc.next();
       sc.nextLine();
     }
-    String date = isHoliday ? dateInput : dateInput + " " + timeInput;
+    String date = isHoliday ? dateInput : (dateInput + " " + timeInput);
 
     try {
-      LocalDateTime Date = LocalDateTime.parse(date, format);
+      LocalDateTime Date = LocalDate.parse(date, format).atStartOfDay();
       date = format.format(Date);
       if (validateDate(date, format)) {
         return date;
@@ -210,6 +212,7 @@ public class Helper {
       }
     } catch (DateTimeParseException e) {
       System.out.println("\nInvalid Date format");
+      System.out.println(e);
     }
     return "";
   }

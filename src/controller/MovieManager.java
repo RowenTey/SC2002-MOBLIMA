@@ -8,6 +8,8 @@ import database.*;
 import helper.Helper;
 import model.*;
 import model.enums.*;
+import view.ReviewView;
+import view.ShowtimeView;
 
 /**
  * Movie Manager
@@ -190,11 +192,11 @@ public class MovieManager {
      * Display a list of movies
      */
     public static boolean displayListOfMovies() {
-        System.out.println("List of movies");
         if (MovieManager.getTotalNumOfMovie() == 0) {
             System.out.println("We don't have any movies at this time");
             return false;
         } else {
+            System.out.println("List of movies");
             for (int i = 0; i < movieList.size(); i++) {
                 System.out.println("(" + (i + 1) + ") " + movieList.get(i).getTitle());
             }
@@ -215,6 +217,15 @@ public class MovieManager {
         MovieManager.printMovieDetails(selectedMovie);
         Helper.pressAnyKeyToContinue();
         return selectedMovie;
+    }
+
+    /**
+     * Handle View Reviews
+     */
+    public static void handleViewPastMovieReviews(String path){
+        Movie selectedMovie = MovieManager.selectMovie();
+        ReviewView reviewView = new ReviewView(selectedMovie, path);
+        reviewView.viewApp();
     }
 
     /**
@@ -359,5 +370,54 @@ public class MovieManager {
         movie.addReview(newReview);
         Database.MOVIES.put(movie.getMovieId(), movie);
         System.out.println("Successfully added review!");
+    }
+
+    public static void handleAddMovie() {
+        System.out.println("Enter movie title: ");
+        String title = Helper.readString();
+
+        System.out.println("\nSelect show status: ");
+        int count = 0;
+        for (ShowStatus status : ShowStatus.values()) {
+            count += 1;
+            System.out.println("(" + (count) + ") " + status);
+        }
+        int opt = Helper.readInt(1, count);
+        ShowStatus showStatus = ShowStatus.values()[opt - 1];
+
+        System.out.println("\nEnter synopsis: ");
+        String synopsis = Helper.readString();
+
+        System.out.println("\nEnter director's name: ");
+        String director = Helper.readString();
+
+        System.out.println("\nEnter cast member names line-by-line: (Enter '0' to stop)");
+        ArrayList<String> castMembers = new ArrayList<String>();
+        String castMember = Helper.readString();
+        while (!castMember.equals("0")) {
+            castMembers.add(castMember);
+            castMember = Helper.readString();
+        }
+        String[] cast = new String[castMembers.size()];
+        cast = castMembers.toArray(cast);
+
+        System.out.println("\nEnter movie type: ");
+        count = 0;
+        for (TypeMovies type : TypeMovies.values()) {
+            count += 1;
+            System.out.println("(" + (count) + ") " + type);
+        }
+        opt = Helper.readInt(1, count);
+        TypeMovies movieType = TypeMovies.values()[opt - 1];
+
+        MovieManager.addMovie(title, showStatus, synopsis, director, cast, movieType);
+    }
+
+    public static void handleBookMovie(String path) {
+        System.out.println("Which movie would you like to book?\n");
+        if (MovieManager.displayListOfMovies()) {
+            ShowtimeView showtimeView = new ShowtimeView(path + " > Movie", false);
+            showtimeView.viewApp(path,MovieManager.selectMovie());
+        }
     }
 }

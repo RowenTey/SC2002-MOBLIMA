@@ -136,7 +136,7 @@ public class ShowtimeView extends MainView {
     /**
      * Overrided View App - from movie view (user)
      */
-    public void viewApp(Movie movie) {
+    public void viewApp(String path,Movie movie) {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
         handleShowtimeSelection(movie);

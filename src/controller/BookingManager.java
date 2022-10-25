@@ -43,7 +43,7 @@ public class BookingManager {
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
         System.out.println();
         System.out.println("Booking created! Your ticket is printed below: ");
-        printBookingDetails(newBooking, position);
+        printBookingDetails(newBooking, position, movieGoer.getAgeGroup().getLabel());
     }
 
     /**
@@ -51,13 +51,14 @@ public class BookingManager {
      *
      * @param guest {@link Booking} object to print
      */
-    public static void printBookingDetails(Booking booking, String position) {
+    public static void printBookingDetails(Booking booking, String position, String ageGroup) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-30s: %s", "Transaction ID", booking.getTransactionId()));
         System.out.println(String.format("%-30s: %s", "Name", booking.getName()));
         System.out.println(String.format("%-30s: %s", "Mobile Number", booking.getMobileNum()));
         System.out.println(String.format("%-30s: %s", "Email", booking.getEmailAddr()));
+        System.out.println(String.format("%-30s: %s", "Age Group", ageGroup));
         System.out.println(String.format("%-30s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
         System.out.println(String.format("%-30s: %s", "Seat", position));
         System.out.println(String.format("%-30s: %s", "Price", booking.getTicket().getPrice()));

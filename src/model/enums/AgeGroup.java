@@ -13,15 +13,25 @@ public enum AgeGroup {
   /**
    * ADULT AGEGROUP
    */
-  ADULT,
+  ADULT("Adult"),
 
   /**
    * CHILD AGEGROUP
    */
-  CHILD,
+  CHILD("Child"),
 
   /**
    * SENIOR AGEGROUP
    */
-  SENIOR_CITIZEN,
+  SENIOR_CITIZEN("Senior Citizen");
+
+  public final String label;
+
+  private AgeGroup(String label) {
+    this.label = label;
+  }
+
+  public String getLabel() {
+    return this.label;
+  }
 }
