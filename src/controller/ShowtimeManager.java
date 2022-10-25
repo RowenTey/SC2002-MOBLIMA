@@ -95,7 +95,7 @@ public class ShowtimeManager {
       randomDay = minDay + random.nextInt(maxDay - minDay);
       randomDate = LocalDate.ofEpochDay(randomDay);
       Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
       String strDate = dateFormat.format(date);
       newDate.add(strDate);
     }
@@ -104,12 +104,6 @@ public class ShowtimeManager {
       createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
     }
     ShowtimeManager.printAllShowtime();
-  }
-
-  public static void getCurrentList() {
-  }
-
-  public static void getUpcomingList() {
   }
 
   /**
@@ -165,7 +159,7 @@ public class ShowtimeManager {
       Movie selectedMovie = MovieManager.selectMovie();
       String date;
       do {
-        date = Helper.setDate(false);
+        date = Helper.setDate(false, false);
       } while (date.equals(""));
       System.out.println("\nWhich cineplex would you like to air this movie?\n");
       CineplexManager.displayExistingCineplex();
@@ -251,8 +245,8 @@ public class ShowtimeManager {
    */
   public static void promptSeatSelection(String showtimeId) {
     String position;
-    int row = 3;
-    int col = 4;
+    int row = 0;
+    int col = 0;
     Showtime showtime = getShowtimebyId(showtimeId);
     Cineplex cineplex = CineplexManager.getCineplexByShowtime(showtime);
     displayShowtimeLayout(showtime);
@@ -272,20 +266,21 @@ public class ShowtimeManager {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println();
-      System.out.println("Seat "+position+" selected...");
+      System.out.println("Seat " + position + " selected...");
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
       int pay;
-      pay = Helper.readInt(1,2);
-      switch(pay){
+      pay = Helper.readInt(1, 2);
+      switch (pay) {
         case 1:
           MovieGoer newMovieGoer = BookingManager.promptUserDetails();
           if (bookSeat(row + 1, col, showtime)) {
             System.out.println();
-            System.out.println("Seat " + position + " is booked successfully");
+            System.out.println("Seat " + position + " is booked successfully!");
             System.out.println("Your Ticket will be generated in a short time... ");
           }
-          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex, newMovieGoer,position);
+          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex,
+              newMovieGoer, position);
           break;
         case 2:
           System.out.println("Booking failed!");
@@ -370,7 +365,7 @@ public class ShowtimeManager {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
     for (Showtime showtime : showtimeList) {
-      if (CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2)).equals(cineplex.getLocation())) {
+      if (CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2)) == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
     }

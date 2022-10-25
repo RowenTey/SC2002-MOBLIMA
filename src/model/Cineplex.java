@@ -39,11 +39,6 @@ public class Cineplex implements Serializable {
     private ArrayList<Cinema> cinemaList;
 
     /**
-     * List of ShowTimes in the Cineplex
-     */
-    private ArrayList<Showtime> showtimeList;
-
-    /**
      * Constructor of Cineplex
      * 
      * @param location Location of Cineplex
@@ -88,12 +83,21 @@ public class Cineplex implements Serializable {
     }
 
     /**
+     * Gets the location of the Cineplex in a String
+     * 
+     * @return string object of the location of Cineplex
+     */
+    public String getLocationStr() {
+        return this.location.getLabel();
+    }
+
+    /**
      * Gets the location of the Cineplex
      * 
-     * @return location of the Cineplex
+     * @return the location of Cineplex
      */
-    public String getLocation() {
-        return this.location.getLabel();
+    public Location getLocation() {
+        return this.location;
     }
 
     /**
@@ -130,23 +134,5 @@ public class Cineplex implements Serializable {
      */
     public void setCinemaList(ArrayList<Cinema> newList) {
         this.cinemaList = newList;
-    }
-
-    /**
-     * Gets the list of showtimes in the Cineplex
-     * 
-     * @return list of showtimes
-     */
-    public ArrayList<Showtime> getShowtimeList() {
-        return this.showtimeList;
-    }
-
-    /**
-     * Sets the list of showtimes
-     * 
-     * @param newList
-     */
-    public void setShowtimeList(ArrayList<Showtime> newList) {
-        this.showtimeList = newList;
     }
 }

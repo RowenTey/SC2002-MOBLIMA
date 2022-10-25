@@ -177,21 +177,28 @@ public class Helper {
    * 
    * @param now {@code true} to return the current time. Otherwise, {@code false}
    *            to prompt user for new time.
-   * @return String object for the date in the format "yyyy-MM-dd HH:mm"
+   * @return String object for the date in the format "yyyy-MM-dd HH:mm" or
+   *         "yyyy-MM-dd"
    */
-  public static String setDate(boolean now) {
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+  public static String setDate(boolean now, boolean isHoliday) {
     if (now) {
       return getTimeNow();
     }
 
+    DateTimeFormatter format = isHoliday ? DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    String dateInput = "", timeInput = "";
     System.out.println("Please input a date in the format: yyyy-MM-dd");
-    String dateInput = sc.next();
+    dateInput = sc.next();
     sc.nextLine();
-    System.out.println("Please input a time in the format: HH:mm");
-    String timeInput = sc.next();
-    sc.nextLine();
-    String date = dateInput + " " + timeInput;
+
+    if (!isHoliday) {
+      System.out.println("Please input a time in the format: HH:mm");
+      timeInput = sc.next();
+      sc.nextLine();
+    }
+    String date = isHoliday ? dateInput : dateInput + " " + timeInput;
 
     try {
       LocalDateTime Date = LocalDateTime.parse(date, format);

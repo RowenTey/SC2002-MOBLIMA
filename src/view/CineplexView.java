@@ -28,7 +28,6 @@ public class CineplexView extends MainView {
         super();
         this.path = path;
         this.isStaff = isStaff;
-        new CineplexManager();
     }
 
     /**
@@ -101,7 +100,8 @@ public class CineplexView extends MainView {
                 this.printMenu();
                 choice = Helper.readInt(1, numOfCineplex + 1);
                 if (choice != numOfCineplex + 1) {
-                    System.out.println(CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
+                    System.out.println(
+                            "\n" + CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
                     ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes", false);
                     showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));

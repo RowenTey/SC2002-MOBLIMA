@@ -57,7 +57,7 @@ public class MovieGoerView extends MainView {
                 case 1:
                     CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer", false);
                     cineplexView.viewApp();
-                    break;
+                    continue;
                 case 2:
                     ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer", false);
                     showtimeView.viewApp();

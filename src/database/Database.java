@@ -67,9 +67,9 @@ public class Database {
   public static HashMap<String, Movie> MOVIES = new HashMap<String, Movie>();
 
   /**
-   * HashSet to contain {@link Date} objects.
+   * HashSet to contain dates of holidays
    */
-  public static HashSet<Date> HOLIDAYS = new HashSet<Date>();
+  public static HashSet<String> HOLIDAYS = new HashSet<String>();
 
   /**
    * Number of movies in database
@@ -169,7 +169,7 @@ public class Database {
         MOVIES = (HashMap<String, Movie>) object;
         numOfMovies = MOVIES.size();
       } else if (fileType == FileType.HOLIDAYS) {
-        HOLIDAYS = (HashSet<Date>) object;
+        HOLIDAYS = (HashSet<String>) object;
       }
 
       objectInputStream.close();
@@ -191,7 +191,7 @@ public class Database {
       } else if (fileType == FileType.MOVIES) {
         MOVIES = new HashMap<String, Movie>();
       } else if (fileType == FileType.HOLIDAYS) {
-        HOLIDAYS = new HashSet<Date>();
+        HOLIDAYS = new HashSet<String>();
       }
     } catch (IOException err) {
       err.printStackTrace();
@@ -344,7 +344,7 @@ public class Database {
     numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);
 
-    HOLIDAYS = new HashSet<Date>();
+    HOLIDAYS = new HashSet<String>();
     writeSerializedObject(FileType.HOLIDAYS);
 
     return true;

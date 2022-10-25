@@ -141,11 +141,11 @@ public class CineplexManager {
         available_locations.add(1); // Amk
         available_locations.add(2); // Jem
         for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-            if (CineplexManager.cineplexList.get(i).getLocation() == "Causeway Point") {
+            if (CineplexManager.cineplexList.get(i).getLocationStr() == "Causeway Point") {
                 available_locations.remove(Integer.valueOf(0));
-            } else if (CineplexManager.cineplexList.get(i).getLocation() == "Amk Hub") {
+            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Amk Hub") {
                 available_locations.remove(Integer.valueOf(1));
-            } else if (CineplexManager.cineplexList.get(i).getLocation() == "Jem") {
+            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Jem") {
                 available_locations.remove(Integer.valueOf(2));
             }
         }
@@ -199,17 +199,16 @@ public class CineplexManager {
         }
     }
 
-
     /**
      * Get cineplex by showtime
      */
-    public static Cineplex getCineplexByShowtime(Showtime showtime){
-        String cinemaCode = showtime.getCinemaCode().substring(0,2);
+    public static Cineplex getCineplexByShowtime(Showtime showtime) {
+        String cinemaCode = showtime.getCinemaCode().substring(0, 2);
         ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
         String cineplexName;
-        for(int i=0; i< CineplexManager.getTotalNumOfCineplex(); i++){
-            cineplexName = cineplexList.get(i).getLocation().substring(0,2).toUpperCase();
-            if(cineplexName.equals(cinemaCode)){
+        for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
+            cineplexName = cineplexList.get(i).getLocationStr().substring(0, 2).toUpperCase();
+            if (cineplexName.equals(cinemaCode)) {
                 return cineplexList.get(i);
             }
         }

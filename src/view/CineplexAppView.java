@@ -1,5 +1,6 @@
 package view;
 
+import controller.*;
 import helper.Helper;
 
 /**
@@ -15,6 +16,9 @@ public class CineplexAppView extends MainView {
      */
     public CineplexAppView() {
         super();
+        new MovieManager();
+        new ShowtimeManager();
+        new CineplexManager();
     }
 
     /**
@@ -53,7 +57,7 @@ public class CineplexAppView extends MainView {
                     System.out.println();
                     printRoute("Cineplex App > Staff > Database > Reset Database");
                     if (DatabaseView.resetDatabase()) {
-                    System.out.println("Database cleared");
+                        System.out.println("Database cleared");
                     }
                     break;
                 default:

@@ -1,5 +1,6 @@
 package view;
 
+import controller.StaffManager;
 import database.Database;
 import helper.Helper;
 
@@ -29,8 +30,9 @@ public class DatabaseView extends MainView {
     System.out.println("(1) Initialize Cineplex");
     System.out.println("(2) Initialize Movies");
     System.out.println("(3) Initialize Showtimes");
-    System.out.println("(4) Reset Database");
-    System.out.println("(5) Exit");
+    System.out.println("(4) Add Holidays");
+    System.out.println("(5) Reset Database");
+    System.out.println("(6) Exit");
   }
 
   /**
@@ -43,7 +45,7 @@ public class DatabaseView extends MainView {
     int choice = -1;
     do {
       printMenu();
-      choice = Helper.readInt(1, 5);
+      choice = Helper.readInt(1, 6);
       System.out.println();
       switch (choice) {
         case 1:
@@ -71,22 +73,23 @@ public class DatabaseView extends MainView {
           }
           break;
         case 4:
-          System.out.println();
+          printRoute("Cineplex App > Staff > Database > Add Holidays");
+          handleAddHoliday();
+          break;
+        case 5:
           printRoute("Cineplex App > Staff > Database > Reset Database");
           if (resetDatabase()) {
             System.out.println("Database cleared");
           }
           break;
-        case 5:
-          break;
         default:
           break;
       }
-      if (choice != 5) {
+      if (choice != 6) {
         System.out.println();
         Helper.pressAnyKeyToContinue();
       }
-    } while (choice != 5);
+    } while (choice != 6);
   }
 
   /**
@@ -120,6 +123,11 @@ public class DatabaseView extends MainView {
    */
   private boolean initializeShowtime() {
     return Database.initializeShowtime();
+  }
+
+  private boolean handleAddHoliday() {
+    StaffManager.addHoliday();
+    return true;
   }
 
   // /**

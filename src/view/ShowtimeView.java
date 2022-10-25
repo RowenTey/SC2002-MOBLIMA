@@ -30,15 +30,19 @@ public class ShowtimeView extends MainView {
     public boolean isStaff;
 
     /**
-     * Default contructor for the ShowtimeView
+     * Default contructor for the MovieAppView
+     */
+    public ShowtimeView() {
+        super();
+    }
+
+    /**
+     * Overrided contructor for the ShowtimeView
      */
     public ShowtimeView(String path, boolean isStaff) {
         super();
         this.path = path;
         this.isStaff = isStaff;
-        new MovieManager();
-        new ShowtimeManager();
-        new CineplexManager();
     }
 
     /**
@@ -175,7 +179,7 @@ public class ShowtimeView extends MainView {
      */
     private void handleShowtimeSelection(Cineplex cineplex) {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getShowtimeByCineplex(cineplex);
-        if (movieShowtimes.size() == 0) {
+        if (movieShowtimes.size() == 0 || movieShowtimes == null) {
             System.out.println("No showtimes available for this cineplex...");
             Helper.pressAnyKeyToContinue();
         } else {

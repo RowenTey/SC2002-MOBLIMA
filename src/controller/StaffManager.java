@@ -39,6 +39,18 @@ public class StaffManager {
   }
 
   /**
+   * Adds a holiday to database
+   */
+  public static void addHoliday() {
+    String date;
+    do {
+      date = Helper.setDate(false, true);
+    } while (date.equals(""));
+    Database.HOLIDAYS.add(date);
+    System.out.println("Holiday on " + date + " added!");
+  }
+
+  /**
    * Initializer for cinema staffs
    */
   public static void initializeStaff() {
