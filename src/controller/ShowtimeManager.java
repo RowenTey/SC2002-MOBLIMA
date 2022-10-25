@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
-
 import database.Database;
 import database.FileType;
 import model.*;
@@ -19,7 +18,7 @@ import helper.Helper;
 
 public class ShowtimeManager {
   /**
-   * List of showtime
+   * List of showtime for movies that are NOW_SHOWING
    */
   private static ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
 
@@ -51,7 +50,7 @@ public class ShowtimeManager {
   /**
    * Initialise HashMap
    */
-  public static void initializeHashMap(){
+  public static void initializeHashMap() {
     CinematoCineplexLocation.put("AM", "Amk Hub");
     CinematoCineplexLocation.put("JE", "Jem");
     CinematoCineplexLocation.put("CA", "Causeway Point");
@@ -126,11 +125,11 @@ public class ShowtimeManager {
   /**
    * Display showtimes given an array of showtimes
    */
-  public static void displayShowtime(ArrayList<Showtime> showtimes) {
-    System.out.println("List of showtimes(s) for this movie:");
+  public static void displayShowtime(ArrayList<Showtime> showtimes, String from) {
+    System.out.println("List of showtimes(s) for this " + from + ":");
     for (int i = 0; i < showtimes.size(); i++) {
       System.out.println("\nShowtime " + "(" + (i + 1) + ")");
-      printShowtimeDetails(showtimes.get(i));
+      printShowtimeDetails(showtimes.get(i), from);
     }
   }
 
@@ -143,8 +142,10 @@ public class ShowtimeManager {
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
-    ShowtimeManager.showtimeList.add(newShowtime);
-    ShowtimeManager.totalShowtimes += 1;
+    if (movie.getStatus() == ShowStatus.NOW_SHOWING) {
+      ShowtimeManager.showtimeList.add(newShowtime);
+      ShowtimeManager.totalShowtimes += 1;
+    }
     return true;
   }
 
@@ -172,11 +173,13 @@ public class ShowtimeManager {
   }
 
   /**
-   * Read movie data from database
+   * Read showtime data that is NOW_SHOWING from database
    */
   public static void readShowtime() {
     for (Showtime showtime : Database.SHOWTIME.values()) {
-      ShowtimeManager.showtimeList.add(showtime);
+      if (showtime.getMovie().getStatus() == ShowStatus.NOW_SHOWING) {
+        ShowtimeManager.showtimeList.add(showtime);
+      }
     }
   }
 
@@ -186,7 +189,7 @@ public class ShowtimeManager {
   public static String selectShowtime(ArrayList<Showtime> showtimes) {
     Showtime selectedShowtime;
     System.out.println("Select a showtime by entering it's index:");
-    int choice = Helper.readInt(1, (showtimes.size() + 1));
+    int choice = Helper.readInt(1, (totalShowtimes + 1));
     selectedShowtime = showtimes.get(choice - 1);
     return selectedShowtime.getShowtimeId();
   }
@@ -245,40 +248,43 @@ public class ShowtimeManager {
     int col = 4;
     Showtime showtime = getShowtimebyId(showtimeId);
     displayShowtimeLayout(showtime);
-    
-    do{
+
+    do {
       System.out.println("Please enter the desired seat coordinates (e.g A6):");
       position = Helper.readString();
       row = getSeatRow(position);
       col = Integer.parseInt(position.substring(1));
-      if(row != 3 && row != 7 && col != 5 && col != 14){
+      if (row != 3 && row != 7 && col != 5 && col != 14) {
         break;
       }
-      System.out.println("Invalid row and column!!");
-    }while(row == 3 || row == 7 || col == 5 || col == 14);
-    
+      System.out.println("Invalid row and column!");
+    } while (row == 3 || row == 7 || col == 5 || col == 14);
+
     System.out.println("Row " + row + " Col " + col);
-    if(showtime.getSeatAt(row+1, col).getBooked()){
+    if (showtime.getSeatAt(row + 1, col).getBooked()) {
       System.out.println("Booking failed! Seat is occupied");
-    }else{
+    } else {
       if (bookSeat(row + 1, col, showtime)) {
-      System.out.println("Seat " + position + " booked successfully");
+        System.out.println("Seat " + position + " booked successfully");
+      }
     }
-    }
-    
+
     Helper.pressAnyKeyToContinue();
   }
 
   /**
    * Print details of showtime
    */
-  public static void printShowtimeDetails(Showtime showtime) {
+  public static void printShowtimeDetails(Showtime showtime, String from) {
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
-    System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
+    if (from.equals("cineplex")) {
+      System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
+    }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
     System.out.println(
-        String.format("%-20s: %s", "Location", ShowtimeManager.CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
+        String.format("%-20s: %s", "Location",
+            ShowtimeManager.CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
   }
@@ -346,8 +352,25 @@ public class ShowtimeManager {
         MovieManager.printMovieDetails(movies.get(i));
       }
     }
+    }
 
+  /**
+   * Get list of showtimes for a specific cineplex
+   */
+  public static ArrayList<Showtime> getShowtimeByCineplex(Cineplex cineplex) {
+    ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
+    for (Showtime showtime : showtimeList) {
+      if (CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2)).equals(cineplex.getLocation())) {
+        toReturn.add(showtime);
+      }
+    }
+
+    if (toReturn.size() == 0) {
+      return null;
+    } else {
+      return toReturn;
+    }
   }
 
 }

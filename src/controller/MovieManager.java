@@ -18,7 +18,7 @@ import model.enums.*;
  */
 public class MovieManager {
     /**
-     * List of movies
+     * List of movies that is NOW_SHOWING
      */
     private static ArrayList<Movie> movieList = new ArrayList<Movie>();
 
@@ -50,7 +50,9 @@ public class MovieManager {
      */
     public static void readMovies() {
         for (Movie movie : Database.MOVIES.values()) {
-            MovieManager.movieList.add(movie);
+            if (movie.getStatus() == ShowStatus.NOW_SHOWING) {
+                MovieManager.movieList.add(movie);
+            }
         }
     }
 
@@ -58,7 +60,7 @@ public class MovieManager {
      * Initializer for movies
      */
     public static void initializeMovies() {
-        MovieManager.addMovie("Black Adam", ShowStatus.NOW_SHOWING, "Fake superman", "Shao Wei",
+        MovieManager.addMovie("Black Adam", ShowStatus.COMING_SOON, "Fake superman", "Shao Wei",
                 new String[] { "The Rock" }, TypeMovies.BLOCKBUSTER);
         MovieManager.addMovie("Smile", ShowStatus.NOW_SHOWING, "A girl kills herself", "Horstann",
                 new String[] { "Horstann" }, TypeMovies.TWO_D);
@@ -79,9 +81,14 @@ public class MovieManager {
         MovieManager.addMovie("Minions: The Rise of Gru", ShowStatus.COMING_SOON, "Mini Yellow Alien", "Michael Bay",
                 new String[] { "Gru" }, TypeMovies.BLOCKBUSTER);
         MovieManager.addMovie("Top Gun: Maverick", ShowStatus.END_OF_SHOWING, "Airforce",
-        "Ace",
-        new String[] { "Maverick","Rooster" }, TypeMovies.THREE_D);
-        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong", new String[]{"Naruto", "Sasuke"}, TypeMovies.TWO_D);
+        "Ace",new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+        MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.END_OF_SHOWING, "Rasengan and Chidori", "Kaiseong", new String[]{"Naruto", "Sasuke"}, TypeMovies.TWO_D);                
+        MovieManager.addMovie("Black Panther", ShowStatus.COMING_SOON, "Sick show",
+                "Wakanda",
+                new String[] { "Reggie Jackson" }, TypeMovies.BLOCKBUSTER);
+        MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING,
+                "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.",
+                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, TypeMovies.TWO_D);
     }
 
     /**
@@ -137,10 +144,12 @@ public class MovieManager {
 
         Database.MOVIES.put(movieId, newMovie);
         Database.saveFileIntoDatabase(FileType.MOVIES);
-        MovieManager.movieList.add(newMovie);
+        if (status == ShowStatus.NOW_SHOWING) {
+            MovieManager.movieList.add(newMovie);
+            MovieManager.totalMovies += 1;
+        }
         System.out.println("Movie created! Movie Details: ");
         MovieManager.printMovieDetails(newMovie);
-        MovieManager.totalMovies += 1;
     }
 
     /**
@@ -157,11 +166,13 @@ public class MovieManager {
             opt = Helper.readInt(1, MovieManager.getTotalNumOfMovie() + 1);
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
                 Movie oldMovie = MovieManager.getMovieList().get(opt - 1);
-                MovieManager.movieList.remove(oldMovie);
+                if (oldMovie.getStatus() == ShowStatus.NOW_SHOWING) {
+                    MovieManager.movieList.remove(oldMovie);
+                    MovieManager.totalMovies -= 1;
+                }
                 Database.MOVIES.remove(oldMovie.getMovieId());
                 Database.saveFileIntoDatabase(FileType.MOVIES);
                 System.out.println("Removed movie!");
-                MovieManager.totalMovies -= 1;
             }
         }
     }
@@ -321,7 +332,7 @@ public class MovieManager {
      */
     public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
-        if (reviews.size() == 0){
+        if (reviews.size() == 0) {
             System.out.println("No reviews found!");
             return;
         }

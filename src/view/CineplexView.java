@@ -2,6 +2,7 @@ package view;
 
 import controller.CineplexManager;
 import helper.Helper;
+import model.Showtime;
 
 /**
  * Viewing interface for Cineplex
@@ -51,7 +52,7 @@ public class CineplexView extends MainView {
             } else {
                 int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
                 CineplexManager.displayExistingCineplex();
-                System.out.println("("+ (numOfCineplex+1) +") Exit");
+                System.out.println("(" + (numOfCineplex + 1) + ") Exit");
                 System.out.println("Which location would you like to choose? ");
             }
         }
@@ -74,7 +75,7 @@ public class CineplexView extends MainView {
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Add New Cineplex");
                         opt = CineplexManager.promptLocation();
-                        if(opt == -1){
+                        if (opt == -1) {
                             break;
                         }
                         CineplexManager.addCineplex(opt);
@@ -103,6 +104,8 @@ public class CineplexView extends MainView {
                 if (choice != numOfCineplex + 1) {
                     System.out.println(CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes", false);
+                    showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
                 }
             } while (choice != (numOfCineplex + 1));
         }
