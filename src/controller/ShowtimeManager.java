@@ -57,7 +57,7 @@ public class ShowtimeManager {
   }
 
   /**
-   * Initializer for cineplex
+   * Initializer for showtime
    */
   public static void initializeShowtime() {
     ArrayList<Movie> newMovies = MovieManager.getMovieList();

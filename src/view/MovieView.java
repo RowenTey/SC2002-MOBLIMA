@@ -73,8 +73,6 @@ public class MovieView extends MainView {
      * View App
      */
     public void viewApp() {
-        Scanner sc = new Scanner(System.in);
-
         int choice;
         if (this.isStaff) {
             do {
@@ -84,37 +82,7 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
-
-                        System.out.println("Enter movie title: ");
-                        String title = sc.next();
-
-                        System.out.println("Select show status: ");
-                        int count = 0;
-                        for (ShowStatus status : ShowStatus.values()) {
-                            count += 1;
-                            System.out.println("(" + (count) + ") " + status);
-                        }
-                        int opt = Helper.readInt(1, count);
-                        ShowStatus showStatus = ShowStatus.values()[opt - 1];
-
-                        System.out.println("Enter synopsis: ");
-                        String synopsis = sc.next();
-                        System.out.println("Enter director's name: ");
-                        String director = sc.next();
-                        System.out.println("Enter cast member names line-by-line: (Enter '0' to stop)");
-                        ArrayList<String> castMembers = new ArrayList<String>();
-                        String castMember;
-                        castMember = sc.next();
-                        while (castMember != "0") {
-                            castMembers.add(castMember);
-                        }
-                        String[] cast = new String[castMembers.size()];
-                        cast = castMembers.toArray(cast);
-                        System.out.println("Enter movie type: ");
-                        String movieType = sc.next();
-                        TypeMovies type = TypeMovies.valueOf(movieType);
-
-                        MovieManager.addMovie(title, showStatus, synopsis, director, cast, type);
+                        handleAddMovie();
                         break;
                     case 2:
                         // selectedMovieId = selectMovie();
@@ -203,5 +171,46 @@ public class MovieView extends MainView {
             ShowtimeView showtimeView = new ShowtimeView(this.path + " > Movie", false);
             showtimeView.viewApp(MovieManager.selectMovie());
         }
+    }
+
+    private void handleAddMovie() {
+        System.out.println("Enter movie title: ");
+        String title = Helper.readString();
+
+        System.out.println("\nSelect show status: ");
+        int count = 0;
+        for (ShowStatus status : ShowStatus.values()) {
+            count += 1;
+            System.out.println("(" + (count) + ") " + status);
+        }
+        int opt = Helper.readInt(1, count);
+        ShowStatus showStatus = ShowStatus.values()[opt - 1];
+
+        System.out.println("\nEnter synopsis: ");
+        String synopsis = Helper.readString();
+
+        System.out.println("\nEnter director's name: ");
+        String director = Helper.readString();
+
+        System.out.println("\nEnter cast member names line-by-line: (Enter '0' to stop)");
+        ArrayList<String> castMembers = new ArrayList<String>();
+        String castMember = Helper.readString();
+        while (!castMember.equals("0")) {
+            castMembers.add(castMember);
+            castMember = Helper.readString();
+        }
+        String[] cast = new String[castMembers.size()];
+        cast = castMembers.toArray(cast);
+
+        System.out.println("\nEnter movie type: ");
+        count = 0;
+        for (TypeMovies type : TypeMovies.values()) {
+            count += 1;
+            System.out.println("(" + (count) + ") " + type);
+        }
+        opt = Helper.readInt(1, count);
+        TypeMovies movieType = TypeMovies.values()[opt - 1];
+
+        MovieManager.addMovie(title, showStatus, synopsis, director, cast, movieType);
     }
 }

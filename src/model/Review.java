@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * The class that stores customer review
  * 
@@ -8,7 +10,11 @@ package model;
  * @since 2022-10-20
  */
 
-public class Review {
+public class Review implements Serializable {
+    /*
+     * For Java Serializable
+     */
+    private static final long serialVersionUID = 7L;
 
     /**
      * string that contains the actual review

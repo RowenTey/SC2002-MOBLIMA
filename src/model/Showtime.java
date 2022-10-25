@@ -14,7 +14,7 @@ import model.enums.LayoutType;
  */
 public class Showtime implements Serializable {
   /**
-   * For Java Serializable.
+   * For Java Serializable
    */
   private static final long serialVersionUID = 5L;
 

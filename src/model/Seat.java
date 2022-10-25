@@ -11,6 +11,9 @@ import java.util.Map;
  * @since 2022-10-18
  */
 public class Seat implements Serializable {
+  /*
+   * For Java Serializable
+   */
   private static final long serialVersionUID = 6L;
 
   /**

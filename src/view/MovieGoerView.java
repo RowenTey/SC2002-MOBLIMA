@@ -38,10 +38,10 @@ public class MovieGoerView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > MovieGoer");
         System.out.println("What would you like to do ?");
-        System.out.println("(1) Search or list Cineplexes");
-        System.out.println("(2) Search or list Showtimes");
-        System.out.println("(3) Search or list Movies");
-        System.out.println("(4) View booking history");
+        System.out.println("(1) Search or List Cineplexes");
+        System.out.println("(2) Search or List Showtimes");
+        System.out.println("(3) Search or List Movies");
+        System.out.println("(4) View Booking History");
         System.out.println("(5) Exit");
     }
 
