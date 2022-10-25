@@ -56,8 +56,7 @@ public class ShowtimeView extends MainView {
             System.out.println("(1) List \"NOW SHOWING\" Showtimes");
             System.out.println("(2) List \"PREVIEW\" Showtimes");
             System.out.println("(3) List \"COMING SOON\" Showtimes");
-            System.out.println("(4) List \"END OF SHOWING\" Showtimes");
-            System.out.println("(5) Exit");
+            System.out.println("(4) Exit");
         }
     }
 
@@ -102,7 +101,7 @@ public class ShowtimeView extends MainView {
         else {
             do {
                 printMenu();
-                choice = Helper.readInt(1, 5);
+                choice = Helper.readInt(1, 4);
                 switch (choice) {
                     case 1:
                         // NOW_SHOWING
@@ -124,20 +123,14 @@ public class ShowtimeView extends MainView {
                         ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 4:
-                        // END OF SHOWING
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing (END OF SHOWING)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.END_OF_SHOWING);
-                        break;
-                    case 5:
                         break;
                     default:
                         break;
                 }
-                if (choice != 5) {
+                if (choice != 4) {
                     Helper.pressAnyKeyToContinue();
                 }
-            } while (choice != 5);
+            } while (choice != 4);
         }
 
     }
