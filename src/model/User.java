@@ -68,6 +68,6 @@ public class User implements Serializable {
      * @return the name of the user
      */
     public String getName() {
-        return this.username;
+        return username;
     }
 }

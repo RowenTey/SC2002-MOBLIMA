@@ -41,10 +41,10 @@ public class Booking implements Serializable {
      *
      */
     public Booking(String transactionId, Ticket ticket, MovieGoer movieGoer, String position) {
-        this.transactionId = transactionId;
-        this.ticket = ticket;
-        this.movieGoer = movieGoer;
-        this.position = position;
+        setTransactionId(transactionId);
+        setTicket(ticket);
+        setMovieGoer(movieGoer);
+        setPosition(position);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Booking implements Serializable {
      * @return the transaction ID of the booking
      */
     public String getTransactionId() {
-        return this.transactionId;
+        return transactionId;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Booking implements Serializable {
      * @return the ticket of the booking
      */
     public Ticket getTicket() {
-        return this.ticket;
+        return ticket;
     }
 
     /**
@@ -88,19 +88,19 @@ public class Booking implements Serializable {
      *
      * @return the name of the booking
      */
-    public MovieGoer getMovieGoer(){
-        return this.movieGoer;
+    public MovieGoer getMovieGoer() {
+        return movieGoer;
     }
 
-    public void setMovieGoer(MovieGoer movieGoer){
+    public void setMovieGoer(MovieGoer movieGoer) {
         this.movieGoer = movieGoer;
     }
 
-    public String getPosition(){
-        return this.position;
+    public String getPosition() {
+        return position;
     }
-    
-    public void setPosition(String position){
+
+    public void setPosition(String position) {
         this.position = position;
     }
 }

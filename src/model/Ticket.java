@@ -15,7 +15,7 @@ public class Ticket implements Serializable {
      * For java serializable
      */
     protected static final long serialVersionUID = 9L;
-    
+
     /**
      * price of ticket
      */
@@ -36,9 +36,9 @@ public class Ticket implements Serializable {
      *
      */
     public Ticket(double price, Seat seat, Cineplex cineplex) {
-        this.price = price;
-        this.seat = seat;
-        this.cineplex = cineplex;
+        setPrice(price);
+        setSeat(seat);
+        setCineplex(cineplex);
     }
 
     /**
@@ -47,7 +47,7 @@ public class Ticket implements Serializable {
      * @return the price of the booking
      */
     public double getPrice() {
-        return this.price;
+        return price;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Ticket implements Serializable {
      * @return ticket {@link Seat}
      */
     public Seat getSeat() {
-        return this.seat;
+        return seat;
     }
 
     /**
@@ -83,7 +83,7 @@ public class Ticket implements Serializable {
      * @return ticket {@link Cineplex}
      */
     public Cineplex getCineplex() {
-        return this.cineplex;
+        return cineplex;
     }
 
     /**

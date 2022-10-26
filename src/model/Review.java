@@ -31,8 +31,8 @@ public class Review implements Serializable {
      *
      */
     public Review(String review, double rating) {
-        this.review = review;
-        this.rating = rating;
+        setReview(review);
+        setRating(rating);
     }
 
     /**

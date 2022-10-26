@@ -41,6 +41,6 @@ public class Staff extends User {
      * @return the password of the staff
      */
     public String getPassword() {
-        return this.password;
+        return password;
     }
 }

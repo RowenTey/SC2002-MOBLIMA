@@ -44,9 +44,9 @@ public class Seat implements Serializable {
    * @param showtime {@link Showtime} of seat
    */
   public Seat(int row, int col, Showtime showtime) {
-    this.setPos(row, col);
-    this.setShowtime(showtime);
-    this.setBooked(false);
+    setPos(row, col);
+    setShowtime(showtime);
+    setBooked(false);
   }
 
   /**
@@ -79,21 +79,12 @@ public class Seat implements Serializable {
   }
 
   /**
-   * Gets the position of seat
-   * 
-   * @return position of seat
-   */
-  public Map.Entry<Integer, Integer> getPos() {
-    return Map.entry(this.row, this.col);
-  }
-
-  /**
    * Gets if the seat is booked
    * 
    * @return {@code true} if the seat is booked. Otherwise, {@code false}
    */
   public boolean getBooked() {
-    return this.booked;
+    return booked;
   }
 
   /**
@@ -102,6 +93,6 @@ public class Seat implements Serializable {
    * @return {@link Showtime} the seat belongs to
    */
   public Showtime getShowtime() {
-    return this.showtime;
+    return showtime;
   }
 }

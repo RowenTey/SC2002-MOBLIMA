@@ -31,11 +31,6 @@ public class Cinema implements Serializable {
     private boolean isPlatinum;
 
     /**
-     * Type of movies being showed in the cinema (3D/2D)
-     */
-    private boolean is3D;
-
-    /**
      * Constructor of Cinema
      * 
      * @param cineplex   Cineplex
@@ -44,11 +39,10 @@ public class Cinema implements Serializable {
      * @param is3D       Type of movies showed in cinema
      */
 
-    public Cinema(Cineplex cineplex, String cinemaCode, boolean isPlatinum, boolean is3D) {
-        this.cineplex = cineplex;
-        this.cinemaCode = cinemaCode;
-        this.isPlatinum = isPlatinum;
-        this.is3D = is3D;
+    public Cinema(Cineplex cineplex, String cinemaCode, boolean isPlatinum) {
+        setCineplex(cineplex);
+        setCinemaCode(cinemaCode);
+        setIsPlatinum(isPlatinum);
     }
 
     /**
@@ -57,7 +51,28 @@ public class Cinema implements Serializable {
      * @return Cineplex of cinema
      */
     public Cineplex getCineplex() {
-        return this.cineplex;
+        return cineplex;
+    }
+
+    /**
+     * Sets the cinemaCode of the cinema
+     */
+    public void setCinemaCode(String cinemaCode) {
+        this.cinemaCode = cinemaCode;
+    }
+
+    /**
+     * Sets the if cinema is platinum
+     */
+    public void setIsPlatinum(boolean isPlatinum) {
+        this.isPlatinum = isPlatinum;
+    }
+
+    /**
+     * Sets the Cineplex of the cinema
+     */
+    public void setCineplex(Cineplex cineplex) {
+        this.cineplex = cineplex;
     }
 
     /**
@@ -76,14 +91,5 @@ public class Cinema implements Serializable {
      */
     public boolean getIsPlatinum() {
         return this.isPlatinum;
-    }
-
-    /**
-     * Gets the type of movies showed in cinema (3D/2D)
-     * 
-     * @return Type of movies showed
-     */
-    public boolean getIs3D() {
-        return this.is3D;
     }
 }

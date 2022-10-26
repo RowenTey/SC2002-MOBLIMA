@@ -39,6 +39,6 @@ public class BlockbusterMovie extends Movie {
      * get the price of the blockbuster movie
      */
     public double getPrice() {
-        return this.price;
+        return price;
     }
 }

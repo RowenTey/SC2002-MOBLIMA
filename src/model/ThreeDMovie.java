@@ -38,6 +38,6 @@ public class ThreeDMovie extends Movie {
      * get the price of the 3D movie
      */
     public double getPrice() {
-        return this.price;
+        return price;
     }
 }

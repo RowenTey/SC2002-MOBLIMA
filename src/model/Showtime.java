@@ -68,12 +68,12 @@ public class Showtime implements Serializable {
    * @param layoutType {@link LayoutType} of showtime
    */
   public Showtime(String showtimeId, String time, Movie movie, String cinemaCode, LayoutType layoutType) {
-    this.setShowtimeId(showtimeId);
-    this.setTime(time);
-    this.setMovie(movie);
-    this.setCinemaCode(cinemaCode);
-    this.setLayoutType(layoutType);
-    this.initSeats();
+    setShowtimeId(showtimeId);
+    setTime(time);
+    setMovie(movie);
+    setCinemaCode(cinemaCode);
+    setLayoutType(layoutType);
+    initSeats();
   }
 
   /**
@@ -128,7 +128,7 @@ public class Showtime implements Serializable {
    * @return {@code time} of showtime
    */
   public String getTime() {
-    return this.time;
+    return time;
   }
 
   /**
@@ -137,7 +137,7 @@ public class Showtime implements Serializable {
    * @return Id of the showtime
    */
   public String getShowtimeId() {
-    return this.showtimeId;
+    return showtimeId;
   }
 
   /**
@@ -146,7 +146,7 @@ public class Showtime implements Serializable {
    * @return {@link Movie} that is assigned to this showtime
    */
   public Movie getMovie() {
-    return this.movie;
+    return movie;
   }
 
   /**
@@ -155,7 +155,7 @@ public class Showtime implements Serializable {
    * @return cinemaCode that is assigned to this showtime
    */
   public String getCinemaCode() {
-    return this.cinemaCode;
+    return cinemaCode;
   }
 
   /**
@@ -164,7 +164,7 @@ public class Showtime implements Serializable {
    * @return {@code Seats[][]} of this showtime
    */
   public Seat[][] getSeats() {
-    return this.seats;
+    return seats;
   }
 
   /**
@@ -175,7 +175,7 @@ public class Showtime implements Serializable {
    * @return {@link Seats} at ({@code row}, {@code col})
    */
   public Seat getSeatAt(int row, int col) {
-    return this.seats[row - 1][col - 1];
+    return seats[row - 1][col - 1];
   }
 
   /**
@@ -184,7 +184,7 @@ public class Showtime implements Serializable {
    * @param layoutType {@link LayoutType} of showtime
    */
   private void initSeats() {
-    switch (this.layoutType) {
+    switch (layoutType) {
       case LARGE:
         ROWS = 11;
         break;
@@ -199,7 +199,7 @@ public class Showtime implements Serializable {
         break;
     }
 
-    this.seats = new Seat[ROWS][COLS];
+    seats = new Seat[ROWS][COLS];
 
     for (int row = 0; row < ROWS; row++) {
       for (int col = 0; col <= 16; col++) {
@@ -208,7 +208,7 @@ public class Showtime implements Serializable {
         if (col == 4 || col == 13)
           continue;
 
-        this.seats[row][col] = new Seat(row, col, this);
+        seats[row][col] = new Seat(row, col, this);
       }
     }
   }

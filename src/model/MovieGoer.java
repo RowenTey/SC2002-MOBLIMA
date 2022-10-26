@@ -42,9 +42,9 @@ public class MovieGoer extends User {
      */
     public MovieGoer(String userId, String username, String mobile, String email, AgeGroup ageGroup) {
         super(userId, username);
-        this.mobile = mobile;
-        this.email = email;
-        this.ageGroup = ageGroup;
+        setMobile(mobile);
+        setEmail(email);
+        setAgeGroup(ageGroup);
         this.bookings = new ArrayList<>();
     }
 
@@ -63,7 +63,7 @@ public class MovieGoer extends User {
      * @return the mobile number of the MovieGoer
      */
     public String getMobile() {
-        return this.mobile;
+        return mobile;
     }
 
     /**
@@ -81,7 +81,7 @@ public class MovieGoer extends User {
      * @return email the email address of the MovieGoer
      */
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     /**
@@ -99,7 +99,7 @@ public class MovieGoer extends User {
      * @return ageGroup the ageGroup of the MovieGoer
      */
     public AgeGroup getAgeGroup() {
-        return this.ageGroup;
+        return ageGroup;
     }
 
     /**

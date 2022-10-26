@@ -76,14 +76,14 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      */
     public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
             TypeMovies type) {
-        this.movieId = movieId;
-        this.title = title;
-        this.status = status;
-        this.synopsis = synopsis;
-        this.director = director;
-        this.cast = cast;
-        this.type = type;
-        this.setTicketSales(0);
+        setMovieId(movieId);
+        setTitle(title);
+        setStatus(status);
+        setSynopsis(synopsis);
+        setDirector(director);
+        setCast(cast);
+        setType(type);
+        setTicketSales(0);
         this.reviews = new ArrayList<Review>();
     }
 
@@ -103,7 +103,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      * @return the ID of the movie
      */
     public String getMovieId() {
-        return this.movieId;
+        return movieId;
     }
 
     /**
@@ -230,15 +230,15 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      */
     public int getOverallRating() {
         if (reviews.size() == 0) {
-            this.overallRating = -1;
-            return this.overallRating;
+            overallRating = -1;
+            return overallRating;
         }
 
         for (int i = 0; i < reviews.size(); i++) {
-            this.overallRating += reviews.get(i).getRating();
+            overallRating += reviews.get(i).getRating();
         }
-        this.overallRating /= reviews.size();
-        return this.overallRating;
+        overallRating /= reviews.size();
+        return overallRating;
     }
 
     /**
@@ -256,7 +256,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      * @param {@link Review[]} that is added to this movie
      */
     public void addReview(Review review) {
-        this.reviews.add(review);
+        reviews.add(review);
     }
 
     /**
@@ -282,10 +282,9 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         if (this == movie) {
             return 0;
         }
-        // int thisOrderId = Integer.parseInt(this.getOrderId().substring(1));
-        // int thatOrderId = Integer.parseInt(order.getOrderId().substring(1));
+        int thisOverallRating = overallRating;
+        int thatOverallRating = movie.getOverallRating();
 
-        // return thisOrderId - thatOrderId;
-        return 1;
+        return thisOverallRating - thatOverallRating;
     }
 }

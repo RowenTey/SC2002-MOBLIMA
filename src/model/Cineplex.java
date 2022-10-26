@@ -48,18 +48,18 @@ public class Cineplex implements Serializable {
         this.location = location;
         this.numOfCinemas = 10;
         this.cineplexID = cineplexId;
-        this.initCineplex();
+        initCineplex();
     }
 
     /**
      * Initialise Cineplex
      */
-    public void initCineplex() {
-        String cinemaCode = this.location.getLabel().substring(0, 2).toUpperCase();
+    private void initCineplex() {
+        String cinemaCode = location.getLabel().substring(0, 2).toUpperCase();
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             String s = "" + i;
-            Cinema newCinema = new Cinema(this, cinemaCode + s, false, false);
+            Cinema newCinema = new Cinema(this, cinemaCode + s, false);
             this.cinemaList.add(newCinema);
         }
     }
