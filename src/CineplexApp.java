@@ -12,7 +12,7 @@ public class CineplexApp {
                         Helper.pressAnyKeyToContinue();
                         cineplexAppView.viewApp();
                 } catch (Exception e) {
-                        System.out.println("Error " + e);
+                        System.out.println("Error caught in main app: " + e);
                 } finally {
                         Database.saveAllFiles();
                         System.out.println("Program closing ... Thank you for using MOBLIMA!");

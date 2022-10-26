@@ -102,17 +102,17 @@ public class MovieManager {
     public static void printMovieDetails(Movie movie) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-30s: %s", "Movie ID", movie.getMovieId()));
-        System.out.println(String.format("%-30s: %s", "Title", movie.getTitle()));
-        System.out.println(String.format("%-30s: %s", "Show Status", movie.getStatus().name()));
-        System.out.println(String.format("%-30s: %s", "Movie Type", movie.getType().name()));
+        System.out.println(String.format("%-25s: %s", "Movie ID", movie.getMovieId()));
+        System.out.println(String.format("%-25s: %s", "Title", movie.getTitle()));
+        System.out.println(String.format("%-25s: %s", "Show Status", movie.getStatus().name()));
+        System.out.println(String.format("%-25s: %s", "Movie Type", movie.getType().name()));
         String[] castMembers = movie.getCast();
         String cast = String.join(", ", castMembers);
-        System.out.println(String.format("%-30s: %s", "Director", movie.getDirector()));
-        System.out.println(String.format("%-30s: %s", "Cast", cast));
-        System.out.println(String.format("%-30s: %s", "Synopsis", movie.getSynopsis()));
-        System.out.println(String.format("%-30s: %s", "Number of Ticket Sales", movie.getTicketSales()));
-        System.out.println(String.format("%-30s: %s", "Overall Rating", movie.getOverallRating()));
+        System.out.println(String.format("%-25s: %s", "Director", movie.getDirector()));
+        System.out.println(String.format("%-25s: %s", "Cast", cast));
+        System.out.println(String.format("%-25s: %s", "Synopsis", movie.getSynopsis()));
+        System.out.println(String.format("%-25s: %s", "Number of Ticket Sales", movie.getTicketSales()));
+        System.out.println(String.format("%-25s: %s", "Overall Rating", movie.getOverallRating()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -152,7 +152,6 @@ public class MovieManager {
 
         Database.MOVIES.put(movieId, newMovie);
         Database.numOfMovies++;
-        System.out.println("There are " + Database.numOfMovies + " movies in the database");
         Database.saveFileIntoDatabase(FileType.MOVIES);
         if ((status == ShowStatus.PREVIEW) || (status == ShowStatus.NOW_SHOWING)) {
             MovieManager.movieList.add(newMovie);
@@ -222,7 +221,7 @@ public class MovieManager {
     /**
      * Handle View Reviews
      */
-    public static void handleViewPastMovieReviews(String path){
+    public static void handleViewPastMovieReviews(String path) {
         Movie selectedMovie = MovieManager.selectMovie();
         ReviewView reviewView = new ReviewView(selectedMovie, path);
         reviewView.viewApp();
@@ -417,7 +416,7 @@ public class MovieManager {
         System.out.println("Which movie would you like to book?\n");
         if (MovieManager.displayListOfMovies()) {
             ShowtimeView showtimeView = new ShowtimeView(path + " > Movie", false);
-            showtimeView.viewApp(path,MovieManager.selectMovie());
+            showtimeView.viewApp(path, MovieManager.selectMovie());
         }
     }
 }

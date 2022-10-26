@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import database.Database;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -186,11 +189,10 @@ public class Helper {
       return getTimeNow();
     }
 
-    DateTimeFormatter format = isHoliday ? DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    String dateInput="";
-    String timeInput="";
+    String dateInput = "";
+    String timeInput = "00:00";
     System.out.println("Please input a date in the format: yyyy-MM-dd");
     dateInput = sc.next();
     sc.nextLine();
@@ -200,13 +202,16 @@ public class Helper {
       timeInput = sc.next();
       sc.nextLine();
     }
-    String date = isHoliday ? dateInput : (dateInput + " " + timeInput);
+    String date = dateInput + " " + timeInput;
 
     try {
-      LocalDateTime Date = LocalDate.parse(date, format).atStartOfDay();
+      LocalDateTime Date = LocalDateTime.parse(date, format);
       date = format.format(Date);
       if (validateDate(date, format)) {
-        return date;
+        if (!isHoliday) {
+          return date;
+        }
+        return date.substring(0, 10);
       } else {
         System.out.println("\nInvalid Date");
       }
@@ -351,21 +356,17 @@ public class Helper {
     }
   }
 
-  public static Date promptDate() {
-    final String DATE_FORMAT = "yyyy-MM-dd HH:mm"; // specify final output format
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    Date date = new Date();
-    String dateInput, timeInput;
+  public static String promptDate() {
+    final String DATE_FORMAT = "yyyy-MM-dd"; // specify final output format
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    String dateInput, finalDate = "";
 
     do {
       System.out.println("Please input a date in the format: yyyy-MM-dd");
       dateInput = sc.next();
       sc.nextLine();
-      System.out.println("Please input a time in the format: HH:mm");
-      timeInput = sc.next();
-      sc.nextLine();
 
-      if (validateDate(dateInput + " " + timeInput, format)) {
+      if (validateDate(dateInput, format)) {
         break;
       }
 
@@ -375,13 +376,13 @@ public class Helper {
     try {
       DateFormat df = new SimpleDateFormat(DATE_FORMAT);
       df.setLenient(false); // makes input follow the given format strictly
-      String finalDate = dateInput + " " + timeInput; // concatenates data to the final format
-      date = df.parse(finalDate); // parses the string into the Date class
+      finalDate = dateInput; // concatenates data to the final format
+      df.parse(finalDate); // parses the string into the Date class
     } catch (ParseException e) {
-      System.out.println("Error! Please input data in the correct format.");
+      System.out.println("Error! Please input date in the correct format.");
       promptDate();
     }
-    return date;
+    return finalDate;
   }
 
 }

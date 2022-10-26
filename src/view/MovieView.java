@@ -41,7 +41,6 @@ public class MovieView extends MainView {
         super();
         this.path = path;
         this.isStaff = isStaff;
-        new MovieManager();
     }
 
     /**

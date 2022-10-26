@@ -136,7 +136,7 @@ public class ShowtimeView extends MainView {
     /**
      * Overrided View App - from movie view (user)
      */
-    public void viewApp(String path,Movie movie) {
+    public void viewApp(String path, Movie movie) {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
         handleShowtimeSelection(movie);
@@ -171,7 +171,7 @@ public class ShowtimeView extends MainView {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
         ShowtimeManager.displayShowtime(movieShowtimes, "movie");
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        ShowtimeManager.promptSeatSelection(showtimeId);
+        ShowtimeManager.promptBooking(showtimeId);
     }
 
     /**
@@ -186,6 +186,6 @@ public class ShowtimeView extends MainView {
             ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
         }
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        ShowtimeManager.promptSeatSelection(showtimeId);
+        ShowtimeManager.promptBooking(showtimeId);
     }
 }

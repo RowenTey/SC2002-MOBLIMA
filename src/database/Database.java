@@ -1,6 +1,5 @@
 package database;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -146,7 +145,7 @@ public class Database {
       FileInputStream fileInputStream = new FileInputStream(filePath);
       ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
       Object object = objectInputStream.readObject();
-      if (!(object instanceof HashMap)) {
+      if (!(object instanceof HashMap) && !(object instanceof HashSet)) {
         System.out.println(fileType.fileName);
         objectInputStream.close();
         return false;
@@ -175,9 +174,10 @@ public class Database {
       objectInputStream.close();
       fileInputStream.close();
     } catch (EOFException err) {
-      System.out.println("Warning: " + err.getMessage());
+      System.out.println("Warning: " + err);
       if (fileType == FileType.STAFF) {
         STAFF = new HashMap<String, Staff>();
+        Database.initializeStaff();
       } else if (fileType == FileType.MOVIE_GOERS) {
         MOVIE_GOER = new HashMap<String, MovieGoer>();
       } else if (fileType == FileType.CINEMAS) {

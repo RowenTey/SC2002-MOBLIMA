@@ -161,6 +161,7 @@ public class ShowtimeManager {
       do {
         date = Helper.setDate(false, false);
       } while (date.equals(""));
+      System.out.println(date);
       System.out.println("\nWhich cineplex would you like to air this movie?\n");
       CineplexManager.displayExistingCineplex();
       Cineplex selectedCineplex = CineplexManager.selectCineplex();
@@ -241,9 +242,9 @@ public class ShowtimeManager {
   }
 
   /**
-   * Prompt user to select a seat for booking
+   * Prompt user for booking booking details
    */
-  public static void promptSeatSelection(String showtimeId) {
+  public static void promptBooking(String showtimeId) {
     String position;
     int row = 0;
     int col = 0;
@@ -265,19 +266,18 @@ public class ShowtimeManager {
     if (showtime.getSeatAt(row + 1, col).getBooked()) {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
-      System.out.println();
-      System.out.println("Seat " + position + " selected...");
+      System.out.println("\nSeat " + position + " selected...");
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
       System.out.print("Which would you like to do: ");
+
       int pay;
       pay = Helper.readInt(1, 2);
       switch (pay) {
         case 1:
           MovieGoer newMovieGoer = BookingManager.promptUserDetails();
           if (bookSeat(row + 1, col, showtime)) {
-            System.out.println();
-            System.out.println("Seat " + position + " is booked successfully!");
+            System.out.println("\nSeat " + position + " is booked successfully!");
             System.out.println("Your Ticket will be generated in a short time... ");
           }
           BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex,
@@ -324,7 +324,7 @@ public class ShowtimeManager {
   /**
    * Gets the row from position
    */
-  private static int getSeatRow(String position) {
+  protected static int getSeatRow(String position) {
     String rowStr = position.substring(0, 1);
     int row = 0;
 
@@ -340,7 +340,7 @@ public class ShowtimeManager {
   /**
    * Books the seat at that position for that showtime
    */
-  private static boolean bookSeat(int row, int column, Showtime showtime) {
+  protected static boolean bookSeat(int row, int column, Showtime showtime) {
     showtime.getSeatAt(row, column).setBooked(true);
     Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);

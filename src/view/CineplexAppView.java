@@ -19,6 +19,7 @@ public class CineplexAppView extends MainView {
         new MovieManager();
         new ShowtimeManager();
         new CineplexManager();
+        new BookingManager();
     }
 
     /**

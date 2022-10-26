@@ -35,6 +35,7 @@ public class BookingManager {
         BookingManager.readBookings();
         BookingManager.totalBookings = bookingList.size();
     }
+
     /**
      * Get the number of bookings
      * 
@@ -44,7 +45,7 @@ public class BookingManager {
         return BookingManager.totalBookings;
     }
 
-    public static ArrayList<Booking> getBookingList(){
+    public static ArrayList<Booking> getBookingList() {
         return BookingManager.bookingList;
     }
 
@@ -56,6 +57,7 @@ public class BookingManager {
             BookingManager.bookingList.add(booking);
         }
     }
+
     /**
      * Constructor for booking in BookingManager
      *
@@ -75,15 +77,15 @@ public class BookingManager {
          * h : hour, m : minutes, XXX : cinema code in letters)
          */
 
-        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer,position);
+        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer, position);
         BookingManager.bookingList.add(newBooking);
         Database.BOOKINGS.put(transactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
-        System.out.println();
-        System.out.println("Booking created! Your ticket is printed below: ");
+
+        System.out.println("\nBooking created! Your ticket is printed below: ");
         printBookingDetails(newBooking);
     }
-    
+
     /**
      * Print the complete details of the booking
      *
@@ -93,14 +95,14 @@ public class BookingManager {
         MovieGoer movieGoer = booking.getMovieGoer();
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
-        System.out.println(String.format("%-30s: %s", "Transaction ID", booking.getTransactionId()));
-        System.out.println(String.format("%-30s: %s", "Name", movieGoer.getName()));
-        System.out.println(String.format("%-30s: %s", "Mobile Number", movieGoer.getMobile()));
-        System.out.println(String.format("%-30s: %s", "Email", movieGoer.getEmail()));
-        System.out.println(String.format("%-30s: %s", "Age Group", movieGoer.getAgeGroup().getLabel()));
-        System.out.println(String.format("%-30s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
-        System.out.println(String.format("%-30s: %s", "Seat", booking.getPosition()));
-        System.out.println(String.format("%-30s: %s", "Price", booking.getTicket().getPrice()));
+        System.out.println(String.format("%-25s: %s", "Transaction ID", booking.getTransactionId()));
+        System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
+        System.out.println(String.format("%-25s: %s", "Mobile Number", movieGoer.getMobile()));
+        System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
+        System.out.println(String.format("%-25s: %s", "Age Group", movieGoer.getAgeGroup().getLabel()));
+        System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
+        System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
+        System.out.println(String.format("%-25s: %s", "Price", booking.getTicket().getPrice()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -141,24 +143,18 @@ public class BookingManager {
         return date;
     }
 
-    public static String promptTransactionId(){
+    public static String promptTransactionId() {
         System.out.println("Enter your transaction ID: ");
         String transactionId = Helper.readString();
         return transactionId;
     }
 
-
     /**
      * Find booking by transactionId
      */
-    public static void findBooking(String transactionId){
-        ArrayList<Booking> curList = BookingManager.getBookingList();
-        for(int i=0 ;i < curList.size(); i++){
-            System.out.println(curList.get(i).getTransactionId());
-            if(curList.get(i).getTransactionId().equals(transactionId)){
-                printBookingDetails(curList.get(i));
-                Helper.pressAnyKeyToContinue();
-            }
+    public static void findBooking(String transactionId) {
+        if (Database.BOOKINGS.containsKey(transactionId)) {
+            printBookingDetails(Database.BOOKINGS.get(transactionId));
         }
     }
 

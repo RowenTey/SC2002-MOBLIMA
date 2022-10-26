@@ -69,7 +69,7 @@ public class StaffManager {
   public static void printStaffDetails(Staff staff) {
     System.out.println();
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
-    System.out.println(String.format("%-20s: %s", "UserId", staff.getUserId()));
+    System.out.println(String.format("%-20s: %s", "User ID", staff.getUserId()));
     System.out.println(String.format("%-20s: %s", "Username", staff.getName()));
     System.out.println(String.format("%-20s: %s", "Password", staff.getPassword()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
