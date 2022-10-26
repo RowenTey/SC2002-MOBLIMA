@@ -5,8 +5,8 @@ import view.CineplexAppView;
 public class CineplexApp {
         public static void main(String[] args) throws Exception {
                 try {
-                        CineplexAppView cineplexAppView = new CineplexAppView();
                         new Database();
+                        CineplexAppView cineplexAppView = new CineplexAppView();
                         Helper.clearScreen();
                         printMOBLIMATitle();
                         Helper.pressAnyKeyToContinue();

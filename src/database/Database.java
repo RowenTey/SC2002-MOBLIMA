@@ -36,16 +36,6 @@ public class Database {
   public static HashMap<String, Staff> STAFF = new HashMap<String, Staff>();
 
   /**
-   * HashMap to contain {@link MovieGoer} objects.
-   */
-  public static HashMap<String, MovieGoer> MOVIE_GOER = new HashMap<String, MovieGoer>();
-
-  /**
-   * HashMap to contain {@link Cinema} objects.
-   */
-  public static HashMap<String, Cinema> CINEMAS = new HashMap<String, Cinema>();
-
-  /**
    * HashMap to contain {@link Booking} objects.
    */
   public static HashMap<String, Booking> BOOKINGS = new HashMap<String, Booking>();
@@ -154,10 +144,6 @@ public class Database {
       // Read into database
       if (fileType == FileType.STAFF) {
         STAFF = (HashMap<String, Staff>) object;
-      } else if (fileType == FileType.MOVIE_GOERS) {
-        MOVIE_GOER = (HashMap<String, MovieGoer>) object;
-      } else if (fileType == FileType.CINEMAS) {
-        CINEMAS = (HashMap<String, Cinema>) object;
       } else if (fileType == FileType.BOOKINGS) {
         BOOKINGS = (HashMap<String, Booking>) object;
       } else if (fileType == FileType.CINEPLEX) {
@@ -178,20 +164,6 @@ public class Database {
       if (fileType == FileType.STAFF) {
         STAFF = new HashMap<String, Staff>();
         Database.initializeStaff();
-      } else if (fileType == FileType.MOVIE_GOERS) {
-        MOVIE_GOER = new HashMap<String, MovieGoer>();
-      } else if (fileType == FileType.CINEMAS) {
-        CINEMAS = new HashMap<String, Cinema>();
-      } else if (fileType == FileType.BOOKINGS) {
-        BOOKINGS = new HashMap<String, Booking>();
-      } else if (fileType == FileType.CINEPLEX) {
-        CINEPLEX = new HashMap<String, Cineplex>();
-      } else if (fileType == FileType.SHOWTIME) {
-        SHOWTIME = new HashMap<String, Showtime>();
-      } else if (fileType == FileType.MOVIES) {
-        MOVIES = new HashMap<String, Movie>();
-      } else if (fileType == FileType.HOLIDAYS) {
-        HOLIDAYS = new HashSet<String>();
       }
     } catch (IOException err) {
       err.printStackTrace();
@@ -221,10 +193,6 @@ public class Database {
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
       if (fileType == FileType.STAFF) {
         objectOutputStream.writeObject(STAFF);
-      } else if (fileType == FileType.MOVIE_GOERS) {
-        objectOutputStream.writeObject(MOVIE_GOER);
-      } else if (fileType == FileType.CINEMAS) {
-        objectOutputStream.writeObject(CINEMAS);
       } else if (fileType == FileType.BOOKINGS) {
         objectOutputStream.writeObject(BOOKINGS);
       } else if (fileType == FileType.CINEPLEX) {
@@ -324,12 +292,6 @@ public class Database {
     STAFF = new HashMap<String, Staff>();
     Database.initializeStaff();
     writeSerializedObject(FileType.STAFF);
-
-    MOVIE_GOER = new HashMap<String, MovieGoer>();
-    writeSerializedObject(FileType.MOVIE_GOERS);
-
-    CINEMAS = new HashMap<String, Cinema>();
-    writeSerializedObject(FileType.CINEMAS);
 
     BOOKINGS = new HashMap<String, Booking>();
     writeSerializedObject(FileType.BOOKINGS);
