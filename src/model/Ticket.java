@@ -17,6 +17,11 @@ public class Ticket implements Serializable {
     protected static final long serialVersionUID = 9L;
 
     /**
+     * Movie title
+     */
+    private String movieTitle;
+
+    /**
      * price of ticket
      */
     private double price;
@@ -35,10 +40,11 @@ public class Ticket implements Serializable {
      * Constructor of Ticket
      *
      */
-    public Ticket(double price, Seat seat, Cineplex cineplex) {
+    public Ticket(double price, Seat seat, Cineplex cineplex, String movieTitle) {
         setPrice(price);
         setSeat(seat);
         setCineplex(cineplex);
+        setMovieTitle(movieTitle);
     }
 
     /**
@@ -57,6 +63,24 @@ public class Ticket implements Serializable {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    /**
+     * Gets the title of the movie
+     * 
+     * @return MovieTitle
+     */
+    public String getMovieTitle() {
+        return this.movieTitle;
+    }
+
+    /**
+     * Sets the movie title
+     * 
+     * @param movieTitle
+     */
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
     }
 
     /**

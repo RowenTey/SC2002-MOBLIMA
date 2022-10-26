@@ -66,7 +66,8 @@ public class BookingManager {
      * @param cineplex the cineplex of the ticket
      * @param name     the user associated with the ticket
      */
-    public static void createBooking(double price, Seat seat, Cineplex cineplex, MovieGoer movieGoer, String position) {
+    public static void createBooking(double price, Seat seat, Cineplex cineplex, MovieGoer movieGoer, String position,
+            String movieTitle) {
         String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
         String timeShow = Helper.getTimeNow(); // get the current time
         timeShow = formatDate(timeShow);
@@ -77,7 +78,8 @@ public class BookingManager {
          * h : hour, m : minutes, XXX : cinema code in letters)
          */
 
-        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex), movieGoer, position);
+        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex, movieTitle), movieGoer,
+                position);
         BookingManager.bookingList.add(newBooking);
         Database.BOOKINGS.put(transactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
@@ -100,6 +102,7 @@ public class BookingManager {
         System.out.println(String.format("%-25s: %s", "Mobile Number", movieGoer.getMobile()));
         System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
         System.out.println(String.format("%-25s: %s", "Age Group", movieGoer.getAgeGroup().getLabel()));
+        System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
         System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
         System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
         System.out.println(String.format("%-25s: %s", "Price", booking.getTicket().getPrice()));
@@ -143,19 +146,23 @@ public class BookingManager {
         return date;
     }
 
-    public static String promptTransactionId() {
-        System.out.println("Enter your transaction ID: ");
-        String transactionId = Helper.readString();
-        return transactionId;
+    public static String promptEmail() {
+        System.out.println("Enter your email: ");
+        String email = Helper.readString();
+        return email;
     }
 
     /**
-     * Find booking by transactionId
+     * Find booking by email
      */
-    public static void findBooking(String transactionId) {
-        if (Database.BOOKINGS.containsKey(transactionId)) {
-            printBookingDetails(Database.BOOKINGS.get(transactionId));
+    public static void findBooking(String email) {
+        ArrayList<Booking> curList = BookingManager.getBookingList();
+        for (int i = 0; i < curList.size(); i++) {
+            if (curList.get(i).getMovieGoer().getEmail().equals(email)) {
+                printBookingDetails(curList.get(i));
+            }
         }
+        Helper.pressAnyKeyToContinue();
     }
 
 }

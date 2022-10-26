@@ -71,8 +71,8 @@ public class MovieGoerView extends MainView {
                     System.out.println("View Booking History");
                     Helper.clearScreen();
                     printRoute(this.path + " > MovieGoer > View Booking History");
-                    String transactionId = BookingManager.promptTransactionId();
-                    BookingManager.findBooking(transactionId);
+                    String email = BookingManager.promptEmail();
+                    BookingManager.findBooking(email);
                     break;
                 case 5:
                     break;
