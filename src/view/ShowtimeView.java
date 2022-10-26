@@ -57,9 +57,9 @@ public class ShowtimeView extends MainView {
             System.out.println("(2) List Showtimes");
             System.out.println("(3) Exit");
         } else {
-            System.out.println("(1) List \"NOW SHOWING\" Showtimes");
-            System.out.println("(2) List \"PREVIEW\" Showtimes");
-            System.out.println("(3) List \"COMING SOON\" Showtimes");
+            System.out.println("(1) List \"NOW SHOWING\" Movies");
+            System.out.println("(2) List \"PREVIEW\" Movies");
+            System.out.println("(3) List \"COMING SOON\" Movies");
             System.out.println("(4) Exit");
         }
     }
@@ -105,19 +105,19 @@ public class ShowtimeView extends MainView {
                     case 1:
                         // NOW_SHOWING
                         Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing (NOW SHOWING)");
+                        printRoute(this.path + " > Showtime > Movies Listing (NOW SHOWING)");
                         ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 2:
                         // PREVIEW
                         Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing (PREVIEW)");
+                        printRoute(this.path + " > Showtime > Movies Listing (PREVIEW)");
                         ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 3:
                         // COMING SOON
                         Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing (COMING SOON)");
+                        printRoute(this.path + " > Showtime > Movies Listing (COMING SOON)");
                         ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 4:

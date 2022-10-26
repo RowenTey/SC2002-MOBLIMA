@@ -16,7 +16,6 @@ import model.*;
 import model.enums.LayoutType;
 import model.enums.Location;
 import model.enums.ShowStatus;
-import model.enums.TypeMovies;
 import helper.Helper;
 
 public class ShowtimeManager {
@@ -74,7 +73,7 @@ public class ShowtimeManager {
   public static void initializeShowtime() {
     ShowtimeManager.initializeHashMap();
 
-    ArrayList<Movie> newMovies = MovieManager.getMovieList();
+    ArrayList<Movie> newMovies = MovieManager.getAllMovieList();
     ArrayList<Cineplex> newCineplex = CineplexManager.getCineplexList();
     ArrayList<String> newCinemaCode = new ArrayList<String>();
     ArrayList<String> newDate = new ArrayList<String>();
@@ -101,7 +100,9 @@ public class ShowtimeManager {
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
-      createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
+      if(newMovies.get(i).getStatus() == ShowStatus.NOW_SHOWING || newMovies.get(i).getStatus() == ShowStatus.PREVIEW){
+        createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
+      }
     }
     ShowtimeManager.printAllShowtime();
   }
@@ -155,7 +156,7 @@ public class ShowtimeManager {
     System.out.println("Which movie would you like to create a showtime for?\n");
 
     // movie list not empty
-    if (MovieManager.displayListOfMovies()) {
+    if (MovieManager.displayListOfBookableMovies()) {
       Movie selectedMovie = MovieManager.selectMovie();
       String date;
       do {
@@ -351,9 +352,10 @@ public class ShowtimeManager {
    * Print showtimes based on Status
    */
   public static void printShowtimeBasedOnStatus(ShowStatus status) {
-    ArrayList<Movie> movies = MovieManager.getMovieList();
+    ArrayList<Movie> movies = MovieManager.getAllMovieList();
     for (int i = 0; i < movies.size(); i++) {
-      if (movies.get(i).getStatus().equals(status)) {
+      if (movies.get(i).getStatus() == status) {
+        System.out.println(i);
         MovieManager.printMovieDetails(movies.get(i));
       }
     }
