@@ -281,7 +281,7 @@ public class ShowtimeManager {
             System.out.println("Your Ticket will be generated in a short time... ");
           }
           BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex,
-              newMovieGoer, position);
+              newMovieGoer, position, showtime.getMovie().getTitle());
           break;
         case 2:
           System.out.println("Booking failed!");
