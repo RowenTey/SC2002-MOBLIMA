@@ -100,7 +100,8 @@ public class ShowtimeManager {
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
-      if(newMovies.get(i).getStatus() == ShowStatus.NOW_SHOWING || newMovies.get(i).getStatus() == ShowStatus.PREVIEW){
+      if (newMovies.get(i).getStatus() == ShowStatus.NOW_SHOWING
+          || newMovies.get(i).getStatus() == ShowStatus.PREVIEW) {
         createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
       }
     }
@@ -355,7 +356,6 @@ public class ShowtimeManager {
     ArrayList<Movie> movies = MovieManager.getAllMovieList();
     for (int i = 0; i < movies.size(); i++) {
       if (movies.get(i).getStatus() == status) {
-        System.out.println(i);
         MovieManager.printMovieDetails(movies.get(i));
       }
     }
