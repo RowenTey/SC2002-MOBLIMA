@@ -167,7 +167,7 @@ public class ShowtimeManager {
       System.out.println("\nWhich cineplex would you like to air this movie?\n");
       CineplexManager.displayExistingCineplex();
       Cineplex selectedCineplex = CineplexManager.selectCineplex();
-      System.out.println("Which ciname in this cineplex would you like to pick?\n");
+      System.out.println("Which cinema in this cineplex would you like to pick?\n");
       String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
       ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
       return true;

@@ -20,7 +20,7 @@ public class BookingManager {
     /**
      * List of bookings
      */
-    private static ArrayList<Booking> bookingList = new ArrayList<Booking>();
+    public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
 
     /**
      * Total number of bookings
@@ -38,14 +38,14 @@ public class BookingManager {
 
     /**
      * Get the number of bookings
-     * 
+     *
      * @return the total number of bookings
      */
     public static int getTotalNumOfBooking() {
         return BookingManager.totalBookings;
     }
 
-    public static ArrayList<Booking> getBookingList() {
+    private static ArrayList<Booking> getBookingList() {
         return BookingManager.bookingList;
     }
 
@@ -59,6 +59,54 @@ public class BookingManager {
     }
 
     /**
+     * Creates a transaction ID for booking
+     */
+    public static String createTransactionId (Seat seat){
+        String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
+        String timeShow = Helper.getTimeNow(); // get the current time
+        timeShow = formatDate(timeShow);
+
+        String transactionid = cinemacode + timeShow;
+        /*
+         * formats the transaction id as XXXYYYYMMDDhhmm (Y : year, M : month, D : day,
+         * h : hour, m : minutes, XXX : cinema code in letters)
+         */
+        return transactionid;
+    }
+
+    //TODO refactor code to take in a cinema so boolean isPlatinum can be passed
+
+//    public static Ticket createBookingTicket(double price, Seat seat, Cineplex cineplex,String movieTitle,Cinema cinema){
+//        double adjustedPrice = price;
+//        double multiplier = 1;
+//        if (cinema.getIsPlatinum() ){
+//            multiplier *=2.5; //multiplier of 2.5x for platinum cinemas
+//            System.out.println("\nPlatinum class applied!");
+//        }
+    //TODO work out logic for holidays
+//
+//        multiplier*=1.07; // 7% GST
+//        System.out.printf("\nTotal multiplier: %f",multiplier);
+//        adjustedPrice *= multiplier;
+//        Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
+//
+//        return newTicket;
+//    }
+
+    /**
+     * Creates a ticket for the createBooking method
+     */
+    public static Ticket createBookingTicket(double price, Seat seat, Cineplex cineplex,String movieTitle){
+        double adjustedPrice = price;
+        double multiplier = 1;
+        multiplier*=1.07; // 7% GST
+        adjustedPrice *= multiplier;
+        Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
+
+        return newTicket;
+    }
+
+    /**
      * Constructor for booking in BookingManager
      *
      * @param price    the price of the ticket
@@ -67,21 +115,15 @@ public class BookingManager {
      * @param name     the user associated with the ticket
      */
     public static void createBooking(double price, Seat seat, Cineplex cineplex, MovieGoer movieGoer, String position,
-            String movieTitle) {
-        String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
-        String timeShow = Helper.getTimeNow(); // get the current time
-        timeShow = formatDate(timeShow);
+                                     String movieTitle) {
 
-        String transactionId = cinemacode + timeShow;
-        /*
-         * formats the transaction id as XXXYYYYMMDDhhmm (Y : year, M : month, D : day,
-         * h : hour, m : minutes, XXX : cinema code in letters)
-         */
-
-        Booking newBooking = new Booking(transactionId, new Ticket(price, seat, cineplex, movieTitle), movieGoer,
+        String newTransactionId = createTransactionId(seat);
+        Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle);
+        //Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be implemented
+        Booking newBooking = new Booking(newTransactionId, newTicket, movieGoer,
                 position);
         BookingManager.bookingList.add(newBooking);
-        Database.BOOKINGS.put(transactionId, newBooking);
+        Database.BOOKINGS.put(newTransactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
 
         System.out.println("\nBooking created! Your ticket is printed below: ");
