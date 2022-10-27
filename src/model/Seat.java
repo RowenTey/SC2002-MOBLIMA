@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * The class that records the seat of a {@link Showtime}.

@@ -1,12 +1,7 @@
 package view;
 
-import java.util.ArrayList;
-
 import controller.MovieManager;
 import helper.Helper;
-import model.Movie;
-import model.enums.ShowStatus;
-import model.enums.TypeMovies;
 
 /**
  * Viewing interface for Cineplex

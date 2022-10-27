@@ -2,8 +2,6 @@ package view;
 
 import java.util.ArrayList;
 
-import controller.CineplexManager;
-import controller.MovieManager;
 import controller.ShowtimeManager;
 import helper.Helper;
 import model.Cineplex;
