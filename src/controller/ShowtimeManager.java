@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 import database.Database;
 import database.FileType;
 import model.*;
