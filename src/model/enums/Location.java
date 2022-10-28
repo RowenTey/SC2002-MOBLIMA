@@ -22,7 +22,17 @@ public enum Location {
   /**
    * Jem
    */
-  JEM("Jem");
+  JEM("Jem"),
+
+  /**
+   * Somerset 313
+   */
+  SOMERSET_313("Somerset 313"),
+
+  /**
+   * Jurong Point
+   */
+  JURONG_POINT("Jurong Point");
 
   public final String label;
 

@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import model.enums.LayoutType;
 
@@ -34,9 +33,9 @@ public class Showtime implements Serializable {
   private Movie movie;
 
   /**
-   * cinema code of showtime
+   * cinema of showtime
    */
-  private String cinemaCode;
+  private Cinema cinema;
 
   /**
    * {@link LayoutType} of showtime
@@ -64,14 +63,14 @@ public class Showtime implements Serializable {
    * @param time       time of showtime
    * @param showtimeId id of showtime
    * @param movie      {@link Movie} of showtime
-   * @param cinemaCode cinema code of showtime
+   * @param cinema cinema of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
-  public Showtime(String showtimeId, String time, Movie movie, String cinemaCode, LayoutType layoutType) {
+  public Showtime(String showtimeId, String time, Movie movie, Cinema cinema, LayoutType layoutType) {
     setShowtimeId(showtimeId);
     setTime(time);
     setMovie(movie);
-    setCinemaCode(cinemaCode);
+    setCinema(cinema);
     setLayoutType(layoutType);
     initSeats();
   }
@@ -105,12 +104,12 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Sets the cinema code of showtime
+   * Sets the cinema of showtime
    * 
-   * @param cinemaCode cinemaCode of showtime
+   * @param cinema cinema of showtime
    */
-  public void setCinemaCode(String cinemaCode) {
-    this.cinemaCode = cinemaCode;
+  public void setCinema(Cinema cinema) {
+    this.cinema = cinema;
   }
 
   /**
@@ -150,12 +149,12 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Gets the cinema code of showtime
+   * Gets the cinema of showtime
    * 
-   * @return cinemaCode that is assigned to this showtime
+   * @return cinema object that is assigned to this showtime
    */
-  public String getCinemaCode() {
-    return cinemaCode;
+  public Cinema getCinema() {
+    return this.cinema;
   }
 
   /**

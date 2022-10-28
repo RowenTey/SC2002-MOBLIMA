@@ -51,7 +51,7 @@ public class Cinema implements Serializable {
      * @return Cineplex of cinema
      */
     public Cineplex getCineplex() {
-        return cineplex;
+        return this.cineplex;
     }
 
     /**
