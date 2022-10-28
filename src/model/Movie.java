@@ -58,7 +58,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     /**
      * overall rating of movie based on average of ratings
      */
-    private int overallRating;
+    private double overallRating;
 
     /**
      * {@link Review} for movie
@@ -228,17 +228,18 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      *
      * @return overall rating of the movie
      */
-    public int getOverallRating() {
-        if (reviews.size() == 0) {
-            overallRating = -1;
-            return overallRating;
-        }
-
+    public double getOverallRating() {
+        double dummy = 0;
         for (int i = 0; i < reviews.size(); i++) {
-            overallRating += reviews.get(i).getRating();
+            dummy += reviews.get(i).getRating();
         }
-        overallRating /= reviews.size();
-        return overallRating;
+        dummy /= reviews.size();
+        setOverallRating(dummy);
+        return dummy;
+    }
+
+    public void setOverallRating(double overallRating){
+        this.overallRating = overallRating;
     }
 
     /**
@@ -282,9 +283,9 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         if (this == movie) {
             return 0;
         }
-        int thisOverallRating = overallRating;
-        int thatOverallRating = movie.getOverallRating();
+        double thisOverallRating = this.overallRating;
+        double thatOverallRating = movie.getOverallRating();
 
-        return thisOverallRating - thatOverallRating;
+        return (int)(thisOverallRating - thatOverallRating);
     }
 }

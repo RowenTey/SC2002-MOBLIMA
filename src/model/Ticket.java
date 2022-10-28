@@ -32,18 +32,18 @@ public class Ticket implements Serializable {
     private Seat seat;
 
     /**
-     * ticket {@link Cineplex}
+     * ticket {@link Cinema}
      */
-    private Cineplex cineplex;
+    private Cinema cinema;
 
     /**
      * Constructor of Ticket
      *
      */
-    public Ticket(double price, Seat seat, Cineplex cineplex, String movieTitle) {
+    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle) {
         setPrice(price);
         setSeat(seat);
-        setCineplex(cineplex);
+        setCinema(cinema);
         setMovieTitle(movieTitle);
     }
 
@@ -102,20 +102,20 @@ public class Ticket implements Serializable {
     }
 
     /**
-     * Gets the ticket cineplex
+     * Gets the ticket cinema
      *
-     * @return ticket {@link Cineplex}
+     * @return ticket {@link Cinema}
      */
-    public Cineplex getCineplex() {
-        return cineplex;
+    public Cinema getCinema() {
+        return this.cinema;
     }
 
     /**
-     * Sets the ticket {@link Cineplex}
+     * Sets the ticket {@link Cinema}
      *
-     * @param cineplex ticket {@link Cineplex}
+     * @param cinema ticket {@link Cinema}
      */
-    public void setCineplex(Cineplex cineplex) {
-        this.cineplex = cineplex;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
 }
