@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class MovieManager {
      * Total number of cineplex
      */
     private static int totalMovies;
+
+    /**
+     * 2 dp constructor
+     */
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * Constructor of MovieManager
@@ -119,7 +125,7 @@ public class MovieManager {
         System.out.println(String.format("%-25s: %s", "Cast", cast));
         System.out.println(String.format("%-25s: %s", "Synopsis", movie.getSynopsis()));
         System.out.println(String.format("%-25s: %s", "Number of Ticket Sales", movie.getTicketSales()));
-        System.out.println(String.format("%-25s: %s", "Overall Rating", movie.getOverallRating()));
+        System.out.println(String.format("%-25s: %s", "Overall Rating", movie.getReviews().size()<=1 ? "NA": df.format(movie.getOverallRating()) ));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -373,7 +379,7 @@ public class MovieManager {
         for (Review review : reviews) {
             System.out.println();
             System.out.println(String.format("%-40s", "").replace(" ", "-"));
-            System.out.println(String.format("%-30s: %s", "Rating", Double.toString(review.getRating())));
+            System.out.println(String.format("%-30s: %s", "Rating", df.format(review.getRating())));
             System.out.println(String.format("%-30s: %s", "Review", review.getReview()));
             System.out.println(String.format("%-40s", "").replace(" ", "-"));
             System.out.println();

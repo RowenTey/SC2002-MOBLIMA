@@ -7,7 +7,6 @@ import database.Database;
 import database.FileType;
 import model.Cinema;
 import model.Cineplex;
-import model.Showtime;
 import model.enums.Location;
 
 /**
@@ -49,7 +48,7 @@ public class CineplexManager {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-20s: %s", "CineplexId", cineplex.getCineplexId()));
-        System.out.println(String.format("%-20s: %s", "Location", cineplex.getLocation()));
+        System.out.println(String.format("%-20s: %s", "Location", cineplex.getLocationStr()));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -137,9 +136,9 @@ public class CineplexManager {
         }
 
         ArrayList<Integer> available_locations = new ArrayList<Integer>();
-        available_locations.add(0); // Causeway
-        available_locations.add(1); // Amk
-        available_locations.add(2); // Jem
+        for(int i=0; i<5; i++){
+            available_locations.add(i);
+        }
         for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
             if (CineplexManager.cineplexList.get(i).getLocationStr() == "Causeway Point") {
                 available_locations.remove(Integer.valueOf(0));
@@ -147,7 +146,11 @@ public class CineplexManager {
                 available_locations.remove(Integer.valueOf(1));
             } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Jem") {
                 available_locations.remove(Integer.valueOf(2));
-            }
+            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Somerset 313") {
+                available_locations.remove(Integer.valueOf(3));
+            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Jurong Point") {
+                available_locations.remove(Integer.valueOf(4));
+            } 
         }
 
         System.out.println("Where do you want to add a new Cineplex ?");
@@ -180,12 +183,12 @@ public class CineplexManager {
     /**
      * Allow user to select a specific cinema from a cineplex
      */
-    public static String selectCinema(Cineplex selectedCineplex) {
+    public static Cinema selectCinema(Cineplex selectedCineplex) {
         displayCinema(selectedCineplex);
         int choice = Helper.readInt(1, (selectedCineplex.getCinemaList().size() + 1));
         Cinema cinema = selectedCineplex.getCinemaList().get(choice - 1);
         System.out.println("\nYou selected: " + cinema.getCinemaCode());
-        return cinema.getCinemaCode();
+        return cinema;
     }
 
     /**
@@ -197,21 +200,5 @@ public class CineplexManager {
             System.out.println(
                     "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
         }
-    }
-
-    /**
-     * Get cineplex by showtime
-     */
-    public static Cineplex getCineplexByShowtime(Showtime showtime) {
-        String cinemaCode = showtime.getCinemaCode().substring(0, 2);
-        ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
-        String cineplexName;
-        for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-            cineplexName = cineplexList.get(i).getLocationStr().substring(0, 2).toUpperCase();
-            if (cineplexName.equals(cinemaCode)) {
-                return cineplexList.get(i);
-            }
-        }
-        return null;
     }
 }

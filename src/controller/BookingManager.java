@@ -6,6 +6,7 @@ import helper.Helper;
 import model.*;
 import model.enums.AgeGroup;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -59,10 +60,15 @@ public class BookingManager {
     }
 
     /**
+     * 2 dp constructor
+     */
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
+    /**
      * Creates a transaction ID for booking
      */
     public static String createTransactionId (Seat seat){
-        String cinemacode = seat.getShowtime().getCinemaCode(); // first two letters of location
+        String cinemacode = seat.getShowtime().getCinema().getCinemaCode(); // first two letters of location
         String timeShow = Helper.getTimeNow(); // get the current time
         timeShow = formatDate(timeShow);
 
@@ -96,12 +102,12 @@ public class BookingManager {
     /**
      * Creates a ticket for the createBooking method
      */
-    public static Ticket createBookingTicket(double price, Seat seat, Cineplex cineplex,String movieTitle){
+    public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema,String movieTitle){
         double adjustedPrice = price;
         double multiplier = 1;
         multiplier*=1.07; // 7% GST
         adjustedPrice *= multiplier;
-        Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
+        Ticket newTicket = new Ticket(adjustedPrice, seat, cinema, movieTitle);
 
         return newTicket;
     }
@@ -114,11 +120,11 @@ public class BookingManager {
      * @param cineplex the cineplex of the ticket
      * @param name     the user associated with the ticket
      */
-    public static void createBooking(double price, Seat seat, Cineplex cineplex, MovieGoer movieGoer, String position,
+    public static void createBooking(double price, Seat seat, Cinema cinema, MovieGoer movieGoer, String position,
                                      String movieTitle) {
 
         String newTransactionId = createTransactionId(seat);
-        Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle);
+        Ticket newTicket = createBookingTicket(price,seat,cinema,movieTitle);
         //Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be implemented
         Booking newBooking = new Booking(newTransactionId, newTicket, movieGoer,
                 position);
@@ -143,11 +149,13 @@ public class BookingManager {
         System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
         System.out.println(String.format("%-25s: %s", "Mobile Number", movieGoer.getMobile()));
         System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
-        System.out.println(String.format("%-25s: %s", "Age Group", movieGoer.getAgeGroup().getLabel()));
+        System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
         System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
-        System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCineplex().getLocationStr()));
+        System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getCinema().getCinemaCode()));
+        System.out.println(String.format("%-25s: %s", "Cinema Type", booking.getTicket().getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
+        System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLocationStr()));
         System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
-        System.out.println(String.format("%-25s: %s", "Price", booking.getTicket().getPrice()));
+        System.out.println(String.format("%-25s: %s", "Price", df.format(booking.getTicket().getPrice())));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -158,7 +166,7 @@ public class BookingManager {
     public static MovieGoer promptUserDetails() {
         System.out.print("\nEnter your name: ");
         String name = Helper.readString();
-        System.out.print("Enter your mobile number (eg: +65-88889770): ");
+        System.out.print("Enter your mobile number (eg: 88889770): +65-");
         String mobile = Helper.readString();
         System.out.print("Enter your email: ");
         String email = Helper.readString();

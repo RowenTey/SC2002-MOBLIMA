@@ -10,11 +10,12 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Map.Entry;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import database.Database;
 import database.FileType;
 import model.*;
 import model.enums.LayoutType;
-import model.enums.Location;
 import model.enums.ShowStatus;
 import helper.Helper;
 
@@ -28,11 +29,6 @@ public class ShowtimeManager {
    * Total number of showtime
    */
   private static int totalShowtimes;
-
-  /**
-   * HashMap to get cinema location from cinema code
-   */
-  private static HashMap<String, Location> CinematoCineplexLocation = new HashMap<String, Location>();
 
   /**
    * HashMap to get row number from alphabets
@@ -53,9 +49,6 @@ public class ShowtimeManager {
    * Initialise HashMap
    */
   public static void initializeHashMap() {
-    CinematoCineplexLocation.put("AM", Location.AMK_HUB);
-    CinematoCineplexLocation.put("JE", Location.JEM);
-    CinematoCineplexLocation.put("CA", Location.CAUSEWAY_POINT);
     alphaRow.put(0, "A");
     alphaRow.put(1, "B");
     alphaRow.put(2, "C");
@@ -75,7 +68,7 @@ public class ShowtimeManager {
 
     ArrayList<Movie> newMovies = MovieManager.getAllMovieList();
     ArrayList<Cineplex> newCineplex = CineplexManager.getCineplexList();
-    ArrayList<String> newCinemaCode = new ArrayList<String>();
+    ArrayList<Cinema> newCinema = new ArrayList<Cinema>();
     ArrayList<String> newDate = new ArrayList<String>();
 
     Random random = new Random();
@@ -86,8 +79,8 @@ public class ShowtimeManager {
     ZoneId defaultZoneId = ZoneId.systemDefault();
 
     for (int i = 0; i < 10; i++) {
-      newCinemaCode.add(newCineplex.get(0).getCinemaList().get(i).getCinemaCode());
-      newCinemaCode.add(newCineplex.get(1).getCinemaList().get(i).getCinemaCode());
+      newCinema.add(newCineplex.get(0).getCinemaList().get(i));
+      newCinema.add(newCineplex.get(1).getCinemaList().get(i));
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
@@ -102,7 +95,7 @@ public class ShowtimeManager {
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       if (newMovies.get(i).getStatus() == ShowStatus.NOW_SHOWING
           || newMovies.get(i).getStatus() == ShowStatus.PREVIEW) {
-        createShowtime(newDate.get(i), newMovies.get(i), newCinemaCode.get(i));
+        createShowtime(newDate.get(i), newMovies.get(i), newCinema.get(i));
       }
     }
     ShowtimeManager.printAllShowtime();
@@ -137,10 +130,10 @@ public class ShowtimeManager {
   /**
    * Create a showtime and store in database
    */
-  public static boolean createShowtime(String time, Movie movie, String cinemaCode) {
+  public static boolean createShowtime(String time, Movie movie, Cinema cinema) {
     int sId = Helper.generateUniqueId(Database.SHOWTIME);
     String showtimeId = String.format("S%04d", sId);
-    Showtime newShowtime = new Showtime(showtimeId, time, movie, cinemaCode, LayoutType.MEDIUM);
+    Showtime newShowtime = new Showtime(showtimeId, time, movie, cinema, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
     if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
@@ -168,8 +161,8 @@ public class ShowtimeManager {
       CineplexManager.displayExistingCineplex();
       Cineplex selectedCineplex = CineplexManager.selectCineplex();
       System.out.println("Which cinema in this cineplex would you like to pick?\n");
-      String cinemaCode = CineplexManager.selectCinema(selectedCineplex);
-      ShowtimeManager.createShowtime(date, selectedMovie, cinemaCode);
+      Cinema cinema = CineplexManager.selectCinema(selectedCineplex);
+      ShowtimeManager.createShowtime(date, selectedMovie, cinema);
       return true;
     }
 
@@ -202,17 +195,15 @@ public class ShowtimeManager {
    * Prints the showtime with details
    */
   public static void printAllShowtime() {
-    String cinemaCode;
-
     for (Showtime showtime : Database.SHOWTIME.values()) {
-      cinemaCode = showtime.getCinemaCode().substring(0, 2);
       System.out.println();
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
+      System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
       System.out
-          .println(String.format("%-20s: %s", "Location", ShowtimeManager.CinematoCineplexLocation.get(cinemaCode)));
+          .println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }
@@ -251,7 +242,6 @@ public class ShowtimeManager {
     int row = 0;
     int col = 0;
     Showtime showtime = getShowtimebyId(showtimeId);
-    Cineplex cineplex = CineplexManager.getCineplexByShowtime(showtime);
     displayShowtimeLayout(showtime);
 
     do {
@@ -269,6 +259,7 @@ public class ShowtimeManager {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println("\nSeat " + position + " selected...");
+      System.out.println("The price of the ticket is : $" + showtime.getMovie().getPrice());
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
       System.out.print("Which would you like to do: ");
@@ -282,7 +273,7 @@ public class ShowtimeManager {
             System.out.println("\nSeat " + position + " is booked successfully!");
             System.out.println("Your Ticket will be generated in a short time... ");
           }
-          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), cineplex,
+          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), showtime.getCinema(),
               newMovieGoer, position, showtime.getMovie().getTitle());
           break;
         case 2:
@@ -306,9 +297,8 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
     }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-    System.out.println(
-        String.format("%-20s: %s", "Location",
-            ShowtimeManager.CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2))));
+    System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum" : "Not Platinum"));
+    System.out.println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
   }
@@ -368,7 +358,7 @@ public class ShowtimeManager {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
     for (Showtime showtime : showtimeList) {
-      if (CinematoCineplexLocation.get(showtime.getCinemaCode().substring(0, 2)) == cineplex.getLocation()) {
+      if ( showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
     }
