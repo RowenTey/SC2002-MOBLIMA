@@ -259,7 +259,7 @@ public class ShowtimeManager {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println("\nSeat " + position + " selected...");
-      System.out.println("The price of the ticket is : $" + showtime.getMovie().getPrice());
+      System.out.println("The price of the ticket is : $" + BookingManager.computePrice(showtime.getMovie().getPrice(),showtime.getCinema()));
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
       System.out.print("Which would you like to do: ");

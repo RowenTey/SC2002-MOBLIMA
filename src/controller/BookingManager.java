@@ -91,17 +91,30 @@ public class BookingManager {
 //    }
 
     /**
-     * Creates a ticket for the createBooking method
+     * 
+     * @param price
+     * @return computed price
      */
-    public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema,String movieTitle){
+    public static double computePrice(double price, Cinema cinema){
         double adjustedPrice = price;
         double multiplier = 1.07;
-
         adjustedPrice *= multiplier;
         if(cinema.getIsPlatinum()){
             adjustedPrice += 5; //extra $5 for platinum cinema
         }
-        Ticket newTicket = new Ticket(adjustedPrice, seat, cinema, movieTitle);
+
+        // TODO: add in holiday price? different price for different age groups?
+
+        return adjustedPrice;
+    }
+
+    /**
+     * Creates a ticket for the createBooking method
+     */
+    public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema,String movieTitle){
+        double finalPrice = BookingManager.computePrice(price, cinema);
+        
+        Ticket newTicket = new Ticket(finalPrice, seat, cinema, movieTitle);
 
         return newTicket;
     }
