@@ -34,12 +34,25 @@ public enum Location {
    */
   JURONG_POINT("Jurong Point");
 
+  /**
+   * A String value for the location type for retrieving purposes
+   */
   public final String label;
 
+  /**
+   * Constructor for the Location Enum.
+   * 
+   * @param label label type as a string
+   */
   private Location(String label) {
     this.label = label;
   }
 
+  /**
+   * Get function to access the label of the location
+   * 
+   * @return the label of the location
+   */
   public String getLabel() {
     return this.label;
   }
