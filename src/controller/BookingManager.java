@@ -79,16 +79,7 @@ public class BookingManager {
          */
         return transactionid;
     }
-
-    //TODO refactor code to take in a cinema so boolean isPlatinum can be passed
-
-//    public static Ticket createBookingTicket(double price, Seat seat, Cineplex cineplex,String movieTitle,Cinema cinema){
-//        double adjustedPrice = price;
-//        double multiplier = 1;
-//        if (cinema.getIsPlatinum() ){
-//            multiplier *=2.5; //multiplier of 2.5x for platinum cinemas
-//            System.out.println("\nPlatinum class applied!");
-//        }
+    
     //TODO work out logic for holidays
 //
 //        multiplier*=1.07; // 7% GST
@@ -104,9 +95,12 @@ public class BookingManager {
      */
     public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema,String movieTitle){
         double adjustedPrice = price;
-        double multiplier = 1;
-        multiplier*=1.07; // 7% GST
+        double multiplier = 1.07;
+
         adjustedPrice *= multiplier;
+        if(cinema.getIsPlatinum()){
+            adjustedPrice += 5; //extra $5 for platinum cinema
+        }
         Ticket newTicket = new Ticket(adjustedPrice, seat, cinema, movieTitle);
 
         return newTicket;

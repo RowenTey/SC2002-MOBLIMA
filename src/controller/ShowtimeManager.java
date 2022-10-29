@@ -76,10 +76,12 @@ public class ShowtimeManager {
     LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
     ZoneId defaultZoneId = ZoneId.systemDefault();
 
-    for (int i = 0; i < 10; i++) {
-      newCinema.add(newCineplex.get(0).getCinemaList().get(i));
-      newCinema.add(newCineplex.get(1).getCinemaList().get(i));
+    for(int j=0; j< newCineplex.size(); j++){
+      for (int i = 0; i < 10; i++) {
+        newCinema.add(newCineplex.get(j).getCinemaList().get(i));
+      }
     }
+    
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       randomDay = minDay + random.nextInt(maxDay - minDay);
