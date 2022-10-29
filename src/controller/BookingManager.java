@@ -154,7 +154,7 @@ public class BookingManager {
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-25s: %s", "Transaction ID", booking.getTransactionId()));
         System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
-        System.out.println(String.format("%-25s: %s", "Mobile Number", movieGoer.getMobile()));
+        System.out.println(String.format("%-25s: +65-%s", "Mobile Number", movieGoer.getMobile()));
         System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
         System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
         System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
@@ -162,7 +162,7 @@ public class BookingManager {
         System.out.println(String.format("%-25s: %s", "Cinema Type", booking.getTicket().getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
         System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLocationStr()));
         System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
-        System.out.println(String.format("%-25s: %s", "Price", df.format(booking.getTicket().getPrice())));
+        System.out.println(String.format("%-25s: $%s", "Price", df.format(booking.getTicket().getPrice())));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }

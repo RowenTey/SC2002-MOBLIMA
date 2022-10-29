@@ -198,7 +198,7 @@ public class CineplexManager {
         System.out.println("List of cinema(s):");
         for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
             System.out.println(
-                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode());
+                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode() + " (" + (selectedCineplex.getCinemaList().get(i).getIsPlatinum()? "Platinum": "Not Platinum" )+ ")");
         }
     }
 }
