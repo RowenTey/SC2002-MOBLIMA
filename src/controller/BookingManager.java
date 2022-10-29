@@ -7,7 +7,11 @@ import model.*;
 import model.enums.AgeGroup;
 
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 /**
  * Booking Manager
@@ -95,7 +99,7 @@ public class BookingManager {
      * @param price
      * @return computed price
      */
-    public static double computePrice(double price, Cinema cinema){
+    public static double computePrice(double price, Cinema cinema, Seat seat){
         double adjustedPrice = price;
         double multiplier = 1.07;
         adjustedPrice *= multiplier;
@@ -103,7 +107,15 @@ public class BookingManager {
             adjustedPrice += 5; //extra $5 for platinum cinema
         }
 
-        // TODO: add in holiday price? different price for different age groups?
+        //TODO different price for different age groups?
+
+        String formattedDate = seat.getShowtime().getTime().substring(0,10);
+        //formats date to yyyy-MM-dd to match format in HOLIDAY database
+        System.out.println(formattedDate);
+        if (Database.HOLIDAYS.contains(formattedDate)){
+            multiplier *= 1.3;
+            adjustedPrice *= multiplier;    //30% surcharge for holiday
+        }
 
         return adjustedPrice;
     }
@@ -112,7 +124,7 @@ public class BookingManager {
      * Creates a ticket for the createBooking method
      */
     public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema,String movieTitle){
-        double finalPrice = BookingManager.computePrice(price, cinema);
+        double finalPrice = BookingManager.computePrice(price, cinema,seat);
         
         Ticket newTicket = new Ticket(finalPrice, seat, cinema, movieTitle);
 
@@ -156,6 +168,7 @@ public class BookingManager {
         System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
         System.out.println(String.format("%-25s: +65-%s", "Mobile Number", movieGoer.getMobile()));
         System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
+        System.out.println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().getShowtime().getTime()));
         System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
         System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
         System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getCinema().getCinemaCode()));
