@@ -3,6 +3,7 @@ package database;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import controller.BookingManager;
 import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
@@ -16,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import model.*;
+import model.enums.TypeMovies;
 
 /**
  * Database class to read and write serialized data into .dat files.
@@ -56,6 +58,11 @@ public class Database {
   public static HashMap<String, Movie> MOVIES = new HashMap<String, Movie>();
 
   /**
+   * HashMap to contain movie prices according to type.
+   */
+  public static HashMap<TypeMovies, Double> PRICES = new HashMap<TypeMovies, Double>();
+
+  /**
    * HashSet to contain dates of holidays
    */
   public static HashSet<String> HOLIDAYS = new HashSet<String>();
@@ -73,12 +80,6 @@ public class Database {
     if (!readSerializedObject(FileType.STAFF)) {
       System.out.println("Read into Staffs failed!");
     }
-    if (!readSerializedObject(FileType.MOVIE_GOERS)) {
-      System.out.println("Read into MovieGoers failed!");
-    }
-    if (!readSerializedObject(FileType.CINEMAS)) {
-      System.out.println("Read into Cinema failed!");
-    }
     if (!readSerializedObject(FileType.BOOKINGS)) {
       System.out.println("Read into Bookings failed!");
     }
@@ -90,6 +91,9 @@ public class Database {
     }
     if (!readSerializedObject(FileType.MOVIES)) {
       System.out.println("Read into Movies failed!");
+    }
+    if (!readSerializedObject(FileType.PRICES)) {
+      System.out.println("Read into Prices failed!");
     }
     if (!readSerializedObject(FileType.HOLIDAYS)) {
       System.out.println("Read into Holidays failed!");
@@ -111,12 +115,11 @@ public class Database {
    */
   public static void saveAllFiles() {
     saveFileIntoDatabase(FileType.STAFF);
-    saveFileIntoDatabase(FileType.MOVIE_GOERS);
-    saveFileIntoDatabase(FileType.CINEMAS);
     saveFileIntoDatabase(FileType.BOOKINGS);
     saveFileIntoDatabase(FileType.CINEPLEX);
     saveFileIntoDatabase(FileType.SHOWTIME);
     saveFileIntoDatabase(FileType.MOVIES);
+    saveFileIntoDatabase(FileType.PRICES);
     saveFileIntoDatabase(FileType.HOLIDAYS);
   }
 
@@ -153,6 +156,8 @@ public class Database {
       } else if (fileType == FileType.MOVIES) {
         MOVIES = (HashMap<String, Movie>) object;
         numOfMovies = MOVIES.size();
+      } else if (fileType == FileType.PRICES) {
+        PRICES = (HashMap<TypeMovies, Double>) object;
       } else if (fileType == FileType.HOLIDAYS) {
         HOLIDAYS = (HashSet<String>) object;
       }
@@ -201,6 +206,8 @@ public class Database {
         objectOutputStream.writeObject(SHOWTIME);
       } else if (fileType == FileType.MOVIES) {
         objectOutputStream.writeObject(MOVIES);
+      } else if (fileType == FileType.PRICES) {
+        objectOutputStream.writeObject(PRICES);
       } else if (fileType == FileType.HOLIDAYS) {
         objectOutputStream.writeObject(HOLIDAYS);
       }
@@ -293,18 +300,28 @@ public class Database {
     Database.initializeStaff();
     writeSerializedObject(FileType.STAFF);
 
+    BookingManager.clearBookings();
     BOOKINGS = new HashMap<String, Booking>();
     writeSerializedObject(FileType.BOOKINGS);
 
+    CineplexManager.clearCineplexes();
     CINEPLEX = new HashMap<String, Cineplex>();
     writeSerializedObject(FileType.CINEPLEX);
 
+    ShowtimeManager.clearShowtimes();
     SHOWTIME = new HashMap<String, Showtime>();
     writeSerializedObject(FileType.SHOWTIME);
 
+    MovieManager.clearMovies();
     MOVIES = new HashMap<String, Movie>();
     numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);
+
+    PRICES = new HashMap<TypeMovies, Double>();
+    PRICES.put(TypeMovies.TWO_D, 13.00);
+    PRICES.put(TypeMovies.THREE_D, 20.00);
+    PRICES.put(TypeMovies.BLOCKBUSTER, 16.00);
+    writeSerializedObject(FileType.PRICES);
 
     HOLIDAYS = new HashSet<String>();
     writeSerializedObject(FileType.HOLIDAYS);

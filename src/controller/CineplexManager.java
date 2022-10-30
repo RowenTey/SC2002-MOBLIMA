@@ -112,7 +112,7 @@ public class CineplexManager {
         }
 
         ArrayList<Integer> available_locations = new ArrayList<Integer>();
-        for(int i=0; i<5; i++){
+        for (int i = 0; i < 5; i++) {
             available_locations.add(i);
         }
         for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
@@ -126,7 +126,7 @@ public class CineplexManager {
                 available_locations.remove(Integer.valueOf(3));
             } else if (cineplexList.get(i).getLocationStr() == "Jurong Point") {
                 available_locations.remove(Integer.valueOf(4));
-            } 
+            }
         }
 
         System.out.println("Where do you want to add a new Cineplex ?");
@@ -175,7 +175,9 @@ public class CineplexManager {
         System.out.println("List of cinema(s):");
         for (int i = 0; i < selectedCineplex.getCinemaList().size(); i++) {
             System.out.println(
-                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode() + " (" + (selectedCineplex.getCinemaList().get(i).getIsPlatinum()? "Platinum": "Not Platinum" )+ ")");
+                    "(" + (i + 1) + ") " + "Cinema " + selectedCineplex.getCinemaList().get(i).getCinemaCode() + " ("
+                            + (selectedCineplex.getCinemaList().get(i).getIsPlatinum() ? "Platinum" : "Normal")
+                            + ")");
         }
     }
 }

@@ -1,6 +1,7 @@
 package helper;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -387,7 +388,7 @@ public class Helper {
   /**
    * Generate random date
    */
-  public static String generateRandomDate(){
+  public static String generateRandomDate() {
     Random random = new Random();
     int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
     int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
@@ -403,4 +404,10 @@ public class Helper {
 
     return strDate;
   }
+
+  /**
+   * 2 dp constructor
+   */
+  public static final DecimalFormat df = new DecimalFormat("0.00");
+
 }

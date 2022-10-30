@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import model.enums.Location;
+
 /**
  * The class that initialise a Cinema.
  * 
@@ -18,7 +20,7 @@ public class Cinema implements Serializable {
     /**
      * Its Cineplex
      */
-    private Cineplex cineplex;
+    private Location cineplex;
 
     /**
      * Unique code of the cinema
@@ -36,9 +38,8 @@ public class Cinema implements Serializable {
      * @param cineplex   Cineplex
      * @param cinemaCode Code of the cinema
      * @param isPlatinum Type of cinema
-     * @param is3D       Type of movies showed in cinema
      */
-    public Cinema(Cineplex cineplex, String cinemaCode, boolean isPlatinum) {
+    public Cinema(Location cineplex, String cinemaCode, boolean isPlatinum) {
         setCineplex(cineplex);
         setCinemaCode(cinemaCode);
         setIsPlatinum(isPlatinum);
@@ -49,8 +50,8 @@ public class Cinema implements Serializable {
      * 
      * @return Cineplex of cinema
      */
-    public Cineplex getCineplex() {
-        return this.cineplex;
+    public Location getCineplex() {
+        return cineplex;
     }
 
     /**
@@ -70,7 +71,7 @@ public class Cinema implements Serializable {
     /**
      * Sets the Cineplex of the cinema
      */
-    public void setCineplex(Cineplex cineplex) {
+    public void setCineplex(Location cineplex) {
         this.cineplex = cineplex;
     }
 
@@ -80,7 +81,7 @@ public class Cinema implements Serializable {
      * @return code of cinema
      */
     public String getCinemaCode() {
-        return this.cinemaCode;
+        return cinemaCode;
     }
 
     /**
@@ -89,6 +90,6 @@ public class Cinema implements Serializable {
      * @return Type of cinema
      */
     public boolean getIsPlatinum() {
-        return this.isPlatinum;
+        return isPlatinum;
     }
 }

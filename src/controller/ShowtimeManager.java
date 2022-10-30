@@ -82,6 +82,7 @@ public class ShowtimeManager {
         createShowtime(newDate.get(i), newMovies.get(i), newCinema.get(i));
       }
     }
+
     ShowtimeManager.printAllShowtime();
   }
 
@@ -186,9 +187,9 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
       System.out.println(String.format("%-20s: %s", "Cinema Type",
-          showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+          showtime.getCinema().getIsPlatinum() ? "Platinum" : "Normal"));
       System.out
-          .println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
+          .println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex()));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
       System.out.println();
     }
@@ -230,8 +231,8 @@ public class ShowtimeManager {
     }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
     System.out.println(
-        String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
-    System.out.println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
+        String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum() ? "Platinum" : "Normal"));
+    System.out.println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
   }
@@ -269,7 +270,7 @@ public class ShowtimeManager {
     ArrayList<Movie> movies = MovieManager.getAllMovieList();
     for (int i = 0; i < movies.size(); i++) {
       if (movies.get(i).getStatus() == status) {
-        MovieManager.printMovieDetails(movies.get(i));
+        MovieManager.displayMovieDetails(movies.get(i));
       }
     }
   }
@@ -281,7 +282,7 @@ public class ShowtimeManager {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
     for (Showtime showtime : showtimeList) {
-      if (showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
+      if (showtime.getCinema().getCineplex() == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
     }
@@ -293,4 +294,8 @@ public class ShowtimeManager {
     }
   }
 
+  public static boolean clearShowtimes() {
+    showtimeList.clear();
+    return true;
+  }
 }
