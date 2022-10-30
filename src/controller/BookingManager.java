@@ -6,7 +6,6 @@ import helper.Helper;
 import model.*;
 import model.enums.AgeGroup;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -144,7 +143,7 @@ public class BookingManager {
     System.out.println(
         String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
-    System.out.println(String.format("%-25s: $%s", "Price", df.format(booking.getTicket().getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -170,7 +169,7 @@ public class BookingManager {
         String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", position));
-    System.out.println(String.format("%-25s: $%s", "Price", df.format(ticket.getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
     System.out.println(String.format("%-25s: %s", "Status", ticket.getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
