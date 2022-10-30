@@ -76,12 +76,11 @@ public class ShowtimeManager {
     LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
     ZoneId defaultZoneId = ZoneId.systemDefault();
 
-    for(int j=0; j< newCineplex.size(); j++){
+    for (int j = 0; j < newCineplex.size(); j++) {
       for (int i = 0; i < 10; i++) {
         newCinema.add(newCineplex.get(j).getCinemaList().get(i));
       }
     }
-    
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       randomDay = minDay + random.nextInt(maxDay - minDay);
@@ -201,7 +200,8 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-      System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
+      System.out.println(String.format("%-20s: %s", "Cinema Type",
+          showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
       System.out
           .println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -259,7 +259,8 @@ public class ShowtimeManager {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println("\nSeat " + position + " selected...");
-      System.out.println("The price of the ticket is : $" + BookingManager.computePrice(showtime.getMovie().getPrice(),showtime.getCinema() ,showtime.getSeatAt(row+1,col)));
+      System.out.println("The price of the ticket is : $" + BookingManager.computePrice(showtime.getMovie().getPrice(),
+          showtime.getCinema(), showtime.getSeatAt(row + 1, col)));
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
       System.out.print("Which would you like to do: ");
@@ -273,7 +274,8 @@ public class ShowtimeManager {
             System.out.println("\nSeat " + position + " is booked successfully!");
             System.out.println("Your Ticket will be generated in a short time... ");
           }
-          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), showtime.getCinema(),
+          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col),
+              showtime.getCinema(),
               newMovieGoer, position, showtime.getMovie().getTitle());
           break;
         case 2:
@@ -297,7 +299,8 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
     }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-    System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum" : "Not Platinum"));
+    System.out.println(
+        String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
@@ -358,7 +361,7 @@ public class ShowtimeManager {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
     for (Showtime showtime : showtimeList) {
-      if ( showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
+      if (showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
     }

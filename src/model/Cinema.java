@@ -38,7 +38,6 @@ public class Cinema implements Serializable {
      * @param isPlatinum Type of cinema
      * @param is3D       Type of movies showed in cinema
      */
-
     public Cinema(Cineplex cineplex, String cinemaCode, boolean isPlatinum) {
         setCineplex(cineplex);
         setCinemaCode(cinemaCode);
