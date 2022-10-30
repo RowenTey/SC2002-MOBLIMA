@@ -55,11 +55,11 @@ public class MovieGoerView extends MainView {
                 case 2:
                     ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer", false);
                     showtimeView.viewApp();
-                    break;
+                    continue;
                 case 3:
                     MovieView movieView = new MovieView(this.path + " > MovieGoer", false);
                     movieView.viewApp();
-                    break;
+                    continue;
                 case 4:
                     System.out.println("View Booking History");
                     Helper.clearScreen();

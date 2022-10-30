@@ -390,7 +390,7 @@ public class Helper {
    */
   public static String generateRandomDate() {
     Random random = new Random();
-    int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
+    int minDay = (int) LocalDate.of(2022, 11, 1).toEpochDay();
     int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
     long randomDay = minDay + random.nextInt(maxDay - minDay);
     LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
@@ -410,10 +410,9 @@ public class Helper {
    */
   public static DecimalFormat df2 = new DecimalFormat("0.00");
 
-  /** 
+  /**
    * 1 dp constructor
    */
   public static DecimalFormat df1 = new DecimalFormat("0.0");
-
 
 }

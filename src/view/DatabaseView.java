@@ -75,11 +75,7 @@ public class DatabaseView extends MainView {
           break;
         case 4:
           printRoute("Cineplex App > Staff > Database > Add Holidays");
-          if (handleAddHoliday()) {
-            System.out.println("Holiday added successfully");
-          } else {
-            System.out.println("Holiday added unsuccessfully");
-          }
+          handleAddHoliday();
           break;
         case 5:
           printRoute("Cineplex App > Staff > Database > Update Ticket Prices");

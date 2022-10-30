@@ -46,8 +46,9 @@ public class ShowtimeView extends MainView {
         System.out.println("What would you like to do ?");
         if (this.isStaff) {
             System.out.println("(1) Create Showtime");
-            System.out.println("(2) List Showtimes");
-            System.out.println("(3) Exit");
+            System.out.println("(2) Remove Showtime");
+            System.out.println("(3) List Showtimes");
+            System.out.println("(4) Exit");
         } else {
             System.out.println("(1) List \"NOW SHOWING\" Movies");
             System.out.println("(2) List \"PREVIEW\" Movies");
