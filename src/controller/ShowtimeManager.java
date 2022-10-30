@@ -235,59 +235,6 @@ public class ShowtimeManager {
   }
 
   /**
-   * Prompt user for booking booking details
-   */
-  public static void promptBooking(String showtimeId) {
-    String position;
-    int row = 0;
-    int col = 0;
-    Showtime showtime = getShowtimebyId(showtimeId);
-    displayShowtimeLayout(showtime);
-
-    do {
-      System.out.println("Please enter the desired seat coordinates (e.g A6): ");
-      position = Helper.readString();
-      row = getSeatRow(position);
-      col = Integer.parseInt(position.substring(1));
-      if (row != 3 && row != 7 && col != 5 && col != 14) {
-        break;
-      }
-      System.out.println("\nInvalid row and column!");
-    } while (row == 3 || row == 7 || col == 5 || col == 14);
-
-    if (showtime.getSeatAt(row + 1, col).getBooked()) {
-      System.out.println("Booking failed! Seat is occupied...");
-    } else {
-      System.out.println("\nSeat " + position + " selected...");
-      System.out.println("The price of the ticket is : $" + BookingManager.computePrice(showtime.getMovie().getPrice(),showtime.getCinema() ,showtime.getSeatAt(row+1,col)));
-      System.out.println("(1) Confirm Payment");
-      System.out.println("(2) Back");
-      System.out.print("Which would you like to do: ");
-
-      int pay;
-      pay = Helper.readInt(1, 2);
-      switch (pay) {
-        case 1:
-          MovieGoer newMovieGoer = BookingManager.promptUserDetails();
-          if (bookSeat(row + 1, col, showtime)) {
-            System.out.println("\nSeat " + position + " is booked successfully!");
-            System.out.println("Your Ticket will be generated in a short time... ");
-          }
-          BookingManager.createBooking(showtime.getMovie().getPrice(), showtime.getSeatAt(row + 1, col), showtime.getCinema(),
-              newMovieGoer, position, showtime.getMovie().getTitle());
-          break;
-        case 2:
-          System.out.println("Booking failed!");
-          break;
-        default:
-          break;
-      }
-    }
-
-    Helper.pressAnyKeyToContinue();
-  }
-
-  /**
    * Print details of showtime
    */
   public static void printShowtimeDetails(Showtime showtime, String from) {
@@ -306,7 +253,7 @@ public class ShowtimeManager {
   /**
    * Gets a showtime by showtime ID from database
    */
-  private static Showtime getShowtimebyId(String showtimeId) {
+  protected static Showtime getShowtimebyId(String showtimeId) {
     if (Database.SHOWTIME.containsKey(showtimeId)) {
       return Database.SHOWTIME.get(showtimeId);
     }
@@ -327,16 +274,6 @@ public class ShowtimeManager {
     }
 
     return row;
-  }
-
-  /**
-   * Books the seat at that position for that showtime
-   */
-  protected static boolean bookSeat(int row, int column, Showtime showtime) {
-    showtime.getSeatAt(row, column).setBooked(true);
-    Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
-    Database.saveFileIntoDatabase(FileType.SHOWTIME);
-    return true;
   }
 
   /**
