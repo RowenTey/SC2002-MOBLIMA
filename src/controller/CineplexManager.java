@@ -84,6 +84,7 @@ public class CineplexManager {
             if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
                 Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
                 Database.CINEPLEX.remove(old.getCineplexId());
+                //TODO remove all showtimes
                 Database.saveFileIntoDatabase(FileType.CINEPLEX);
                 System.out.println("Removed cineplex!");
             }
