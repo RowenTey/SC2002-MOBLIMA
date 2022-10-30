@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import controller.BookingManager;
 import controller.ShowtimeManager;
 import helper.Helper;
 import model.Cineplex;
@@ -169,7 +170,7 @@ public class ShowtimeView extends MainView {
         ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
         ShowtimeManager.displayShowtime(movieShowtimes, "movie");
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        ShowtimeManager.promptBooking(showtimeId);
+        BookingManager.promptBooking(showtimeId);
     }
 
     /**
@@ -184,6 +185,6 @@ public class ShowtimeView extends MainView {
             ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
         }
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        ShowtimeManager.promptBooking(showtimeId);
+        BookingManager.promptBooking(showtimeId);
     }
 }
