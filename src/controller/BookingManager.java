@@ -9,7 +9,6 @@ import model.enums.AgeGroup;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-
 /**
  * Booking Manager
  *
@@ -68,7 +67,7 @@ public class BookingManager {
     /**
      * Creates a transaction ID for booking
      */
-    public static String createTransactionId (Seat seat){
+    public static String createTransactionId(Seat seat) {
         String cinemacode = seat.getShowtime().getCinema().getCinemaCode(); // first two letters of location
         String timeShow = Helper.getTimeNow(); // get the current time
         timeShow = formatDate(timeShow);
@@ -80,16 +79,16 @@ public class BookingManager {
          */
         return transactionid;
     }
-    
-    //TODO work out logic for holidays
-//
-//        multiplier*=1.07; // 7% GST
-//        System.out.printf("\nTotal multiplier: %f",multiplier);
-//        adjustedPrice *= multiplier;
-//        Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
-//
-//        return newTicket;
-//    }
+
+    // TODO work out logic for holidays
+    //
+    // multiplier*=1.07; // 7% GST
+    // System.out.printf("\nTotal multiplier: %f",multiplier);
+    // adjustedPrice *= multiplier;
+    // Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
+    //
+    // return newTicket;
+    // }
 
     /**
      * 
@@ -98,20 +97,20 @@ public class BookingManager {
      */
     public static double computePrice(double price, Cinema cinema, Seat seat, MovieGoer movieGoer){
         double adjustedPrice = price;
-        double multiplier = 1.07;
+        double multiplier = 1.07; // GST
         adjustedPrice *= multiplier;
-        if(cinema.getIsPlatinum()){
-            adjustedPrice += 5; //extra $5 for platinum cinema
+        if (cinema.getIsPlatinum()) {
+            adjustedPrice += 5; // extra $5 for platinum cinema
         }
 
-        //TODO different price for different age groups?
+        // TODO different price for different age groups?
 
-        String formattedDate = seat.getShowtime().getTime().substring(0,10);
-        //formats date to yyyy-MM-dd to match format in HOLIDAY database
+        String formattedDate = seat.getShowtime().getTime().substring(0, 10);
+        // formats date to yyyy-MM-dd to match format in HOLIDAY database
         System.out.println(formattedDate);
-        if (Database.HOLIDAYS.contains(formattedDate)){
+        if (Database.HOLIDAYS.contains(formattedDate)) {
             multiplier *= 1.3;
-            adjustedPrice *= multiplier;    //30% surcharge for holiday
+            adjustedPrice *= multiplier; // 30% surcharge for holiday
         }
 
         return adjustedPrice;
@@ -169,8 +168,10 @@ public class BookingManager {
         System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
         System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
         System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getCinema().getCinemaCode()));
-        System.out.println(String.format("%-25s: %s", "Cinema Type", booking.getTicket().getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
-        System.out.println(String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLocationStr()));
+        System.out.println(String.format("%-25s: %s", "Cinema Type",
+                booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+        System.out.println(
+                String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLocationStr()));
         System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
         System.out.println(String.format("%-25s: $%s", "Price", df.format(booking.getTicket().getPrice())));
         System.out.println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid()?"Paid": "Ready for Payment"));

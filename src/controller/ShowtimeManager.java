@@ -76,12 +76,11 @@ public class ShowtimeManager {
     LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
     ZoneId defaultZoneId = ZoneId.systemDefault();
 
-    for(int j=0; j< newCineplex.size(); j++){
+    for (int j = 0; j < newCineplex.size(); j++) {
       for (int i = 0; i < 10; i++) {
         newCinema.add(newCineplex.get(j).getCinemaList().get(i));
       }
     }
-    
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       randomDay = minDay + random.nextInt(maxDay - minDay);
@@ -201,7 +200,8 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
       System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-      System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum": "Not Platinum"));
+      System.out.println(String.format("%-20s: %s", "Cinema Type",
+          showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
       System.out
           .println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -244,7 +244,8 @@ public class ShowtimeManager {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
     }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
-    System.out.println(String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum()? "Platinum" : "Not Platinum"));
+    System.out.println(
+        String.format("%-20s: %s", "Cinema Type", showtime.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-20s: %s", "Location", showtime.getCinema().getCineplex().getLocationStr()));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
@@ -295,7 +296,7 @@ public class ShowtimeManager {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
     for (Showtime showtime : showtimeList) {
-      if ( showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
+      if (showtime.getCinema().getCineplex().getLocation() == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
     }
