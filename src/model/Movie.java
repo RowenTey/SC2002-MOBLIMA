@@ -83,6 +83,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         setDirector(director);
         setCast(cast);
         setType(type);
+        setOverallRating(-1);
         setTicketSales(0);
         this.reviews = new ArrayList<Review>();
     }
@@ -229,6 +230,10 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
      * @return overall rating of the movie
      */
     public double getOverallRating() {
+        if (reviews.size() == 0) {
+            return -1;
+        }
+
         double dummy = 0;
         for (int i = 0; i < reviews.size(); i++) {
             dummy += reviews.get(i).getRating();
@@ -238,7 +243,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         return dummy;
     }
 
-    public void setOverallRating(double overallRating){
+    public void setOverallRating(double overallRating) {
         this.overallRating = overallRating;
     }
 
@@ -283,9 +288,19 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         if (this == movie) {
             return 0;
         }
-        double thisOverallRating = this.overallRating;
+        double thisOverallRating = this.getOverallRating();
         double thatOverallRating = movie.getOverallRating();
 
-        return (int)(thisOverallRating - thatOverallRating);
+        return thisOverallRating > thatOverallRating ? 1 : -1;
+    }
+
+    public int compareToTicketSales(Movie movie) {
+        if (this == movie) {
+            return 0;
+        }
+        int thisTicketSales = this.getTicketSales();
+        int thatTicketSales = movie.getTicketSales();
+
+        return (thisTicketSales - thatTicketSales);
     }
 }

@@ -41,7 +41,7 @@ public class Review implements Serializable {
      * @return the review
      */
     public String getReview() {
-        return this.review;
+        return review;
     }
 
     /**
@@ -59,7 +59,7 @@ public class Review implements Serializable {
      * @return the rating
      */
     public double getRating() {
-        return this.rating;
+        return rating;
     }
 
     /**

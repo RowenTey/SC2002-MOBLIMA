@@ -78,7 +78,7 @@ public class BookingManager {
   /**
    * Creates a ticket for the createBooking method
    */
-  public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema,MovieGoer movieGoer) {
+  public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema, MovieGoer movieGoer) {
     double finalPrice = BookingManager.computePrice(movie.getPrice(), cinema, seat, movieGoer);
 
     Ticket newTicket = new Ticket(finalPrice, seat, cinema, movie.getTitle(), movie.getType());
@@ -103,7 +103,6 @@ public class BookingManager {
     bookingList.add(newBooking);
     Database.BOOKINGS.put(newTransactionId, newBooking);
     Database.saveFileIntoDatabase(FileType.BOOKINGS);
-
     System.out.println("\nBooking created! Your ticket is printed below: ");
     printBookingDetails(newBooking);
   }
@@ -154,7 +153,8 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Movie Title", ticket.getMovieTitle()));
     System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getMovieType()));
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
-    System.out.println(String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+    System.out.println(
+        String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", position));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
@@ -233,18 +233,19 @@ public class BookingManager {
       position = Helper.readString();
       row = ShowtimeManager.getSeatRow(position);
       col = Integer.parseInt(position.substring(1));
-      if (row != 3 && row != 7 && col != 5 && col != 14) {
+      if (row != -1 && row != 3 && row != 7 && col != 5 && col != 14 && col <= 17) {
         break;
       }
       System.out.println("\nInvalid row and column!");
-    } while (row == 3 || row == 7 || col == 5 || col == 14);
+    } while (row == 3 || row == 7 || col == 5 || col == 14 || row == -1 || col > 17);
 
     if (showtime.getSeatAt(row + 1, col).getBooked()) {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println("\nSeat " + position + " selected...");
       MovieGoer newMovieGoer = BookingManager.promptUserDetails();
-      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(),showtime.getSeatAt(row + 1, col), showtime.getCinema(),newMovieGoer);
+      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(), showtime.getSeatAt(row + 1, col),
+          showtime.getCinema(), newMovieGoer);
       BookingManager.printTicketDetails(ticket, newMovieGoer, position);
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
@@ -259,7 +260,7 @@ public class BookingManager {
           }
           BookingManager.createBooking(showtime.getSeatAt(row + 1, col), ticket, newMovieGoer, position,
               showtime.getMovie().getTitle());
-          showtime.getMovie().setTicketSales(showtime.getMovie().getTicketSales()+1);
+          updateTicketSales(showtime);
           break;
         case 2:
           System.out.println("Booking failed!");
@@ -279,6 +280,14 @@ public class BookingManager {
     showtime.getSeatAt(row, column).setBooked(true);
     Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
+    return true;
+  }
+
+  protected static boolean updateTicketSales(Showtime showtime) {
+    Movie movie = showtime.getMovie();
+    movie.setTicketSales(movie.getTicketSales() + 1);
+    Database.MOVIES.put(movie.getMovieId(), movie);
+    Database.saveFileIntoDatabase(FileType.MOVIES);
     return true;
   }
 

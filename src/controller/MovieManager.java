@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import database.*;
@@ -256,28 +257,16 @@ public class MovieManager {
             System.out.println("No movies found!");
             return;
         }
+
         ArrayList<Movie> movieList = MovieManager.getBookableMovies();
+        Collections.sort(movieList, (a, b) -> {
+            return a.compareToTicketSales(b);
+        });
+        List<Movie> res = movieList.subList(movieList.size() - 5, movieList.size());
 
-        int len = movieList.size();
-        for (int i = 1; i < len; i += 1) {
-            Movie right = movieList.get(i);
-            for (int j = i; j > 0; j -= 1) {
-                Movie left = movieList.get(i - 1);
-                if (left.getTicketSales() > right.getTicketSales()) {
-                    movieList.set(j - 1, right);
-                    movieList.set(j, left);
-                } else
-                    break;
-            }
-        }
-
-        int resSize = 5;
-        if (MovieManager.getBookableMovies().size() < 5)
-            resSize = MovieManager.getBookableMovies().size();
-        List<Movie> res = movieList.subList(len - resSize, len);
-        System.out.println("Top " + (resSize) + " Movies by Ticket Sales: ");
-        for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
+        System.out.println("Top 5 Movies by Overall Rating: ");
+        for (int i = 5; i > 0; i--) {
+            System.out.println("(" + (5 - i + 1) + ") " + res.get(i - 1).getTitle());
         }
     }
 
@@ -289,28 +278,14 @@ public class MovieManager {
             System.out.println("No movies found!");
             return;
         }
+
         ArrayList<Movie> movieList = MovieManager.getBookableMovies();
+        Collections.sort(movieList);
+        List<Movie> res = movieList.subList(movieList.size() - 5, movieList.size());
 
-        int len = movieList.size();
-        for (int i = 1; i < len; i += 1) {
-            Movie right = movieList.get(i);
-            for (int j = i; j > 0; j -= 1) {
-                Movie left = movieList.get(i - 1);
-                if (left.getOverallRating() > right.getOverallRating()) {
-                    movieList.set(j - 1, right);
-                    movieList.set(j, left);
-                } else
-                    break;
-            }
-        }
-
-        int resSize = 5;
-        if (MovieManager.getBookableMovies().size() < 5)
-            resSize = MovieManager.getBookableMovies().size();
-        List<Movie> res = movieList.subList(len - resSize, len);
-        System.out.println("Top " + (resSize) + " Movies by Overall Rating: ");
-        for (int i = resSize - 1; i >= 0; i--) {
-            System.out.println("(" + (resSize - i) + ") " + res.get(i).getTitle());
+        System.out.println("Top 5 Movies by Overall Rating: ");
+        for (int i = 5; i > 0; i--) {
+            System.out.println("(" + (5 - i + 1) + ") " + res.get(i - 1).getTitle());
         }
     }
 
@@ -343,15 +318,15 @@ public class MovieManager {
     public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
         if (reviews.size() == 0) {
-            System.out.println("No reviews found!");
+            System.out.println("\nNo reviews found!");
             return;
         }
 
         for (Review review : reviews) {
             System.out.println();
             System.out.println(String.format("%-40s", "").replace(" ", "-"));
-            System.out.println(String.format("%-30s: %s", "Rating", Helper.df1.format(review.getRating())));
-            System.out.println(String.format("%-30s: %s", "Review", review.getReview()));
+            System.out.println(String.format("%-15s: %s", "Rating", Helper.df1.format(review.getRating())));
+            System.out.println(String.format("%-15s: %s", "Review", review.getReview()));
             System.out.println(String.format("%-40s", "").replace(" ", "-"));
             System.out.println();
         }
