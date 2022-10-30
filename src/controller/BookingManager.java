@@ -78,11 +78,10 @@ public class BookingManager {
   /**
    * Creates a ticket for the createBooking method
    */
-  public static Ticket createBookingTicket(double price, Seat seat, Cinema cinema, String movieTitle,
-      MovieGoer movieGoer) {
-    double finalPrice = BookingManager.computePrice(price, cinema, seat, movieGoer);
+  public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema,MovieGoer movieGoer) {
+    double finalPrice = BookingManager.computePrice(movie.getPrice(), cinema, seat, movieGoer);
 
-    Ticket newTicket = new Ticket(finalPrice, seat, cinema, movieTitle);
+    Ticket newTicket = new Ticket(finalPrice, seat, cinema, movie.getTitle(), movie.getType());
 
     return newTicket;
   }
@@ -99,9 +98,6 @@ public class BookingManager {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
     String newTransactionId = createTransactionId(seat);
     ticket.setIsPaid(true);
-    // Ticket newTicket =
-    // createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be
-    // implemented
     Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
         position);
     bookingList.add(newBooking);
@@ -128,6 +124,7 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
     System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
+    System.out.println(String.format("%-25s: %s", "Movie Type", booking.getTicket().getMovieType()));
     System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getCinema().getCinemaCode()));
     System.out.println(String.format("%-25s: %s", "Cinema Type",
         booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
@@ -155,9 +152,9 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Time", ticket.getSeat().getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
     System.out.println(String.format("%-25s: %s", "Movie Title", ticket.getMovieTitle()));
+    System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getMovieType()));
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
-    System.out.println(
-        String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+    System.out.println(String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", position));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
@@ -247,8 +244,7 @@ public class BookingManager {
     } else {
       System.out.println("\nSeat " + position + " selected...");
       MovieGoer newMovieGoer = BookingManager.promptUserDetails();
-      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie().getPrice(),
-          showtime.getSeatAt(row + 1, col), showtime.getCinema(), showtime.getMovie().getTitle(), newMovieGoer);
+      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(),showtime.getSeatAt(row + 1, col), showtime.getCinema(),newMovieGoer);
       BookingManager.printTicketDetails(ticket, newMovieGoer, position);
       System.out.println("(1) Confirm Payment");
       System.out.println("(2) Back");
@@ -263,6 +259,7 @@ public class BookingManager {
           }
           BookingManager.createBooking(showtime.getSeatAt(row + 1, col), ticket, newMovieGoer, position,
               showtime.getMovie().getTitle());
+          showtime.getMovie().setTicketSales(showtime.getMovie().getTicketSales()+1);
           break;
         case 2:
           System.out.println("Booking failed!");

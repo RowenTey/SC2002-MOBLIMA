@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -71,6 +72,7 @@ public class ShowtimeManager {
       strDate = Helper.generateRandomDate();
       newDate.add(strDate);
     }
+    Collections.shuffle(newCinema);
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
       if (newMovies.get(i).getStatus() == ShowStatus.NOW_SHOWING

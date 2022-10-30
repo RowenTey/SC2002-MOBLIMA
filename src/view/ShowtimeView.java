@@ -8,7 +8,6 @@ import helper.Helper;
 import model.Cineplex;
 import model.Movie;
 import model.Showtime;
-import model.enums.ShowStatus;
 
 /**
  * Viewing interface for Showtime
@@ -24,17 +23,11 @@ public class ShowtimeView extends MainView {
     public String path;
 
     /**
-     * Current user is staff
-     */
-    public boolean isStaff;
-
-    /**
      * Overrided contructor for the ShowtimeView
      */
     public ShowtimeView(String path, boolean isStaff) {
         super();
         this.path = path;
-        this.isStaff = isStaff;
     }
 
     /**
@@ -62,68 +55,28 @@ public class ShowtimeView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
-
-        // staff
-        if (this.isStaff) {
-            do {
-                printMenu();
-                choice = Helper.readInt(1, 3);
-                switch (choice) {
-                    case 1:
-                        Helper.clearScreen();
-                        printRoute(path + " > Create Showtime");
-                        handleCreateShowtime();
-                        Helper.pressAnyKeyToContinue();
-                        break;
-                    case 2:
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Showtime Listing");
-                        ShowtimeManager.printAllShowtime();
-                        Helper.pressAnyKeyToContinue();
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        break;
-                }
-            } while (choice != 3);
-        }
-
-        // user
-        else {
-            do {
-                printMenu();
-                choice = Helper.readInt(1, 4);
-                switch (choice) {
-                    case 1:
-                        // NOW_SHOWING
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Movies Listing (NOW SHOWING)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
-                        break;
-                    case 2:
-                        // PREVIEW
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Movies Listing (PREVIEW)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.PREVIEW);
-                        break;
-                    case 3:
-                        // COMING SOON
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Showtime > Movies Listing (COMING SOON)");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
-                        break;
-                    case 4:
-                        break;
-                    default:
-                        break;
-                }
-                if (choice != 4) {
+        do {
+            printMenu();
+            choice = Helper.readInt(1, 3);
+            switch (choice) {
+                case 1:
+                    Helper.clearScreen();
+                    printRoute(path + " > Create Showtime");
+                    handleCreateShowtime();
                     Helper.pressAnyKeyToContinue();
-                }
-            } while (choice != 4);
-        }
-
+                    break;
+                case 2:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > Showtime > Showtime Listing");
+                    ShowtimeManager.printAllShowtime();
+                    Helper.pressAnyKeyToContinue();
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        } while (choice != 3);
     }
 
     /**

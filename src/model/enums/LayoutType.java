@@ -27,14 +27,14 @@ public enum LayoutType {
   /**
    * A String value for the Layout type for retrieving purposes
    */
-  public final String layoutTypeAsStr;
+  public final String label;
 
   /**
    * Constructor for the layoutType Enum.
    * 
-   * @param layoutTypeAsStr Layout type as a string
+   * @param label Layout type as a string
    */
-  private LayoutType(String layoutTypeAsStr) {
-    this.layoutTypeAsStr = layoutTypeAsStr;
+  private LayoutType(String label) {
+    this.label = label;
   }
 }
