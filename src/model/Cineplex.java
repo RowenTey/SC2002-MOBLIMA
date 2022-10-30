@@ -59,7 +59,7 @@ public class Cineplex implements Serializable {
         this.cinemaList = new ArrayList<Cinema>();
         for (int i = 0; i < this.numOfCinemas; i++) {
             String s = "" + i;
-            Cinema newCinema = new Cinema(this, cinemaCode + s, i>=4? false: true);
+            Cinema newCinema = new Cinema(this.getLocation(), cinemaCode + s, i >= 4 ? false : true);
             this.cinemaList.add(newCinema);
         }
     }

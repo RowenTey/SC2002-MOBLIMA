@@ -65,7 +65,7 @@ public class MovieManager {
         for (Movie movie : Database.MOVIES.values()) {
             if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
                 MovieManager.bookableMovieList.add(movie);
-            }else if(movie.getStatus() == ShowStatus.COMING_SOON){
+            } else if (movie.getStatus() == ShowStatus.COMING_SOON) {
                 MovieManager.comingSoonMovieList.add(movie);
             }
         }
@@ -112,7 +112,7 @@ public class MovieManager {
     /**
      * Print details of movie
      */
-    public static void printMovieDetails(Movie movie) {
+    public static void displayMovieDetails(Movie movie) {
         System.out.println();
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println(String.format("%-25s: %s", "Movie ID", movie.getMovieId()));
@@ -125,7 +125,8 @@ public class MovieManager {
         System.out.println(String.format("%-25s: %s", "Cast", cast));
         System.out.println(String.format("%-25s: %s", "Synopsis", movie.getSynopsis()));
         System.out.println(String.format("%-25s: %s", "Number of Ticket Sales", movie.getTicketSales()));
-        System.out.println(String.format("%-25s: %s", "Overall Rating", movie.getReviews().size()<=1 ? "NA": df.format(movie.getOverallRating()) ));
+        System.out.println(String.format("%-25s: %s", "Overall Rating",
+                movie.getReviews().size() <= 1 ? "NA" : df.format(movie.getOverallRating())));
         System.out.println(String.format("%-40s", "").replace(" ", "-"));
         System.out.println();
     }
@@ -138,9 +139,9 @@ public class MovieManager {
         int mId = Helper.generateUniqueId(Database.MOVIES);
         String movieId = String.format("M%04d", mId);
 
-        double TWODMovieDefaultPrice = 13;
-        double THREEDMovieDefaultPrice = 20;
-        double BlockbusterMovieDefaultPrice = 16;
+        double TWODMovieDefaultPrice = Database.PRICES.get(TypeMovies.TWO_D);
+        double THREEDMovieDefaultPrice = Database.PRICES.get(TypeMovies.THREE_D);
+        double BlockbusterMovieDefaultPrice = Database.PRICES.get(TypeMovies.BLOCKBUSTER);
 
         Movie newMovie = null;
         switch (type) {
@@ -166,15 +167,15 @@ public class MovieManager {
         Database.MOVIES.put(movieId, newMovie);
         Database.numOfMovies++;
         Database.saveFileIntoDatabase(FileType.MOVIES);
-        if (status == ShowStatus.NOW_SHOWING || status == ShowStatus.PREVIEW){
+        if (status == ShowStatus.NOW_SHOWING || status == ShowStatus.PREVIEW) {
             MovieManager.bookableMovieList.add(newMovie);
             MovieManager.totalMovies++;
-        }else if(status == ShowStatus.COMING_SOON){
+        } else if (status == ShowStatus.COMING_SOON) {
             MovieManager.comingSoonMovieList.add(newMovie);
             MovieManager.totalMovies++;
         }
         System.out.println("Movie created! Movie Details: ");
-        MovieManager.printMovieDetails(newMovie);
+        MovieManager.displayMovieDetails(newMovie);
     }
 
     /**
@@ -194,7 +195,7 @@ public class MovieManager {
                 if (oldMovie.getStatus() == ShowStatus.NOW_SHOWING || oldMovie.getStatus() == ShowStatus.PREVIEW) {
                     MovieManager.bookableMovieList.remove(oldMovie);
                     MovieManager.totalMovies--;
-                }else if(oldMovie.getStatus() == ShowStatus.COMING_SOON){
+                } else if (oldMovie.getStatus() == ShowStatus.COMING_SOON) {
                     MovieManager.comingSoonMovieList.remove(oldMovie);
                     MovieManager.totalMovies--;
                 }
@@ -231,7 +232,7 @@ public class MovieManager {
         int choice = Helper.readInt(1, (bookableMovieList.size() + 1));
         Movie selectedMovie = bookableMovieList.get(choice - 1);
         System.out.println("\nYou selected:");
-        MovieManager.printMovieDetails(selectedMovie);
+        MovieManager.displayMovieDetails(selectedMovie);
         Helper.pressAnyKeyToContinue();
         return selectedMovie;
     }
@@ -270,6 +271,9 @@ public class MovieManager {
                 opt = Helper.readInt(1, count);
                 ShowStatus newShowStatus = ShowStatus.values()[opt - 1];
                 movie.setStatus(newShowStatus);
+                if (newShowStatus == ShowStatus.END_OF_SHOWING) {
+                    bookableMovieList.remove(movie);
+                }
                 Database.MOVIES.remove(movie.getMovieId());
                 Database.MOVIES.put(movieId, movie);
                 Database.saveFileIntoDatabase(FileType.MOVIES);
@@ -362,7 +366,8 @@ public class MovieManager {
     public static void displayExistingMovies() {
         System.out.println("Current Movie(es) we have: ");
         for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
-            System.out.println("(" + (i + 1) + ") " + MovieManager.getAllMovieList().get(i).getTitle() + " (" + MovieManager.getAllMovieList().get(i).getStatus() +  ")" );
+            System.out.println("(" + (i + 1) + ") " + MovieManager.getAllMovieList().get(i).getTitle() + " ("
+                    + MovieManager.getAllMovieList().get(i).getStatus() + ")");
         }
     }
 
@@ -440,5 +445,11 @@ public class MovieManager {
             ShowtimeView showtimeView = new ShowtimeView(path + " > Movie", false);
             showtimeView.viewApp(path, MovieManager.selectMovie());
         }
+    }
+
+    public static boolean clearMovies() {
+        bookableMovieList.clear();
+        comingSoonMovieList.clear();
+        return true;
     }
 }

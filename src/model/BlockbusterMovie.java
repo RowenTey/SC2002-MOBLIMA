@@ -11,7 +11,6 @@ import model.enums.TypeMovies;
  * @since 2022-10-24
  */
 public class BlockbusterMovie extends Movie {
-
     /**
      * the base price of the blockbustor movie
      */
@@ -20,14 +19,14 @@ public class BlockbusterMovie extends Movie {
     /**
      * Constructor of blockbuster movie
      * 
-     * @param movieId   ID of the movie
-     * @param title     title of the movie
-     * @param status    status of the movie
-     * @param synopsis  synopsis of the movie
-     * @param director  director of the movie
-     * @param cast      cast list of the movie
-     * @param type      type of the movie
-     * @param price     price of the movie
+     * @param movieId  ID of the movie
+     * @param title    title of the movie
+     * @param status   status of the movie
+     * @param synopsis synopsis of the movie
+     * @param director director of the movie
+     * @param cast     cast list of the movie
+     * @param type     type of the movie
+     * @param price    price of the movie
      */
     public BlockbusterMovie(String movieId, String title, ShowStatus status, String synopsis, String director,
             String[] cast, TypeMovies type, double price) {
