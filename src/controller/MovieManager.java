@@ -170,6 +170,7 @@ public class MovieManager {
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
                 Movie oldMovie = MovieManager.getAllMovieList().get(opt - 1);
                 Database.MOVIES.remove(oldMovie.getMovieId());
+                //TODO remove showtime
                 Database.numOfMovies--;
                 Database.saveFileIntoDatabase(FileType.MOVIES);
                 System.out.println("Removed movie!");
