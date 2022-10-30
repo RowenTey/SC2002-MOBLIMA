@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import model.enums.TypeMovies;
+
 /**
  * The class that stores the movie ticket
  *
@@ -42,15 +44,21 @@ public class Ticket implements Serializable {
     private boolean isPaid;
 
     /**
+     * movie type
+     */
+    private TypeMovies movieType;
+
+    /**
      * Constructor of Ticket
      *
      */
-    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle) {
+    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle, TypeMovies movieType) {
         setPrice(price);
         setSeat(seat);
         setCinema(cinema);
         setMovieTitle(movieTitle);
         setIsPaid(false);
+        setMovieType(movieType);
     }
 
     /**
@@ -138,4 +146,18 @@ public class Ticket implements Serializable {
     public void setIsPaid(boolean status){
         this.isPaid = status;
     }
+    /**
+     * get the type of movie
+     */
+    public String getMovieType(){
+        return this.movieType.getLabel();
+    }
+
+    /**
+     * sets the status of the ticket
+     */
+    public void setMovieType(TypeMovies movieType){
+        this.movieType = movieType;
+    }
+
 }

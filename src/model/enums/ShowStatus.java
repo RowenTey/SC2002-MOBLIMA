@@ -31,14 +31,18 @@ public enum ShowStatus {
     /**
     * A String value for the Layout type for retrieving purposes
     */
-    public final String layoutTypeAsStr;
+    public final String label;
 
     /**
      * Constructor for the layoutType Enum.
      * 
-     * @param layoutTypeAsStr Layout type as a string
+     * @param label Layout type as a string
      */
-    private ShowStatus(String layoutTypeAsStr) {
-        this.layoutTypeAsStr = layoutTypeAsStr;
+    private ShowStatus(String label) {
+        this.label = label;
+    }
+
+    public String getLabel(){
+        return label;
     }
 }
