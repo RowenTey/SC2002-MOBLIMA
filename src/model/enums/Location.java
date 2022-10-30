@@ -42,7 +42,7 @@ public enum Location {
   /**
    * Constructor for the Location Enum.
    * 
-   * @param label label type as a string
+   * @param label string value of the location
    */
   private Location(String label) {
     this.label = label;
@@ -51,7 +51,7 @@ public enum Location {
   /**
    * Get function to access the label of the location
    * 
-   * @return the label of the location
+   * @return the string label of the location
    */
   public String getLabel() {
     return this.label;

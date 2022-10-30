@@ -34,14 +34,19 @@ public enum ShowStatus {
     public final String label;
 
     /**
-     * Constructor for the layoutType Enum.
+     * Constructor for the ShowStatus
      * 
-     * @param label Layout type as a string
+     * @param label string value of the status
      */
     private ShowStatus(String label) {
         this.label = label;
     }
 
+    /**
+     * Get function to access the label of the ShowStatus
+     * 
+     * @return the string label of the Show Status
+     */
     public String getLabel(){
         return label;
     }
