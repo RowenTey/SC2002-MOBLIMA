@@ -90,19 +90,18 @@ public class BookingManager {
 
     String formattedDate = seat.getShowtime().getTime().substring(0, 10);
     // formats date to yyyy-MM-dd to match format in HOLIDAY database
-    System.out.println(formattedDate);
     if (Database.HOLIDAYS.contains(formattedDate) || Helper.checkIsDateWeekend(seat.getShowtime().getTime())) {
       multiplier *= 1.3; // 30% surcharge for holiday or weekend
     }
 
     // include GST
     multiplier *= 1.07;
-
     adjustedPrice *= multiplier;
 
     if (cinema.getIsPlatinum()) {
       adjustedPrice += 5; // extra $5 for platinum cinema
     }
+
     return adjustedPrice;
   }
 
@@ -164,9 +163,9 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Cinema Type",
         booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(
-        String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLocationStr()));
+        String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex()));
     System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
-    System.out.println(String.format("%-25s: $%s", "Price", df.format(booking.getTicket().getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -190,9 +189,9 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
     System.out.println(
         String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
-    System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLocationStr()));
+    System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex()));
     System.out.println(String.format("%-25s: %s", "Seat", position));
-    System.out.println(String.format("%-25s: $%s", "Price", df.format(ticket.getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df.format(ticket.getPrice())));
     System.out.println(String.format("%-25s: %s", "Status", ticket.getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();

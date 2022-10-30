@@ -25,13 +25,6 @@ public class MovieView extends MainView {
     /**
      * Default contructor for the MovieAppView
      */
-    public MovieView() {
-        super();
-    }
-
-    /**
-     * Default contructor for the MovieAppView
-     */
     public MovieView(String path, boolean isStaff) {
         super();
         this.path = path;

@@ -75,7 +75,11 @@ public class DatabaseView extends MainView {
           break;
         case 4:
           printRoute("Cineplex App > Staff > Database > Add Holidays");
-          handleAddHoliday();
+          if (handleAddHoliday()) {
+            System.out.println("Holiday added successfully");
+          } else {
+            System.out.println("Holiday added unsuccessfully");
+          }
           break;
         case 5:
           printRoute("Cineplex App > Staff > Database > Update Ticket Prices");
@@ -138,8 +142,14 @@ public class DatabaseView extends MainView {
    *         see {@link Database} for more initialization details.
    */
   private boolean handleAddHoliday() {
-    SystemManager.addHoliday();
-    return true;
+    String date;
+    do {
+      date = Helper.setDate(false, true);
+    } while (date.equals(""));
+    if (SystemManager.addHoliday(date)) {
+      return true;
+    }
+    return false;
   }
 
   /**

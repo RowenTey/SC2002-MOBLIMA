@@ -17,13 +17,6 @@ public class StaffView extends MainView {
     public String path;
 
     /**
-     * Default contructor for the StaffView
-     */
-    public StaffView() {
-        super();
-    }
-
-    /**
      * Overrided contructor for the StaffView
      */
     public StaffView(String path) {
