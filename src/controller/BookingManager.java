@@ -269,6 +269,7 @@ public class BookingManager {
           }
           BookingManager.createBooking(showtime.getSeatAt(row + 1, col), ticket, newMovieGoer, position,
               showtime.getMovie().getTitle());
+          showtime.getMovie().setTicketSales(showtime.getMovie().getTicketSales()+1);
           break;
         case 2:
           System.out.println("Booking failed!");
