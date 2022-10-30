@@ -391,7 +391,7 @@ public class MovieManager {
         do{
             castMembers.add(castMember);
             castMember = Helper.readString();
-        }while(!castMember.equals("0") && castMembers.size() < 2);
+        }while(!castMember.equals("0") || castMembers.size() < 2);
 
         String[] cast = new String[castMembers.size()];
         cast = castMembers.toArray(cast);
