@@ -37,17 +37,11 @@ public class ShowtimeView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Showtime");
         System.out.println("What would you like to do ?");
-        if (this.isStaff) {
             System.out.println("(1) Create Showtime");
             System.out.println("(2) Remove Showtime");
-            System.out.println("(3) List Showtimes");
-            System.out.println("(4) Exit");
-        } else {
-            System.out.println("(1) List \"NOW SHOWING\" Movies");
-            System.out.println("(2) List \"PREVIEW\" Movies");
-            System.out.println("(3) List \"COMING SOON\" Movies");
-            System.out.println("(4) Exit");
-        }
+            System.out.println("(3) Update Showtime");
+            System.out.println("(4) List Showtimes");
+            System.out.println("(5) Exit");
     }
 
     /**
@@ -57,26 +51,38 @@ public class ShowtimeView extends MainView {
         int choice = -1;
         do {
             printMenu();
-            choice = Helper.readInt(1, 3);
+            choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
                     Helper.clearScreen();
                     printRoute(path + " > Create Showtime");
                     handleCreateShowtime();
                     Helper.pressAnyKeyToContinue();
-                    break;
+                    break;                
                 case 2:
+                    Helper.clearScreen();
+                    printRoute(path + " > Remove Showtime");
+                    ShowtimeManager.removeShowtime();
+                    Helper.pressAnyKeyToContinue();
+                    break;
+                case 3:
+                    Helper.clearScreen();
+                    printRoute(path + " > Update Showtime");
+                    ShowtimeManager.updateShowtime();
+                    Helper.pressAnyKeyToContinue();
+                    break;
+                case 4:
                     Helper.clearScreen();
                     printRoute(this.path + " > Showtime > Showtime Listing");
                     ShowtimeManager.printAllShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
-                case 3:
+                case 5:
                     break;
                 default:
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 5);
     }
 
     /**
@@ -134,4 +140,5 @@ public class ShowtimeView extends MainView {
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
         BookingManager.promptBooking(showtimeId);
     }
+
 }
