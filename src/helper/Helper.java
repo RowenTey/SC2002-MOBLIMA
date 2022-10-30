@@ -356,35 +356,6 @@ public class Helper {
     }
   }
 
-  public static String promptDate() {
-    final String DATE_FORMAT = "yyyy-MM-dd"; // specify final output format
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    String dateInput, finalDate = "";
-
-    do {
-      System.out.println("Please input a date in the format: yyyy-MM-dd");
-      dateInput = sc.next();
-      sc.nextLine();
-
-      if (validateDate(dateInput, format)) {
-        break;
-      }
-
-      System.out.println("\nPlease input a valid date and time!\n");
-    } while (true);
-
-    try {
-      DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-      df.setLenient(false); // makes input follow the given format strictly
-      finalDate = dateInput; // concatenates data to the final format
-      df.parse(finalDate); // parses the string into the Date class
-    } catch (ParseException e) {
-      System.out.println("Error! Please input date in the correct format.");
-      promptDate();
-    }
-    return finalDate;
-  }
-
   /**
    * Generate random date
    */

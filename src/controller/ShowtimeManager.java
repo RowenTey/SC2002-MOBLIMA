@@ -13,16 +13,7 @@ import model.enums.ShowStatus;
 import helper.Helper;
 
 public class ShowtimeManager {
-  /**
-   * Get the number of showtimes
-   * 
-   * @return the total number of showtimes
-   */
-  public static int getTotalNumOfShowtime() {
-    return Database.numOfShowtimes;
-  }
-
-  /**
+  /*
    * HashMap to get row number from alphabets
    */
   private static HashMap<Integer, String> alphaRow = new HashMap<Integer, String>();
@@ -242,7 +233,7 @@ public class ShowtimeManager {
   public static void printShowtimeDetails(Showtime showtime, String from) {
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println(String.format("%-20s: %s", "Showtime ID", showtime.getShowtimeId()));
-    if (from.equals("cineplex")) {
+    if (from.equals("cineplex") || from.equals("")) {
       System.out.println(String.format("%-20s: %s", "Movie", showtime.getMovie().getTitle()));
     }
     System.out.println(String.format("%-20s: %s", "Time", showtime.getTime()));
@@ -319,16 +310,16 @@ public class ShowtimeManager {
     if (showtimes.size() == 0) {
       System.out.println("No showtimes found...");
     } else {
-      System.out.println("Which showtime do you want to remove ?");
       displayShowtime(showtimes, "");
       System.out.println("(" + (showtimes.size() + 1) + ") Exit");
+      System.out.println("\nWhich showtime do you want to remove ?");
       opt = Helper.readInt(1, showtimes.size() + 1);
       if (opt != showtimes.size() + 1) {
         Showtime showtime = showtimes.get(opt - 1);
         Database.SHOWTIME.remove(showtime.getShowtimeId());
-        Database.numOfMovies--;
-        Database.saveFileIntoDatabase(FileType.MOVIES);
-        System.out.println("Removed showtime!");
+        Database.numOfShowtimes--;
+        Database.saveFileIntoDatabase(FileType.SHOWTIME);
+        System.out.println("\nRemoved showtime!");
       }
     }
   }
