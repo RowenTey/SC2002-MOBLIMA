@@ -80,16 +80,6 @@ public class BookingManager {
         return transactionid;
     }
 
-    // TODO work out logic for holidays
-    //
-    // multiplier*=1.07; // 7% GST
-    // System.out.printf("\nTotal multiplier: %f",multiplier);
-    // adjustedPrice *= multiplier;
-    // Ticket newTicket = new Ticket(adjustedPrice, seat, cineplex, movieTitle);
-    //
-    // return newTicket;
-    // }
-
     /**
      * 
      * @param price
@@ -97,22 +87,28 @@ public class BookingManager {
      */
     public static double computePrice(double price, Cinema cinema, Seat seat, MovieGoer movieGoer){
         double adjustedPrice = price;
-        double multiplier = 1.07; // GST
-        adjustedPrice *= multiplier;
-        if (cinema.getIsPlatinum()) {
-            adjustedPrice += 5; // extra $5 for platinum cinema
-        }
+        double multiplier = 1;
 
-        // TODO different price for different age groups?
+        // Child & Senior Citizen 50% cheaper
+        if(movieGoer.getAgeGroup() == AgeGroup.CHILD || movieGoer.getAgeGroup() == AgeGroup.SENIOR_CITIZEN){
+            multiplier *= 0.5;
+        }
 
         String formattedDate = seat.getShowtime().getTime().substring(0, 10);
         // formats date to yyyy-MM-dd to match format in HOLIDAY database
         System.out.println(formattedDate);
-        if (Database.HOLIDAYS.contains(formattedDate)) {
-            multiplier *= 1.3;
-            adjustedPrice *= multiplier; // 30% surcharge for holiday
+        if (Database.HOLIDAYS.contains(formattedDate) || Helper.checkIsDateWeekend(seat.getShowtime().getTime())) {
+            multiplier *= 1.3; // 30% surcharge for holiday or weekend
         }
 
+        //include GST
+        multiplier *= 1.07;
+
+        adjustedPrice *= multiplier;
+
+        if (cinema.getIsPlatinum()) {
+            adjustedPrice += 5; // extra $5 for platinum cinema
+        }
         return adjustedPrice;
     }
 

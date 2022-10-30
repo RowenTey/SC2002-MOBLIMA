@@ -1,13 +1,7 @@
 package controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Map.Entry;
 
 import database.Database;
@@ -69,12 +63,7 @@ public class ShowtimeManager {
     ArrayList<Cinema> newCinema = new ArrayList<Cinema>();
     ArrayList<String> newDate = new ArrayList<String>();
 
-    Random random = new Random();
-    int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
-    int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
-    long randomDay = minDay + random.nextInt(maxDay - minDay);
-    LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
-    ZoneId defaultZoneId = ZoneId.systemDefault();
+    String strDate;
 
     for (int j = 0; j < newCineplex.size(); j++) {
       for (int i = 0; i < 10; i++) {
@@ -83,11 +72,7 @@ public class ShowtimeManager {
     }
 
     for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
-      randomDay = minDay + random.nextInt(maxDay - minDay);
-      randomDate = LocalDate.ofEpochDay(randomDay);
-      Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-      String strDate = dateFormat.format(date);
+      strDate = Helper.generateRandomDate();
       newDate.add(strDate);
     }
 

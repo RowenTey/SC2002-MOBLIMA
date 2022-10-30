@@ -37,7 +37,7 @@ public class MovieManager {
     /**
      * 2 dp constructor
      */
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormat df = new DecimalFormat("0.0");
 
     /**
      * Constructor of MovieManager
@@ -415,10 +415,11 @@ public class MovieManager {
         System.out.println("\nEnter cast member names line-by-line: (Enter '0' to stop)");
         ArrayList<String> castMembers = new ArrayList<String>();
         String castMember = Helper.readString();
-        while (!castMember.equals("0")) {
+        do{
             castMembers.add(castMember);
             castMember = Helper.readString();
-        }
+        }while(!castMember.equals("0") && castMembers.size() < 2);
+
         String[] cast = new String[castMembers.size()];
         cast = castMembers.toArray(cast);
 
