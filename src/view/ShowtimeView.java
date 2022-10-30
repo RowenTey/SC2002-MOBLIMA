@@ -37,11 +37,11 @@ public class ShowtimeView extends MainView {
         Helper.clearScreen();
         printRoute(this.path + " > Showtime");
         System.out.println("What would you like to do ?");
-            System.out.println("(1) Create Showtime");
-            System.out.println("(2) Remove Showtime");
-            System.out.println("(3) Update Showtime");
-            System.out.println("(4) List Showtimes");
-            System.out.println("(5) Exit");
+        System.out.println("(1) Create Showtime");
+        System.out.println("(2) Remove Showtime");
+        System.out.println("(3) Update Showtime");
+        System.out.println("(4) List Showtimes");
+        System.out.println("(5) Exit");
     }
 
     /**
@@ -58,7 +58,7 @@ public class ShowtimeView extends MainView {
                     printRoute(path + " > Create Showtime");
                     handleCreateShowtime();
                     Helper.pressAnyKeyToContinue();
-                    break;                
+                    break;
                 case 2:
                     Helper.clearScreen();
                     printRoute(path + " > Remove Showtime");
