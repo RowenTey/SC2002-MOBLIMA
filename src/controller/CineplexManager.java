@@ -18,22 +18,6 @@ import model.enums.Location;
  */
 public class CineplexManager {
     /**
-     * List of cineplex
-     */
-    private static ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
-
-    /**
-     * Total number of cineplex
-     */
-    private static int totalCineplex;
-
-    public CineplexManager() {
-        cineplexList.clear();
-        readCineplexes();
-        CineplexManager.totalCineplex = cineplexList.size();
-    }
-
-    /**
      * Initializer for cineplex
      */
     public static void initializeCineplex() {
@@ -59,13 +43,15 @@ public class CineplexManager {
      * @return the total number of cineplexes
      */
     public static int getTotalNumOfCineplex() {
-        return CineplexManager.totalCineplex;
+        return CineplexManager.getCineplexList().size();
     }
 
-    public static void readCineplexes() {
+    public static ArrayList<Cineplex> getCineplexList() {
+        ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
         for (Cineplex cineplex : Database.CINEPLEX.values()) {
             cineplexList.add(cineplex);
         }
+        return cineplexList;
     }
 
     /**
@@ -78,10 +64,8 @@ public class CineplexManager {
             Cineplex newCineplex = new Cineplex(cineplexId, Location.values()[opt]);
             Database.CINEPLEX.put(cineplexId, newCineplex);
             Database.saveFileIntoDatabase(FileType.CINEPLEX);
-            CineplexManager.cineplexList.add(newCineplex);
             System.out.println("Cineplex created! Cineplex Details: ");
             printCineplexDetails(newCineplex);
-            CineplexManager.totalCineplex += 1;
         }
     }
 
@@ -99,20 +83,11 @@ public class CineplexManager {
             opt = Helper.readInt(1, CineplexManager.getTotalNumOfCineplex() + 1);
             if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
                 Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
-                CineplexManager.cineplexList.remove(old);
+                Database.CINEPLEX.remove(old.getCineplexId());
+                Database.saveFileIntoDatabase(FileType.CINEPLEX);
                 System.out.println("Removed cineplex!");
-                CineplexManager.totalCineplex -= 1;
             }
         }
-    }
-
-    /**
-     * Get the list of cineplex
-     * 
-     * @return an array of cineplexes
-     */
-    public static ArrayList<Cineplex> getCineplexList() {
-        return CineplexManager.cineplexList;
     }
 
     /**
@@ -121,7 +96,7 @@ public class CineplexManager {
     public static void displayExistingCineplex() {
         System.out.println("Current Cineplex(es) we have: ");
         for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-            System.out.println("(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocation());
+            System.out.println("(" + (i + 1) + ") " + CineplexManager.getCineplexList().get(i).getLocationStr());
         }
     }
 
@@ -129,6 +104,7 @@ public class CineplexManager {
      * Prompt which Cineplex to add
      */
     public static int promptLocation() {
+        ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
         int opt = 1;
         if (CineplexManager.getTotalNumOfCineplex() != 0) {
             CineplexManager.displayExistingCineplex();
@@ -140,15 +116,15 @@ public class CineplexManager {
             available_locations.add(i);
         }
         for (int i = 0; i < CineplexManager.getTotalNumOfCineplex(); i++) {
-            if (CineplexManager.cineplexList.get(i).getLocationStr() == "Causeway Point") {
+            if (cineplexList.get(i).getLocationStr() == "Causeway Point") {
                 available_locations.remove(Integer.valueOf(0));
-            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Amk Hub") {
+            } else if (cineplexList.get(i).getLocationStr() == "Amk Hub") {
                 available_locations.remove(Integer.valueOf(1));
-            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Jem") {
+            } else if (cineplexList.get(i).getLocationStr() == "Jem") {
                 available_locations.remove(Integer.valueOf(2));
-            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Somerset 313") {
+            } else if (cineplexList.get(i).getLocationStr() == "Somerset 313") {
                 available_locations.remove(Integer.valueOf(3));
-            } else if (CineplexManager.cineplexList.get(i).getLocationStr() == "Jurong Point") {
+            } else if (cineplexList.get(i).getLocationStr() == "Jurong Point") {
                 available_locations.remove(Integer.valueOf(4));
             } 
         }
@@ -170,6 +146,7 @@ public class CineplexManager {
      * Allow user to select a specific cineplex by index
      */
     public static Cineplex selectCineplex() {
+        ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
         Cineplex selectedCineplex;
         System.out.println("Select a cineplex by entering it's index:");
         int choice = Helper.readInt(1, (cineplexList.size() + 1));

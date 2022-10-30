@@ -19,23 +19,9 @@ import java.util.ArrayList;
 
 public class BookingManager {
     /**
-     * List of bookings
-     */
-    public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
-
-    /**
      * Total number of bookings
      */
     private static int totalBookings;
-
-    /**
-     * Constructor of BookingManager
-     */
-    public BookingManager() {
-        BookingManager.bookingList.clear();
-        BookingManager.readBookings();
-        BookingManager.totalBookings = bookingList.size();
-    }
 
     /**
      * Get the number of bookings
@@ -47,16 +33,11 @@ public class BookingManager {
     }
 
     private static ArrayList<Booking> getBookingList() {
-        return BookingManager.bookingList;
-    }
-
-    /**
-     * Read bookings data from database
-     */
-    public static void readBookings() {
+        ArrayList<Booking> bookingList = new ArrayList<Booking>();
         for (Booking booking : Database.BOOKINGS.values()) {
-            BookingManager.bookingList.add(booking);
+            bookingList.add(booking);
         }
+        return bookingList;
     }
 
     /**
@@ -131,15 +112,14 @@ public class BookingManager {
      * @param cineplex the cineplex of the ticket
      * @param name     the user associated with the ticket
      */
-    public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position,
-                                     String movieTitle) {
-
+    public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position,String movieTitle) {
+        ArrayList<Booking> bookingList = BookingManager.getBookingList();
         String newTransactionId = createTransactionId(seat);
         ticket.setIsPaid(true);
         //Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be implemented
         Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
                 position);
-        BookingManager.bookingList.add(newBooking);
+        bookingList.add(newBooking);
         Database.BOOKINGS.put(newTransactionId, newBooking);
         Database.saveFileIntoDatabase(FileType.BOOKINGS);
 
