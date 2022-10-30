@@ -1,6 +1,5 @@
 package controller;
 
-import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -364,13 +363,13 @@ public class ShowtimeManager {
    */
   public static void updateShowtime() {
     int opt = -1;
-    if (Database.numOfShowtimes == 0) {
+    if (ShowtimeManager.getShowtime("all").size() == 0) {
       System.out.println("No showtimes found!");
     } else {
       System.out.println("Which showtime do you want to update ?");
       ShowtimeManager.displayShowtime(ShowtimeManager.getShowtime("all"), "");
-      opt = Helper.readInt(1, Database.numOfShowtimes + 1);
-      if (opt != Database.numOfShowtimes + 1) {
+      opt = Helper.readInt(1, ShowtimeManager.getShowtime("all").size() + 1);
+      if (opt != ShowtimeManager.getShowtime("all").size() + 1) {
         Showtime showtime = ShowtimeManager.getShowtime("all").get(opt - 1);
         String showtimeId = showtime.getShowtimeId();
         CineplexManager.displayExistingCineplex();

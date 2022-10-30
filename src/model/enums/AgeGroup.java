@@ -26,14 +26,14 @@ public enum AgeGroup {
   SENIOR_CITIZEN("Senior Citizen");
 
   /**
-   * A String value for the agegroup type for retrieving purposes
+   * A String value for the AgeGroup type for retrieving purposes
    */
   public final String label;
 
   /**
    * Constructor for the AgeGroup Enum.
    * 
-   * @param label label type as a string
+   * @param label string value for the AgeGroup
    */
   private AgeGroup(String label) {
     this.label = label;
@@ -42,7 +42,7 @@ public enum AgeGroup {
   /**
    * Get function to access the label of the age group
    * 
-   * @return the label of the age group
+   * @return the string label of the age group
    */
   public String getLabel() {
     return this.label;

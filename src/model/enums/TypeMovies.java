@@ -31,13 +31,18 @@ public enum TypeMovies {
     /**
      * Constructor for the layoutType Enum.
      * 
-     * @param layoutTypeAsStr Layout type as a string
+     * @param label Layout type as a string
      */
     private TypeMovies(String label) {
         this.label = label;
     }
-
+    
+    /**
+     * Get function to access the label of the Movie Type
+     * 
+     * @return the string label of the Movie Type
+     */
     public String getLabel() {
         return this.label;
-      }
+    }
 }
