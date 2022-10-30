@@ -362,7 +362,9 @@ public class MovieManager {
         ArrayList<String> castMembers = new ArrayList<String>();
         String castMember = Helper.readString();
         do {
-            castMembers.add(castMember);
+            if(!Helper.isNumeric(castMember)){
+               castMembers.add(castMember); 
+            }
             castMember = Helper.readString();
         } while (!castMember.equals("0") || castMembers.size() < 2);
 

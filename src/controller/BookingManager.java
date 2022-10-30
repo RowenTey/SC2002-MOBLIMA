@@ -9,9 +9,9 @@ import model.enums.AgeGroup;
 import java.util.ArrayList;
 
 /**
- * Booking Manager
+ * Booking Manager is a controller class that manages the bookings.
  *
- * @author Ace Ang
+ * @author Ace Ang, Shao Wei
  * @version 1.0
  * @since 2022-10-22
  */
@@ -199,12 +199,6 @@ public class BookingManager {
     return date;
   }
 
-  public static String promptEmail() {
-    System.out.println("Enter your email: ");
-    String email = Helper.readString();
-    return email;
-  }
-
   /**
    * Find booking by email
    */
@@ -289,6 +283,12 @@ public class BookingManager {
     Database.MOVIES.put(movie.getMovieId(), movie);
     Database.saveFileIntoDatabase(FileType.MOVIES);
     return true;
+  }
+
+  public static void handleCheckBooking(){
+    System.out.print("Enter your email: ");
+    String email = Helper.readString();
+    BookingManager.findBooking(email);
   }
 
 }

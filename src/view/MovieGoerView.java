@@ -59,8 +59,7 @@ public class MovieGoerView extends MainView {
                     System.out.println("View Booking History");
                     Helper.clearScreen();
                     printRoute(this.path + " > MovieGoer > View Booking History");
-                    String email = BookingManager.promptEmail();
-                    BookingManager.findBooking(email);
+                    BookingManager.handleCheckBooking();
                     break;
                 case 4:
                     break;

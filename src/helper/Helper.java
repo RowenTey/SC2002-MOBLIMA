@@ -386,4 +386,20 @@ public class Helper {
    */
   public static DecimalFormat df1 = new DecimalFormat("0.0");
 
+  /**
+   * check if the string is Numeric
+   * @param strNum
+   * @return true is the string is Numeric; else false
+   */
+  public static boolean isNumeric(String strNum) {
+    if (strNum == null) {
+        return false;
+    }
+    try {
+        double d = Double.parseDouble(strNum);
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+    return true;
+}
 }
