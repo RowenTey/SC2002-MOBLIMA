@@ -363,13 +363,13 @@ public class ShowtimeManager {
    */
   public static void updateShowtime() {
     int opt = -1;
-    if (ShowtimeManager.getTotalNumOfShowtime() == 0) {
+    if (ShowtimeManager.getShowtime("all").size() == 0) {
         System.out.println("No showtimes found!");
     } else {
         System.out.println("Which showtime do you want to update ?");
         ShowtimeManager.displayShowtime(ShowtimeManager.getShowtime("all"),"");
-        opt = Helper.readInt(1, ShowtimeManager.getTotalNumOfShowtime() + 1);
-        if (opt != ShowtimeManager.getTotalNumOfShowtime() + 1) {
+        opt = Helper.readInt(1, ShowtimeManager.getShowtime("all").size() + 1);
+        if (opt != ShowtimeManager.getShowtime("all").size() + 1) {
             Showtime showtime = ShowtimeManager.getShowtime("all").get(opt - 1);
             String showtimeId = showtime.getShowtimeId();
             CineplexManager.displayExistingCineplex();
