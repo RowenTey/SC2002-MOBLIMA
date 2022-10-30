@@ -27,10 +27,5 @@ SetupInstructions.pdf
 .vscode/
 bin/
 *.txt
-src/database/data/Booking.dat
-src/database/data/Cinema.dat
-src/database/data/Cineplex.dat
-src/database/data/Holidays.dat
-src/database/data/MovieGoer.dat
-src/database/data/Movies.dat
-src/database/data/Showtime.dat
+data/
+
