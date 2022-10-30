@@ -306,7 +306,6 @@ public class Database {
     CINEPLEX = new HashMap<String, Cineplex>();
     writeSerializedObject(FileType.CINEPLEX);
 
-    ShowtimeManager.clearShowtimes();
     SHOWTIME = new HashMap<String, Showtime>();
     writeSerializedObject(FileType.SHOWTIME);
 

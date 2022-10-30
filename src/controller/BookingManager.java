@@ -16,27 +16,27 @@ import java.util.ArrayList;
  * @since 2022-10-22
  */
 public class BookingManager {
-    /**
-     * Total number of bookings
-     */
-    private static int totalBookings;
+  /**
+   * Total number of bookings
+   */
+  private static int totalBookings;
 
-    /**
-     * Get the number of bookings
-     *
-     * @return the total number of bookings
-     */
-    public static int getTotalNumOfBooking() {
-        return BookingManager.totalBookings;
-    }
+  /**
+   * Get the number of bookings
+   *
+   * @return the total number of bookings
+   */
+  public static int getTotalNumOfBooking() {
+    return BookingManager.totalBookings;
+  }
 
-    private static ArrayList<Booking> getBookingList() {
-        ArrayList<Booking> bookingList = new ArrayList<Booking>();
-        for (Booking booking : Database.BOOKINGS.values()) {
-            bookingList.add(booking);
-        }
-        return bookingList;
+  private static ArrayList<Booking> getBookingList() {
+    ArrayList<Booking> bookingList = new ArrayList<Booking>();
+    for (Booking booking : Database.BOOKINGS.values()) {
+      bookingList.add(booking);
     }
+    return bookingList;
+  }
 
   /**
    * Creates a transaction ID for booking
@@ -70,19 +70,18 @@ public class BookingManager {
 
     String formattedDate = seat.getShowtime().getTime().substring(0, 10);
     // formats date to yyyy-MM-dd to match format in HOLIDAY database
-    System.out.println(formattedDate);
     if (Database.HOLIDAYS.contains(formattedDate) || Helper.checkIsDateWeekend(seat.getShowtime().getTime())) {
       multiplier *= 1.3; // 30% surcharge for holiday or weekend
     }
 
     // include GST
     multiplier *= 1.07;
-
     adjustedPrice *= multiplier;
 
     if (cinema.getIsPlatinum()) {
       adjustedPrice += 5; // extra $5 for platinum cinema
     }
+
     return adjustedPrice;
   }
 
@@ -98,24 +97,26 @@ public class BookingManager {
     return newTicket;
   }
 
-    /**
-     * Constructor for booking in BookingManager
-     *
-     * @param price    the price of the ticket
-     * @param seat     the seat of the ticket
-     * @param cineplex the cineplex of the ticket
-     * @param name     the user associated with the ticket
-     */
-    public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position,String movieTitle) {
-        ArrayList<Booking> bookingList = BookingManager.getBookingList();
-        String newTransactionId = createTransactionId(seat);
-        ticket.setIsPaid(true);
-        //Ticket newTicket = createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be implemented
-        Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
-                position);
-        bookingList.add(newBooking);
-        Database.BOOKINGS.put(newTransactionId, newBooking);
-        Database.saveFileIntoDatabase(FileType.BOOKINGS);
+  /**
+   * Constructor for booking in BookingManager
+   *
+   * @param price    the price of the ticket
+   * @param seat     the seat of the ticket
+   * @param cineplex the cineplex of the ticket
+   * @param name     the user associated with the ticket
+   */
+  public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position, String movieTitle) {
+    ArrayList<Booking> bookingList = BookingManager.getBookingList();
+    String newTransactionId = createTransactionId(seat);
+    ticket.setIsPaid(true);
+    // Ticket newTicket =
+    // createBookingTicket(price,seat,cineplex,movieTitle,cinema); //to be
+    // implemented
+    Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
+        position);
+    bookingList.add(newBooking);
+    Database.BOOKINGS.put(newTransactionId, newBooking);
+    Database.saveFileIntoDatabase(FileType.BOOKINGS);
 
     System.out.println("\nBooking created! Your ticket is printed below: ");
     printBookingDetails(newBooking);

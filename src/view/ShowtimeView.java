@@ -29,13 +29,6 @@ public class ShowtimeView extends MainView {
     public boolean isStaff;
 
     /**
-     * Default contructor for the MovieAppView
-     */
-    public ShowtimeView() {
-        super();
-    }
-
-    /**
      * Overrided contructor for the ShowtimeView
      */
     public ShowtimeView(String path, boolean isStaff) {

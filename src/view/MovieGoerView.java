@@ -18,14 +18,7 @@ public class MovieGoerView extends MainView {
     private String path;
 
     /**
-     * Default contructor for the CineplexAppView
-     */
-    public MovieGoerView() {
-        super();
-    }
-
-    /**
-     * Default contructor for the CineplexAppView
+     * Overrided contructor for the MovieGoerView
      */
     public MovieGoerView(String path) {
         super();

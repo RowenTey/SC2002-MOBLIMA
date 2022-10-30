@@ -13,13 +13,10 @@ public class SystemManager {
   /**
    * Adds a holiday to database
    */
-  public static void addHoliday() {
-    String date;
-    do {
-      date = Helper.setDate(false, true);
-    } while (date.equals(""));
+  public static boolean addHoliday(String date) {
     Database.HOLIDAYS.add(date);
     System.out.println("Holiday on " + date + " added!");
+    return true;
   }
 
   public static boolean updateTicketPrices() {

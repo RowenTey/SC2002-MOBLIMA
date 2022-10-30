@@ -13,16 +13,6 @@ import helper.Helper;
 
 public class ShowtimeManager {
   /**
-   * List of showtime for movies that are NOW_SHOWING
-   */
-  private static ArrayList<Showtime> showtimeList = new ArrayList<Showtime>();
-
-  /**
-   * Total number of showtime
-   */
-  private static int totalShowtimes;
-
-  /**
    * HashMap to get row number from alphabets
    */
   private static HashMap<Integer, String> alphaRow = new HashMap<Integer, String>();
@@ -31,9 +21,6 @@ public class ShowtimeManager {
    * Constructor of ShowtimeManager
    */
   public ShowtimeManager() {
-    ShowtimeManager.showtimeList.clear();
-    ShowtimeManager.readShowtime();
-    ShowtimeManager.totalShowtimes = showtimeList.size();
     ShowtimeManager.initializeHashMap();
   }
 
@@ -90,15 +77,15 @@ public class ShowtimeManager {
    * Get all showtimes for this movie
    */
   public static ArrayList<Showtime> getMovieShowtime(Movie movie) {
-    ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
+    ArrayList<Showtime> showtimes = new ArrayList<Showtime>();
 
-    for (Showtime showtime : showtimeList) {
+    for (Showtime showtime : Database.SHOWTIME.values()) {
       if (showtime.getMovie().getTitle().equals(movie.getTitle())) {
-        toReturn.add(showtime);
+        showtimes.add(showtime);
       }
     }
 
-    return toReturn;
+    return showtimes;
   }
 
   /**
@@ -121,10 +108,6 @@ public class ShowtimeManager {
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinema, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
-    if (movie.getStatus() == ShowStatus.NOW_SHOWING || movie.getStatus() == ShowStatus.PREVIEW) {
-      ShowtimeManager.showtimeList.add(newShowtime);
-      ShowtimeManager.totalShowtimes += 1;
-    }
     return true;
   }
 
@@ -155,14 +138,18 @@ public class ShowtimeManager {
   }
 
   /**
-   * Read showtime data that is NOW_SHOWING from database
+   * Get showtime data that is NOW_SHOWING from database
    */
-  public static void readShowtime() {
+  public static ArrayList<Showtime> getShowtime() {
+    ArrayList<Showtime> showtimes = new ArrayList<Showtime>();
+
     for (Showtime showtime : Database.SHOWTIME.values()) {
       if (showtime.getMovie().getStatus() == ShowStatus.NOW_SHOWING) {
-        ShowtimeManager.showtimeList.add(showtime);
+        showtimes.add(showtime);
       }
     }
+
+    return showtimes;
   }
 
   /**
@@ -171,7 +158,7 @@ public class ShowtimeManager {
   public static String selectShowtime(ArrayList<Showtime> showtimes) {
     Showtime selectedShowtime;
     System.out.println("Select a showtime by entering it's index:");
-    int choice = Helper.readInt(1, (totalShowtimes + 1));
+    int choice = Helper.readInt(1, (showtimes.size() + 1));
     selectedShowtime = showtimes.get(choice - 1);
     return selectedShowtime.getShowtimeId();
   }
@@ -281,7 +268,7 @@ public class ShowtimeManager {
   public static ArrayList<Showtime> getShowtimeByCineplex(Cineplex cineplex) {
     ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
 
-    for (Showtime showtime : showtimeList) {
+    for (Showtime showtime : Database.SHOWTIME.values()) {
       if (showtime.getCinema().getCineplex() == cineplex.getLocation()) {
         toReturn.add(showtime);
       }
@@ -292,10 +279,5 @@ public class ShowtimeManager {
     } else {
       return toReturn;
     }
-  }
-
-  public static boolean clearShowtimes() {
-    showtimeList.clear();
-    return true;
   }
 }
