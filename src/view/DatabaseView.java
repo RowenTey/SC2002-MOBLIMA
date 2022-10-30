@@ -1,6 +1,6 @@
 package view;
 
-import controller.StaffManager;
+import controller.SystemManager;
 import database.Database;
 import helper.Helper;
 
@@ -31,8 +31,9 @@ public class DatabaseView extends MainView {
     System.out.println("(2) Initialize Movies");
     System.out.println("(3) Initialize Showtimes");
     System.out.println("(4) Add Holidays");
-    System.out.println("(5) Reset Database");
-    System.out.println("(6) Exit");
+    System.out.println("(5) Update Ticket Prices");
+    System.out.println("(6) Reset Database");
+    System.out.println("(7) Exit");
   }
 
   /**
@@ -45,7 +46,7 @@ public class DatabaseView extends MainView {
     int choice = -1;
     do {
       printMenu();
-      choice = Helper.readInt(1, 6);
+      choice = Helper.readInt(1, 7);
       System.out.println();
       switch (choice) {
         case 1:
@@ -77,6 +78,10 @@ public class DatabaseView extends MainView {
           handleAddHoliday();
           break;
         case 5:
+          printRoute("Cineplex App > Staff > Database > Update Ticket Prices");
+          SystemManager.updateTicketPrices();
+          break;
+        case 6:
           printRoute("Cineplex App > Staff > Database > Reset Database");
           if (resetDatabase()) {
             System.out.println("Database cleared");
@@ -85,11 +90,11 @@ public class DatabaseView extends MainView {
         default:
           break;
       }
-      if (choice != 6) {
+      if (choice != 7) {
         System.out.println();
         Helper.pressAnyKeyToContinue();
       }
-    } while (choice != 6);
+    } while (choice != 7);
   }
 
   /**
@@ -125,21 +130,17 @@ public class DatabaseView extends MainView {
     return Database.initializeShowtime();
   }
 
+  /**
+   * A method that initialize dummy data for Showtime.
+   *
+   * @return {@code true} if initialized successfully. Otherwise, {@code false}
+   *         <p>
+   *         see {@link Database} for more initialization details.
+   */
   private boolean handleAddHoliday() {
-    StaffManager.addHoliday();
+    SystemManager.addHoliday();
     return true;
   }
-
-  // /**
-  // * A method that initialize dummy data for Menu.
-  // *
-  // * @return {@code true} if initialized successfully. Otherwise, {@code false}
-  // * <p>
-  // * see {@link Database} for more initialization details.
-  // */
-  // private boolean initializeMenu() {
-  // return Database.initializeDummyMenu();
-  // }
 
   /**
    * A method that reset the database.

@@ -15,16 +15,6 @@ public enum FileType {
   STAFF("Staff"),
 
   /**
-   * File type corresponding to the {@link MovieGoer} file.
-   */
-  MOVIE_GOERS("MovieGoer"),
-
-  /**
-   * File type corresponding to the {@link Cinema} file.
-   */
-  CINEMAS("Cinema"),
-
-  /**
    * File type corresponding to the {@link Booking} file.
    */
   BOOKINGS("Booking"),
@@ -43,6 +33,11 @@ public enum FileType {
    * File type corresponding to the {@link Movie} file.
    */
   MOVIES("Movies"),
+
+  /**
+   * File type corresponding to the movie prices file.
+   */
+  PRICES("Prices"),
 
   /**
    * File type corresponding to the Holidays file.
