@@ -300,18 +300,15 @@ public class Database {
     Database.initializeStaff();
     writeSerializedObject(FileType.STAFF);
 
-    BookingManager.clearBookings();
     BOOKINGS = new HashMap<String, Booking>();
     writeSerializedObject(FileType.BOOKINGS);
 
-    CineplexManager.clearCineplexes();
     CINEPLEX = new HashMap<String, Cineplex>();
     writeSerializedObject(FileType.CINEPLEX);
 
     SHOWTIME = new HashMap<String, Showtime>();
     writeSerializedObject(FileType.SHOWTIME);
 
-    MovieManager.clearMovies();
     MOVIES = new HashMap<String, Movie>();
     numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);

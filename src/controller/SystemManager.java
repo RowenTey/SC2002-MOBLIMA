@@ -48,7 +48,7 @@ public class SystemManager {
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     for (Map.Entry<TypeMovies, Double> currentTicketType : Database.PRICES.entrySet()) {
       System.out.println(String.format("%-25s: %s", currentTicketType.getKey(),
-          Helper.df.format(currentTicketType.getValue())));
+          Helper.df2.format(currentTicketType.getValue())));
     }
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
   }

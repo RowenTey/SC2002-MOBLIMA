@@ -408,6 +408,12 @@ public class Helper {
   /**
    * 2 dp constructor
    */
-  public static final DecimalFormat df = new DecimalFormat("0.00");
+  public static DecimalFormat df2 = new DecimalFormat("0.00");
+
+  /** 
+   * 1 dp constructor
+   */
+  public static DecimalFormat df1 = new DecimalFormat("0.0");
+
 
 }

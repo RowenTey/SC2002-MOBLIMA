@@ -6,7 +6,6 @@ import helper.Helper;
 import model.*;
 import model.enums.AgeGroup;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -18,23 +17,9 @@ import java.util.ArrayList;
  */
 public class BookingManager {
   /**
-   * List of bookings
-   */
-  public static ArrayList<Booking> bookingList = new ArrayList<Booking>();
-
-  /**
    * Total number of bookings
    */
   private static int totalBookings;
-
-  /**
-   * Constructor of BookingManager
-   */
-  public BookingManager() {
-    BookingManager.bookingList.clear();
-    BookingManager.readBookings();
-    BookingManager.totalBookings = bookingList.size();
-  }
 
   /**
    * Get the number of bookings
@@ -46,16 +31,11 @@ public class BookingManager {
   }
 
   private static ArrayList<Booking> getBookingList() {
-    return BookingManager.bookingList;
-  }
-
-  /**
-   * Read bookings data from database
-   */
-  public static void readBookings() {
+    ArrayList<Booking> bookingList = new ArrayList<Booking>();
     for (Booking booking : Database.BOOKINGS.values()) {
-      BookingManager.bookingList.add(booking);
+      bookingList.add(booking);
     }
+    return bookingList;
   }
 
   /**
@@ -125,9 +105,8 @@ public class BookingManager {
    * @param cineplex the cineplex of the ticket
    * @param name     the user associated with the ticket
    */
-  public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position,
-      String movieTitle) {
-
+  public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position, String movieTitle) {
+    ArrayList<Booking> bookingList = BookingManager.getBookingList();
     String newTransactionId = createTransactionId(seat);
     ticket.setIsPaid(true);
     // Ticket newTicket =
@@ -135,7 +114,7 @@ public class BookingManager {
     // implemented
     Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
         position);
-    BookingManager.bookingList.add(newBooking);
+    bookingList.add(newBooking);
     Database.BOOKINGS.put(newTransactionId, newBooking);
     Database.saveFileIntoDatabase(FileType.BOOKINGS);
 
@@ -163,9 +142,9 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Cinema Type",
         booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(
-        String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex()));
+        String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
-    System.out.println(String.format("%-25s: $%s", "Price", Helper.df.format(booking.getTicket().getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -189,9 +168,9 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
     System.out.println(
         String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
-    System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex()));
+    System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat", position));
-    System.out.println(String.format("%-25s: $%s", "Price", Helper.df.format(ticket.getPrice())));
+    System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
     System.out.println(String.format("%-25s: %s", "Status", ticket.getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println();
@@ -316,8 +295,4 @@ public class BookingManager {
     return true;
   }
 
-  public static boolean clearBookings() {
-    bookingList.clear();
-    return true;
-  }
 }
