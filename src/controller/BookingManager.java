@@ -17,19 +17,8 @@ import java.util.ArrayList;
  */
 public class BookingManager {
   /**
-   * Total number of bookings
+   * Creates a transaction ID for booking
    */
-  private static int totalBookings;
-
-  /**
-   * Get the number of bookings
-   *
-   * @return the total number of bookings
-   */
-  public static int getTotalNumOfBooking() {
-    return BookingManager.totalBookings;
-  }
-
   private static ArrayList<Booking> getBookingList() {
     ArrayList<Booking> bookingList = new ArrayList<Booking>();
     for (Booking booking : Database.BOOKINGS.values()) {
@@ -55,6 +44,7 @@ public class BookingManager {
   }
 
   /**
+   * Compute price of ticket based on different factors
    * 
    * @param price
    * @return computed price

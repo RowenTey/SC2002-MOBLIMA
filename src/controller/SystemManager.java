@@ -15,6 +15,7 @@ public class SystemManager {
    */
   public static boolean addHoliday(String date) {
     Database.HOLIDAYS.add(date);
+    Database.saveFileIntoDatabase(FileType.HOLIDAYS);
     System.out.println("Holiday on " + date + " added!");
     return true;
   }
@@ -68,6 +69,15 @@ public class SystemManager {
       }
     }
     return true;
+  }
+
+  public static void initializeHolidays() {
+    String date;
+    for (int i = 0; i < 10; i++) {
+      date = Helper.generateRandomDate().substring(0, 10);
+      addHoliday(date);
+      System.out.println("Holiday on " + date + " added!");
+    }
   }
 
 }

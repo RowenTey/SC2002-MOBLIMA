@@ -8,6 +8,7 @@ import controller.CineplexManager;
 import controller.MovieManager;
 import controller.ShowtimeManager;
 import controller.StaffManager;
+import controller.SystemManager;
 
 import java.io.IOException;
 import java.io.EOFException;
@@ -71,6 +72,11 @@ public class Database {
    * Number of movies in database
    */
   public static int numOfMovies = 0;
+
+  /**
+   * Number of movies in database
+   */
+  public static int numOfShowtimes = 0;
 
   /**
    * Constructor that reads all the data from the data file during initialization
@@ -153,6 +159,7 @@ public class Database {
         CINEPLEX = (HashMap<String, Cineplex>) object;
       } else if (fileType == FileType.SHOWTIME) {
         SHOWTIME = (HashMap<String, Showtime>) object;
+        numOfShowtimes = SHOWTIME.size();
       } else if (fileType == FileType.MOVIES) {
         MOVIES = (HashMap<String, Movie>) object;
         numOfMovies = MOVIES.size();
@@ -269,6 +276,7 @@ public class Database {
       return false;
     }
     MovieManager.initializeMovies();
+    numOfMovies = MOVIES.size();
     return true;
   }
 
@@ -286,6 +294,24 @@ public class Database {
       return false;
     }
     ShowtimeManager.initializeShowtime();
+    numOfShowtimes = SHOWTIME.size();
+    return true;
+  }
+
+  /**
+   * A method to initialize {@code Holiday} data when the database is empty.
+   * <p>
+   * Calls {@link SystemManager} to initialize the cineplex.
+   * 
+   * @return {@code true} if initialized successfully. Otherwise, {@code false} if
+   *         database is not empty.
+   */
+  public static boolean initializeHoliday() {
+    if (HOLIDAYS.size() != 0) {
+      System.out.println("The database already has holidays. Reset database first to initialize Holidays");
+      return false;
+    }
+    SystemManager.initializeHolidays();
     return true;
   }
 
@@ -307,6 +333,7 @@ public class Database {
     writeSerializedObject(FileType.CINEPLEX);
 
     SHOWTIME = new HashMap<String, Showtime>();
+    numOfShowtimes = 0;
     writeSerializedObject(FileType.SHOWTIME);
 
     MOVIES = new HashMap<String, Movie>();
@@ -320,6 +347,7 @@ public class Database {
     writeSerializedObject(FileType.PRICES);
 
     HOLIDAYS = new HashSet<String>();
+    Database.initializeHoliday();
     writeSerializedObject(FileType.HOLIDAYS);
 
     return true;

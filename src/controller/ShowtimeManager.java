@@ -13,6 +13,15 @@ import helper.Helper;
 
 public class ShowtimeManager {
   /**
+   * Get the number of showtimes
+   * 
+   * @return the total number of showtimes
+   */
+  public static int getTotalNumOfShowtime() {
+    return Database.numOfShowtimes;
+  }
+
+  /**
    * HashMap to get row number from alphabets
    */
   private static HashMap<Integer, String> alphaRow = new HashMap<Integer, String>();
@@ -92,7 +101,16 @@ public class ShowtimeManager {
    * Display showtimes given an array of showtimes
    */
   public static void displayShowtime(ArrayList<Showtime> showtimes, String from) {
-    System.out.println("List of showtimes(s) for this " + from + ":");
+    if (showtimes.size() == 0) {
+      System.out.println("No showtimes found...");
+    }
+
+    if (from.equals("")) {
+      System.out.println("List of showtimes(s):");
+    } else {
+      System.out.println("List of showtimes(s) for this " + from + ":");
+    }
+
     for (int i = 0; i < showtimes.size(); i++) {
       System.out.println("\nShowtime " + "(" + (i + 1) + ")");
       printShowtimeDetails(showtimes.get(i), from);
@@ -107,6 +125,7 @@ public class ShowtimeManager {
     String showtimeId = String.format("S%04d", sId);
     Showtime newShowtime = new Showtime(showtimeId, time, movie, cinema, LayoutType.MEDIUM);
     Database.SHOWTIME.put(showtimeId, newShowtime);
+    Database.numOfShowtimes++;
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
     return true;
   }
@@ -140,11 +159,14 @@ public class ShowtimeManager {
   /**
    * Get showtime data that is NOW_SHOWING from database
    */
-  public static ArrayList<Showtime> getShowtime() {
+  public static ArrayList<Showtime> getShowtime(String type) {
     ArrayList<Showtime> showtimes = new ArrayList<Showtime>();
 
     for (Showtime showtime : Database.SHOWTIME.values()) {
-      if (showtime.getMovie().getStatus() == ShowStatus.NOW_SHOWING) {
+      if (type.equals("all")) {
+        showtimes.add(showtime);
+      } else if (type.equals("bookable") && (showtime.getMovie().getStatus() == ShowStatus.NOW_SHOWING
+          || showtime.getMovie().getStatus() == ShowStatus.PREVIEW)) {
         showtimes.add(showtime);
       }
     }
@@ -167,6 +189,11 @@ public class ShowtimeManager {
    * Prints the showtime with details
    */
   public static void printAllShowtime() {
+    if (Database.numOfShowtimes == 0) {
+      System.out.println("No showtimes found...\n");
+      return;
+    }
+
     for (Showtime showtime : Database.SHOWTIME.values()) {
       System.out.println();
       System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -279,5 +306,62 @@ public class ShowtimeManager {
     } else {
       return toReturn;
     }
+  }
+
+  /**
+   * Remove a showtime
+   */
+  public static void removeShowtime() {
+    int opt = -1;
+    ArrayList<Showtime> showtimes = getShowtime("all");
+    if (showtimes.size() == 0) {
+      System.out.println("No showtimes found...");
+    } else {
+      System.out.println("Which showtime do you want to remove ?");
+      displayShowtime(showtimes, "");
+      System.out.println("(" + (showtimes.size() + 1) + ") Exit");
+      opt = Helper.readInt(1, showtimes.size() + 1);
+      if (opt != showtimes.size() + 1) {
+        Showtime showtime = showtimes.get(opt - 1);
+        Database.SHOWTIME.remove(showtime.getShowtimeId());
+        Database.numOfMovies--;
+        Database.saveFileIntoDatabase(FileType.MOVIES);
+        System.out.println("Removed showtime!");
+      }
+    }
+  }
+
+  /**
+   * Remove all showtime related to movie
+   */
+  public static void removeShowtimeByMovie(Movie movie) {
+    HashMap<String, Showtime> updatedShowtime = new HashMap<String, Showtime>();
+
+    for (Showtime showtime : Database.SHOWTIME.values()) {
+      if (!showtime.getMovie().getTitle().equals(movie.getTitle())) {
+        updatedShowtime.put(showtime.getShowtimeId(), showtime);
+      }
+    }
+
+    Database.SHOWTIME = updatedShowtime;
+    Database.numOfShowtimes = updatedShowtime.size();
+    Database.saveFileIntoDatabase(FileType.SHOWTIME);
+  }
+
+  /**
+   * Remove all showtime related to cineplex
+   */
+  public static void removeShowtimeByCineplex(Cineplex cineplex) {
+    HashMap<String, Showtime> updatedShowtime = new HashMap<String, Showtime>();
+
+    for (Showtime showtime : Database.SHOWTIME.values()) {
+      if (showtime.getCinema().getCineplex() != cineplex.getLocation()) {
+        updatedShowtime.put(showtime.getShowtimeId(), showtime);
+      }
+    }
+
+    Database.SHOWTIME = updatedShowtime;
+    Database.numOfShowtimes = updatedShowtime.size();
+    Database.saveFileIntoDatabase(FileType.SHOWTIME);
   }
 }

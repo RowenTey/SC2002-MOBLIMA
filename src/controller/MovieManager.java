@@ -40,7 +40,6 @@ public class MovieManager {
         return bookableMovieList;
     }
 
-
     /**
      * Get coming soon movie
      */
@@ -53,7 +52,6 @@ public class MovieManager {
         }
         return comingSoonMovieList;
     }
-
 
     /**
      * Initializer for movies
@@ -170,8 +168,8 @@ public class MovieManager {
             if (opt != MovieManager.getTotalNumOfMovie() + 1) {
                 Movie oldMovie = MovieManager.getAllMovieList().get(opt - 1);
                 Database.MOVIES.remove(oldMovie.getMovieId());
-                //TODO remove showtime
                 Database.numOfMovies--;
+                ShowtimeManager.removeShowtimeByMovie(oldMovie);
                 Database.saveFileIntoDatabase(FileType.MOVIES);
                 System.out.println("Removed movie!");
             }
@@ -388,10 +386,10 @@ public class MovieManager {
         System.out.println("\nEnter cast member names line-by-line: (Enter '0' to stop)");
         ArrayList<String> castMembers = new ArrayList<String>();
         String castMember = Helper.readString();
-        do{
+        do {
             castMembers.add(castMember);
             castMember = Helper.readString();
-        }while(!castMember.equals("0") && castMembers.size() < 2);
+        } while (!castMember.equals("0") && castMembers.size() < 2);
 
         String[] cast = new String[castMembers.size()];
         cast = castMembers.toArray(cast);
