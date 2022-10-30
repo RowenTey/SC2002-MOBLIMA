@@ -39,8 +39,9 @@ public class ShowtimeView extends MainView {
         System.out.println("What would you like to do ?");
         System.out.println("(1) Create Showtime");
         System.out.println("(2) Remove Showtime");
-        System.out.println("(3) List Showtimes");
-        System.out.println("(4) Exit");
+        System.out.println("(3) Update Showtime");
+        System.out.println("(4) List Showtimes");
+        System.out.println("(5) Exit");
     }
 
     /**
@@ -50,7 +51,7 @@ public class ShowtimeView extends MainView {
         int choice = -1;
         do {
             printMenu();
-            choice = Helper.readInt(1, 4);
+            choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
                     Helper.clearScreen();
@@ -60,22 +61,28 @@ public class ShowtimeView extends MainView {
                     break;
                 case 2:
                     Helper.clearScreen();
-                    printRoute(this.path + " > Showtime > Remove Showtime");
+                    printRoute(path + " > Remove Showtime");
                     ShowtimeManager.removeShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
                 case 3:
                     Helper.clearScreen();
+                    printRoute(path + " > Update Showtime");
+                    ShowtimeManager.updateShowtime();
+                    Helper.pressAnyKeyToContinue();
+                    break;
+                case 4:
+                    Helper.clearScreen();
                     printRoute(this.path + " > Showtime > Showtime Listing");
                     ShowtimeManager.printAllShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
-                case 4:
+                case 5:
                     break;
                 default:
                     break;
             }
-        } while (choice != 4);
+        } while (choice != 5);
     }
 
     /**
@@ -133,4 +140,5 @@ public class ShowtimeView extends MainView {
         String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
         BookingManager.promptBooking(showtimeId);
     }
+
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -357,4 +358,35 @@ public class ShowtimeManager {
     Database.numOfShowtimes = updatedShowtime.size();
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
   }
+
+  /**
+   * Update a showtime
+   */
+  public static void updateShowtime() {
+    int opt = -1;
+    if (ShowtimeManager.getTotalNumOfShowtime() == 0) {
+        System.out.println("No showtimes found!");
+    } else {
+        System.out.println("Which showtime do you want to update ?");
+        ShowtimeManager.displayShowtime(ShowtimeManager.getShowtime("all"),"");
+        opt = Helper.readInt(1, ShowtimeManager.getTotalNumOfShowtime() + 1);
+        if (opt != ShowtimeManager.getTotalNumOfShowtime() + 1) {
+            Showtime showtime = ShowtimeManager.getShowtime("all").get(opt - 1);
+            String showtimeId = showtime.getShowtimeId();
+            CineplexManager.displayExistingCineplex();
+            System.out.println("\nUpdate Cineplex to: ");
+            Cineplex newCineplex = CineplexManager.selectCineplex();
+            System.out.println("Cineplex selected: " + newCineplex.getLocationStr());
+            System.out.println("Update Cinema to: ");
+            Cinema newCinema = CineplexManager.selectCinema(newCineplex);
+            System.out.println("Cinema selected: " + newCinema.getCinemaCode());
+            showtime.setCinema(newCinema);
+            Database.SHOWTIME.remove(showtime.getShowtimeId());
+            Database.SHOWTIME.put(showtimeId, showtime);
+            Database.saveFileIntoDatabase(FileType.MOVIES);
+            System.out.println("Showtime successfully updated!");
+        }
+    }
+  }
+
 }
