@@ -4,12 +4,16 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -379,6 +383,26 @@ public class Helper {
       promptDate();
     }
     return finalDate;
+  }
+
+  /**
+   * Generate random date
+   */
+  public static String generateRandomDate() {
+    Random random = new Random();
+    int minDay = (int) LocalDate.of(2022, 10, 18).toEpochDay();
+    int maxDay = (int) LocalDate.of(2023, 1, 1).toEpochDay();
+    long randomDay = minDay + random.nextInt(maxDay - minDay);
+    LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+    ZoneId defaultZoneId = ZoneId.systemDefault();
+
+    randomDay = minDay + random.nextInt(maxDay - minDay);
+    randomDate = LocalDate.ofEpochDay(randomDay);
+    Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    String strDate = dateFormat.format(date);
+
+    return strDate;
   }
 
   /**

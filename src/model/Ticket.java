@@ -37,6 +37,11 @@ public class Ticket implements Serializable {
     private Cinema cinema;
 
     /**
+     * status of the ticket (paid/ready fopr payment)
+     */
+    private boolean isPaid;
+
+    /**
      * Constructor of Ticket
      *
      */
@@ -45,6 +50,7 @@ public class Ticket implements Serializable {
         setSeat(seat);
         setCinema(cinema);
         setMovieTitle(movieTitle);
+        setIsPaid(false);
     }
 
     /**
@@ -117,5 +123,19 @@ public class Ticket implements Serializable {
      */
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
+    }
+
+    /**
+     * get the status of ticket
+     */
+    public boolean getIsPaid(){
+        return this.isPaid;
+    }
+
+    /**
+     * sets the status of the ticket
+     */
+    public void setIsPaid(boolean status){
+        this.isPaid = status;
     }
 }
