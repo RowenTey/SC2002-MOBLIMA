@@ -161,8 +161,8 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
     System.out.println(String.format("%-25s: %s", "Time", ticket.getSeat().getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getMovieType()));
     System.out.println(String.format("%-25s: %s", "Movie Title", ticket.getMovieTitle()));
+    System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getMovieType()));
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
     System.out.println(String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));

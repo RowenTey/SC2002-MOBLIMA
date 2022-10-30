@@ -33,10 +33,9 @@ public class MovieGoerView extends MainView {
         printRoute(this.path + " > MovieGoer");
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or List Cineplexes");
-        System.out.println("(2) Search or List Showtimes");
-        System.out.println("(3) Search or List Movies");
-        System.out.println("(4) View Booking History");
-        System.out.println("(5) Exit");
+        System.out.println("(2) Search or List Movies");
+        System.out.println("(3) View Booking History");
+        System.out.println("(4) Exit");
     }
 
     /**
@@ -46,36 +45,32 @@ public class MovieGoerView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 5);
+            choice = Helper.readInt(1, 4);
             switch (choice) {
                 case 1:
                     CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer", false);
                     cineplexView.viewApp();
                     continue;
                 case 2:
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > MovieGoer", false);
-                    showtimeView.viewApp();
-                    break;
-                case 3:
                     MovieView movieView = new MovieView(this.path + " > MovieGoer", false);
                     movieView.viewApp();
                     break;
-                case 4:
+                case 3:
                     System.out.println("View Booking History");
                     Helper.clearScreen();
                     printRoute(this.path + " > MovieGoer > View Booking History");
                     String email = BookingManager.promptEmail();
                     BookingManager.findBooking(email);
                     break;
-                case 5:
+                case 4:
                     break;
                 default:
                     break;
             }
-            if (choice != 5) {
+            if (choice != 4) {
                 System.out.println();
                 Helper.pressAnyKeyToContinue();
             }
-        } while (choice != 5);
+        } while (choice != 4);
     }
 }
