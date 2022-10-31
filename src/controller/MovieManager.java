@@ -264,7 +264,7 @@ public class MovieManager {
         });
         List<Movie> res = movieList.subList(movieList.size() - 5, movieList.size());
 
-        System.out.println("Top 5 Movies by Overall Rating: ");
+        System.out.println("Top 5 Movies by Ticket Sales: ");
         for (int i = 5; i > 0; i--) {
             System.out.println("(" + (5 - i + 1) + ") " + res.get(i - 1).getTitle());
         }
@@ -332,6 +332,11 @@ public class MovieManager {
         }
     }
 
+    /**
+     * @param movie
+     * @param rating
+     * @param review
+     */
     public static void addReview(Movie movie, double rating, String review) {
         Review newReview = new Review(review, rating);
         movie.addReview(newReview);
@@ -362,8 +367,8 @@ public class MovieManager {
         ArrayList<String> castMembers = new ArrayList<String>();
         String castMember = Helper.readString();
         do {
-            if(!Helper.isNumeric(castMember)){
-               castMembers.add(castMember); 
+            if (!Helper.isNumeric(castMember)) {
+                castMembers.add(castMember);
             }
             castMember = Helper.readString();
         } while (!castMember.equals("0") || castMembers.size() < 2);
@@ -383,6 +388,9 @@ public class MovieManager {
         MovieManager.addMovie(title, showStatus, synopsis, director, cast, movieType);
     }
 
+    /**
+     * @param path
+     */
     public static void handleBookMovie(String path) {
         System.out.println("Which movie would you like to book?\n");
         if (MovieManager.displayListOfBookableMovies()) {

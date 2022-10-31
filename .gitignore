@@ -28,6 +28,3 @@ SetupInstructions.pdf
 bin/
 *.txt
 data/
-
-src/database/data/Prices.dat
-src/database/data/Staff.dat
