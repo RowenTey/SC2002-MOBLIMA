@@ -399,4 +399,18 @@ public class MovieManager {
         }
     }
 
+    /**
+     * 
+     * 
+     * @param status
+     */
+    public static void displayMovieBasedOnStatus(ShowStatus status) {
+        ArrayList<Movie> movies = MovieManager.getAllMovieList();
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getStatus() == status) {
+                MovieManager.displayMovieDetails(movies.get(i));
+            }
+        }
+    }
+
 }

@@ -106,7 +106,7 @@ public class Database {
   }
 
   /**
-   * A method to save a particular {@link FileType} into database.
+   * Save a particular {@link FileType} into database.
    * 
    * @param fileType file type to be saved.
    * @see FileType for the different type of filetypes.
@@ -116,7 +116,7 @@ public class Database {
   }
 
   /**
-   * A method to save all files into database.
+   * Save all files into database.
    */
   public static void saveAllFiles() {
     saveFileIntoDatabase(FileType.STAFF);
@@ -129,7 +129,7 @@ public class Database {
   }
 
   /**
-   * A method to read serialized object from a particular {@link FileType}.
+   * Read serialized object from a particular {@link FileType}.
    * 
    * @param fileType file type to be read.
    * @return {@code true} if read from file is successful. Otherwise,
@@ -190,7 +190,7 @@ public class Database {
   }
 
   /**
-   * A method to write serialized object to file.
+   * Write serialized object to file
    * 
    * @param fileType file type to write into.
    * @return {@code true} if write to file is successful. Otherwise,

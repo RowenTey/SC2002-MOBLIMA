@@ -90,17 +90,17 @@ public class MovieView extends MainView {
                     case 4:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > NOW SHOWING");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 5:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > PREVIEW");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.PREVIEW);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 6:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > COMING SOON");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 7:
                         Helper.clearScreen();
@@ -143,17 +143,17 @@ public class MovieView extends MainView {
                     case 3:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > NOW SHOWING");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.NOW_SHOWING);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 4:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > PREVIEW");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.PREVIEW);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 5:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > COMING SOON");
-                        ShowtimeManager.printShowtimeBasedOnStatus(ShowStatus.COMING_SOON);
+                        MovieManager.displayMovieBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 6:
                         Helper.clearScreen();

@@ -9,9 +9,20 @@ import src.helper.Helper;
 import src.model.Movie;
 import src.model.enums.TypeMovies;
 
+/**
+ * SystemManager is a controller class that handles system configurations.
+ * 
+ * @author Kai Seong
+ * @version 1.0
+ * @since 2022-10-31
+ */
 public class SystemManager {
+
   /**
-   * Adds a holiday to database
+   * Add a holiday
+   * 
+   * @param date of holiday to add
+   * @return {@code true} if holiday was added, {@code false} otherwise
    */
   public static boolean addHoliday(String date) {
     Database.HOLIDAYS.add(date);
@@ -20,6 +31,24 @@ public class SystemManager {
     return true;
   }
 
+  /**
+   * Get the current ticket types based on {@link TypeMovies}
+   * 
+   * @return {@code ArrayList<TypeMovies>} of {@link TypeMovies}
+   */
+  private static ArrayList<TypeMovies> getTicketTypes() {
+    ArrayList<TypeMovies> ticketTypes = new ArrayList<TypeMovies>();
+    for (TypeMovies typeMovies : Database.PRICES.keySet()) {
+      ticketTypes.add(typeMovies);
+    }
+    return ticketTypes;
+  }
+
+  /**
+   * Set ticket prices based on movie type
+   * 
+   * @return {@code true} if ticket price was updated, {@code false} otherwise
+   */
   public static boolean updateTicketPrices() {
     displayTicketPrices();
     ArrayList<TypeMovies> ticketTypes = getTicketTypes();
@@ -44,24 +73,14 @@ public class SystemManager {
     return true;
   }
 
-  private static void displayTicketPrices() {
-    System.out.println("List of Current Ticket Prices");
-    System.out.println(String.format("%-40s", "").replace(" ", "-"));
-    for (Map.Entry<TypeMovies, Double> currentTicketType : Database.PRICES.entrySet()) {
-      System.out.println(String.format("%-25s: %s", currentTicketType.getKey(),
-          Helper.df2.format(currentTicketType.getValue())));
-    }
-    System.out.println(String.format("%-40s", "").replace(" ", "-"));
-  }
-
-  private static ArrayList<TypeMovies> getTicketTypes() {
-    ArrayList<TypeMovies> ticketTypes = new ArrayList<TypeMovies>();
-    for (TypeMovies typeMovies : Database.PRICES.keySet()) {
-      ticketTypes.add(typeMovies);
-    }
-    return ticketTypes;
-  }
-
+  /**
+   * Update existing {@link Movie} prices after ticket price have been updated
+   * 
+   * @param movieType to be updated
+   * @param price     to update with
+   * @return boolean {@code true} if movie price was updated, {@code false}
+   *         otherwise
+   */
   private static boolean updateMoviePrices(TypeMovies movieType, double price) {
     for (Movie movie : Database.MOVIES.values()) {
       if (movie.getType() == movieType) {
@@ -71,13 +90,28 @@ public class SystemManager {
     return true;
   }
 
+  /**
+   * Initialize {@link Database} with 10 random holidays
+   */
   public static void initializeHolidays() {
     String date;
     for (int i = 0; i < 10; i++) {
       date = Helper.generateRandomDate().substring(0, 10);
       addHoliday(date);
-      System.out.println("Holiday on " + date + " added!");
     }
+  }
+
+  /**
+   * Display current ticket prices
+   */
+  protected static void displayTicketPrices() {
+    System.out.println("List of Current Ticket Prices");
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    for (Map.Entry<TypeMovies, Double> currentTicketType : Database.PRICES.entrySet()) {
+      System.out.println(String.format("%-25s: %s", currentTicketType.getKey(),
+          Helper.df2.format(currentTicketType.getValue())));
+    }
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
   }
 
 }
