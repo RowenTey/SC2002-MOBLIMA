@@ -1,9 +1,9 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import model.enums.Location;
+import src.model.enums.Location;
 
 /**
  * The class that initialise a Cineplex.

@@ -1,13 +1,13 @@
-package view;
+package src.view;
 
 import java.util.ArrayList;
 
-import controller.BookingManager;
-import controller.ShowtimeManager;
-import helper.Helper;
-import model.Cineplex;
-import model.Movie;
-import model.Showtime;
+import src.controller.BookingManager;
+import src.controller.ShowtimeManager;
+import src.helper.Helper;
+import src.model.Cineplex;
+import src.model.Movie;
+import src.model.Showtime;
 
 /**
  * Viewing interface for Showtime

@@ -1,16 +1,16 @@
-package controller;
+package src.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import database.Database;
-import database.FileType;
-import model.*;
-import model.enums.LayoutType;
-import model.enums.ShowStatus;
-import helper.Helper;
+import src.database.Database;
+import src.database.FileType;
+import src.model.*;
+import src.model.enums.LayoutType;
+import src.model.enums.ShowStatus;
+import src.helper.Helper;
 
 public class ShowtimeManager {
   /*

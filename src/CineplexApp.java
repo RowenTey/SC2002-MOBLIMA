@@ -1,6 +1,8 @@
-import database.Database;
-import helper.Helper;
-import view.CineplexAppView;
+package src;
+
+import src.database.Database;
+import src.helper.Helper;
+import src.view.CineplexAppView;
 
 public class CineplexApp {
         public static void main(String[] args) throws Exception {

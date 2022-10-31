@@ -1,4 +1,4 @@
-package helper;
+package src.helper;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -388,18 +388,19 @@ public class Helper {
 
   /**
    * check if the string is Numeric
+   * 
    * @param strNum
    * @return true is the string is Numeric; else false
    */
   public static boolean isNumeric(String strNum) {
     if (strNum == null) {
-        return false;
+      return false;
     }
     try {
-        double d = Double.parseDouble(strNum);
+      double d = Double.parseDouble(strNum);
     } catch (NumberFormatException nfe) {
-        return false;
+      return false;
     }
     return true;
-}
+  }
 }

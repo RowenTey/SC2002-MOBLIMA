@@ -1,16 +1,17 @@
-package controller;
+package src.controller;
 
-import helper.Helper;
 import java.util.ArrayList;
 
-import database.Database;
-import database.FileType;
-import model.Cinema;
-import model.Cineplex;
-import model.enums.Location;
+import src.database.Database;
+import src.database.FileType;
+import src.helper.Helper;
+import src.model.Cinema;
+import src.model.Cineplex;
+import src.model.enums.Location;
 
 /**
- * Cineplex Manager is a controller class that helps the staff/admin to manage all the cineplexes.
+ * Cineplex Manager is a controller class that helps the staff/admin to manage
+ * all the cineplexes.
  * 
  * It can initialize, create or remove {@link Cineplex} details.
  * 
@@ -20,7 +21,8 @@ import model.enums.Location;
  */
 public class CineplexManager {
     /**
-     * Initializer for Cineplex for demonstration of project. (3 Cineplexes will be initialized)
+     * Initializer for Cineplex for demonstration of project. (3 Cineplexes will be
+     * initialized)
      */
     public static void initializeCineplex() {
         CineplexManager.addCineplex(1);
@@ -30,6 +32,7 @@ public class CineplexManager {
 
     /**
      * Gets the array list of cineplexes.
+     * 
      * @return ArrayList of existing cineplexes.
      */
     public static ArrayList<Cineplex> getCineplexList() {
@@ -42,6 +45,7 @@ public class CineplexManager {
 
     /**
      * Print the complete details of the cineplex.
+     * 
      * @param cineplex {@link Cineplex} object to print.
      */
     protected static void printCineplexDetails(Cineplex cineplex) {
@@ -64,7 +68,9 @@ public class CineplexManager {
 
     /**
      * Creates and adds a new cineplex object.
-     * @param opt The index of the location chosen from the {@link Location} enum class.
+     * 
+     * @param opt The index of the location chosen from the {@link Location} enum
+     *            class.
      */
     public static void addCineplex(int opt) {
         if (opt != (Location.values().length + 1)) {
@@ -111,7 +117,9 @@ public class CineplexManager {
     }
 
     /**
-     * Shows and prompts the admin to select a location to add a new {@link Cineplex} object.
+     * Shows and prompts the admin to select a location to add a new
+     * {@link Cineplex} object.
+     * 
      * @return the index of location chosen from {@link Location}.
      */
     public static int promptLocation() {

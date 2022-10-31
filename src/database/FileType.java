@@ -1,4 +1,4 @@
-package database;
+package src.database;
 
 /**
  * An Enum that corresponds to the different file types that the database will

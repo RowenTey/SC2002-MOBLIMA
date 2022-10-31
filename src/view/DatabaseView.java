@@ -1,8 +1,8 @@
-package view;
+package src.view;
 
-import controller.SystemManager;
-import database.Database;
-import helper.Helper;
+import src.controller.SystemManager;
+import src.database.Database;
+import src.helper.Helper;
 
 /**
  * DatabaseView provides the view to manage {@link Database}.

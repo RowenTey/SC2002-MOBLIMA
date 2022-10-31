@@ -1,4 +1,4 @@
-package model.enums;
+package src.model.enums;
 
 /**
  * An enum that stores the different agegroups of movie-goers

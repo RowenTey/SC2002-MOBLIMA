@@ -1,4 +1,4 @@
-package model;
+package src.model;
 
 /**
  * The class that represents a staff in the MOBLIMA system

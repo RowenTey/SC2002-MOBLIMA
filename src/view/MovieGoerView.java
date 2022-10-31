@@ -1,7 +1,7 @@
-package view;
+package src.view;
 
-import controller.BookingManager;
-import helper.Helper;
+import src.controller.BookingManager;
+import src.helper.Helper;
 
 /**
  * Viewing interface for MovieGoer

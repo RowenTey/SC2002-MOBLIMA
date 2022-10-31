@@ -1,4 +1,4 @@
-package model.enums;
+package src.model.enums;
 
 /**
  * An enum that corresponds to the different type of layout types of the

@@ -1,15 +1,15 @@
-package controller;
+package src.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import database.*;
-import helper.Helper;
-import model.*;
-import model.enums.*;
-import view.ReviewView;
-import view.ShowtimeView;
+import src.database.*;
+import src.helper.Helper;
+import src.model.*;
+import src.model.enums.*;
+import src.view.ReviewView;
+import src.view.ShowtimeView;
 
 /**
  * Movie Manager

@@ -1,4 +1,4 @@
-package model.enums;
+package src.model.enums;
 
 /**
  * An enum that corresponds to the different types of show status
@@ -9,28 +9,28 @@ package model.enums;
  */
 public enum ShowStatus {
     /**
-    * ShowStatus type corresponding to "coming soon"
-    */
+     * ShowStatus type corresponding to "coming soon"
+     */
     COMING_SOON("coming soon"),
 
     /**
-    * Layout type corresponding to "now showing"
-    */
+     * Layout type corresponding to "now showing"
+     */
     NOW_SHOWING("now showing"),
 
     /**
-    * Layout type corresponding to "preview"
-    */
+     * Layout type corresponding to "preview"
+     */
     PREVIEW("preview"),
 
     /**
-    * Layout type corresponding to "preview"
-    */
+     * Layout type corresponding to "preview"
+     */
     END_OF_SHOWING("end of showing");
 
     /**
-    * A String value for the Layout type for retrieving purposes
-    */
+     * A String value for the Layout type for retrieving purposes
+     */
     public final String label;
 
     /**
@@ -47,7 +47,7 @@ public enum ShowStatus {
      * 
      * @return the string label of the Show Status
      */
-    public String getLabel(){
+    public String getLabel() {
         return label;
     }
 }

@@ -1,4 +1,4 @@
-package model.enums;
+package src.model.enums;
 
 /**
  * An enum that corresponds to the different types of movies
@@ -36,7 +36,7 @@ public enum TypeMovies {
     private TypeMovies(String label) {
         this.label = label;
     }
-    
+
     /**
      * Get function to access the label of the Movie Type
      * 

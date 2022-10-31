@@ -1,4 +1,4 @@
-package helper;
+package src.helper;
 
 /**
  * Thrown by a {@code Scanner} to indicate that the token

@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 /**
  * MainView is an abstract class which is inherited by every view class.

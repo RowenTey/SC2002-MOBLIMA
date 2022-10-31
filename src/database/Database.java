@@ -1,14 +1,16 @@
-package database;
+package src.database;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
-import controller.BookingManager;
-import controller.CineplexManager;
-import controller.MovieManager;
-import controller.ShowtimeManager;
-import controller.StaffManager;
-import controller.SystemManager;
+import src.controller.CineplexManager;
+import src.controller.MovieManager;
+import src.controller.ShowtimeManager;
+import src.controller.StaffManager;
+import src.controller.SystemManager;
+
+import src.model.*;
+import src.model.enums.TypeMovies;
 
 import java.io.IOException;
 import java.io.EOFException;
@@ -16,9 +18,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import model.*;
-import model.enums.TypeMovies;
 
 /**
  * Database class to read and write serialized data into .dat files.

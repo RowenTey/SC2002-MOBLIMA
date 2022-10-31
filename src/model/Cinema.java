@@ -1,8 +1,8 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
 
-import model.enums.Location;
+import src.model.enums.Location;
 
 /**
  * The class that initialise a Cinema.

@@ -1,8 +1,8 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
 
-import model.enums.LayoutType;
+import src.model.enums.LayoutType;
 
 /**
  * The class that records the showtime of a {@link Movie}
@@ -63,7 +63,7 @@ public class Showtime implements Serializable {
    * @param time       time of showtime
    * @param showtimeId id of showtime
    * @param movie      {@link Movie} of showtime
-   * @param cinema cinema of showtime
+   * @param cinema     cinema of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
   public Showtime(String showtimeId, String time, Movie movie, Cinema cinema, LayoutType layoutType) {

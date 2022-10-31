@@ -1,7 +1,7 @@
-package model;
+package src.model;
 
-import model.enums.ShowStatus;
-import model.enums.TypeMovies;
+import src.model.enums.ShowStatus;
+import src.model.enums.TypeMovies;
 
 /**
  * The class that initialises the 2D movie

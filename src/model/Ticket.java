@@ -1,8 +1,8 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
 
-import model.enums.TypeMovies;
+import src.model.enums.TypeMovies;
 
 /**
  * The class that stores the movie ticket
@@ -136,27 +136,28 @@ public class Ticket implements Serializable {
     /**
      * get the status of ticket
      */
-    public boolean getIsPaid(){
+    public boolean getIsPaid() {
         return this.isPaid;
     }
 
     /**
      * sets the status of the ticket
      */
-    public void setIsPaid(boolean status){
+    public void setIsPaid(boolean status) {
         this.isPaid = status;
     }
+
     /**
      * get the type of movie
      */
-    public String getMovieType(){
+    public String getMovieType() {
         return this.movieType.getLabel();
     }
 
     /**
      * sets the status of the ticket
      */
-    public void setMovieType(TypeMovies movieType){
+    public void setMovieType(TypeMovies movieType) {
         this.movieType = movieType;
     }
 

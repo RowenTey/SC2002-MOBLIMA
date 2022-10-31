@@ -1,7 +1,7 @@
-package view;
+package src.view;
 
-import controller.StaffManager;
-import helper.Helper;
+import src.controller.StaffManager;
+import src.helper.Helper;
 
 /**
  * Viewing interface for Showtime

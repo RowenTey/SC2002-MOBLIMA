@@ -1,12 +1,12 @@
-package controller;
-
-import database.Database;
-import database.FileType;
-import helper.Helper;
-import model.*;
-import model.enums.AgeGroup;
+package src.controller;
 
 import java.util.ArrayList;
+
+import src.database.Database;
+import src.database.FileType;
+import src.helper.Helper;
+import src.model.*;
+import src.model.enums.AgeGroup;
 
 /**
  * Booking Manager is a controller class that manages the bookings.
@@ -285,7 +285,7 @@ public class BookingManager {
     return true;
   }
 
-  public static void handleCheckBooking(){
+  public static void handleCheckBooking() {
     System.out.print("Enter your email: ");
     String email = Helper.readString();
     BookingManager.findBooking(email);

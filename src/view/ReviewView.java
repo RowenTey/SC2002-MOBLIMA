@@ -1,8 +1,8 @@
-package view;
+package src.view;
 
-import helper.Helper;
-import controller.MovieManager;
-import model.Movie;
+import src.helper.Helper;
+import src.controller.MovieManager;
+import src.model.Movie;
 
 /**
  * Viewing interface for Reviews

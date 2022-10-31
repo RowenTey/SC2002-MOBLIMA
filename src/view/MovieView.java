@@ -1,9 +1,9 @@
-package view;
+package src.view;
 
-import controller.MovieManager;
-import controller.ShowtimeManager;
-import helper.Helper;
-import model.enums.ShowStatus;
+import src.controller.MovieManager;
+import src.controller.ShowtimeManager;
+import src.helper.Helper;
+import src.model.enums.ShowStatus;
 
 /**
  * Viewing interface for Cineplex
@@ -139,7 +139,7 @@ public class MovieView extends MainView {
                         printRoute(this.path + " > Movie > Movie Reviews");
                         MovieManager.displayExistingMovies();
                         MovieManager.handleViewPastMovieReviews(this.path + " > Movie");
-                        break;                    
+                        break;
                     case 3:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > NOW SHOWING");

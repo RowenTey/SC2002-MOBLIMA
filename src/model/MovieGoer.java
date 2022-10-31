@@ -1,7 +1,7 @@
-package model;
+package src.model;
 
 import java.util.ArrayList;
-import model.enums.AgeGroup;
+import src.model.enums.AgeGroup;
 
 /**
  * The class that represents a movie goer in the MOBLIMA system

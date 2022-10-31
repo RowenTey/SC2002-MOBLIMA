@@ -1,10 +1,10 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import model.enums.ShowStatus;
-import model.enums.TypeMovies;
+import src.model.enums.ShowStatus;
+import src.model.enums.TypeMovies;
 
 /**
  * The class that stores a movie

@@ -1,7 +1,7 @@
-package view;
+package src.view;
 
-import controller.*;
-import helper.Helper;
+import src.controller.*;
+import src.helper.Helper;
 
 /**
  * Viewing interface for Cineplex
