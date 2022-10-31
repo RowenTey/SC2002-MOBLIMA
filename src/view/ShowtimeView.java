@@ -62,19 +62,27 @@ public class ShowtimeView extends MainView {
                 case 2:
                     Helper.clearScreen();
                     printRoute(path + " > Remove Showtime");
-                    ShowtimeManager.removeShowtime();
+                    if (ShowtimeManager.removeShowtime()) {
+                        System.out.println("\nRemoved showtime successfully!");
+                    } else {
+                        System.out.println("\nFailed to remove showtime!");
+                    }
                     Helper.pressAnyKeyToContinue();
                     break;
                 case 3:
                     Helper.clearScreen();
                     printRoute(path + " > Update Showtime");
-                    ShowtimeManager.updateShowtime();
+                    if (ShowtimeManager.updateShowtime()) {
+                        System.out.println("Showtime successfully updated!");
+                    } else {
+                        System.out.println("\nFailed to update showtime!");
+                    }
                     Helper.pressAnyKeyToContinue();
                     break;
                 case 4:
                     Helper.clearScreen();
                     printRoute(this.path + " > Showtime > Showtime Listing");
-                    ShowtimeManager.printAllShowtime();
+                    ShowtimeManager.displayAllShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
                 case 5:
@@ -86,22 +94,22 @@ public class ShowtimeView extends MainView {
     }
 
     /**
-     * Overrided View App - from movie view (user)
+     * Overrided View App - from movie view (MovieGoer)
      */
     public void viewApp(String path, Movie movie) {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
-        handleShowtimeSelection(movie);
+        ShowtimeManager.handleShowtimeSelection(movie);
         return;
     }
 
     /**
-     * Overrided View App - from cineplex view (user)
+     * Overrided View App - from cineplex view (MovieGoer)
      */
     public void viewApp(Cineplex cineplex) {
         Helper.clearScreen();
         printRoute(path + " > " + cineplex.getLocation());
-        handleShowtimeSelection(cineplex);
+        ShowtimeManager.handleShowtimeSelection(cineplex);
         return;
     }
 
@@ -114,31 +122,6 @@ public class ShowtimeView extends MainView {
         } else {
             System.out.println("\nShowtime created unsuccessfully!");
         }
-    }
-
-    /**
-     * action function to handle showtime selection - from movie view
-     */
-    private void handleShowtimeSelection(Movie movie) {
-        ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
-        ShowtimeManager.displayShowtime(movieShowtimes, "movie");
-        String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        BookingManager.promptBooking(showtimeId);
-    }
-
-    /**
-     * action function to handle showtime selection - from cineplex view
-     */
-    private void handleShowtimeSelection(Cineplex cineplex) {
-        ArrayList<Showtime> movieShowtimes = ShowtimeManager.getShowtimeByCineplex(cineplex);
-        if (movieShowtimes.size() == 0 || movieShowtimes == null) {
-            System.out.println("No showtimes available for this cineplex...");
-            Helper.pressAnyKeyToContinue();
-        } else {
-            ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
-        }
-        String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-        BookingManager.promptBooking(showtimeId);
     }
 
 }
