@@ -204,9 +204,17 @@ public class BookingManager {
    */
   public static void findBooking(String email) {
     ArrayList<Booking> curList = BookingManager.getBookingList();
+    ArrayList<Booking> myList = new ArrayList<Booking>();
     for (int i = 0; i < curList.size(); i++) {
       if (curList.get(i).getMovieGoer().getEmail().equals(email)) {
-        printBookingDetails(curList.get(i));
+        myList.add(curList.get(i));
+      }
+    }
+    if(myList.size() == 0){
+      System.out.println("No Booking is found!");
+    }else{
+      for(int i=0; i<myList.size(); i++){
+        BookingManager.printBookingDetails(myList.get(i));
       }
     }
     Helper.pressAnyKeyToContinue();
