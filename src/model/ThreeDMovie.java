@@ -19,14 +19,14 @@ public class ThreeDMovie extends Movie {
     /**
      * Constructor of 3D movie
      * 
-     * @param movieId Id of movie
-     * @param title title of movie
-     * @param status {@link ShowStatus} of movie
-     * @param synopsis synopsis of movie
-     * @param director director of movie
-     * @param cast cast of movie
-     * @param type {@link MovieType} of movie
-     * @param price base price of 3D movie
+     * @param movieId of movie
+     * @param title of movie
+     * @param status of movie
+     * @param synopsis of movie
+     * @param director of movie
+     * @param cast of movie
+     * @param type of movie
+     * @param price of 3D movie
      */
     public ThreeDMovie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
             MoviesType type, double price) {
@@ -36,6 +36,8 @@ public class ThreeDMovie extends Movie {
 
     /**
      * Sets the base price of the 3D movie
+     * 
+     * @param price of movie
      */
     public void setPrice(double price) {
         this.price = price;

@@ -9,10 +9,12 @@ import src.helper.Helper;
 import src.model.*;
 import src.model.enums.*;
 import src.view.ReviewView;
-import src.view.ShowtimeView;
 
 /**
- * Movie Manager
+ * MovieManager is a controller class that acts as a "middleman" between the
+ * view
+ * classes - CineplexAppView and MovieView and the model class -
+ * {@link Movie}
  * 
  * @author Horstann
  * @version 1.0
@@ -20,16 +22,18 @@ import src.view.ShowtimeView;
  */
 public class MovieManager {
     /**
-     * Get the number of movies
+     * Gets the total number of movies
      * 
-     * @return the total number of movies
+     * @return total number of movies
      */
     public static int getTotalNumOfMovie() {
         return Database.numOfMovies;
     }
 
     /**
-     * Get bookable movies
+     * Gets a list of bookable {@link Movie}
+     * 
+     * @return list of bookable {@link Movie}
      */
     public static ArrayList<Movie> getBookableMovies() {
         ArrayList<Movie> bookableMovieList = new ArrayList<Movie>();
@@ -42,7 +46,9 @@ public class MovieManager {
     }
 
     /**
-     * Get coming soon movie
+     * Gets a list of coming soon {@link Movie}
+     * 
+     * @return list of coming soon {@link Movie}
      */
     public static ArrayList<Movie> getComingSoonMovies() {
         ArrayList<Movie> comingSoonMovieList = new ArrayList<Movie>();
@@ -55,7 +61,7 @@ public class MovieManager {
     }
 
     /**
-     * Initializer for movies
+     * Initialize {@link Database} with {@link Movie}
      */
     public static void initializeMovies() {
         MovieManager.addMovie("Black Adam", ShowStatus.COMING_SOON, "Fake superman", "Shao Wei",
@@ -93,7 +99,7 @@ public class MovieManager {
     }
 
     /**
-     * Print details of movie
+     * Print the details of a {@link Movie}
      */
     public static void displayMovieDetails(Movie movie) {
         System.out.println();
@@ -115,7 +121,14 @@ public class MovieManager {
     }
 
     /**
-     * Add new movie
+     * Adds a {@link Movie} to the {@link Database}
+     * 
+     * @param title of movie
+     * @param status of movie
+     * @param synopsis of movie
+     * @param director of movie
+     * @param cast of movie
+     * @param type of movie
      */
     public static void addMovie(String title, ShowStatus status, String synopsis, String director,
             String[] cast, MoviesType type) {

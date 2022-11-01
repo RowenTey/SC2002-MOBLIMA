@@ -39,10 +39,10 @@ public class Booking implements Serializable {
     /**
      * Constructor of Booking
      *
-     * @param transactionId transaction ID of the booking
-     * @param ticket        {@link Ticket} of the booking
-     * @param movieGoer     {@link MovieGoer} of the booking
-     * @param position      position of the booked seat
+     * @param transactionId of the booking
+     * @param ticket        of the booking
+     * @param movieGoer     of the booking
+     * @param position      of the booked seat
      */
     public Booking(String transactionId, Ticket ticket, MovieGoer movieGoer, String position) {
         setTransactionId(transactionId);
@@ -54,7 +54,7 @@ public class Booking implements Serializable {
     /**
      * Sets the transaction ID of the booking
      *
-     * @param transactionId transaction ID of the booking
+     * @param transactionId of the booking
      */
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
@@ -63,7 +63,7 @@ public class Booking implements Serializable {
     /**
      * Sets the {@link Ticket} of the booking
      *
-     * @param ticket {@link Ticket} of the booking
+     * @param ticket of the booking
      */
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
@@ -72,7 +72,7 @@ public class Booking implements Serializable {
     /**
      * Sets the {@link MovieGoer} of the booking
      *
-     * @param movieGoer {@link MovieGoer} of the booking
+     * @param movieGoer of the booking
      */
     public void setMovieGoer(MovieGoer movieGoer) {
         this.movieGoer = movieGoer;
@@ -81,7 +81,7 @@ public class Booking implements Serializable {
     /**
      * Sets the position of the booked seat
      *
-     * @param position position of the booked seat
+     * @param position of the booked seat
      */
     public void setPosition(String position) {
         this.position = position;
@@ -90,7 +90,7 @@ public class Booking implements Serializable {
     /**
      * Gets the transaction ID of the booking
      *
-     * @return the transaction ID of the booking
+     * @return transaction ID of the booking
      */
     public String getTransactionId() {
         return this.transactionId;
@@ -99,7 +99,7 @@ public class Booking implements Serializable {
     /**
      * Gets the {@link Ticket} of the booking
      *
-     * @return the {@link Ticket} of the booking
+     * @return {@link Ticket} of the booking
      */
     public Ticket getTicket() {
         return ticket;
@@ -108,7 +108,7 @@ public class Booking implements Serializable {
     /**
      * Gets the {@link MovieGoer} of the booking
      *
-     * @return the information of the {@link MovieGoer}
+     * @return information of the {@link MovieGoer}
      */
     public MovieGoer getMovieGoer() {
         return movieGoer;
@@ -117,7 +117,7 @@ public class Booking implements Serializable {
     /**
      * Gets the position of the booked seat
      *
-     * @return the position of the booked seat
+     * @return position of the booked seat
      */
     public String getPosition() {
         return position;

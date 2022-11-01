@@ -40,7 +40,7 @@ public class Review implements Serializable {
     /**
      * Sets the content of review 
      *
-     * @param review content of review
+     * @param review content
      */
     public void setReview(String review) {
         this.review = review;
@@ -49,7 +49,7 @@ public class Review implements Serializable {
     /**
      * Sets the rating of review 
      *
-     * @param rating rating of review 
+     * @param rating of review 
      */
     public void setRating(double rating) {
         this.rating = rating;

@@ -41,8 +41,8 @@ public class Cineplex implements Serializable {
     /**
      * Constructor of Cineplex
      * 
-     * @param cineplexId Id of cineplex
-     * @param location {@link Location} of Cineplex
+     * @param cineplexId of cineplex
+     * @param location of Cineplex
      */
     public Cineplex(String cineplexId, Location location) {
         setCineplexId(cineplexId);
@@ -68,7 +68,7 @@ public class Cineplex implements Serializable {
     /**
      * Sets the ID of the cineplex
      * 
-     * @param newID id of cineplex
+     * @param newID of cineplex
      */
     public void setCineplexId(String newID) {
         this.cineplexID = newID;
@@ -86,7 +86,7 @@ public class Cineplex implements Serializable {
     /**
      * Sets the list of {@link Cinema} in the cineplex
      * 
-     * @param newList array list of cinemas of the cineplex
+     * @param newList of cinemas of the cineplex
      */
     public void setCinemaList(ArrayList<Cinema> newList) {
         this.cinemaList = newList;
@@ -95,7 +95,7 @@ public class Cineplex implements Serializable {
     /**
      * Gets the ID of the cineplex
      * 
-     * @return cineplexID
+     * @return cineplexID of the cineplex
      */
     public String getCineplexId() {
         return this.cineplexID;

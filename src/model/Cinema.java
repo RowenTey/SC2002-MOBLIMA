@@ -20,7 +20,7 @@ public class Cinema implements Serializable {
     /**
      * {@link Location} of the cinema
      */
-    private Location cineplex;
+    private Location location;
 
     /**
      * Unique code of the cinema
@@ -35,12 +35,12 @@ public class Cinema implements Serializable {
     /**
      * Constructor of Cinema
      * 
-     * @param Location {@link Location} of the Cinema
-     * @param cinemaCode unique code of the cinema
-     * @param isPlatinum Type of cinema
+     * @param Location of the Cinema
+     * @param cinemaCode of the cinema
+     * @param isPlatinum (type) of cinema
      */
-    public Cinema(Location cineplex, String cinemaCode, boolean isPlatinum) {
-        setCineplex(cineplex);
+    public Cinema(Location location, String cinemaCode, boolean isPlatinum) {
+        setCineplex(location);
         setCinemaCode(cinemaCode);
         setIsPlatinum(isPlatinum);
     }
@@ -48,7 +48,7 @@ public class Cinema implements Serializable {
     /**
      * Sets the cinemaCode of the cinema
      * 
-     * @param cinemaCode unique code of the cinema
+     * @param cinemaCode of the cinema
      */
     public void setCinemaCode(String cinemaCode) {
         this.cinemaCode = cinemaCode;
@@ -57,7 +57,7 @@ public class Cinema implements Serializable {
     /**
      * Sets the type of cinema
      * 
-     * @param isPlatinum type of cinema
+     * @param isPlatinum (type) of cinema
      */
     public void setIsPlatinum(boolean isPlatinum) {
         this.isPlatinum = isPlatinum;
@@ -68,8 +68,8 @@ public class Cinema implements Serializable {
      * 
      * @param cineplex {@link Location} of the cinema
      */
-    public void setCineplex(Location cineplex) {
-        this.cineplex = cineplex;
+    public void setCineplex(Location location) {
+        this.location = location;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Cinema implements Serializable {
      * @return {@link Location} of the cinema
      */
     public Location getCineplex() {
-        return cineplex;
+        return this.location;
     }
 
     /**

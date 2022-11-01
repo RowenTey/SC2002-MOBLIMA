@@ -19,14 +19,14 @@ public class BlockbusterMovie extends Movie {
     /**
      * Constructor of blockbuster movie
      * 
-     * @param movieId  ID of the movie
-     * @param title    title of the movie
-     * @param status   status of the movie
-     * @param synopsis synopsis of the movie
-     * @param director director of the movie
-     * @param cast     cast list of the movie
-     * @param type     type of the movie
-     * @param price    base price of the movie
+     * @param movieId  of the movie
+     * @param title    of the movie
+     * @param status   of the movie
+     * @param synopsis of the movie
+     * @param director of the movie
+     * @param cast     of the movie
+     * @param type     of the movie
+     * @param price    of the movie
      */
     public BlockbusterMovie(String movieId, String title, ShowStatus status, String synopsis, String director,
             String[] cast, MoviesType type, double price) {
@@ -37,7 +37,7 @@ public class BlockbusterMovie extends Movie {
     /**
      * Sets the base price of the movie
      * 
-     * @param price base price of the movie
+     * @param price of the movie
      */
     public void setPrice(double price) {
         this.price = price;
