@@ -13,17 +13,20 @@ import src.model.enums.ShowStatus;
  */
 public class MovieView extends MainView {
     /**
-     * path
+     * Path of entry for MovieView
      */
     private String path;
 
     /**
-     * Current user is staff
+     * boolean {@code true} if current user is staff, {@code false} otherwise
      */
     private boolean isStaff;
 
     /**
-     * Default contructor for the MovieAppView
+     * Default contructor for the MovieView
+     *      
+     * @param path path of entry for cineplex view
+     * @param isStaff boolean value if the current user is staff
      */
     public MovieView(String path, boolean isStaff) {
         super();
@@ -32,7 +35,7 @@ public class MovieView extends MainView {
     }
 
     /**
-     * View Menu
+     * View Menu of the MovieView
      */
     public void printMenu() {
         Helper.clearScreen();
@@ -130,7 +133,11 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
-                        handleBookMovie(this.path + " > Movie > Book Movie");
+                        if(MovieManager.handleBookMovie(this.path + " > Movie > Book Movie")){
+                            ShowtimeView showtimeView = new ShowtimeView(path);
+                            showtimeView.viewApp(MovieManager.selectMovie());
+                        };
+
                         break;
                     case 2:
                         Helper.clearScreen();
@@ -175,16 +182,4 @@ public class MovieView extends MainView {
             } while (choice != 8);
         }
     }
-
-    /**
-     * @param path
-     */
-    private static void handleBookMovie(String path) {
-        System.out.println("Which movie would you like to book?\n");
-        if (MovieManager.displayListOfBookableMovies()) {
-            ShowtimeView showtimeView = new ShowtimeView(path);
-            showtimeView.viewApp(MovieManager.selectMovie());
-        }
-    }
-
 }

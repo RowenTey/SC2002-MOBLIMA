@@ -402,4 +402,14 @@ public class MovieManager {
         }
     }
 
+    /**
+     * @param path
+     */
+    public static boolean handleBookMovie(String path) {
+        System.out.println("Which movie would you like to book?\n");
+        if (MovieManager.displayListOfBookableMovies()) {
+            return true;
+        }
+        return false;
+    }
 }
