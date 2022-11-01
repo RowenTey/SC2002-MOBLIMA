@@ -88,7 +88,6 @@ public class Showtime implements Serializable {
    * Sets the Id of showtime
    * 
    * @param showtimeId Id of showtime
-   * @return id of showtime
    */
   public void setShowtimeId(String showtimeId) {
     this.showtimeId = showtimeId;
@@ -158,7 +157,7 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Gets the {@link Seats} of showtime
+   * Gets the {@link Seat} of showtime
    * 
    * @return {@code Seats[][]} of this showtime
    */
