@@ -24,7 +24,7 @@ public class CineplexView extends MainView {
     /**
      * Default contructor for the CineplexView
      * 
-     * @param path path of entry for CineplexView
+     * @param path of entry for CineplexView
      * @param isStaff boolean value if the current user is staff
      * 
      */

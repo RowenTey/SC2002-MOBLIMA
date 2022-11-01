@@ -25,7 +25,7 @@ public class MovieView extends MainView {
     /**
      * Default contructor for the MovieView
      *      
-     * @param path path of entry for cineplex view
+     * @param path of entry for cineplex view
      * @param isStaff boolean value if the current user is staff
      */
     public MovieView(String path, boolean isStaff) {

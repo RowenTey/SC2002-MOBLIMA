@@ -25,8 +25,8 @@ public class ReviewView extends MainView {
     /**
      * Default contructor for the ReviewView
      * 
-     * @param movie {@link Movie} to be reviewed
-     * @param path path of entry for ReviewView
+     * @param movie to be reviewed
+     * @param path of entry for ReviewView
      */
     public ReviewView(Movie movie, String path) {
         super();
