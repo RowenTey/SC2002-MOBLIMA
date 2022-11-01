@@ -17,22 +17,22 @@ public class Booking implements Serializable {
     private static final long serialVersionUID = 9L;
 
     /**
-     * transaction ID for booking
+     * Transaction ID for booking
      */
     private String transactionId;
 
     /**
-     * ticket for booking
+     * {@link Ticket} for booking
      */
     private Ticket ticket;
 
     /**
-     * info of the customer of the booking
+     * {@link MovieGoer} of booking
      */
     private MovieGoer movieGoer;
 
     /**
-     * seat number
+     * Position of seat
      */
     private String position;
 
@@ -40,24 +40,15 @@ public class Booking implements Serializable {
      * Constructor of Booking
      *
      * @param transactionId transaction ID of the booking
-     * @param ticket        ticket of the booking
-     * @param movieGoer     moviegoer of the booking
-     * @param position      position of the booking
+     * @param ticket        {@link Ticket} of the booking
+     * @param movieGoer     {@link MovieGoer} of the booking
+     * @param position      position of the booked seat
      */
     public Booking(String transactionId, Ticket ticket, MovieGoer movieGoer, String position) {
         setTransactionId(transactionId);
         setTicket(ticket);
         setMovieGoer(movieGoer);
         setPosition(position);
-    }
-
-    /**
-     * Gets the transaction ID of the booking
-     *
-     * @return the transaction ID of the booking
-     */
-    public String getTransactionId() {
-        return transactionId;
     }
 
     /**
@@ -70,56 +61,66 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Gets the ticket of the booking
+     * Sets the {@link Ticket} of the booking
      *
-     * @return the ticket of the booking
-     */
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    /**
-     * Sets the ticket of the booking
-     *
-     * @param ticket ticket of the booking
+     * @param ticket {@link Ticket} of the booking
      */
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 
     /**
-     * Gets the moviegoer of the booking
+     * Sets the {@link MovieGoer} of the booking
      *
-     * @return the information of the moviegoer
+     * @param movieGoer {@link MovieGoer} of the booking
+     */
+    public void setMovieGoer(MovieGoer movieGoer) {
+        this.movieGoer = movieGoer;
+    }
+    
+    /**
+     * Sets the position of the booked seat
+     *
+     * @param position position of the booked seat
+     */
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    /**
+     * Gets the transaction ID of the booking
+     *
+     * @return the transaction ID of the booking
+     */
+    public String getTransactionId() {
+        return this.transactionId;
+    }
+
+    /**
+     * Gets the {@link Ticket} of the booking
+     *
+     * @return the {@link Ticket} of the booking
+     */
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    /**
+     * Gets the {@link MovieGoer} of the booking
+     *
+     * @return the information of the {@link MovieGoer}
      */
     public MovieGoer getMovieGoer() {
         return movieGoer;
     }
 
     /**
-     * Sets the moviegoer of the booking
+     * Gets the position of the booked seat
      *
-     * @param movieGoer moviegoer of the booking
-     */
-    public void setMovieGoer(MovieGoer movieGoer) {
-        this.movieGoer = movieGoer;
-    }
-
-    /**
-     * Gets the position of the booking
-     *
-     * @return the position of the moviegoer
+     * @return the position of the booked seat
      */
     public String getPosition() {
         return position;
     }
-
-    /**
-     * Sets the position of the booking
-     *
-     * @param position position of the booking
-     */
-    public void setPosition(String position) {
-        this.position = position;
-    }
+    
 }

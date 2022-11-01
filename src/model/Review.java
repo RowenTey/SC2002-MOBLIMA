@@ -17,12 +17,12 @@ public class Review implements Serializable {
     private static final long serialVersionUID = 7L;
 
     /**
-     * String that contains the actual review
+     * Content of review
      */
     private String review;
 
     /**
-     * Rating for the review
+     * Rating of review 
      */
     private double rating;
 
@@ -38,38 +38,38 @@ public class Review implements Serializable {
     }
 
     /**
-     * Gets the review for the movie
+     * Sets the content of review 
      *
-     * @return the review
-     */
-    public String getReview() {
-        return review;
-    }
-
-    /**
-     * Sets the review for the movie
-     *
-     * @param review review for the movie
+     * @param review content of review
      */
     public void setReview(String review) {
         this.review = review;
     }
 
     /**
-     * Gets the rating for the movie
+     * Sets the rating of review 
      *
-     * @return the rating
-     */
-    public double getRating() {
-        return rating;
-    }
-
-    /**
-     * Sets the rating for the movie
-     *
-     * @param rating review for the movie
+     * @param rating rating of review 
      */
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    /**
+     * Gets the content of review
+     *
+     * @return content of review
+     */
+    public String getReview() {
+        return review;
+    }
+
+    /**
+     * Gets the rating of review
+     *
+     * @return rating of review
+     */
+    public double getRating() {
+        return rating;
     }
 }

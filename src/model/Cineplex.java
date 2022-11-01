@@ -19,12 +19,12 @@ public class Cineplex implements Serializable {
     private static final long serialVersionUID = 4L;
 
     /**
-     * Cineplex ID
+     * Id of cineplex
      */
     private String cineplexID;
 
     /**
-     * Location of the Cineplex
+     * {@link Location} of the Cineplex
      */
     private Location location;
 
@@ -34,14 +34,15 @@ public class Cineplex implements Serializable {
     private int numOfCinemas;
 
     /**
-     * List of cinemas in the Cineplex
+     * List of {@link Movie} of the Cineplex
      */
     private ArrayList<Cinema> cinemaList;
 
     /**
      * Constructor of Cineplex
      * 
-     * @param location Location of Cineplex
+     * @param cineplexId Id of cineplex
+     * @param location {@link Location} of Cineplex
      */
     public Cineplex(String cineplexId, Location location) {
         setCineplexId(cineplexId);
@@ -52,7 +53,7 @@ public class Cineplex implements Serializable {
     }
 
     /**
-     * Initialise Cineplex
+     * Initialize the cineplex with {@link Cinema}
      */
     private void initCineplex() {
         String cinemaCode = location.getLabel().substring(0, 2).toUpperCase();
@@ -65,6 +66,33 @@ public class Cineplex implements Serializable {
     }
 
     /**
+     * Sets the ID of the cineplex
+     * 
+     * @param newID id of cineplex
+     */
+    public void setCineplexId(String newID) {
+        this.cineplexID = newID;
+    }
+
+    /**
+     * Sets the number of cinemas in the cineplex
+     * 
+     * @param newNum number of cinemas of the cineplex
+     */
+    public void setNumOfCinemas(int newNum) {
+        this.numOfCinemas = newNum;
+    }
+
+    /**
+     * Sets the list of {@link Cinema} in the cineplex
+     * 
+     * @param newList array list of cinemas of the cineplex
+     */
+    public void setCinemaList(ArrayList<Cinema> newList) {
+        this.cinemaList = newList;
+    }
+
+    /**
      * Gets the ID of the cineplex
      * 
      * @return cineplexID
@@ -74,65 +102,38 @@ public class Cineplex implements Serializable {
     }
 
     /**
-     * Sets the ID of the cineplex
+     * Gets the {@link Location} of the cineplex
      * 
-     * @param cineplexID
-     */
-    public void setCineplexId(String newID) {
-        this.cineplexID = newID;
-    }
-
-    /**
-     * Gets the location of the Cineplex in a String
-     * 
-     * @return string object of the location of Cineplex
-     */
-    public String getLocationStr() {
-        return this.location.getLabel();
-    }
-
-    /**
-     * Gets the location of the Cineplex
-     * 
-     * @return the location of Cineplex
+     * @return the {@link Location} of cineplex
      */
     public Location getLocation() {
         return this.location;
     }
 
     /**
-     * Gets the number of cinemas in the Cineplex
+     * Gets the location of the Cineplex in a string
      * 
-     * @return number of cinemas in the Cineplex
+     * @return location of the Cineplex in string format
+     */
+    public String getLocationStr() {
+        return this.location.getLabel();
+    }
+
+    /**
+     * Gets the number of cinemas of the cineplex
+     * 
+     * @return number of cinemas of the cineplex
      */
     public int getNumOfCinemas() {
         return this.numOfCinemas;
     }
 
     /**
-     * Sets the number of cinemas in the Cineplex
+     * Gets the list of {@link Cinema} of the cineplex
      * 
-     * @param numberOfCinemas
-     */
-    public void setNumOfCinemas(int newNum) {
-        this.numOfCinemas = newNum;
-    }
-
-    /**
-     * Gets the list of cinemas in the Cineplex
-     * 
-     * @return list of cinemas
+     * @return list of {@link Cinema} of the cineplex
      */
     public ArrayList<Cinema> getCinemaList() {
         return this.cinemaList;
-    }
-
-    /**
-     * Sets the list of cinemas in the Cineplex
-     * 
-     * @param cinemaList
-     */
-    public void setCinemaList(ArrayList<Cinema> newList) {
-        this.cinemaList = newList;
     }
 }

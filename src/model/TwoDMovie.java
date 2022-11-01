@@ -20,7 +20,14 @@ public class TwoDMovie extends Movie {
     /**
      * Constructor of 2D movie
      * 
-     * @param price price of 2D movie
+     * @param movieId  ID of the movie
+     * @param title    title of the movie
+     * @param status   status of the movie
+     * @param synopsis synopsis of the movie
+     * @param director director of the movie
+     * @param cast     cast list of the movie
+     * @param type     type of the movie
+     * @param price    base price of the movie
      */
     public TwoDMovie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
             MoviesType type, double price) {
@@ -29,14 +36,16 @@ public class TwoDMovie extends Movie {
     }
 
     /**
-     * set the price of the 2D movie
+     * Sets the base price of the movie
      */
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
-     * get the price of the 2D movie
+     * Gets the price of the movie
+     * 
+     * @return base price of movie
      */
     public double getPrice() {
         return price;

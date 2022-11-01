@@ -18,7 +18,7 @@ public class Cinema implements Serializable {
     private static final long serialVersionUID = 2L;
 
     /**
-     * Its Cineplex
+     * {@link Location} of the cinema
      */
     private Location cineplex;
 
@@ -28,15 +28,15 @@ public class Cinema implements Serializable {
     private String cinemaCode;
 
     /**
-     * Type of the cinema (Platinum/Normal)
+     * Type of the cinema
      */
     private boolean isPlatinum;
 
     /**
      * Constructor of Cinema
      * 
-     * @param cineplex   Cineplex
-     * @param cinemaCode Code of the cinema
+     * @param Location {@link Location} of the Cinema
+     * @param cinemaCode unique code of the cinema
      * @param isPlatinum Type of cinema
      */
     public Cinema(Location cineplex, String cinemaCode, boolean isPlatinum) {
@@ -46,23 +46,18 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Gets the Cineplex of the cinema
-     * 
-     * @return Cineplex of cinema
-     */
-    public Location getCineplex() {
-        return cineplex;
-    }
-
-    /**
      * Sets the cinemaCode of the cinema
+     * 
+     * @param cinemaCode unique code of the cinema
      */
     public void setCinemaCode(String cinemaCode) {
         this.cinemaCode = cinemaCode;
     }
 
     /**
-     * Sets the if cinema is platinum
+     * Sets the type of cinema
+     * 
+     * @param isPlatinum type of cinema
      */
     public void setIsPlatinum(boolean isPlatinum) {
         this.isPlatinum = isPlatinum;
@@ -70,9 +65,20 @@ public class Cinema implements Serializable {
 
     /**
      * Sets the Cineplex of the cinema
+     * 
+     * @param cineplex {@link Location} of the cinema
      */
     public void setCineplex(Location cineplex) {
         this.cineplex = cineplex;
+    }
+
+    /**
+     * Gets the {@link Location} of the cinema
+     * 
+     * @return {@link Location} of the cinema
+     */
+    public Location getCineplex() {
+        return cineplex;
     }
 
     /**
@@ -85,7 +91,7 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Gets the type of cinema (Platinum/Normal)
+     * Gets the type of cinema 
      * 
      * @return Type of cinema
      */

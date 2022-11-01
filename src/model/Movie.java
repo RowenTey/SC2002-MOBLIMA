@@ -21,7 +21,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     protected static final long serialVersionUID = 6L;
 
     /**
-     * movie ID of movie
+     * Id of movie
      */
     private String movieId;
 
@@ -61,21 +61,28 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     private double overallRating;
 
     /**
-     * {@link Review} for movie
+     * list of {@link Review} of movie
      */
     private ArrayList<Review> reviews;
 
     /**
-     * type of movie
+     * {@link MovieType} of movie
      */
     private MoviesType type;
 
     /**
      * Constructor of Movie
      * 
+     * @param movieId id of movie
+     * @param title title of movie 
+     * @param status {@link ShowStatus} of movie 
+     * @param synopsis synopsis of movie
+     * @param director director of movie
+     * @param cast cast of movie
+     * @param type {@link MovieType} of movie
+     * 
      */
-    public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            MoviesType type) {
+    public Movie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast, MoviesType type) {
         setMovieId(movieId);
         setTitle(title);
         setStatus(status);
@@ -99,30 +106,12 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     public abstract void setPrice(double price);
 
     /**
-     * Gets the ID of the movie
+     * Sets the Id of the movie
      *
-     * @return the ID of the movie
-     */
-    public String getMovieId() {
-        return movieId;
-    }
-
-    /**
-     * Sets the ID of the movie
-     *
-     * @param movieId ID of the movie
+     * @param movieId Id of the movie
      */
     public void setMovieId(String movieId) {
         this.movieId = movieId;
-    }
-
-    /**
-     * Gets the title of the movie
-     *
-     * @return the title of the movie
-     */
-    public String getTitle() {
-        return title;
     }
 
     /**
@@ -135,30 +124,12 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     }
 
     /**
-     * Gets the status of the movie
+     * Sets the {@link ShowStatus} of the movie
      *
-     * @return the status of the movie
-     */
-    public ShowStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Sets the status of the movie
-     *
-     * @param status status of the movie
+     * @param status {@link ShowStatus} of the movie
      */
     public void setStatus(ShowStatus status) {
         this.status = status;
-    }
-
-    /**
-     * Gets the synopsis of the movie
-     *
-     * @return the synopsis of the movie
-     */
-    public String getSynopsis() {
-        return synopsis;
     }
 
     /**
@@ -171,30 +142,12 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     }
 
     /**
-     * Gets the director of the movie
-     *
-     * @return the director of the movie
-     */
-    public String getDirector() {
-        return director;
-    }
-
-    /**
      * Sets the director of the movie
      *
      * @param director director of the movie
      */
     public void setDirector(String director) {
         this.director = director;
-    }
-
-    /**
-     * Gets the cast of the movie
-     *
-     * @return array of the cast of the movie
-     */
-    public String[] getCast() {
-        return cast;
     }
 
     /**
@@ -207,15 +160,6 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     }
 
     /**
-     * Gets the total ticket sales of the movie
-     *
-     * @return total ticket sales of the movie
-     */
-    public int getTicketSales() {
-        return ticketSales;
-    }
-
-    /**
      * Sets the total ticket sales of the movie
      *
      * @param ticketSales total ticket sales of the movie
@@ -224,6 +168,91 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         this.ticketSales = ticketSales;
     }
 
+    /**
+     * Sets the overall rating of the movie
+     * 
+     * @param overallRating overall rating of the movie
+     */
+    public void setOverallRating(double overallRating) {
+        this.overallRating = overallRating;
+    }
+
+    /**
+     * Adds {@link Review} to the list of {@link Review} of the movie
+     *
+     * @param review {@link Review} that is added to this movie
+     */
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+        
+    /**
+     * Sets the {@link MovieType} of the movie
+     *
+     * @param type {@link MovieType} of the movie
+     */
+    public void setType(MoviesType type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the Id of the movie
+     *
+     * @return Id of the movie
+     */
+    public String getMovieId() {
+        return movieId;
+    }
+    
+    /**
+     * Gets the title of the movie
+     *
+     * @return title of the movie
+     */
+    public String getTitle() {
+        return title;
+    }
+    /**
+     * Gets the {@link ShowStatus} of the movie
+     *
+     * @return {@link ShowStatus} of the movie
+     */
+    public ShowStatus getStatus() {
+        return status;
+    }
+    /**
+     * Gets the synopsis of the movie
+     *
+     * @return synopsis of the movie
+     */
+    public String getSynopsis() {
+        return synopsis;
+    }
+    /**
+     * Gets the director of the movie
+     *
+     * @return director of the movie
+     */
+    public String getDirector() {
+        return director;
+    }
+
+    /**
+     * Gets the cast of the movie
+     *
+     * @return cast of the movie
+     */
+    public String[] getCast() {
+        return cast;
+    }
+    /**
+     * Gets the total ticket sales of the movie
+     *
+     * @return total ticket sales of the movie
+     */
+    public int getTicketSales() {
+        return ticketSales;
+    }
     /**
      * Gets the overall rating of the movie
      *
@@ -242,47 +271,31 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         setOverallRating(dummy);
         return dummy;
     }
-
-    public void setOverallRating(double overallRating) {
-        this.overallRating = overallRating;
-    }
-
+    
     /**
-     * Gets the review of movie
+     * Gets the list of {@link Review} of movie
      *
-     * @return {@link Review[]} that is assigned to this movie
+     * @return list of {@link Review} of the movie
      */
     public ArrayList<Review> getReviews() {
         return reviews;
     }
 
     /**
-     * Sets the review of movie
+     * Gets the {@link MovieType} of the movie
      *
-     * @param {@link Review[]} that is added to this movie
-     */
-    public void addReview(Review review) {
-        reviews.add(review);
-    }
-
-    /**
-     * Gets the type of the movie
-     *
-     * @return the type
+     * @return {@link MovieType} of the movie
      */
     public MoviesType getType() {
         return type;
     }
 
     /**
-     * Sets the type of the movie
-     *
-     * @param type type for the movie
+     * Compare the overall ratings between two movies
+     * 
+     * @param movie {@link Movie} that is to be compared with
+     * @return integer {@code 1} if the current movie's overall rating is higher, {@code -1} otherwise
      */
-    public void setType(MoviesType type) {
-        this.type = type;
-    }
-
     @Override
     public int compareTo(Movie movie) {
         if (this == movie) {
@@ -294,6 +307,12 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         return thisOverallRating > thatOverallRating ? 1 : -1;
     }
 
+    /**
+     * Compare movies with their ticket sales
+     * 
+     * @param movie {@link Movie} that is to be compared with
+     * @return the difference between the current and compared movie's ticket sales
+     */
     public int compareToTicketSales(Movie movie) {
         if (this == movie) {
             return 0;
