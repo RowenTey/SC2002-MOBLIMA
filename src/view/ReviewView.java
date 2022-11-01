@@ -13,14 +13,20 @@ import src.model.Movie;
  */
 public class ReviewView extends MainView {
     /**
-     * Path of entry for ReviewView
+     * Path of entry for Review View
      */
     private String path;
 
+    /**
+     * {@link Movie} to be reviewed
+     */
     private Movie movie;
 
     /**
-     * Default contructor for the CineplexAppView
+     * Default contructor for the ReviewView
+     * 
+     * @param movie {@link Movie} to be reviewed
+     * @param path path of entry for ReviewView
      */
     public ReviewView(Movie movie, String path) {
         super();
@@ -29,7 +35,7 @@ public class ReviewView extends MainView {
     }
 
     /**
-     * View Menu
+     * View Menu of the ReviewView
      */
     public void printMenu() {
         Helper.clearScreen();
@@ -70,5 +76,4 @@ public class ReviewView extends MainView {
             }
         } while (choice != 3);
     }
-
 }

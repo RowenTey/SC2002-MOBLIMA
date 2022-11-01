@@ -17,12 +17,16 @@ public class CineplexView extends MainView {
     private String path;
 
     /**
-     * Current user is staff
+     * boolean {@code true} if current user is staff, {@code false} otherwise
      */
     private boolean isStaff;
 
     /**
      * Default contructor for the CineplexView
+     * 
+     * @param path path of entry for CineplexView
+     * @param isStaff boolean value if the current user is staff
+     * 
      */
     public CineplexView(String path, boolean isStaff) {
         super();
@@ -31,7 +35,7 @@ public class CineplexView extends MainView {
     }
 
     /**
-     * View Menu
+     * View Menu of the CineplexView
      */
     public void printMenu() {
         if (this.isStaff) {
