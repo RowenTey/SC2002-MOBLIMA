@@ -8,7 +8,6 @@ package src.model.enums;
  * @since 2022-10-20
  */
 public enum Location {
-
   /**
    * Causeway Point
    */

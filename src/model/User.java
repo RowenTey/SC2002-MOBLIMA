@@ -3,7 +3,7 @@ package src.model;
 import java.io.Serializable;
 
 /**
- * The base class that stores the name of the user
+ * The base class that stores the basic information of the user
  * 
  * @author Xiaoyue
  * @version 1.0
@@ -56,7 +56,7 @@ public class User implements Serializable {
     /**
      * Gets the ID of the user
      *
-     * @return the ID of the user
+     * @return ID of the user
      */
     public String getUserId() {
         return userId;
@@ -65,7 +65,7 @@ public class User implements Serializable {
     /**
      * Gets the name of the current user
      *
-     * @return the name of the user
+     * @return name of the user
      */
     public String getName() {
         return username;

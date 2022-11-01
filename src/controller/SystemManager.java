@@ -7,7 +7,7 @@ import src.database.Database;
 import src.database.FileType;
 import src.helper.Helper;
 import src.model.Movie;
-import src.model.enums.TypeMovies;
+import src.model.enums.MoviesType;
 
 /**
  * SystemManager is a controller class that handles system configurations.
@@ -32,14 +32,14 @@ public class SystemManager {
   }
 
   /**
-   * Get the current ticket types based on {@link TypeMovies}
+   * Get the current ticket types based on {@link MoviesType}
    * 
-   * @return {@code ArrayList<TypeMovies>} of {@link TypeMovies}
+   * @return {@code ArrayList<MoviesType>} of {@link MoviesType}
    */
-  private static ArrayList<TypeMovies> getTicketTypes() {
-    ArrayList<TypeMovies> ticketTypes = new ArrayList<TypeMovies>();
-    for (TypeMovies typeMovies : Database.PRICES.keySet()) {
-      ticketTypes.add(typeMovies);
+  private static ArrayList<MoviesType> getTicketTypes() {
+    ArrayList<MoviesType> ticketTypes = new ArrayList<MoviesType>();
+    for (MoviesType MoviesType : Database.PRICES.keySet()) {
+      ticketTypes.add(MoviesType);
     }
     return ticketTypes;
   }
@@ -51,7 +51,7 @@ public class SystemManager {
    */
   public static boolean updateTicketPrices() {
     displayTicketPrices();
-    ArrayList<TypeMovies> ticketTypes = getTicketTypes();
+    ArrayList<MoviesType> ticketTypes = getTicketTypes();
     int opt = -1;
 
     System.out.println("Which ticket price would you like to update: ");
@@ -61,7 +61,7 @@ public class SystemManager {
     System.out.println("(" + (ticketTypes.size() + 1) + ") Exit");
     opt = Helper.readInt(1, ticketTypes.size() + 1);
     if (opt != ticketTypes.size() + 1) {
-      TypeMovies type = ticketTypes.get(opt - 1);
+      MoviesType type = ticketTypes.get(opt - 1);
       System.out.println("\nUpdate price to: ");
       double newPrice = Helper.readDouble(0, 100);
       Database.PRICES.put(type, newPrice);
@@ -81,7 +81,7 @@ public class SystemManager {
    * @return boolean {@code true} if movie price was updated, {@code false}
    *         otherwise
    */
-  private static boolean updateMoviePrices(TypeMovies movieType, double price) {
+  private static boolean updateMoviePrices(MoviesType movieType, double price) {
     for (Movie movie : Database.MOVIES.values()) {
       if (movie.getType() == movieType) {
         movie.setPrice(price);
@@ -107,7 +107,7 @@ public class SystemManager {
   protected static void displayTicketPrices() {
     System.out.println("List of Current Ticket Prices");
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
-    for (Map.Entry<TypeMovies, Double> currentTicketType : Database.PRICES.entrySet()) {
+    for (Map.Entry<MoviesType, Double> currentTicketType : Database.PRICES.entrySet()) {
       System.out.println(String.format("%-25s: %s", currentTicketType.getKey(),
           Helper.df2.format(currentTicketType.getValue())));
     }

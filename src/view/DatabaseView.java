@@ -37,7 +37,7 @@ public class DatabaseView extends MainView {
   }
 
   /**
-   * View Application of the DatabaseView.
+   * View application of the DatabaseView.
    * <p>
    * See {@link Database} for more details.
    */

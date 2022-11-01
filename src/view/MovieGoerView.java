@@ -4,13 +4,12 @@ import src.controller.BookingManager;
 import src.helper.Helper;
 
 /**
- * Viewing interface for MovieGoer
+ * MovieGoerView provides the view to access movie goer actions.
  * 
  * @author Shao Wei
  * @version 1.0
  * @since 2022-10-20
  */
-
 public class MovieGoerView extends MainView {
     /**
      * Path of entry for showtime view
@@ -19,6 +18,8 @@ public class MovieGoerView extends MainView {
 
     /**
      * Overrided contructor for the MovieGoerView
+     * 
+     * @param path of entry for MovieGoerView
      */
     public MovieGoerView(String path) {
         super();

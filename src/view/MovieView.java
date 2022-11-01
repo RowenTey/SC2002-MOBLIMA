@@ -1,7 +1,6 @@
 package src.view;
 
 import src.controller.MovieManager;
-import src.controller.ShowtimeManager;
 import src.helper.Helper;
 import src.model.enums.ShowStatus;
 
@@ -12,7 +11,6 @@ import src.model.enums.ShowStatus;
  * @version 1.0
  * @since 2022-10-20
  */
-
 public class MovieView extends MainView {
     /**
      * path
@@ -132,7 +130,7 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
-                        MovieManager.handleBookMovie(this.path + " > Movie > Book Movie");
+                        handleBookMovie(this.path + " > Movie > Book Movie");
                         break;
                     case 2:
                         Helper.clearScreen();
@@ -175,6 +173,17 @@ public class MovieView extends MainView {
                     Helper.pressAnyKeyToContinue();
                 }
             } while (choice != 8);
+        }
+    }
+
+    /**
+     * @param path
+     */
+    private static void handleBookMovie(String path) {
+        System.out.println("Which movie would you like to book?\n");
+        if (MovieManager.displayListOfBookableMovies()) {
+            ShowtimeView showtimeView = new ShowtimeView(path);
+            showtimeView.viewApp(MovieManager.selectMovie());
         }
     }
 

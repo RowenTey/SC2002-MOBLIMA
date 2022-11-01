@@ -2,7 +2,7 @@ package src.model;
 
 import java.io.Serializable;
 
-import src.model.enums.TypeMovies;
+import src.model.enums.MoviesType;
 
 /**
  * The class that stores the movie ticket
@@ -19,40 +19,45 @@ public class Ticket implements Serializable {
     protected static final long serialVersionUID = 9L;
 
     /**
-     * Movie title
+     * Movie title corresponding to ticket bought
      */
     private String movieTitle;
 
     /**
-     * price of ticket
+     * Price of ticket
      */
     private double price;
 
     /**
-     * ticket {@link Seat}
+     * {@link Seat} of ticket
      */
     private Seat seat;
 
     /**
-     * ticket {@link Cinema}
+     * {@link Cinema} of ticket
      */
     private Cinema cinema;
 
     /**
-     * status of the ticket (paid/ready fopr payment)
+     * Status of the ticket (paid/ready for payment)
      */
     private boolean isPaid;
 
     /**
-     * movie type
+     * {@link MoviesType} of ticket
      */
-    private TypeMovies movieType;
+    private MoviesType movieType;
 
     /**
      * Constructor of Ticket
      *
+     * @param price      of the ticket
+     * @param seat       of ticket
+     * @param cinema     of ticket
+     * @param movieTitle corresponding to ticket bought
+     * @param movieType  of ticket
      */
-    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle, TypeMovies movieType) {
+    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle, MoviesType movieType) {
         setPrice(price);
         setSeat(seat);
         setCinema(cinema);
@@ -64,7 +69,7 @@ public class Ticket implements Serializable {
     /**
      * Gets the price of the ticket
      *
-     * @return the price of the booking
+     * @return price of the ticket
      */
     public double getPrice() {
         return price;
@@ -73,91 +78,100 @@ public class Ticket implements Serializable {
     /**
      * Sets the price of the ticket
      *
-     * @param price price of the ticket
+     * @param price of the ticket
      */
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
-     * Gets the title of the movie
+     * Gets the title of the movie of ticket bought
      * 
-     * @return MovieTitle
+     * @return movie title corresponding to ticket bought
      */
     public String getMovieTitle() {
-        return this.movieTitle;
+        return movieTitle;
     }
 
     /**
-     * Sets the movie title
+     * Sets the movie title of ticket bought
      * 
-     * @param movieTitle
+     * @param movieTitle corresponding to ticket bought
      */
     public void setMovieTitle(String movieTitle) {
         this.movieTitle = movieTitle;
     }
 
     /**
-     * Gets the ticket seat
+     * Gets the {@link Seat} of ticket
      *
-     * @return ticket {@link Seat}
+     * @return seat of ticket
      */
     public Seat getSeat() {
         return seat;
     }
 
     /**
-     * Sets the ticket {@link Seat}
+     * Sets the {@link Seat} of ticket
      *
-     * @param seat ticket {@link Seat}
+     * @param seat of ticket
      */
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
 
     /**
-     * Gets the ticket cinema
+     * Gets the {@link Cinema} of ticket
      *
-     * @return ticket {@link Cinema}
+     * @return cinema of ticket
      */
     public Cinema getCinema() {
-        return this.cinema;
+        return cinema;
     }
 
     /**
-     * Sets the ticket {@link Cinema}
+     * Sets the {@link Cinema} of ticket
      *
-     * @param cinema ticket {@link Cinema}
+     * @param cinema of ticket
      */
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
     }
 
     /**
-     * get the status of ticket
+     * Get the status of ticket
+     * 
+     * @return boolean {@code true} if ticket was paid, {@code false}
+     *         otherwise
      */
     public boolean getIsPaid() {
-        return this.isPaid;
+        return isPaid;
     }
 
     /**
-     * sets the status of the ticket
+     * Sets the status of the ticket
+     * 
+     * @param status of ticket
      */
     public void setIsPaid(boolean status) {
         this.isPaid = status;
     }
 
     /**
-     * get the type of movie
+     * Get the {@link MoviesType} of ticket
+     * 
+     * @return movie type of ticket
      */
     public String getMovieType() {
-        return this.movieType.getLabel();
+        return movieType.getLabel();
     }
 
     /**
-     * sets the status of the ticket
+     * Sets the {@link MoviesType} of ticket
+     * 
+     * @param movieType of ticket
      */
-    public void setMovieType(TypeMovies movieType) {
+    public void setMovieType(MoviesType movieType) {
         this.movieType = movieType;
     }
 

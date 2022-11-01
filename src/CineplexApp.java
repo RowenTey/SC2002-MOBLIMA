@@ -4,7 +4,17 @@ import src.database.Database;
 import src.helper.Helper;
 import src.view.CineplexAppView;
 
+/**
+ * The starting point of the application
+ * 
+ * @author Kai Seong
+ * @version 1.0
+ * @since 2022-11-01
+ */
 public class CineplexApp {
+        /**
+         * Main function that is the starting point of the application
+         */
         public static void main(String[] args) throws Exception {
                 try {
                         new Database();
@@ -22,7 +32,7 @@ public class CineplexApp {
         }
 
         /**
-         * Prints the MOBLIMA title.
+         * Prints the MOBLIMA title
          */
         private static void printMOBLIMATitle() {
                 System.out.println();

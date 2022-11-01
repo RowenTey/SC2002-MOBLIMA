@@ -11,7 +11,6 @@ import src.model.Movie;
  * @version 1.0
  * @since 2022-10-20
  */
-
 public class ReviewView extends MainView {
     /**
      * Path of entry for ReviewView

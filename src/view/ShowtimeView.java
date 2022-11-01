@@ -1,16 +1,12 @@
 package src.view;
 
-import java.util.ArrayList;
-
-import src.controller.BookingManager;
 import src.controller.ShowtimeManager;
 import src.helper.Helper;
 import src.model.Cineplex;
 import src.model.Movie;
-import src.model.Showtime;
 
 /**
- * Viewing interface for Showtime
+ * ShowtimeView provides the view to manage and select showtime
  * 
  * @author Shao Wei
  * @version 1.0
@@ -18,14 +14,16 @@ import src.model.Showtime;
  */
 public class ShowtimeView extends MainView {
     /**
-     * Path of entry for showtime view
+     * Path of entry for ShowtimeView
      */
     public String path;
 
     /**
      * Overrided contructor for the ShowtimeView
+     * 
+     * @param path of entry for StaffView
      */
-    public ShowtimeView(String path, boolean isStaff) {
+    public ShowtimeView(String path) {
         super();
         this.path = path;
     }
@@ -95,8 +93,10 @@ public class ShowtimeView extends MainView {
 
     /**
      * Overrided View App - from movie view (MovieGoer)
+     * 
+     * @param movie to select showtime from
      */
-    public void viewApp(String path, Movie movie) {
+    protected void viewApp(Movie movie) {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
         ShowtimeManager.handleShowtimeSelection(movie);
@@ -105,8 +105,10 @@ public class ShowtimeView extends MainView {
 
     /**
      * Overrided View App - from cineplex view (MovieGoer)
+     * 
+     * @param cineplex to select showtime from
      */
-    public void viewApp(Cineplex cineplex) {
+    protected void viewApp(Cineplex cineplex) {
         Helper.clearScreen();
         printRoute(path + " > " + cineplex.getLocation());
         ShowtimeManager.handleShowtimeSelection(cineplex);
@@ -114,7 +116,7 @@ public class ShowtimeView extends MainView {
     }
 
     /**
-     * action function to handle creating a showtime
+     * Action function to handle creating a showtime
      */
     private void handleCreateShowtime() {
         if (ShowtimeManager.onCreateShowtime()) {

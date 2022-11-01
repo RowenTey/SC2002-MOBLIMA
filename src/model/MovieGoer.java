@@ -12,33 +12,33 @@ import src.model.enums.AgeGroup;
  */
 public class MovieGoer extends User {
     /**
-     * mobile number of the MovieGoer
+     * Mobile number of movie goer
      */
     private String mobile;
 
     /**
-     * email address of the the MovieGoer
+     * Email address of movie goer
      */
     private String email;
 
     /**
-     * age group of the MovieGoer
+     * {@link AgeGroup} of movie goer
      */
     private AgeGroup ageGroup;
 
     /**
-     * A list that stores all the booking history of the MovieGoer
+     * A list that stores all the {@link Booking} of movie goer
      */
     private ArrayList<Booking> bookings;
 
     /**
-     * Constructor of MovieGoer
+     * Constructor of movie goer
      * 
-     * @param userId   This MovieGoer's userId
-     * @param username This MovieGoer's username
-     * @param mobile   This MovieGoer's mobile number
-     * @param email    This MovieGoer's email address
-     * @param ageGroup This MovieGoer's age group
+     * @param userId   of movie goer
+     * @param username of movie goer
+     * @param mobile   number of movie goer
+     * @param email    address of movie goer
+     * @param ageGroup {@link AgeGroup} of movie goer
      */
     public MovieGoer(String userId, String username, String mobile, String email, AgeGroup ageGroup) {
         super(userId, username);
@@ -49,72 +49,72 @@ public class MovieGoer extends User {
     }
 
     /**
-     * Sets the mobile number of the MovieGoer
+     * Sets the mobile number of the movie goer
      * 
-     * @param mobile the mobile number of the MovieGoer
+     * @param mobile number of movie goer
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
     /**
-     * Gets the mobile number of the MovieGoer
+     * Gets the mobile number of the movie goer
      * 
-     * @return the mobile number of the MovieGoer
+     * @return mobile number of the movie goer
      */
     public String getMobile() {
         return mobile;
     }
 
     /**
-     * Sets the email address of the MovieGoer
+     * Sets the email address of the movie goer
      * 
-     * @param email the email address of the MovieGoer
+     * @param email address of the movie goer
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * Gets the email address of the MovieGoer
+     * Gets the email address of the movie goer
      * 
-     * @return email the email address of the MovieGoer
+     * @return email address of the movie goer
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Sets the ageGroup of the MovieGoer
+     * Sets the {@link AgeGroup} of the movie goer
      * 
-     * @param ageGroup the ageGroup of the MovieGoer
+     * @param ageGroup of the movie goer
      */
     public void setAgeGroup(AgeGroup ageGroup) {
         this.ageGroup = ageGroup;
     }
 
     /**
-     * Gets the ageGroup of the MovieGoer
+     * Gets the {@link AgeGroup} of the movie goer
      * 
-     * @return ageGroup the ageGroup of the MovieGoer
+     * @return ageGroup of the movie goer
      */
     public AgeGroup getAgeGroup() {
         return ageGroup;
     }
 
     /**
-     * Sets the booking of the MovieGoer
+     * Sets the {@link Booking} of the movie goer
      * 
-     * @param bookings the booking of the MovieGoer
+     * @param bookings of the movie goer
      */
     public void setBooking(ArrayList<Booking> bookings) {
         this.bookings = bookings;
     }
 
     /**
-     * Gets the list of bookings of the MovieGoer
+     * Gets the list of {@link Booking} of the movie goer
      * 
-     * @return {@code bookings} the list of bookings of the MovieGoer
+     * @return {@code ArrayList<Booking>} list of bookings of the movie goer
      */
     public ArrayList<Booking> getBooking() {
         return bookings;

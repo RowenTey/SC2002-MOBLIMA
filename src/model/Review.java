@@ -3,7 +3,7 @@ package src.model;
 import java.io.Serializable;
 
 /**
- * The class that stores customer review
+ * The class that stores movie goer's review
  * 
  * @author Ace Ang
  * @version 1.0
@@ -17,18 +17,20 @@ public class Review implements Serializable {
     private static final long serialVersionUID = 7L;
 
     /**
-     * string that contains the actual review
+     * String that contains the actual review
      */
     private String review;
 
     /**
-     * rating for the review
+     * Rating for the review
      */
     private double rating;
 
     /**
      * Constructor of Review
      *
+     * @param review for the movie
+     * @param rating for the movie
      */
     public Review(String review, double rating) {
         setReview(review);

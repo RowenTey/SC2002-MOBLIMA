@@ -4,7 +4,7 @@ import src.controller.*;
 import src.helper.Helper;
 
 /**
- * Viewing interface for Cineplex
+ * Viewing interface for MOBLIMA user
  * 
  * @author Shao Wei
  * @version 1.0

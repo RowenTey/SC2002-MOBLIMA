@@ -18,7 +18,7 @@ public class Showtime implements Serializable {
   private static final long serialVersionUID = 5L;
 
   /**
-   * Id of the menu item
+   * Id of the showtime
    */
   private String showtimeId;
 
@@ -33,7 +33,7 @@ public class Showtime implements Serializable {
   private Movie movie;
 
   /**
-   * cinema of showtime
+   * {@link Cinema} of showtime
    */
   private Cinema cinema;
 
@@ -63,7 +63,7 @@ public class Showtime implements Serializable {
    * @param time       time of showtime
    * @param showtimeId id of showtime
    * @param movie      {@link Movie} of showtime
-   * @param cinema     cinema of showtime
+   * @param cinema     {@link Cinema} of showtime
    * @param layoutType {@link LayoutType} of showtime
    */
   public Showtime(String showtimeId, String time, Movie movie, Cinema cinema, LayoutType layoutType) {
@@ -87,7 +87,7 @@ public class Showtime implements Serializable {
   /**
    * Sets the Id of showtime
    * 
-   * @param showtimeId Id of the menu item
+   * @param showtimeId Id of showtime
    * @return id of showtime
    */
   public void setShowtimeId(String showtimeId) {
@@ -104,9 +104,9 @@ public class Showtime implements Serializable {
   }
 
   /**
-   * Sets the cinema of showtime
+   * Sets the {@link Cinema} of showtime
    * 
-   * @param cinema cinema of showtime
+   * @param cinema {@link Cinema} of showtime
    */
   public void setCinema(Cinema cinema) {
     this.cinema = cinema;
@@ -124,7 +124,7 @@ public class Showtime implements Serializable {
   /**
    * Gets the time of showtime
    * 
-   * @return {@code time} of showtime
+   * @return time of showtime
    */
   public String getTime() {
     return time;
@@ -142,7 +142,7 @@ public class Showtime implements Serializable {
   /**
    * Gets the movie of showtime
    * 
-   * @return {@link Movie} that is assigned to this showtime
+   * @return {@link Movie} object that is assigned to this showtime
    */
   public Movie getMovie() {
     return movie;
@@ -151,7 +151,7 @@ public class Showtime implements Serializable {
   /**
    * Gets the cinema of showtime
    * 
-   * @return cinema object that is assigned to this showtime
+   * @return {@link Cinema} object that is assigned to this showtime
    */
   public Cinema getCinema() {
     return this.cinema;
@@ -171,7 +171,7 @@ public class Showtime implements Serializable {
    * 
    * @param row row no. of seat
    * @param col column no. of seat
-   * @return {@link Seats} at ({@code row}, {@code col})
+   * @return {@link Seat} at ({@code row}, {@code col})
    */
   public Seat getSeatAt(int row, int col) {
     return seats[row - 1][col - 1];

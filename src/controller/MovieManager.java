@@ -59,37 +59,37 @@ public class MovieManager {
      */
     public static void initializeMovies() {
         MovieManager.addMovie("Black Adam", ShowStatus.COMING_SOON, "Fake superman", "Shao Wei",
-                new String[] { "The Rock" }, TypeMovies.BLOCKBUSTER);
+                new String[] { "The Rock" }, MoviesType.BLOCKBUSTER);
         MovieManager.addMovie("Smile", ShowStatus.NOW_SHOWING, "A girl kills herself", "Horstann",
-                new String[] { "Horstann" }, TypeMovies.TWO_D);
+                new String[] { "Horstann" }, MoviesType.TWO_D);
         MovieManager.addMovie("One Piece FILM RED", ShowStatus.NOW_SHOWING, "Singing and dancing", "Oda",
-                new String[] { "Luffy" }, TypeMovies.TWO_D);
+                new String[] { "Luffy" }, MoviesType.TWO_D);
         MovieManager.addMovie("Transformer", ShowStatus.COMING_SOON, "Car turns to robot", "Michael Bay",
-                new String[] { "Optimus Prime" }, TypeMovies.BLOCKBUSTER);
+                new String[] { "Optimus Prime" }, MoviesType.BLOCKBUSTER);
         MovieManager.addMovie("La La Land", ShowStatus.NOW_SHOWING, "Dancing show",
                 "Ace",
-                new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+                new String[] { "Samuel L. Jackson" }, MoviesType.THREE_D);
         MovieManager.addMovie("Thor: Love and Thunder", ShowStatus.NOW_SHOWING,
                 "As the son of Odin (Anthony Hopkins), king of the Norse gods, Thor (Chris Hemsworth) will soon inherit the throne of Asgard from his aging father. However, on the day that he is to be crowned, Thor reacts with brutality when the gods' enemies, the Frost Giants, enter the palace in violation of their treaty. As punishment, Odin banishes Thor to Earth. While Loki (Tom Hiddleston), Thor's brother, plots mischief in Asgard, Thor, now stripped of his powers, faces his greatest threat.",
-                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, TypeMovies.TWO_D);
+                "Kaiseong", new String[] { "Chris Hemsworth", "Natalie Portman", "Tessa Thompson" }, MoviesType.TWO_D);
         MovieManager.addMovie("Iron Man", ShowStatus.PREVIEW, "I am Iron Man", "Shao Wei",
-                new String[] { "Tony Stark" }, TypeMovies.TWO_D);
+                new String[] { "Tony Stark" }, MoviesType.TWO_D);
         MovieManager.addMovie("Spider Man", ShowStatus.PREVIEW, "I got bitten by spider", "Horstann",
-                new String[] { "Peter Parker" }, TypeMovies.THREE_D);
+                new String[] { "Peter Parker" }, MoviesType.THREE_D);
         MovieManager.addMovie("Jurassic World", ShowStatus.COMING_SOON, "Stupid dinosaurs", "Oda",
-                new String[] { "T-Rex", "Kentrosaurus" }, TypeMovies.TWO_D);
+                new String[] { "T-Rex", "Kentrosaurus" }, MoviesType.TWO_D);
         MovieManager.addMovie("Minions: The Rise of Gru", ShowStatus.COMING_SOON, "Mini Yellow Alien", "Michael Bay",
-                new String[] { "Gru" }, TypeMovies.BLOCKBUSTER);
+                new String[] { "Gru" }, MoviesType.BLOCKBUSTER);
         MovieManager.addMovie("Top Gun: Maverick", ShowStatus.PREVIEW, "Airforce",
-                "Ace", new String[] { "Samuel L. Jackson" }, TypeMovies.THREE_D);
+                "Ace", new String[] { "Samuel L. Jackson" }, MoviesType.THREE_D);
         MovieManager.addMovie("Jujutsu Kaisen 0", ShowStatus.PREVIEW, "Rasengan and Chidori", "Kaiseong",
-                new String[] { "Naruto", "Sasuke" }, TypeMovies.TWO_D);
+                new String[] { "Naruto", "Sasuke" }, MoviesType.TWO_D);
         MovieManager.addMovie("Black Panther", ShowStatus.COMING_SOON, "Sick show",
                 "Wakanda",
-                new String[] { "Reggie Jackson" }, TypeMovies.BLOCKBUSTER);
+                new String[] { "Reggie Jackson" }, MoviesType.BLOCKBUSTER);
         MovieManager.addMovie("Thor: Scarlet Witch", ShowStatus.NOW_SHOWING,
                 "Another Thor movie",
-                "Shaowei", new String[] { "Chris Hemsworth" }, TypeMovies.TWO_D);
+                "Shaowei", new String[] { "Chris Hemsworth" }, MoviesType.TWO_D);
     }
 
     /**
@@ -118,31 +118,31 @@ public class MovieManager {
      * Add new movie
      */
     public static void addMovie(String title, ShowStatus status, String synopsis, String director,
-            String[] cast, TypeMovies type) {
+            String[] cast, MoviesType type) {
         int mId = Helper.generateUniqueId(Database.MOVIES);
         String movieId = String.format("M%04d", mId);
 
-        double TWODMovieDefaultPrice = Database.PRICES.get(TypeMovies.TWO_D);
-        double THREEDMovieDefaultPrice = Database.PRICES.get(TypeMovies.THREE_D);
-        double BlockbusterMovieDefaultPrice = Database.PRICES.get(TypeMovies.BLOCKBUSTER);
+        double TWODMovieDefaultPrice = Database.PRICES.get(MoviesType.TWO_D);
+        double THREEDMovieDefaultPrice = Database.PRICES.get(MoviesType.THREE_D);
+        double BlockbusterMovieDefaultPrice = Database.PRICES.get(MoviesType.BLOCKBUSTER);
 
         Movie newMovie = null;
         switch (type) {
             case TWO_D:
-                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, MoviesType.TWO_D,
                         TWODMovieDefaultPrice);
                 break;
             case THREE_D:
-                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.THREE_D,
+                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, MoviesType.THREE_D,
                         THREEDMovieDefaultPrice);
                 break;
             case BLOCKBUSTER:
                 newMovie = new BlockbusterMovie(movieId, title, status, synopsis, director, cast,
-                        TypeMovies.BLOCKBUSTER,
+                        MoviesType.BLOCKBUSTER,
                         BlockbusterMovieDefaultPrice);
                 break;
             default:
-                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, TypeMovies.TWO_D,
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, MoviesType.TWO_D,
                         TWODMovieDefaultPrice);
                 break;
         }
@@ -378,25 +378,14 @@ public class MovieManager {
 
         System.out.println("\nEnter movie type: ");
         count = 0;
-        for (TypeMovies type : TypeMovies.values()) {
+        for (MoviesType type : MoviesType.values()) {
             count += 1;
             System.out.println("(" + (count) + ") " + type);
         }
         opt = Helper.readInt(1, count);
-        TypeMovies movieType = TypeMovies.values()[opt - 1];
+        MoviesType movieType = MoviesType.values()[opt - 1];
 
         MovieManager.addMovie(title, showStatus, synopsis, director, cast, movieType);
-    }
-
-    /**
-     * @param path
-     */
-    public static void handleBookMovie(String path) {
-        System.out.println("Which movie would you like to book?\n");
-        if (MovieManager.displayListOfBookableMovies()) {
-            ShowtimeView showtimeView = new ShowtimeView(path + " > Movie", false);
-            showtimeView.viewApp(path, MovieManager.selectMovie());
-        }
     }
 
     /**

@@ -1,7 +1,7 @@
 package src.model;
 
 import src.model.enums.ShowStatus;
-import src.model.enums.TypeMovies;
+import src.model.enums.MoviesType;
 
 /**
  * The class that initialises the 3D movie
@@ -22,7 +22,7 @@ public class ThreeDMovie extends Movie {
      * @param price price of 3D movie
      */
     public ThreeDMovie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            TypeMovies type, double price) {
+            MoviesType type, double price) {
         super(movieId, title, status, synopsis, director, cast, type);
         setPrice(price);
     }

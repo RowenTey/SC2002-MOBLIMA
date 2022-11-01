@@ -103,7 +103,7 @@ public class CineplexView extends MainView {
                     System.out.println(
                             "\n" + CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes", false);
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes");
                     showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
                 }
             } while (choice != (numOfCineplex + 1));

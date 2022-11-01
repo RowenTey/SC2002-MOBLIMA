@@ -34,7 +34,7 @@ public enum ShowStatus {
     public final String label;
 
     /**
-     * Constructor for the ShowStatus
+     * Constructor for the ShowStatus Enum.
      * 
      * @param label string value of the status
      */

@@ -4,7 +4,7 @@ import src.controller.StaffManager;
 import src.helper.Helper;
 
 /**
- * Viewing interface for Showtime
+ * StaffView provides the view to access staff actions
  * 
  * @author Xiaoyue
  * @version 1.0
@@ -12,18 +12,23 @@ import src.helper.Helper;
  */
 public class StaffView extends MainView {
     /**
-     * Path of entry for showtime view
+     * Path of entry for StaffView
      */
     public String path;
 
     /**
      * Overrided contructor for the StaffView
+     * 
+     * @param path of entry for StaffView
      */
     public StaffView(String path) {
         super();
         this.path = path;
     }
 
+    /**
+     * View menu
+     */
     public void printMenu() {
         Helper.clearScreen();
         printRoute(this.path + " > Staff");
@@ -35,6 +40,9 @@ public class StaffView extends MainView {
         System.out.println("(5) Exit");
     }
 
+    /**
+     * View app
+     */
     public void viewApp() {
         if (!this.handleLogin()) {
             return;
@@ -53,7 +61,7 @@ public class StaffView extends MainView {
                     movieView.viewApp();
                     continue;
                 case 3:
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", true);
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff");
                     showtimeView.viewApp();
                     continue;
                 case 4:
@@ -68,6 +76,12 @@ public class StaffView extends MainView {
         } while (choice != 5);
     }
 
+    /**
+     * Action function to handle staff login
+     * 
+     * @return boolean {@code true} if staff credentials was valid, {@code false}
+     *         otherwise
+     */
     private boolean handleLogin() {
         Helper.clearScreen();
         printRoute(this.path + " > Staff Login");

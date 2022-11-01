@@ -7,7 +7,7 @@ package src.model.enums;
  * @version 1.0
  * @since 2022-10-20
  */
-public enum TypeMovies {
+public enum MoviesType {
     /**
      * Movie type corresponding to "2D"
      */
@@ -29,11 +29,11 @@ public enum TypeMovies {
     public final String label;
 
     /**
-     * Constructor for the layoutType Enum.
+     * Constructor for the MoviesType Enum.
      * 
      * @param label Layout type as a string
      */
-    private TypeMovies(String label) {
+    private MoviesType(String label) {
         this.label = label;
     }
 

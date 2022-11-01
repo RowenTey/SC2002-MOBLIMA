@@ -1,7 +1,7 @@
 package src.model;
 
 import src.model.enums.ShowStatus;
-import src.model.enums.TypeMovies;
+import src.model.enums.MoviesType;
 
 /**
  * The class that initialises the blockbuster movie
@@ -29,7 +29,7 @@ public class BlockbusterMovie extends Movie {
      * @param price    price of the movie
      */
     public BlockbusterMovie(String movieId, String title, ShowStatus status, String synopsis, String director,
-            String[] cast, TypeMovies type, double price) {
+            String[] cast, MoviesType type, double price) {
         super(movieId, title, status, synopsis, director, cast, type);
         setPrice(price);
     }

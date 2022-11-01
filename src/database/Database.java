@@ -10,7 +10,7 @@ import src.controller.StaffManager;
 import src.controller.SystemManager;
 
 import src.model.*;
-import src.model.enums.TypeMovies;
+import src.model.enums.MoviesType;
 
 import java.io.IOException;
 import java.io.EOFException;
@@ -60,7 +60,7 @@ public class Database {
   /**
    * HashMap to contain movie prices according to type.
    */
-  public static HashMap<TypeMovies, Double> PRICES = new HashMap<TypeMovies, Double>();
+  public static HashMap<MoviesType, Double> PRICES = new HashMap<MoviesType, Double>();
 
   /**
    * HashSet to contain dates of holidays
@@ -163,7 +163,7 @@ public class Database {
         MOVIES = (HashMap<String, Movie>) object;
         numOfMovies = MOVIES.size();
       } else if (fileType == FileType.PRICES) {
-        PRICES = (HashMap<TypeMovies, Double>) object;
+        PRICES = (HashMap<MoviesType, Double>) object;
       } else if (fileType == FileType.HOLIDAYS) {
         HOLIDAYS = (HashSet<String>) object;
       }
@@ -339,10 +339,10 @@ public class Database {
     numOfMovies = 0;
     writeSerializedObject(FileType.MOVIES);
 
-    PRICES = new HashMap<TypeMovies, Double>();
-    PRICES.put(TypeMovies.TWO_D, 13.00);
-    PRICES.put(TypeMovies.THREE_D, 20.00);
-    PRICES.put(TypeMovies.BLOCKBUSTER, 16.00);
+    PRICES = new HashMap<MoviesType, Double>();
+    PRICES.put(MoviesType.TWO_D, 13.00);
+    PRICES.put(MoviesType.THREE_D, 20.00);
+    PRICES.put(MoviesType.BLOCKBUSTER, 16.00);
     writeSerializedObject(FileType.PRICES);
 
     HOLIDAYS = new HashSet<String>();

@@ -8,7 +8,6 @@ package src.model;
  * @since 2022-10-19
  */
 public class Staff extends User {
-
     /**
      * Staff's password for enabling admin functions
      */
@@ -17,9 +16,9 @@ public class Staff extends User {
     /**
      * Constructor of Staff
      * 
-     * @param userId   Staff's userId
-     * @param username Staff's username
-     * @param password Staff's password
+     * @param userId   of staff
+     * @param username of staff
+     * @param password of staff
      */
     public Staff(String userId, String username, String password) {
         super(userId, username);
@@ -29,7 +28,7 @@ public class Staff extends User {
     /**
      * Sets the password of the staff
      * 
-     * @param password Staff's password
+     * @param password of staff
      */
     public void setPassword(String password) {
         this.password = password;
@@ -38,7 +37,7 @@ public class Staff extends User {
     /**
      * Gets the password of the staff
      * 
-     * @return the password of the staff
+     * @return password of the staff
      */
     public String getPassword() {
         return password;

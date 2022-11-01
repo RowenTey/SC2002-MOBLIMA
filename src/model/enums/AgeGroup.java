@@ -9,7 +9,6 @@ package src.model.enums;
  */
 
 public enum AgeGroup {
-
   /**
    * ADULT AGEGROUP
    */
