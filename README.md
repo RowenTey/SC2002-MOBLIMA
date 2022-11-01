@@ -2,7 +2,7 @@
 
 > Movie Booking and Listing Management Application (MOBLIMA) for SC2002
 
-## Project Folder Structure
+## 📂 Project Folder Structure
 
 > Folder structure of our project
 
@@ -32,7 +32,7 @@
 └── ...
 ```
 
-## Scripts
+## 📝 Scripts
 
 > How to run our project
 
@@ -103,7 +103,7 @@ Press Enter key to continue...
 
 `Database is cleared successfully if the above message is shown`
 
-# Java docs
+## 📃 Documentation
 
 Create javadocs - make sure you are at SC2002_HRPS directory
 
@@ -113,7 +113,7 @@ javadoc -d ./docs/ ./src/*java ./src/controller/*java ./src/database/*java ./src
 
 Launch the index.html under ./javadoc/index.html
 
-## Contributors
+## 🧠 Contributors
 
 - [@RowenTey](https://github.com/RowenTey)
 - [@Horstann](https://github.com/Horstann)
