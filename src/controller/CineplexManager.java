@@ -10,10 +10,10 @@ import src.model.Cineplex;
 import src.model.enums.Location;
 
 /**
- * Cineplex Manager is a controller class that helps the staff/admin to manage
- * all the cineplexes.
- * 
- * It can initialize, create or remove {@link Cineplex} details.
+ * CineplexManager is a controller class that acts as a "middleman" between the
+ * view
+ * classes - CineplexAppView and CineplexView and the model class -
+ * {@link Cineplex}
  * 
  * @author Shao Wei
  * @version 1.0
@@ -21,8 +21,7 @@ import src.model.enums.Location;
  */
 public class CineplexManager {
     /**
-     * Initializer for Cineplex for demonstration of project. (3 Cineplexes will be
-     * initialized)
+     * Initialize {@link Database} with {@link Cineplex}
      */
     public static void initializeCineplex() {
         CineplexManager.addCineplex(1);
@@ -31,9 +30,9 @@ public class CineplexManager {
     }
 
     /**
-     * Gets the array list of cineplexes.
+     * Gets the array list of {@link Cineplex}.
      * 
-     * @return ArrayList of existing cineplexes.
+     * @return list of existing {@link Cineplex}.
      */
     public static ArrayList<Cineplex> getCineplexList() {
         ArrayList<Cineplex> cineplexList = new ArrayList<Cineplex>();
@@ -44,9 +43,9 @@ public class CineplexManager {
     }
 
     /**
-     * Print the complete details of the cineplex.
+     * Prints the complete details of the {@link Cineplex}.
      * 
-     * @param cineplex {@link Cineplex} object to print.
+     * @param cineplex to be printed.
      */
     protected static void printCineplexDetails(Cineplex cineplex) {
         System.out.println();
@@ -58,18 +57,18 @@ public class CineplexManager {
     }
 
     /**
-     * Gets the total number of existing cineplexes.
+     * Gets the total number of existing {@link Cineplex}.
      * 
-     * @return the total number of existing cineplexes.
+     * @return the total number of existing {@link Cineplex}.
      */
     public static int getTotalNumOfCineplex() {
         return CineplexManager.getCineplexList().size();
     }
 
     /**
-     * Creates and adds a new cineplex object.
+     * Adds a new {@link Cineplex} to the {@link Database}
      * 
-     * @param opt The index of the location chosen from the {@link Location} enum
+     * @param opt - the index of the location chosen from the {@link Location} enum
      *            class.
      */
     public static void addCineplex(int opt) {
@@ -85,7 +84,7 @@ public class CineplexManager {
     }
 
     /**
-     * Handles the removal of cineplex.
+     * Handles the removal of {@link Cineplex} from {@link Database}.
      */
     public static void removeCineplex() {
         int opt = -1;
@@ -107,7 +106,7 @@ public class CineplexManager {
     }
 
     /**
-     * Display all existing Cineplexes
+     * Displays all existing {@link Cineplex}
      */
     public static void displayExistingCineplex() {
         System.out.println("Current Cineplex(es) we have: ");
@@ -118,9 +117,9 @@ public class CineplexManager {
 
     /**
      * Shows and prompts the admin to select a location to add a new
-     * {@link Cineplex} object.
+     * {@link Cineplex}
      * 
-     * @return the index of location chosen from {@link Location}.
+     * @return the index of location chosen
      */
     public static int promptLocation() {
         ArrayList<Cineplex> cineplexList = CineplexManager.getCineplexList();
@@ -162,7 +161,7 @@ public class CineplexManager {
     }
 
     /**
-     * Allow user to select a specific cineplex by index
+     * Selects a specific {@link Cineplex} by index
      * 
      * @return the selected {@link Cineplex} object.
      */
@@ -179,9 +178,11 @@ public class CineplexManager {
     }
 
     /**
-     * Allow user to select a specific cinema from a cineplex
+     * Selects a specific {@link Cinema} from a {@link Cineplex}
      * 
-     * @return the selected {@link Cinema} object.
+     * @param selectedCineplex - the selected cineplex
+     * 
+     * @return the selected {@link Cinema}
      */
     protected static Cinema selectCinema(Cineplex selectedCineplex) {
         displayCinema(selectedCineplex);
@@ -192,9 +193,9 @@ public class CineplexManager {
     }
 
     /**
-     * Displays the list of cinemas of this cineplex.
+     * Displays the list of {@link Cinema} of this {@link Cineplex}
      * 
-     * @param selectedCineplex the selected cineplex
+     * @param selectedCineplex - the selected cineplex
      */
     private static void displayCinema(Cineplex selectedCineplex) {
         System.out.println("List of cinema(s):");

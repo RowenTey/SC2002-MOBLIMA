@@ -9,7 +9,10 @@ import src.model.*;
 import src.model.enums.AgeGroup;
 
 /**
- * Booking Manager is a controller class that manages the bookings.
+ * BookingManager is a controller class that acts as a "middleman" between the
+ * view
+ * classes - CineplexAppView, MovieView, ShowtimeView and the model class -
+ * {@link Booking}
  *
  * @author Ace Ang, Shao Wei
  * @version 1.0
@@ -17,7 +20,9 @@ import src.model.enums.AgeGroup;
  */
 public class BookingManager {
   /**
-   * Creates a transaction ID for booking
+   * Gets the list of {@link Booking}
+   * 
+   * @return list of {@link Booking}
    */
   private static ArrayList<Booking> getBookingList() {
     ArrayList<Booking> bookingList = new ArrayList<Booking>();
@@ -28,7 +33,11 @@ public class BookingManager {
   }
 
   /**
-   * Creates a transaction ID for booking
+   * Creates a transaction ID for {@link Booking}
+   * 
+   * @param seat of the booking
+   * 
+   * @return transaction id for the {@link Booking}
    */
   public static String createTransactionId(Seat seat) {
     String cinemacode = seat.getShowtime().getCinema().getCinemaCode(); // first two letters of location
@@ -44,9 +53,13 @@ public class BookingManager {
   }
 
   /**
-   * Compute price of ticket based on different factors
+   * Computes the price of ticket based on different factors
    * 
-   * @param price
+   * @param price (base price) of movie
+   * @param cinema of the movie
+   * @param seat of the booking
+   * @param movieGoer 
+   * 
    * @return computed price
    */
   public static double computePrice(double price, Cinema cinema, Seat seat, MovieGoer movieGoer) {
@@ -76,7 +89,14 @@ public class BookingManager {
   }
 
   /**
-   * Creates a ticket for the createBooking method
+   * Creates a booking {@link Ticket}
+   * 
+   * @param movie of booking
+   * @param seat of booking
+   * @param cinema of movie
+   * @param movieGoer 
+   * 
+   * @return {@link Ticket} of the booking
    */
   public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema, MovieGoer movieGoer) {
     double finalPrice = BookingManager.computePrice(movie.getPrice(), cinema, seat, movieGoer);
@@ -87,12 +107,13 @@ public class BookingManager {
   }
 
   /**
-   * Constructor for booking in BookingManager
+   * Creates a new {@link Booking} and stores it to {@link Database}
    *
-   * @param price    the price of the ticket
-   * @param seat     the seat of the ticket
-   * @param cineplex the cineplex of the ticket
-   * @param name     the user associated with the ticket
+   * @param seat of the booking
+   * @param ticket of the booking
+   * @param movieGoer
+   * @param position of the seat
+   * @param movieTitle of the booking
    */
   public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position, String movieTitle) {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
@@ -108,9 +129,9 @@ public class BookingManager {
   }
 
   /**
-   * Print the complete details of the booking
+   * Prints the complete details of the {@link Booking}
    *
-   * @param guest {@link Booking} object to print
+   * @param booking to be printed
    */
   public static void printBookingDetails(Booking booking) {
     MovieGoer movieGoer = booking.getMovieGoer();
@@ -138,9 +159,11 @@ public class BookingManager {
   }
 
   /**
-   * Print the complete details of the booking
+   * Prints the complete details of the {@link Ticket}
    *
-   * @param guest {@link Booking} object to print
+   * @param ticket to be printed
+   * @param movieGoer 
+   * @param position of the seat
    */
   public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer, String position) {
     System.out.println();
@@ -164,7 +187,9 @@ public class BookingManager {
   }
 
   /**
-   * Prompt User's information
+   * Prompts the {@link MovieGoer} details
+   * 
+   * @return {@link MovieGoer} 
    */
   public static MovieGoer promptUserDetails() {
     System.out.print("\nEnter your name: ");
@@ -190,7 +215,9 @@ public class BookingManager {
   }
 
   /**
-   * Remove hyphen and semi-colon from Date
+   * Removes hyphen and semi-colon from Date
+   * 
+   * @return formatted date in string
    */
   public static String formatDate(String date) {
     date = date.replaceAll(":", "");
@@ -200,7 +227,9 @@ public class BookingManager {
   }
 
   /**
-   * Find booking by email
+   * Finds {@link Booking} by email
+   * 
+   * @param email of the moviegoer
    */
   public static void findBooking(String email) {
     ArrayList<Booking> curList = BookingManager.getBookingList();
@@ -221,7 +250,9 @@ public class BookingManager {
   }
 
   /**
-   * Prompt user for booking booking details
+   * Prompts user for {@link Booking} details
+   * 
+   * @param showtimeId of showtime
    */
   public static void promptBooking(String showtimeId) {
     String position;
@@ -277,6 +308,12 @@ public class BookingManager {
 
   /**
    * Books the seat at that position for that showtime
+   * 
+   * @param row of the seat
+   * @param column of the seat
+   * @param showtime 
+   * 
+   * @return boolean {@code true} when seat is booked
    */
   protected static boolean bookSeat(int row, int column, Showtime showtime) {
     showtime.getSeatAt(row, column).setBooked(true);
@@ -285,6 +322,13 @@ public class BookingManager {
     return true;
   }
 
+  /**
+   * Updates the ticket sales of {@link Movie}
+   * 
+   * @param showtime of the movie
+   * 
+   * @return boolean {@code true} when ticket sales is updated
+   */
   protected static boolean updateTicketSales(Showtime showtime) {
     Movie movie = showtime.getMovie();
     movie.setTicketSales(movie.getTicketSales() + 1);
@@ -293,10 +337,12 @@ public class BookingManager {
     return true;
   }
 
+  /**
+   * Handles {@link Booking} checking
+   */
   public static void handleCheckBooking() {
     System.out.print("Enter your email: ");
     String email = Helper.readString();
     BookingManager.findBooking(email);
   }
-
 }

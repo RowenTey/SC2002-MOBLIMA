@@ -168,7 +168,7 @@ public class MovieManager {
     }
 
     /**
-     * Remove a movie
+     * Removes a {@link Movie} from {@link Database}
      */
     public static void removeMovie() {
         int opt = -1;
@@ -191,7 +191,7 @@ public class MovieManager {
     }
 
     /**
-     * Display a list of bookable movies
+     * Displays a list of bookable {@link Movie}
      */
     public static boolean displayListOfBookableMovies() {
         if (MovieManager.getBookableMovies().size() == 0) {
@@ -208,7 +208,7 @@ public class MovieManager {
     }
 
     /**
-     * Allow user to select a specific movie by index
+     * Allows user to select a specific {@link Movie} by index
      */
     public static Movie selectMovie() {
         System.out.println("Select a movie by entering it's index:");
@@ -221,7 +221,9 @@ public class MovieManager {
     }
 
     /**
-     * Handle View Reviews
+     * Handles View Past Movie Reviews
+     * 
+     * @param path of entry
      */
     public static void handleViewPastMovieReviews(String path) {
         Movie selectedMovie = MovieManager.selectMovie();
@@ -230,7 +232,7 @@ public class MovieManager {
     }
 
     /**
-     * Update a movie
+     * Updates the {@link ShowStatus} of a {@link Movie}
      */
     public static void updateMovie() {
         int opt = -1;
@@ -263,7 +265,7 @@ public class MovieManager {
     }
 
     /**
-     * Display Top 5 Movies by Ticket Sales
+     * Displays Top 5 {@link Movie} by Ticket Sales
      */
     public static void printTop5ByTicketSales() {
         if (MovieManager.getBookableMovies().size() == 0) {
@@ -284,7 +286,7 @@ public class MovieManager {
     }
 
     /**
-     * Display Top 5 Movies by Overall Rating
+     * Displays Top 5 {@link Movie} by Overall Rating
      */
     public static void printTop5ByOverallRating() {
         if (MovieManager.getBookableMovies().size() == 0) {
@@ -303,9 +305,9 @@ public class MovieManager {
     }
 
     /**
-     * Get the list of movies
+     * Gets the list of all {@link Movie}
      * 
-     * @return an array of movies
+     * @return list of all {@link Movie}
      */
     public static ArrayList<Movie> getAllMovieList() {
         ArrayList<Movie> movieList = new ArrayList<Movie>();
@@ -315,7 +317,7 @@ public class MovieManager {
     }
 
     /**
-     * Display existing Movies
+     * Displays existing {@link Movie}
      */
     public static void displayExistingMovies() {
         System.out.println("Current Movie(es) we have: ");
@@ -326,7 +328,9 @@ public class MovieManager {
     }
 
     /**
-     * Display past movie reviews
+     * Displays past movie's {@link Review}
+     * 
+     * @param movie to be viewed
      */
     public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
@@ -346,9 +350,11 @@ public class MovieManager {
     }
 
     /**
-     * @param movie
-     * @param rating
-     * @param review
+     * Adds a new {@link Review} to a {@link Movie}
+     * 
+     * @param movie to be reviewed
+     * @param rating of {@link Review}
+     * @param review (content) of {@link Review}
      */
     public static void addReview(Movie movie, double rating, String review) {
         Review newReview = new Review(review, rating);
@@ -357,6 +363,10 @@ public class MovieManager {
         System.out.println("Successfully added review!");
     }
 
+
+    /**
+     * Handles the addition of {@link Movie}
+     */
     public static void handleAddMovie() {
         System.out.println("Enter movie title: ");
         String title = Helper.readString();
@@ -402,9 +412,9 @@ public class MovieManager {
     }
 
     /**
+     * Displays list of {@link Movie} based on their {@link ShowStatus}
      * 
-     * 
-     * @param status
+     * @param status of the {@link Movie}
      */
     public static void displayMovieBasedOnStatus(ShowStatus status) {
         ArrayList<Movie> movies = MovieManager.getAllMovieList();
@@ -416,7 +426,8 @@ public class MovieManager {
     }
 
     /**
-     * @param path
+     * Handles the booking of movie
+     * @param path of entry
      */
     public static boolean handleBookMovie(String path) {
         System.out.println("Which movie would you like to book?\n");
