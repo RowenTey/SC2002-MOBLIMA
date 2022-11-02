@@ -55,10 +55,10 @@ public class BookingManager {
   /**
    * Computes the price of ticket based on different factors
    * 
-   * @param price (base price) of movie
-   * @param cinema of the movie
-   * @param seat of the booking
-   * @param movieGoer 
+   * @param price     (base price) of movie
+   * @param cinema    of the movie
+   * @param seat      of the booking
+   * @param movieGoer
    * 
    * @return computed price
    */
@@ -91,10 +91,10 @@ public class BookingManager {
   /**
    * Creates a booking {@link Ticket}
    * 
-   * @param movie of booking
-   * @param seat of booking
-   * @param cinema of movie
-   * @param movieGoer 
+   * @param movie     of booking
+   * @param seat      of booking
+   * @param cinema    of movie
+   * @param movieGoer
    * 
    * @return {@link Ticket} of the booking
    */
@@ -109,10 +109,10 @@ public class BookingManager {
   /**
    * Creates a new {@link Booking} and stores it to {@link Database}
    *
-   * @param seat of the booking
-   * @param ticket of the booking
+   * @param seat       of the booking
+   * @param ticket     of the booking
    * @param movieGoer
-   * @param position of the seat
+   * @param position   of the seat
    * @param movieTitle of the booking
    */
   public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position, String movieTitle) {
@@ -161,9 +161,9 @@ public class BookingManager {
   /**
    * Prints the complete details of the {@link Ticket}
    *
-   * @param ticket to be printed
-   * @param movieGoer 
-   * @param position of the seat
+   * @param ticket    to be printed
+   * @param movieGoer
+   * @param position  of the seat
    */
   public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer, String position) {
     System.out.println();
@@ -189,7 +189,7 @@ public class BookingManager {
   /**
    * Prompts the {@link MovieGoer} details
    * 
-   * @return {@link MovieGoer} 
+   * @return {@link MovieGoer}
    */
   public static MovieGoer promptUserDetails() {
     System.out.print("\nEnter your name: ");
@@ -239,10 +239,10 @@ public class BookingManager {
         myList.add(curList.get(i));
       }
     }
-    if(myList.size() == 0){
-      System.out.println("No Booking is found!");
-    }else{
-      for(int i=0; i<myList.size(); i++){
+    if (myList.size() == 0) {
+      System.out.println("\nNo booking is found!");
+    } else {
+      for (int i = 0; i < myList.size(); i++) {
         BookingManager.printBookingDetails(myList.get(i));
       }
     }
@@ -309,9 +309,9 @@ public class BookingManager {
   /**
    * Books the seat at that position for that showtime
    * 
-   * @param row of the seat
-   * @param column of the seat
-   * @param showtime 
+   * @param row      of the seat
+   * @param column   of the seat
+   * @param showtime
    * 
    * @return boolean {@code true} when seat is booked
    */

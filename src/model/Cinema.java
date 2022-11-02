@@ -35,7 +35,7 @@ public class Cinema implements Serializable {
     /**
      * Constructor of Cinema
      * 
-     * @param Location of the Cinema
+     * @param Location   of the Cinema
      * @param cinemaCode of the cinema
      * @param isPlatinum (type) of cinema
      */
@@ -78,7 +78,7 @@ public class Cinema implements Serializable {
      * @return {@link Location} of the cinema
      */
     public Location getCineplex() {
-        return this.location;
+        return location;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Gets the type of cinema 
+     * Gets the type of cinema
      * 
      * @return Type of cinema
      */
