@@ -58,7 +58,7 @@ public class BookingManager {
    * @param price     (base price) of movie
    * @param cinema    of the movie
    * @param seat      of the booking
-   * @param movieGoer
+   * @param movieGoer of the booking
    * 
    * @return computed price
    */
@@ -94,7 +94,7 @@ public class BookingManager {
    * @param movie     of booking
    * @param seat      of booking
    * @param cinema    of movie
-   * @param movieGoer
+   * @param movieGoer of the booking
    * 
    * @return {@link Ticket} of the booking
    */
@@ -111,7 +111,7 @@ public class BookingManager {
    *
    * @param seat       of the booking
    * @param ticket     of the booking
-   * @param movieGoer
+   * @param movieGoer  of the booking
    * @param position   of the seat
    * @param movieTitle of the booking
    */
@@ -162,7 +162,7 @@ public class BookingManager {
    * Prints the complete details of the {@link Ticket}
    *
    * @param ticket    to be printed
-   * @param movieGoer
+   * @param movieGoer of the booking
    * @param position  of the seat
    */
   public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer, String position) {
@@ -216,6 +216,8 @@ public class BookingManager {
 
   /**
    * Removes hyphen and semi-colon from Date
+   * 
+   * @param date to be formatted
    * 
    * @return formatted date in string
    */
@@ -311,7 +313,7 @@ public class BookingManager {
    * 
    * @param row      of the seat
    * @param column   of the seat
-   * @param showtime
+   * @param showtime of the booking
    * 
    * @return boolean {@code true} when seat is booked
    */

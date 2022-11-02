@@ -106,6 +106,9 @@ public class Helper {
    * Keeps catching the exception {@link InputMismatchException} when invalid
    * characters are entered
    * 
+   * @param min value of double
+   * @param max value of double
+   * 
    * @return returns the read double entered in the terminal.
    */
   public static double readDouble(double min, double max) {
@@ -181,6 +184,8 @@ public class Helper {
    * 
    * @param now {@code true} to return the current time. Otherwise, {@code false}
    *            to prompt user for new time.
+   * @param isHoliday boolean {@code true} if the date is a holiday, {@code false} otherwise
+   * 
    * @return String object for the date in the format "yyyy-MM-dd HH:mm" or
    *         "yyyy-MM-dd"
    */
@@ -358,6 +363,8 @@ public class Helper {
 
   /**
    * Generate random date
+   * 
+   * @return string of a random date 
    */
   public static String generateRandomDate() {
     Random random = new Random();
@@ -389,7 +396,7 @@ public class Helper {
   /**
    * check if the string is Numeric
    * 
-   * @param strNum
+   * @param strNum the string to be checked
    * @return true is the string is Numeric; else false
    */
   public static boolean isNumeric(String strNum) {

@@ -66,7 +66,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     private ArrayList<Review> reviews;
 
     /**
-     * {@link MovieType} of movie
+     * {@link MoviesType} of movie
      */
     private MoviesType type;
 
@@ -97,11 +97,15 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
 
     /**
      * Abstract method - Gets the price of the movie
+     * 
+     * @return price of movie
      */
     public abstract double getPrice();
 
     /**
      * Abstract method - Sets the ID of the movie
+     * 
+     * @param price to be set
      */
     public abstract void setPrice(double price);
 
@@ -187,7 +191,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     }
         
     /**
-     * Sets the {@link MovieType} of the movie
+     * Sets the {@link MoviesType} of the movie
      *
      * @param type of the movie
      */
@@ -282,9 +286,9 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     }
 
     /**
-     * Gets the {@link MovieType} of the movie
+     * Gets the {@link MoviesType} of the movie
      *
-     * @return {@link MovieType} of the movie
+     * @return {@link MoviesType} of the movie
      */
     public MoviesType getType() {
         return type;

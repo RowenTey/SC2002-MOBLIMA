@@ -28,6 +28,7 @@ public class User implements Serializable {
     /**
      * Constructor of User
      * 
+     * @param userId of the user
      * @param username user's username
      */
     public User(String userId, String username) {
