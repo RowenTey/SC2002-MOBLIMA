@@ -100,6 +100,8 @@ public class MovieManager {
 
     /**
      * Print the details of a {@link Movie}
+     * 
+     * @param movie that is selected to be printed
      */
     public static void displayMovieDetails(Movie movie) {
         System.out.println();
@@ -192,6 +194,8 @@ public class MovieManager {
 
     /**
      * Displays a list of bookable {@link Movie}
+     * 
+     * @return boolean {@code true} if the list of bookable {@link Movie} is not empty, {@code false} otherwise
      */
     public static boolean displayListOfBookableMovies() {
         if (MovieManager.getBookableMovies().size() == 0) {
@@ -209,6 +213,8 @@ public class MovieManager {
 
     /**
      * Allows user to select a specific {@link Movie} by index
+     * 
+     @return {@link Movie} that is selected
      */
     public static Movie selectMovie() {
         System.out.println("Select a movie by entering it's index:");
@@ -427,7 +433,10 @@ public class MovieManager {
 
     /**
      * Handles the booking of movie
+     * 
      * @param path of entry
+     * 
+     * @return boolean {@code true} if the list of bookable {@link Movie} is not empty, {@code false} otherwise
      */
     public static boolean handleBookMovie(String path) {
         System.out.println("Which movie would you like to book?\n");
