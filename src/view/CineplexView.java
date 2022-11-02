@@ -22,16 +22,23 @@ public class CineplexView extends MainView {
     private boolean isStaff;
 
     /**
+     * Name of current user
+     */
+    private String username;
+
+    /**
      * Default contructor for the CineplexView
      * 
-     * @param path of entry for CineplexView
-     * @param isStaff boolean value if the current user is staff
+     * @param path     of entry for CineplexView
+     * @param isStaff  boolean value if the current user is staff
+     * @param username of current user
      * 
      */
-    public CineplexView(String path, boolean isStaff) {
+    public CineplexView(String path, boolean isStaff, String username) {
         super();
         this.path = path;
         this.isStaff = isStaff;
+        this.username = username;
     }
 
     /**
@@ -107,7 +114,7 @@ public class CineplexView extends MainView {
                     System.out.println(
                             "\n" + CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes");
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes", this.username);
                     showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
                 }
             } while (choice != (numOfCineplex + 1));

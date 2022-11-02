@@ -23,15 +23,22 @@ public class MovieView extends MainView {
     private boolean isStaff;
 
     /**
-     * Default contructor for the MovieView
-     *      
-     * @param path of entry for cineplex view
-     * @param isStaff boolean value if the current user is staff
+     * Name of current user
      */
-    public MovieView(String path, boolean isStaff) {
+    private String username;
+
+    /**
+     * Default contructor for the MovieView
+     * 
+     * @param path     of entry for cineplex view
+     * @param isStaff  boolean value if the current user is staff
+     * @param username of current user
+     */
+    public MovieView(String path, boolean isStaff, String username) {
         super();
         this.path = path;
         this.isStaff = isStaff;
+        this.username = username;
     }
 
     /**
@@ -133,11 +140,10 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Book Movie");
-                        if(MovieManager.handleBookMovie(this.path + " > Movie > Book Movie")){
-                            ShowtimeView showtimeView = new ShowtimeView(path);
+                        if (MovieManager.handleBookMovie()) {
+                            ShowtimeView showtimeView = new ShowtimeView(path, this.username);
                             showtimeView.viewApp(MovieManager.selectMovie());
-                        };
-
+                        }
                         break;
                     case 2:
                         Helper.clearScreen();

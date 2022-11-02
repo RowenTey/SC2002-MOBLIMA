@@ -1,6 +1,6 @@
 package src.view;
 
-import src.controller.StaffManager;
+import src.controller.UserManager;
 import src.helper.Helper;
 
 /**
@@ -44,24 +44,21 @@ public class StaffView extends MainView {
      * View app
      */
     public void viewApp() {
-        if (!this.handleLogin()) {
-            return;
-        }
         int choice = -1;
         do {
             this.printMenu();
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView(this.path + " > Staff", true);
+                    CineplexView cineplexView = new CineplexView(this.path + " > Staff", true, "");
                     cineplexView.viewApp();
                     continue;
                 case 2:
-                    MovieView movieView = new MovieView(this.path + " > Staff", true);
+                    MovieView movieView = new MovieView(this.path + " > Staff", true, "");
                     movieView.viewApp();
                     continue;
                 case 3:
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff");
+                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", "");
                     showtimeView.viewApp();
                     continue;
                 case 4:
@@ -75,31 +72,4 @@ public class StaffView extends MainView {
             }
         } while (choice != 5);
     }
-
-    /**
-     * Action function to handle staff login
-     * 
-     * @return boolean {@code true} if staff credentials was valid, {@code false}
-     *         otherwise
-     */
-    private boolean handleLogin() {
-        Helper.clearScreen();
-        printRoute(this.path + " > Staff Login");
-        System.out.println("Please enter your staff username");
-        String username = Helper.readString();
-        System.out.println();
-        System.out.println("Please enter your staff password");
-        String password = Helper.readString();
-        System.out.println();
-        if (StaffManager.validateStaff(username, password)) {
-            System.out.println("Login successfully! Welcome " + username + " to the MOBLIMA system.\n");
-            Helper.pressAnyKeyToContinue();
-            return true;
-        } else {
-            System.out.println("Invalid staff!");
-            Helper.pressAnyKeyToContinue();
-            return false;
-        }
-    }
-
 }

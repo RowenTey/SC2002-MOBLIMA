@@ -125,12 +125,12 @@ public class MovieManager {
     /**
      * Adds a {@link Movie} to the {@link Database}
      * 
-     * @param title of movie
-     * @param status of movie
+     * @param title    of movie
+     * @param status   of movie
      * @param synopsis of movie
      * @param director of movie
-     * @param cast of movie
-     * @param type of movie
+     * @param cast     of movie
+     * @param type     of movie
      */
     public static void addMovie(String title, ShowStatus status, String synopsis, String director,
             String[] cast, MoviesType type) {
@@ -195,14 +195,15 @@ public class MovieManager {
     /**
      * Displays a list of bookable {@link Movie}
      * 
-     * @return boolean {@code true} if the list of bookable {@link Movie} is not empty, {@code false} otherwise
+     * @return boolean {@code true} if the list of bookable {@link Movie} is not
+     *         empty, {@code false} otherwise
      */
     public static boolean displayListOfBookableMovies() {
         if (MovieManager.getBookableMovies().size() == 0) {
             System.out.println("We don't have any showing movies at this time");
             return false;
         } else {
-            System.out.println("List of SHOWING & PREVIEW Movies");
+            System.out.println("List of NOW_SHOWING & PREVIEW Movies");
             for (int i = 0; i < MovieManager.getBookableMovies().size(); i++) {
                 System.out.println("(" + (i + 1) + ") " + MovieManager.getBookableMovies().get(i).getTitle());
             }
@@ -214,7 +215,7 @@ public class MovieManager {
     /**
      * Allows user to select a specific {@link Movie} by index
      * 
-     @return {@link Movie} that is selected
+     * @return {@link Movie} that is selected
      */
     public static Movie selectMovie() {
         System.out.println("Select a movie by entering it's index:");
@@ -287,7 +288,8 @@ public class MovieManager {
 
         System.out.println("Top 5 Movies by Ticket Sales: ");
         for (int i = 5; i > 0; i--) {
-            System.out.println("(" + (5 - i + 1) + ") " + res.get(i - 1).getTitle());
+            System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
+                    res.get(i - 1).getTicketSales()));
         }
     }
 
@@ -306,7 +308,8 @@ public class MovieManager {
 
         System.out.println("Top 5 Movies by Overall Rating: ");
         for (int i = 5; i > 0; i--) {
-            System.out.println("(" + (5 - i + 1) + ") " + res.get(i - 1).getTitle());
+            System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
+                    res.get(i - 1).getOverallRating() == -1 ? "N/A" : res.get(i - 1).getOverallRating()));
         }
     }
 
@@ -341,7 +344,7 @@ public class MovieManager {
     public static void displayReviews(Movie movie) {
         ArrayList<Review> reviews = movie.getReviews();
         if (reviews.size() == 0) {
-            System.out.println("\nNo reviews found!");
+            System.out.println("No reviews found!");
             return;
         }
 
@@ -358,7 +361,7 @@ public class MovieManager {
     /**
      * Adds a new {@link Review} to a {@link Movie}
      * 
-     * @param movie to be reviewed
+     * @param movie  to be reviewed
      * @param rating of {@link Review}
      * @param review (content) of {@link Review}
      */
@@ -368,7 +371,6 @@ public class MovieManager {
         Database.MOVIES.put(movie.getMovieId(), movie);
         System.out.println("Successfully added review!");
     }
-
 
     /**
      * Handles the addition of {@link Movie}
@@ -434,11 +436,10 @@ public class MovieManager {
     /**
      * Handles the booking of movie
      * 
-     * @param path of entry
-     * 
-     * @return boolean {@code true} if the list of bookable {@link Movie} is not empty, {@code false} otherwise
+     * @return boolean {@code true} if the list of bookable {@link Movie} is not
+     *         empty, {@code false} otherwise
      */
-    public static boolean handleBookMovie(String path) {
+    public static boolean handleBookMovie() {
         System.out.println("Which movie would you like to book?\n");
         if (MovieManager.displayListOfBookableMovies()) {
             return true;

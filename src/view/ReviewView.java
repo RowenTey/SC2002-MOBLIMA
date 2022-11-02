@@ -26,7 +26,7 @@ public class ReviewView extends MainView {
      * Default contructor for the ReviewView
      * 
      * @param movie to be reviewed
-     * @param path of entry for ReviewView
+     * @param path  of entry for ReviewView
      */
     public ReviewView(Movie movie, String path) {
         super();
@@ -56,7 +56,7 @@ public class ReviewView extends MainView {
             choice = Helper.readInt(1, 3);
             switch (choice) {
                 case 1:
-                    System.out.println("Reviews:");
+                    System.out.println("\nReviews:");
                     MovieManager.displayReviews(this.movie);
                     break;
                 case 2:

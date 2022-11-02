@@ -27,11 +27,6 @@ public class MovieGoer extends User {
     private AgeGroup ageGroup;
 
     /**
-     * A list that stores all the {@link Booking} of movie goer
-     */
-    private ArrayList<Booking> bookings;
-
-    /**
      * Constructor of movie goer
      * 
      * @param userId   of movie goer
@@ -39,13 +34,15 @@ public class MovieGoer extends User {
      * @param mobile   number of movie goer
      * @param email    address of movie goer
      * @param ageGroup {@link AgeGroup} of movie goer
+     * @param password of movie goer
+     * @param isStaff  whether user is staff
      */
-    public MovieGoer(String userId, String username, String mobile, String email, AgeGroup ageGroup) {
-        super(userId, username);
+    public MovieGoer(String userId, String username, String mobile, String email, AgeGroup ageGroup, String password,
+            boolean isStaff) {
+        super(userId, username, password, isStaff);
         setMobile(mobile);
         setEmail(email);
         setAgeGroup(ageGroup);
-        this.bookings = new ArrayList<>();
     }
 
     /**
@@ -102,21 +99,4 @@ public class MovieGoer extends User {
         return ageGroup;
     }
 
-    /**
-     * Sets the {@link Booking} of the movie goer
-     * 
-     * @param bookings of the movie goer
-     */
-    public void setBooking(ArrayList<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    /**
-     * Gets the list of {@link Booking} of the movie goer
-     * 
-     * @return {@code ArrayList<Booking>} list of bookings of the movie goer
-     */
-    public ArrayList<Booking> getBooking() {
-        return bookings;
-    }
 }

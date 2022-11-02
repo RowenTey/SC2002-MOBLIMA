@@ -9,37 +9,14 @@ package src.model;
  */
 public class Staff extends User {
     /**
-     * Staff's password for enabling admin functions
-     */
-    private String password;
-
-    /**
      * Constructor of Staff
      * 
      * @param userId   of staff
      * @param username of staff
      * @param password of staff
+     * @param isStaff  whether user is staff
      */
-    public Staff(String userId, String username, String password) {
-        super(userId, username);
-        setPassword(password);
-    }
-
-    /**
-     * Sets the password of the staff
-     * 
-     * @param password of staff
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * Gets the password of the staff
-     * 
-     * @return password of the staff
-     */
-    public String getPassword() {
-        return password;
+    public Staff(String userId, String username, String password, boolean isStaff) {
+        super(userId, username, password, isStaff);
     }
 }

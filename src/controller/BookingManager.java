@@ -71,8 +71,8 @@ public class BookingManager {
       multiplier *= 0.5;
     }
 
-    String formattedDate = seat.getShowtime().getTime().substring(0, 10);
     // formats date to yyyy-MM-dd to match format in HOLIDAY database
+    String formattedDate = seat.getShowtime().getTime().substring(0, 10);
     if (Database.HOLIDAYS.contains(formattedDate) || Helper.checkIsDateWeekend(seat.getShowtime().getTime())) {
       multiplier *= 1.3; // 30% surcharge for holiday or weekend
     }
@@ -99,7 +99,7 @@ public class BookingManager {
    * @return {@link Ticket} of the booking
    */
   public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema, MovieGoer movieGoer) {
-    double finalPrice = BookingManager.computePrice(movie.getPrice(), cinema, seat, movieGoer);
+    double finalPrice = computePrice(movie.getPrice(), cinema, seat, movieGoer);
 
     Ticket newTicket = new Ticket(finalPrice, seat, cinema, movie.getTitle(), movie.getType());
 
@@ -202,7 +202,7 @@ public class BookingManager {
     System.out.print("Enter your age: ");
     int age = Helper.readInt(1, 100);
     AgeGroup ageGroup;
-    if (age >= 60) {
+    if (age >= 55) {
       ageGroup = AgeGroup.SENIOR_CITIZEN;
     } else if (age >= 21) {
       ageGroup = AgeGroup.ADULT;
@@ -210,7 +210,7 @@ public class BookingManager {
       ageGroup = AgeGroup.CHILD;
     }
 
-    MovieGoer newMovieGoer = new MovieGoer(email, name, mobile, email, ageGroup);
+    MovieGoer newMovieGoer = new MovieGoer(email, name, mobile, email, ageGroup, "test", false);
     return newMovieGoer;
   }
 
@@ -244,6 +244,7 @@ public class BookingManager {
     if (myList.size() == 0) {
       System.out.println("\nNo booking is found!");
     } else {
+      System.out.println("Your booking history is as follow:");
       for (int i = 0; i < myList.size(); i++) {
         BookingManager.printBookingDetails(myList.get(i));
       }
@@ -256,7 +257,7 @@ public class BookingManager {
    * 
    * @param showtimeId of showtime
    */
-  public static void promptBooking(String showtimeId) {
+  public static void promptBooking(String showtimeId, String username) {
     String position;
     int row = 0;
     int col = 0;
@@ -278,7 +279,8 @@ public class BookingManager {
       System.out.println("Booking failed! Seat is occupied...");
     } else {
       System.out.println("\nSeat " + position + " selected...");
-      MovieGoer newMovieGoer = BookingManager.promptUserDetails();
+      MovieGoer newMovieGoer = username.equals("") ? BookingManager.promptUserDetails()
+          : (MovieGoer) UserManager.getUser(username);
       Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(), showtime.getSeatAt(row + 1, col),
           showtime.getCinema(), newMovieGoer);
       BookingManager.printTicketDetails(ticket, newMovieGoer, position);
@@ -341,10 +343,18 @@ public class BookingManager {
 
   /**
    * Handles {@link Booking} checking
+   * 
+   * @param username of current user
    */
-  public static void handleCheckBooking() {
-    System.out.print("Enter your email: ");
-    String email = Helper.readString();
+  public static void handleCheckBooking(String username) {
+    String email;
+    if (username.equals("")) {
+      System.out.print("Enter your email: ");
+      email = Helper.readString();
+    } else {
+      MovieGoer currentUser = (MovieGoer) UserManager.getUser(username);
+      email = currentUser.getEmail();
+    }
     BookingManager.findBooking(email);
   }
 }

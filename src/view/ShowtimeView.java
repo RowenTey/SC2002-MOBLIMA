@@ -19,13 +19,20 @@ public class ShowtimeView extends MainView {
     public String path;
 
     /**
+     * Name of current user
+     */
+    private String username;
+
+    /**
      * Overrided contructor for the ShowtimeView
      * 
-     * @param path of entry for StaffView
+     * @param path     of entry for StaffView
+     * @param username of current user
      */
-    public ShowtimeView(String path) {
+    public ShowtimeView(String path, String username) {
         super();
         this.path = path;
+        this.username = username;
     }
 
     /**
@@ -99,7 +106,7 @@ public class ShowtimeView extends MainView {
     protected void viewApp(Movie movie) {
         Helper.clearScreen();
         printRoute(path + " > " + movie.getTitle());
-        ShowtimeManager.handleShowtimeSelection(movie);
+        ShowtimeManager.handleShowtimeSelection(movie, this.username);
         return;
     }
 
@@ -111,7 +118,7 @@ public class ShowtimeView extends MainView {
     protected void viewApp(Cineplex cineplex) {
         Helper.clearScreen();
         printRoute(path + " > " + cineplex.getLocation());
-        ShowtimeManager.handleShowtimeSelection(cineplex);
+        ShowtimeManager.handleShowtimeSelection(cineplex, this.username);
         return;
     }
 

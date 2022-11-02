@@ -32,6 +32,16 @@ public class Helper {
   public static final Scanner sc = new Scanner(System.in);
 
   /**
+   * 2 dp constructor
+   */
+  public static DecimalFormat df2 = new DecimalFormat("0.00");
+
+  /**
+   * 1 dp constructor
+   */
+  public static DecimalFormat df1 = new DecimalFormat("0.0");
+
+  /**
    * Default constructor for initializing Scanner object
    */
   public Helper() {
@@ -182,9 +192,11 @@ public class Helper {
   /**
    * Method to set the date for either current date or user input date
    * 
-   * @param now {@code true} to return the current time. Otherwise, {@code false}
-   *            to prompt user for new time.
-   * @param isHoliday boolean {@code true} if the date is a holiday, {@code false} otherwise
+   * @param now       {@code true} to return the current time. Otherwise,
+   *                  {@code false}
+   *                  to prompt user for new time.
+   * @param isHoliday boolean {@code true} if the date is a holiday, {@code false}
+   *                  otherwise
    * 
    * @return String object for the date in the format "yyyy-MM-dd HH:mm" or
    *         "yyyy-MM-dd"
@@ -362,9 +374,9 @@ public class Helper {
   }
 
   /**
-   * Generate random date
+   * Generate random date with random hour
    * 
-   * @return string of a random date 
+   * @return string of a random date
    */
   public static String generateRandomDate() {
     Random random = new Random();
@@ -376,7 +388,8 @@ public class Helper {
 
     randomDay = minDay + random.nextInt(maxDay - minDay);
     randomDate = LocalDate.ofEpochDay(randomDay);
-    Date date = Date.from(randomDate.atStartOfDay(defaultZoneId).toInstant());
+    Date date = Date
+        .from(randomDate.atTime(getRandomNumber(0, 24), 0).atZone(defaultZoneId).toInstant());
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     String strDate = dateFormat.format(date);
 
@@ -384,17 +397,7 @@ public class Helper {
   }
 
   /**
-   * 2 dp constructor
-   */
-  public static DecimalFormat df2 = new DecimalFormat("0.00");
-
-  /**
-   * 1 dp constructor
-   */
-  public static DecimalFormat df1 = new DecimalFormat("0.0");
-
-  /**
-   * check if the string is Numeric
+   * Check if the string is numerical
    * 
    * @param strNum the string to be checked
    * @return true is the string is Numeric; else false
@@ -409,5 +412,10 @@ public class Helper {
       return false;
     }
     return true;
+  }
+
+  public static int getRandomNumber(int min, int max) {
+    Random random = new Random();
+    return random.nextInt(max - min) + min;
   }
 }

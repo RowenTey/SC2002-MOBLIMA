@@ -17,13 +17,20 @@ public class MovieGoerView extends MainView {
     private String path;
 
     /**
+     * Name of current user
+     */
+    private String username;
+
+    /**
      * Overrided contructor for the MovieGoerView
      * 
-     * @param path of entry for MovieGoerView
+     * @param path     of entry for MovieGoerView
+     * @param username of current user
      */
-    public MovieGoerView(String path) {
+    public MovieGoerView(String path, String username) {
         super();
         this.path = path;
+        this.username = username;
     }
 
     /**
@@ -31,12 +38,13 @@ public class MovieGoerView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > MovieGoer");
+        printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username));
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or List Cineplexes");
         System.out.println("(2) Search or List Movies");
-        System.out.println("(3) View Booking History");
-        System.out.println("(4) Exit");
+        System.out.println("(3) List ticket prices");
+        System.out.println("(4) View Booking History");
+        System.out.println("(5) Exit");
     }
 
     /**
@@ -46,31 +54,39 @@ public class MovieGoerView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 4);
+            choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView(this.path + " > MovieGoer", false);
+                    CineplexView cineplexView = new CineplexView(
+                            this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username), false,
+                            this.username);
                     cineplexView.viewApp();
                     continue;
                 case 2:
-                    MovieView movieView = new MovieView(this.path + " > MovieGoer", false);
+                    MovieView movieView = new MovieView(
+                            this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username), false,
+                            this.username);
                     movieView.viewApp();
-                    break;
+                    continue;
                 case 3:
-                    System.out.println("View Booking History");
-                    Helper.clearScreen();
-                    printRoute(this.path + " > MovieGoer > View Booking History");
-                    BookingManager.handleCheckBooking();
+                    printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
+                            + " > View Ticket Prices");
                     break;
                 case 4:
+                    Helper.clearScreen();
+                    printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
+                            + " > View Booking History");
+                    BookingManager.handleCheckBooking(this.username);
+                    break;
+                case 5:
                     break;
                 default:
                     break;
             }
-            if (choice != 4) {
+            if (choice != 5) {
                 System.out.println();
                 Helper.pressAnyKeyToContinue();
             }
-        } while (choice != 4);
+        } while (choice != 5);
     }
 }

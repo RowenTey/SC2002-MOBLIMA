@@ -6,7 +6,7 @@ import java.util.HashSet;
 import src.controller.CineplexManager;
 import src.controller.MovieManager;
 import src.controller.ShowtimeManager;
-import src.controller.StaffManager;
+import src.controller.UserManager;
 import src.controller.SystemManager;
 
 import src.model.*;
@@ -33,9 +33,9 @@ public class Database {
   private static final String folder = "data";
 
   /**
-   * HashMap to contain {@link Staff} objects.
+   * HashMap to contain {@link User} objects.
    */
-  public static HashMap<String, Staff> STAFF = new HashMap<String, Staff>();
+  public static HashMap<String, User> USERS = new HashMap<String, User>();
 
   /**
    * HashMap to contain {@link Booking} objects.
@@ -82,8 +82,8 @@ public class Database {
    * of program.
    */
   public Database() {
-    if (!readSerializedObject(FileType.STAFF)) {
-      System.out.println("Read into Staffs failed!");
+    if (!readSerializedObject(FileType.USERS)) {
+      System.out.println("Read into Users1 failed!");
     }
     if (!readSerializedObject(FileType.BOOKINGS)) {
       System.out.println("Read into Bookings failed!");
@@ -119,7 +119,7 @@ public class Database {
    * Save all files into database.
    */
   public static void saveAllFiles() {
-    saveFileIntoDatabase(FileType.STAFF);
+    saveFileIntoDatabase(FileType.USERS);
     saveFileIntoDatabase(FileType.BOOKINGS);
     saveFileIntoDatabase(FileType.CINEPLEX);
     saveFileIntoDatabase(FileType.SHOWTIME);
@@ -150,8 +150,8 @@ public class Database {
       }
 
       // Read into database
-      if (fileType == FileType.STAFF) {
-        STAFF = (HashMap<String, Staff>) object;
+      if (fileType == FileType.USERS) {
+        USERS = (HashMap<String, User>) object;
       } else if (fileType == FileType.BOOKINGS) {
         BOOKINGS = (HashMap<String, Booking>) object;
       } else if (fileType == FileType.CINEPLEX) {
@@ -172,8 +172,8 @@ public class Database {
       fileInputStream.close();
     } catch (EOFException err) {
       System.out.println("Warning: " + err);
-      if (fileType == FileType.STAFF) {
-        STAFF = new HashMap<String, Staff>();
+      if (fileType == FileType.USERS) {
+        USERS = new HashMap<String, User>();
         Database.initializeStaff();
       }
     } catch (IOException err) {
@@ -202,8 +202,8 @@ public class Database {
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(filePath);
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-      if (fileType == FileType.STAFF) {
-        objectOutputStream.writeObject(STAFF);
+      if (fileType == FileType.USERS) {
+        objectOutputStream.writeObject(USERS);
       } else if (fileType == FileType.BOOKINGS) {
         objectOutputStream.writeObject(BOOKINGS);
       } else if (fileType == FileType.CINEPLEX) {
@@ -230,17 +230,17 @@ public class Database {
   /**
    * A method to initialize {@link Staff} data when the database is empty.
    * <p>
-   * Calls {@link StaffManager} to initialize the dummy guests.
+   * Calls {@link UserManager} to initialize the dummy guests.
    * 
    * @return {@code true} if initialized successfully. Otherwise, {@code false} if
    *         database is not empty.
    */
   public static boolean initializeStaff() {
-    if (STAFF.size() != 0) {
+    if (USERS.size() != 0) {
       System.out.println("The database already has staffs. Reset database first to initialize staffs");
       return false;
     }
-    StaffManager.initializeStaff();
+    UserManager.initializeStaff();
     return true;
   }
 
@@ -321,9 +321,9 @@ public class Database {
    */
   public static boolean clearDatabase() {
     // Initialize staff data
-    STAFF = new HashMap<String, Staff>();
+    USERS = new HashMap<String, User>();
     Database.initializeStaff();
-    writeSerializedObject(FileType.STAFF);
+    writeSerializedObject(FileType.USERS);
 
     BOOKINGS = new HashMap<String, Booking>();
     writeSerializedObject(FileType.BOOKINGS);

@@ -12,7 +12,7 @@ public enum FileType {
   /**
    * File type corresponding to the {@link Staff} file.
    */
-  STAFF("Staff"),
+  USERS("Users"),
 
   /**
    * File type corresponding to the {@link Booking} file.
