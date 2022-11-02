@@ -245,8 +245,8 @@ public class ShowtimeManager {
    */
   protected static void displayShowtimeLayout(Showtime showtime) {
     System.out.println();
-    System.out.println("                      -------Screen------");
-    System.out.println("     1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17");
+    System.out.println("                                       -------Screen------");
+    System.out.println("      1    2    3    4   5   6    7    8    9    10   11   12   13  14  15   16   17");
     for (int row = 0; row <= 8; row++) {
       System.out.print(alphaRow.get(row) + "   ");
       for (int col = 0; col <= 16; col++) {
@@ -254,9 +254,9 @@ public class ShowtimeManager {
           System.out.print("   ");
         else {
           if (showtime.getSeatAt(row + 1, col + 1).getBooked()) {
-            System.out.print(" X ");
+            System.out.print(" [X] ");
           } else {
-            System.out.print(" O ");
+            System.out.print(" [ ] ");
           }
         }
       }
