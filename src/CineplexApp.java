@@ -15,7 +15,7 @@ public class CineplexApp {
         /**
          * Main function that is the starting point of the application
          * @param args Arguments passed to the app
-         * @throws Exception
+         * @throws Exception handles exception
          */
         public static void main(String[] args) throws Exception {
                 try {

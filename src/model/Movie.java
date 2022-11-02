@@ -105,6 +105,7 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
     /**
      * Abstract method - Sets the ID of the movie
      * 
+     * @param price to be set
      */
     public abstract void setPrice(double price);
 
