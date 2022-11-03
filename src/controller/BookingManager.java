@@ -109,10 +109,15 @@ public class BookingManager {
    * 
    * @return {@link Ticket} of the booking
    */
-  public static Ticket createBookingTicket(Movie movie, Seat seat, Cinema cinema, MovieGoer movieGoer) {
-    double finalPrice = computePrice(movie.getPrice(), cinema, seat, movieGoer);
+  public static Ticket createBookingTicket(Showtime showtime, ArrayList<Seat> seat, MovieGoer movieGoer) {
+    double total = 0;
+    double individualPrice;
+    for(int i=0; i<seat.size(); i++){
+      individualPrice = computePrice(showtime.getMovie().getPrice(), showtime.getCinema(), seat.get(i), movieGoer);
+      total += individualPrice;
+    }
 
-    Ticket newTicket = new Ticket(finalPrice, seat, cinema, movie.getTitle(), movie.getType());
+    Ticket newTicket = new Ticket(showtime, total, seat);
 
     return newTicket;
   }
@@ -125,16 +130,44 @@ public class BookingManager {
    * @param movieGoer  of the booking
    * @param movieTitle of the booking
    */
-  public static void createBooking(Ticket ticket, MovieGoer movieGoer, String movieTitle) {
+  public static void createBooking(Ticket ticket, MovieGoer movieGoer) {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
-    String newTransactionId = createTransactionId(ticket.getSeat());
+    String newTransactionId = createTransactionId(ticket.getSeat().get(0));
     ticket.setIsPaid(true);
-    Booking newBooking = new Booking(newTransactionId, ticket, movieGoer);
+    Booking newBooking = new Booking(newTransactionId, ticket, movieGoer, ticket.getSeat());
     bookingList.add(newBooking);
     Database.BOOKINGS.put(newTransactionId, newBooking);
     Database.saveFileIntoDatabase(FileType.BOOKINGS);
     System.out.println("\nBooking created! Your ticket is printed below: ");
     printBookingDetails(newBooking);
+  }
+
+  /**
+   * Gets the list of seats in string
+   * @param ticket made by the buyer
+   * @return list of seats in string
+   */
+  protected static String getAllSeatsInString(Ticket ticket){
+    String res = "";
+    for(int i=0; i<ticket.getSeat().size(); i++){
+      res += ticket.getSeat().get(i).getPosition();
+      res += " ";
+    }
+    return res;
+  }
+
+  /**
+   * Gets the list of type of seats in string
+   * @param ticket made by the buyer
+   * @return list of type of seats in string
+   */
+  protected static String getAllSeatsTypeInString(Ticket ticket){
+    String res = "";
+    for(int i=0; i<ticket.getSeat().size(); i++){
+      res += ticket.getSeat().get(i).getSeatType().getLabel();
+      res += " ";
+    }
+    return res;
   }
 
   /**
@@ -150,17 +183,17 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
     System.out.println(String.format("%-25s: +65-%s", "Mobile Number", movieGoer.getMobile()));
     System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
-    System.out.println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().getShowtime().getTime()));
+    System.out.println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().get(0).getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getMovieTitle()));
-    System.out.println(String.format("%-25s: %s", "Movie Type", booking.getTicket().getMovieType()));
-    System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getCinema().getCinemaCode()));
+    System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getShowtime().getMovie().getTitle()));
+    System.out.println(String.format("%-25s: %s", "Movie Type", booking.getTicket().getShowtime().getMovie().getType().getLabel()));
+    System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getShowtime().getCinema().getCinemaCode()));
     System.out.println(String.format("%-25s: %s", "Cinema Type",
-        booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+        booking.getTicket().getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(
-        String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Seat", booking.getTicket().getSeat().getPosition()));
-    System.out.println(String.format("%-25s: %s", "Seat Type", booking.getTicket().getSeat().getSeatType().getLabel()));
+        String.format("%-25s: %s", "Location", booking.getTicket().getShowtime().getCinema().getCineplex().getLabel()));
+    System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(booking.getTicket())));
+    System.out.println(String.format("%-25s: %s", "Seat Type", BookingManager.getAllSeatsTypeInString(booking.getTicket())));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
@@ -173,7 +206,6 @@ public class BookingManager {
    *
    * @param ticket    to be printed
    * @param movieGoer of the booking
-   * @param position  of the seat
    */
   public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer) {
     System.out.println();
@@ -181,16 +213,16 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
     System.out.println(String.format("%-25s: +65-%s", "Mobile Number", movieGoer.getMobile()));
     System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
-    System.out.println(String.format("%-25s: %s", "Time", ticket.getSeat().getShowtime().getTime()));
+    System.out.println(String.format("%-25s: %s", "Time", ticket.getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Movie Title", ticket.getMovieTitle()));
-    System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getMovieType()));
-    System.out.println(String.format("%-25s: %s", "Cinema", ticket.getCinema().getCinemaCode()));
+    System.out.println(String.format("%-25s: %s", "Movie Title", ticket.getShowtime().getMovie().getTitle()));
+    System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getShowtime().getMovie().getType()));
+    System.out.println(String.format("%-25s: %s", "Cinema", ticket.getShowtime().getCinema().getCinemaCode()));
     System.out.println(
-        String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
-    System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Seat", ticket.getSeat().getPosition()));
-    System.out.println(String.format("%-25s: %s", "Seat Type", ticket.getSeat().getSeatType().getLabel()));
+        String.format("%-25s: %s", "Cinema Type", ticket.getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+    System.out.println(String.format("%-25s: %s", "Location", ticket.getShowtime().getCinema().getCineplex().getLabel()));
+    System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(ticket)));
+    System.out.println(String.format("%-25s: %s", "Seat Type", BookingManager.getAllSeatsTypeInString(ticket)));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
     System.out.println(String.format("%-25s: %s", "Status", ticket.getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -296,7 +328,6 @@ public class BookingManager {
    */
   public static void promptBooking(String showtimeId, String username) {
     ArrayList<Seat> seatList = new ArrayList<Seat>();
-    ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
     Seat newSeat;
     int opt = -1;
     Showtime showtime = ShowtimeManager.getShowtimebyId(showtimeId);
@@ -319,12 +350,9 @@ public class BookingManager {
     MovieGoer newMovieGoer = username.equals("") ? BookingManager.promptUserDetails()
         : (MovieGoer) UserManager.getUser(username);
     
-    for(int i=0; i<seatList.size(); i++){
-      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(), seatList.get(i),
-      showtime.getCinema(), newMovieGoer);
-      ticketList.add(ticket);
-      BookingManager.printTicketDetails(ticket, newMovieGoer);
-    }
+    Ticket newTicket = BookingManager.createBookingTicket(showtime, seatList, newMovieGoer);
+    BookingManager.printTicketDetails(newTicket, newMovieGoer);
+    
     System.out.println("(1) Confirm Payment");
     System.out.println("(2) Back");
     System.out.print("Which would you like to do: ");
@@ -333,14 +361,13 @@ public class BookingManager {
     pay = Helper.readInt(1, 2);
     switch (pay) {
       case 1:
-        for(int i=0; i<seatList.size(); i++){
-          if (BookingManager.bookSeat(seatList.get(i), showtime)) {
-            System.out.println("\nSeat " + seatList.get(i).getPosition() + " is booked successfully!");
+        for(int i=0; i<newTicket.getSeat().size(); i++){
+          if (BookingManager.bookSeat(newTicket.getSeat().get(i), showtime)) {
+            System.out.println("\n"+ newTicket.getSeat().get(i).getSeatType().getLabel() + " Seat " + newTicket.getSeat().get(i).getPosition() + " is booked successfully!");
           }
-          BookingManager.createBooking(ticketList.get(i), newMovieGoer,
-              showtime.getMovie().getTitle());
-          updateTicketSales(showtime);
         }
+        BookingManager.createBooking(newTicket, newMovieGoer);
+        updateTicketSales(showtime,newTicket);
         break;
       case 2:
         System.out.println("Booking failed!");
@@ -377,9 +404,10 @@ public class BookingManager {
    * 
    * @return boolean {@code true} when ticket sales is updated
    */
-  protected static boolean updateTicketSales(Showtime showtime) {
+  protected static boolean updateTicketSales(Showtime showtime, Ticket ticket) {
     Movie movie = showtime.getMovie();
-    movie.setTicketSales(movie.getTicketSales() + 1);
+    int newSales = ticket.getSeat().size();
+    movie.setTicketSales(movie.getTicketSales() + newSales);
     Database.MOVIES.put(movie.getMovieId(), movie);
     Database.saveFileIntoDatabase(FileType.MOVIES);
     return true;
@@ -402,3 +430,4 @@ public class BookingManager {
     BookingManager.findBooking(email);
   }
 }
+
