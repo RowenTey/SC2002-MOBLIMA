@@ -446,4 +446,58 @@ public class MovieManager {
         }
         return false;
     }
+        /**
+     * Handles Top 5 Movies viewed by MovieGoer
+     */
+    public static void handleTop5Movies(){
+        // 0 - default
+        // 1 - ticket sales only
+        // 2 - rating only
+        // TODO: can help me modify to get this value from database
+        int currentStatus = 0; //get status from database
+        if(currentStatus == 1){
+            MovieManager.printTop5ByTicketSales();
+        }else if(currentStatus == 2){
+            MovieManager.printTop5ByOverallRating();
+        }else{
+            System.out.println("(1) List Top 5 Movies by Ticket Sales");
+            System.out.println("(2) List Top 5 Movies by Overall Rating");
+            int opt = Helper.readInt(1,2);
+            if(opt == 1){
+                MovieManager.printTop5ByTicketSales();
+            }else{
+                MovieManager.printTop5ByOverallRating();
+            }
+        }
+    }
+
+    /**
+     * Shows or hides the top 5 movies that are viewable to the moviegoer
+     */
+    public static void setViewableTop5(){
+        // 0 - default
+        // 1 - ticket sales only
+        // 2 - rating only
+        // TODO can help me change to modify value in database
+        System.out.println("(1) Show Top 5 Movies by Ticket Sales only");
+        System.out.println("(2) Show Top 5 Movies by Overall Rating only");
+        System.out.println("(3) Change back to default");
+        int opt = Helper.readInt(1,3);
+        switch(opt){
+            case 1:
+                //change value in database to 1
+                break;
+            case 2:
+                //change value in database to 2
+                break;
+            case 3:
+                //change value in database to 0
+                break;
+            default:
+                //change value in database to 0
+                break;
+        }
+        System.out.println("System updated!");
+    }
 }
+

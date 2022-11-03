@@ -7,6 +7,7 @@ import src.database.FileType;
 import src.helper.Helper;
 import src.model.*;
 import src.model.enums.AgeGroup;
+import src.model.enums.SeatType;
 
 /**
  * BookingManager is a controller class that acts as a "middleman" between the
@@ -81,8 +82,18 @@ public class BookingManager {
     multiplier *= 1.07;
     adjustedPrice *= multiplier;
 
+    // extra price for special seats
+    if(seat.getSeatType() == SeatType.ULTIMA){
+      adjustedPrice += 2;
+    }else if(seat.getSeatType() == SeatType.ELITE){
+      adjustedPrice += 3;
+    }else if(seat.getSeatType() == SeatType.COUPLE){
+      adjustedPrice += 4;
+    }
+
+    // extra $5 for platinum cinema
     if (cinema.getIsPlatinum()) {
-      adjustedPrice += 5; // extra $5 for platinum cinema
+      adjustedPrice += 5; 
     }
 
     return adjustedPrice;
@@ -112,15 +123,13 @@ public class BookingManager {
    * @param seat       of the booking
    * @param ticket     of the booking
    * @param movieGoer  of the booking
-   * @param position   of the seat
    * @param movieTitle of the booking
    */
-  public static void createBooking(Seat seat, Ticket ticket, MovieGoer movieGoer, String position, String movieTitle) {
+  public static void createBooking(Ticket ticket, MovieGoer movieGoer, String movieTitle) {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
-    String newTransactionId = createTransactionId(seat);
+    String newTransactionId = createTransactionId(ticket.getSeat());
     ticket.setIsPaid(true);
-    Booking newBooking = new Booking(newTransactionId, ticket, movieGoer,
-        position);
+    Booking newBooking = new Booking(newTransactionId, ticket, movieGoer);
     bookingList.add(newBooking);
     Database.BOOKINGS.put(newTransactionId, newBooking);
     Database.saveFileIntoDatabase(FileType.BOOKINGS);
@@ -150,7 +159,8 @@ public class BookingManager {
         booking.getTicket().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(
         String.format("%-25s: %s", "Location", booking.getTicket().getCinema().getCineplex().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Seat", booking.getPosition()));
+    System.out.println(String.format("%-25s: %s", "Seat", booking.getTicket().getSeat().getPosition()));
+    System.out.println(String.format("%-25s: %s", "Seat Type", booking.getTicket().getSeat().getSeatType().getLabel()));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
@@ -165,7 +175,7 @@ public class BookingManager {
    * @param movieGoer of the booking
    * @param position  of the seat
    */
-  public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer, String position) {
+  public static void printTicketDetails(Ticket ticket, MovieGoer movieGoer) {
     System.out.println();
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
@@ -179,7 +189,8 @@ public class BookingManager {
     System.out.println(
         String.format("%-25s: %s", "Cinema Type", ticket.getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(String.format("%-25s: %s", "Location", ticket.getCinema().getCineplex().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Seat", position));
+    System.out.println(String.format("%-25s: %s", "Seat", ticket.getSeat().getPosition()));
+    System.out.println(String.format("%-25s: %s", "Seat Type", ticket.getSeat().getSeatType().getLabel()));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
     System.out.println(String.format("%-25s: %s", "Status", ticket.getIsPaid() ? "Paid" : "Ready for Payment"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
@@ -253,17 +264,16 @@ public class BookingManager {
   }
 
   /**
-   * Prompts user for {@link Booking} details
+   * Prompts user for {@link Seat} details
+   * @param showtime
    * 
-   * @param showtimeId of showtime
+   * @return {@link Seat} selected
    */
-  public static void promptBooking(String showtimeId, String username) {
+  protected static Seat promptSeat(Showtime showtime){
+    ShowtimeManager.displayShowtimeLayout(showtime);
     String position;
     int row = 0;
     int col = 0;
-    Showtime showtime = ShowtimeManager.getShowtimebyId(showtimeId);
-    ShowtimeManager.displayShowtimeLayout(showtime);
-
     do {
       System.out.println("Please enter the desired seat coordinates (e.g A6): ");
       position = Helper.readString();
@@ -275,36 +285,68 @@ public class BookingManager {
       System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14 || row == -1 || col > 17);
 
-    if (showtime.getSeatAt(row + 1, col).getBooked()) {
-      System.out.println("Booking failed! Seat is occupied...");
-    } else {
-      System.out.println("\nSeat " + position + " selected...");
-      MovieGoer newMovieGoer = username.equals("") ? BookingManager.promptUserDetails()
-          : (MovieGoer) UserManager.getUser(username);
-      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(), showtime.getSeatAt(row + 1, col),
-          showtime.getCinema(), newMovieGoer);
-      BookingManager.printTicketDetails(ticket, newMovieGoer, position);
-      System.out.println("(1) Confirm Payment");
-      System.out.println("(2) Back");
-      System.out.print("Which would you like to do: ");
+    showtime.getSeatAt(row+1, col).setPosition(position);
+    return showtime.getSeatAt(row+1, col);
+  }
 
-      int pay;
-      pay = Helper.readInt(1, 2);
-      switch (pay) {
-        case 1:
-          if (BookingManager.bookSeat(row + 1, col, showtime)) {
-            System.out.println("\nSeat " + position + " is booked successfully!");
+  /**
+   * Prompts user for {@link Booking} details
+   * 
+   * @param showtimeId of showtime
+   */
+  public static void promptBooking(String showtimeId, String username) {
+    ArrayList<Seat> seatList = new ArrayList<Seat>();
+    ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+    Seat newSeat;
+    int opt = -1;
+    Showtime showtime = ShowtimeManager.getShowtimebyId(showtimeId);
+
+    do{
+      do{
+      newSeat = BookingManager.promptSeat(showtime);
+      if(newSeat.getBooked()){
+        System.out.println("The selected seat is booked!!");
+      }
+      }while(newSeat.getBooked());
+
+      System.out.println("\n"+newSeat.getSeatType().getLabel()+" Seat " + newSeat.getPosition() + " selected...");
+      seatList.add(newSeat);
+      System.out.println("(1) Select another seat");
+      System.out.println("(2) Proceed to payment");
+      opt = Helper.readInt(1,2);
+    }while(opt != 2);
+
+    MovieGoer newMovieGoer = username.equals("") ? BookingManager.promptUserDetails()
+        : (MovieGoer) UserManager.getUser(username);
+    
+    for(int i=0; i<seatList.size(); i++){
+      Ticket ticket = BookingManager.createBookingTicket(showtime.getMovie(), seatList.get(i),
+      showtime.getCinema(), newMovieGoer);
+      ticketList.add(ticket);
+      BookingManager.printTicketDetails(ticket, newMovieGoer);
+    }
+    System.out.println("(1) Confirm Payment");
+    System.out.println("(2) Back");
+    System.out.print("Which would you like to do: ");
+
+    int pay;
+    pay = Helper.readInt(1, 2);
+    switch (pay) {
+      case 1:
+        for(int i=0; i<seatList.size(); i++){
+          if (BookingManager.bookSeat(seatList.get(i), showtime)) {
+            System.out.println("\nSeat " + seatList.get(i).getPosition() + " is booked successfully!");
           }
-          BookingManager.createBooking(showtime.getSeatAt(row + 1, col), ticket, newMovieGoer, position,
+          BookingManager.createBooking(ticketList.get(i), newMovieGoer,
               showtime.getMovie().getTitle());
           updateTicketSales(showtime);
-          break;
-        case 2:
-          System.out.println("Booking failed!");
-          break;
-        default:
-          break;
-      }
+        }
+        break;
+      case 2:
+        System.out.println("Booking failed!");
+        break;
+      default:
+        break;
     }
 
     Helper.pressAnyKeyToContinue();
@@ -319,8 +361,10 @@ public class BookingManager {
    * 
    * @return boolean {@code true} when seat is booked
    */
-  protected static boolean bookSeat(int row, int column, Showtime showtime) {
-    showtime.getSeatAt(row, column).setBooked(true);
+  protected static boolean bookSeat(Seat seat, Showtime showtime) {
+    int row = seat.getRow()+1;
+    int col = seat.getCol()+1;
+    showtime.getSeatAt(row, col).setBooked(true);
     Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
     return true;

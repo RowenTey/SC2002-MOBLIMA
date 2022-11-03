@@ -24,14 +24,14 @@ public enum MoviesType {
     BLOCKBUSTER("Blockbuster");
 
     /**
-     * A String value for the Layout type for retrieving purposes
+     * A String value for the Movies type for retrieving purposes
      */
     public final String label;
 
     /**
      * Constructor for the MoviesType Enum.
      * 
-     * @param label Layout type as a string
+     * @param label Movies type as a string
      */
     private MoviesType(String label) {
         this.label = label;

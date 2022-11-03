@@ -262,6 +262,10 @@ public class ShowtimeManager {
       }
       System.out.println();
     }
+    System.out.println("Note:");
+    System.out.println("I1-I4 >> Couple Seat");
+    System.out.println("I6-I13 >> Elite Seat");
+    System.out.println("I15-I17 >> Ultima Seat");
     System.out.println();
   }
 

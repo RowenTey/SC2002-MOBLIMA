@@ -57,16 +57,16 @@ public class MovieView extends MainView {
             System.out.println("(6) List \"COMING SOON\" Movies");
             System.out.println("(7) List Top 5 Movies by Ticket Sales");
             System.out.println("(8) List Top 5 Movies by Overall Rating");
-            System.out.println("(9) Exit");
+            System.out.println("(9) Show/Hide Top 5 Movies");
+            System.out.println("(10) Exit");
         } else {
             System.out.println("(1) Book Movie");
             System.out.println("(2) View Past Movie Reviews");
             System.out.println("(3) List \"NOW SHOWING\" Movies");
             System.out.println("(4) List \"PREVIEW\" Movies");
             System.out.println("(5) List \"COMING SOON\" Movies");
-            System.out.println("(6) List Top 5 Movies by Ticket Sales");
-            System.out.println("(7) List Top 5 Movies by Overall Rating");
-            System.out.println("(8) Exit");
+            System.out.println("(6) List Top 5 Movies");
+            System.out.println("(7) Exit");
         }
     }
 
@@ -78,7 +78,7 @@ public class MovieView extends MainView {
         if (this.isStaff) {
             do {
                 this.printMenu();
-                choice = Helper.readInt(1, 9);
+                choice = Helper.readInt(1, 10);
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
@@ -121,21 +121,26 @@ public class MovieView extends MainView {
                         MovieManager.printTop5ByOverallRating();
                         break;
                     case 9:
+                        Helper.clearScreen();
+                        printRoute(this.path + " > Movie > Show/Hide Top 5 Movies");
+                        MovieManager.setViewableTop5();
+                        break;
+                    case 10:
                         break;
                     default:
                         break;
                 }
-                if (choice != 9) {
+                if (choice != 10) {
                     System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }
-            } while (choice != 9);
+            } while (choice != 10);
         }
 
         else {
             do {
                 this.printMenu();
-                choice = Helper.readInt(1, 8);
+                choice = Helper.readInt(1, 7);
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
@@ -168,24 +173,19 @@ public class MovieView extends MainView {
                         break;
                     case 6:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Top 5 Movies by Ticket Sales");
-                        MovieManager.printTop5ByTicketSales();
+                        printRoute(this.path + " > Movie > Top 5 Movies");
+                        MovieManager.handleTop5Movies();
                         break;
                     case 7:
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
-                        MovieManager.printTop5ByOverallRating();
-                        break;
-                    case 8:
                         break;
                     default:
                         break;
                 }
-                if (choice != 8) {
+                if (choice != 7) {
                     System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }
-            } while (choice != 8);
+            } while (choice != 7);
         }
     }
 }

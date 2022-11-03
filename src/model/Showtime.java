@@ -3,6 +3,7 @@ package src.model;
 import java.io.Serializable;
 
 import src.model.enums.LayoutType;
+import src.model.enums.SeatType;
 
 /**
  * The class that records the showtime of a {@link Movie}
@@ -206,7 +207,17 @@ public class Showtime implements Serializable {
         if (col == 4 || col == 13)
           continue;
 
-        seats[row][col] = new Seat(row, col, this);
+        if(row == ROWS-1){
+          if(col < 5){
+            seats[row][col] = new Seat(row, col, this, SeatType.COUPLE);
+          }else if(col < 14){
+            seats[row][col] = new Seat(row, col, this, SeatType.ELITE);
+          }else{
+            seats[row][col] = new Seat(row, col, this, SeatType.ULTIMA);
+          }
+        }else{
+          seats[row][col] = new Seat(row, col, this, SeatType.NORMAL);
+        }
       }
     }
   }
