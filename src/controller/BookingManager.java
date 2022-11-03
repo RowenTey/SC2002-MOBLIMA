@@ -311,8 +311,8 @@ public class BookingManager {
    * 
    * @return {@link Seat} selected
    */
-  protected static Seat promptSeat(Showtime showtime) {
-    ShowtimeManager.displayShowtimeLayout(showtime);
+  protected static Seat promptSeat(Showtime showtime, ArrayList<Seat> seat) {
+    ShowtimeManager.displayShowtimeLayout(showtime, seat);
     String position;
     int row = 0;
     int col = 0;
@@ -344,7 +344,7 @@ public class BookingManager {
 
     do {
       do {
-        newSeat = promptSeat(showtime);
+        newSeat = promptSeat(showtime, seatList);
         if (newSeat.getBooked()) {
           System.out.println("The selected seat is booked!!");
         }
