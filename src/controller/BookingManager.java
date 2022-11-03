@@ -83,17 +83,17 @@ public class BookingManager {
     adjustedPrice *= multiplier;
 
     // extra price for special seats
-    if(seat.getSeatType() == SeatType.ULTIMA){
+    if (seat.getSeatType() == SeatType.ULTIMA) {
       adjustedPrice += 2;
-    }else if(seat.getSeatType() == SeatType.ELITE){
+    } else if (seat.getSeatType() == SeatType.ELITE) {
       adjustedPrice += 3;
-    }else if(seat.getSeatType() == SeatType.COUPLE){
+    } else if (seat.getSeatType() == SeatType.COUPLE) {
       adjustedPrice += 4;
     }
 
     // extra $5 for platinum cinema
     if (cinema.getIsPlatinum()) {
-      adjustedPrice += 5; 
+      adjustedPrice += 5;
     }
 
     return adjustedPrice;
@@ -112,7 +112,7 @@ public class BookingManager {
   public static Ticket createBookingTicket(Showtime showtime, ArrayList<Seat> seat, MovieGoer movieGoer) {
     double total = 0;
     double individualPrice;
-    for(int i=0; i<seat.size(); i++){
+    for (int i = 0; i < seat.size(); i++) {
       individualPrice = computePrice(showtime.getMovie().getPrice(), showtime.getCinema(), seat.get(i), movieGoer);
       total += individualPrice;
     }
@@ -144,12 +144,13 @@ public class BookingManager {
 
   /**
    * Gets the list of seats in string
+   * 
    * @param ticket made by the buyer
    * @return list of seats in string
    */
-  protected static String getAllSeatsInString(Ticket ticket){
+  protected static String getAllSeatsInString(Ticket ticket) {
     String res = "";
-    for(int i=0; i<ticket.getSeat().size(); i++){
+    for (int i = 0; i < ticket.getSeat().size(); i++) {
       res += ticket.getSeat().get(i).getPosition();
       res += " ";
     }
@@ -158,12 +159,13 @@ public class BookingManager {
 
   /**
    * Gets the list of type of seats in string
+   * 
    * @param ticket made by the buyer
    * @return list of type of seats in string
    */
-  protected static String getAllSeatsTypeInString(Ticket ticket){
+  protected static String getAllSeatsTypeInString(Ticket ticket) {
     String res = "";
-    for(int i=0; i<ticket.getSeat().size(); i++){
+    for (int i = 0; i < ticket.getSeat().size(); i++) {
       res += ticket.getSeat().get(i).getSeatType().getLabel();
       res += " ";
     }
@@ -183,17 +185,22 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Name", movieGoer.getName()));
     System.out.println(String.format("%-25s: +65-%s", "Mobile Number", movieGoer.getMobile()));
     System.out.println(String.format("%-25s: %s", "Email", movieGoer.getEmail()));
-    System.out.println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().get(0).getShowtime().getTime()));
+    System.out
+        .println(String.format("%-25s: %s", "Time", booking.getTicket().getSeat().get(0).getShowtime().getTime()));
     System.out.println(String.format("%-25s: %s", "Ticket Type", movieGoer.getAgeGroup().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getShowtime().getMovie().getTitle()));
-    System.out.println(String.format("%-25s: %s", "Movie Type", booking.getTicket().getShowtime().getMovie().getType().getLabel()));
-    System.out.println(String.format("%-25s: %s", "Cinema", booking.getTicket().getShowtime().getCinema().getCinemaCode()));
+    System.out
+        .println(String.format("%-25s: %s", "Movie Title", booking.getTicket().getShowtime().getMovie().getTitle()));
+    System.out.println(
+        String.format("%-25s: %s", "Movie Type", booking.getTicket().getShowtime().getMovie().getType().getLabel()));
+    System.out
+        .println(String.format("%-25s: %s", "Cinema", booking.getTicket().getShowtime().getCinema().getCinemaCode()));
     System.out.println(String.format("%-25s: %s", "Cinema Type",
         booking.getTicket().getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
     System.out.println(
         String.format("%-25s: %s", "Location", booking.getTicket().getShowtime().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(booking.getTicket())));
-    System.out.println(String.format("%-25s: %s", "Seat Type", BookingManager.getAllSeatsTypeInString(booking.getTicket())));
+    System.out
+        .println(String.format("%-25s: %s", "Seat Type", BookingManager.getAllSeatsTypeInString(booking.getTicket())));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(booking.getTicket().getPrice())));
     System.out
         .println(String.format("%-25s: %s", "Status", booking.getTicket().getIsPaid() ? "Paid" : "Ready for Payment"));
@@ -219,8 +226,10 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Movie Type", ticket.getShowtime().getMovie().getType()));
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getShowtime().getCinema().getCinemaCode()));
     System.out.println(
-        String.format("%-25s: %s", "Cinema Type", ticket.getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
-    System.out.println(String.format("%-25s: %s", "Location", ticket.getShowtime().getCinema().getCineplex().getLabel()));
+        String.format("%-25s: %s", "Cinema Type",
+            ticket.getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+    System.out
+        .println(String.format("%-25s: %s", "Location", ticket.getShowtime().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(ticket)));
     System.out.println(String.format("%-25s: %s", "Seat Type", BookingManager.getAllSeatsTypeInString(ticket)));
     System.out.println(String.format("%-25s: $%s", "Price", Helper.df2.format(ticket.getPrice())));
@@ -297,11 +306,12 @@ public class BookingManager {
 
   /**
    * Prompts user for {@link Seat} details
+   * 
    * @param showtime
    * 
    * @return {@link Seat} selected
    */
-  protected static Seat promptSeat(Showtime showtime){
+  protected static Seat promptSeat(Showtime showtime) {
     ShowtimeManager.displayShowtimeLayout(showtime);
     String position;
     int row = 0;
@@ -317,8 +327,8 @@ public class BookingManager {
       System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14 || row == -1 || col > 17);
 
-    showtime.getSeatAt(row+1, col).setPosition(position);
-    return showtime.getSeatAt(row+1, col);
+    showtime.getSeatAt(row + 1, col).setPosition(position);
+    return showtime.getSeatAt(row + 1, col);
   }
 
   /**
@@ -332,27 +342,27 @@ public class BookingManager {
     int opt = -1;
     Showtime showtime = ShowtimeManager.getShowtimebyId(showtimeId);
 
-    do{
-      do{
-      newSeat = BookingManager.promptSeat(showtime);
-      if(newSeat.getBooked()){
-        System.out.println("The selected seat is booked!!");
-      }
-      }while(newSeat.getBooked());
+    do {
+      do {
+        newSeat = promptSeat(showtime);
+        if (newSeat.getBooked()) {
+          System.out.println("The selected seat is booked!!");
+        }
+      } while (newSeat.getBooked());
 
-      System.out.println("\n"+newSeat.getSeatType().getLabel()+" Seat " + newSeat.getPosition() + " selected...");
+      System.out.println("\n" + newSeat.getSeatType().getLabel() + " Seat " + newSeat.getPosition() + " selected...");
       seatList.add(newSeat);
       System.out.println("(1) Select another seat");
       System.out.println("(2) Proceed to payment");
-      opt = Helper.readInt(1,2);
-    }while(opt != 2);
+      opt = Helper.readInt(1, 2);
+    } while (opt != 2);
 
-    MovieGoer newMovieGoer = username.equals("") ? BookingManager.promptUserDetails()
+    MovieGoer newMovieGoer = username.equals("") ? promptUserDetails()
         : (MovieGoer) UserManager.getUser(username);
-    
-    Ticket newTicket = BookingManager.createBookingTicket(showtime, seatList, newMovieGoer);
-    BookingManager.printTicketDetails(newTicket, newMovieGoer);
-    
+
+    Ticket newTicket = createBookingTicket(showtime, seatList, newMovieGoer);
+    printTicketDetails(newTicket, newMovieGoer);
+
     System.out.println("(1) Confirm Payment");
     System.out.println("(2) Back");
     System.out.print("Which would you like to do: ");
@@ -361,13 +371,14 @@ public class BookingManager {
     pay = Helper.readInt(1, 2);
     switch (pay) {
       case 1:
-        for(int i=0; i<newTicket.getSeat().size(); i++){
+        for (int i = 0; i < newTicket.getSeat().size(); i++) {
           if (BookingManager.bookSeat(newTicket.getSeat().get(i), showtime)) {
-            System.out.println("\n"+ newTicket.getSeat().get(i).getSeatType().getLabel() + " Seat " + newTicket.getSeat().get(i).getPosition() + " is booked successfully!");
+            System.out.println("\n" + newTicket.getSeat().get(i).getSeatType().getLabel() + " Seat "
+                + newTicket.getSeat().get(i).getPosition() + " is booked successfully!");
           }
         }
-        BookingManager.createBooking(newTicket, newMovieGoer);
-        updateTicketSales(showtime,newTicket);
+        createBooking(newTicket, newMovieGoer);
+        updateTicketSales(showtime, newTicket);
         break;
       case 2:
         System.out.println("Booking failed!");
@@ -389,8 +400,8 @@ public class BookingManager {
    * @return boolean {@code true} when seat is booked
    */
   protected static boolean bookSeat(Seat seat, Showtime showtime) {
-    int row = seat.getRow()+1;
-    int col = seat.getCol()+1;
+    int row = seat.getRow() + 1;
+    int col = seat.getCol() + 1;
     showtime.getSeatAt(row, col).setBooked(true);
     Database.SHOWTIME.put(showtime.getShowtimeId(), showtime);
     Database.saveFileIntoDatabase(FileType.SHOWTIME);
@@ -430,4 +441,3 @@ public class BookingManager {
     BookingManager.findBooking(email);
   }
 }
-

@@ -262,6 +262,7 @@ public class ShowtimeManager {
       }
       System.out.println();
     }
+    System.out.println();
     System.out.println("Note:");
     System.out.println("I1-I4 >> Couple Seat");
     System.out.println("I6-I13 >> Elite Seat");
@@ -462,6 +463,7 @@ public class ShowtimeManager {
     if (movieShowtimes.size() == 0 || movieShowtimes == null) {
       System.out.println("No showtimes available for this movie...");
       Helper.pressAnyKeyToContinue();
+      return;
     } else {
       ShowtimeManager.displayShowtime(movieShowtimes, "movie");
     }
