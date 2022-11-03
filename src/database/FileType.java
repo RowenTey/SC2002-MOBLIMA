@@ -42,7 +42,12 @@ public enum FileType {
   /**
    * File type corresponding to the Holidays file.
    */
-  HOLIDAYS("Holidays");
+  HOLIDAYS("Holidays"),
+
+  /**
+   * File type corresponding to the System file.
+   */
+  SYSTEM("System");
 
   /**
    * A String value for the FileType for retrieving purposes.

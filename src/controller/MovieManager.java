@@ -446,26 +446,29 @@ public class MovieManager {
         }
         return false;
     }
-        /**
+
+    /**
      * Handles Top 5 Movies viewed by MovieGoer
      */
-    public static void handleTop5Movies(){
+    public static void handleTop5Movies() {
         // 0 - default
         // 1 - ticket sales only
         // 2 - rating only
-        // TODO: can help me modify to get this value from database
-        int currentStatus = 0; //get status from database
-        if(currentStatus == 1){
+        int currentStatus = Integer.parseInt(Database.SYSTEM); // get status from database
+        if (currentStatus == 1) {
             MovieManager.printTop5ByTicketSales();
-        }else if(currentStatus == 2){
+        } else if (currentStatus == 2) {
             MovieManager.printTop5ByOverallRating();
-        }else{
+        } else {
             System.out.println("(1) List Top 5 Movies by Ticket Sales");
             System.out.println("(2) List Top 5 Movies by Overall Rating");
-            int opt = Helper.readInt(1,2);
-            if(opt == 1){
+            System.out.println("Which option would you like to select?");
+            int opt = Helper.readInt(1, 2);
+            if (opt == 1) {
+                System.out.println();
                 MovieManager.printTop5ByTicketSales();
-            }else{
+            } else {
+                System.out.println();
                 MovieManager.printTop5ByOverallRating();
             }
         }
@@ -474,7 +477,7 @@ public class MovieManager {
     /**
      * Shows or hides the top 5 movies that are viewable to the moviegoer
      */
-    public static void setViewableTop5(){
+    public static void setViewableTop5() {
         // 0 - default
         // 1 - ticket sales only
         // 2 - rating only
@@ -482,22 +485,25 @@ public class MovieManager {
         System.out.println("(1) Show Top 5 Movies by Ticket Sales only");
         System.out.println("(2) Show Top 5 Movies by Overall Rating only");
         System.out.println("(3) Change back to default");
-        int opt = Helper.readInt(1,3);
-        switch(opt){
+        int opt = Helper.readInt(1, 3);
+        switch (opt) {
             case 1:
-                //change value in database to 1
+                Database.SYSTEM = "1";
+                Database.saveFileIntoDatabase(FileType.SYSTEM);
                 break;
             case 2:
-                //change value in database to 2
+                Database.SYSTEM = "2";
+                Database.saveFileIntoDatabase(FileType.SYSTEM);
                 break;
             case 3:
-                //change value in database to 0
+                Database.SYSTEM = "0";
+                Database.saveFileIntoDatabase(FileType.SYSTEM);
                 break;
             default:
-                //change value in database to 0
+                Database.SYSTEM = "0";
+                Database.saveFileIntoDatabase(FileType.SYSTEM);
                 break;
         }
         System.out.println("System updated!");
     }
 }
-

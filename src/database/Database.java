@@ -68,12 +68,17 @@ public class Database {
   public static HashSet<String> HOLIDAYS = new HashSet<String>();
 
   /**
+   * A bit to contain system settings
+   */
+  public static String SYSTEM = new String();
+
+  /**
    * Number of movies in database
    */
   public static int numOfMovies = 0;
 
   /**
-   * Number of movies in database
+   * Number of showtimes in database
    */
   public static int numOfShowtimes = 0;
 
@@ -103,6 +108,9 @@ public class Database {
     if (!readSerializedObject(FileType.HOLIDAYS)) {
       System.out.println("Read into Holidays failed!");
     }
+    if (!readSerializedObject(FileType.SYSTEM)) {
+      System.out.println("Read into System failed!");
+    }
   }
 
   /**
@@ -126,6 +134,7 @@ public class Database {
     saveFileIntoDatabase(FileType.MOVIES);
     saveFileIntoDatabase(FileType.PRICES);
     saveFileIntoDatabase(FileType.HOLIDAYS);
+    saveFileIntoDatabase(FileType.SYSTEM);
   }
 
   /**
@@ -143,7 +152,7 @@ public class Database {
       FileInputStream fileInputStream = new FileInputStream(filePath);
       ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
       Object object = objectInputStream.readObject();
-      if (!(object instanceof HashMap) && !(object instanceof HashSet)) {
+      if (!(object instanceof HashMap) && !(object instanceof HashSet) && !(object instanceof String)) {
         System.out.println(fileType.fileName);
         objectInputStream.close();
         return false;
@@ -166,6 +175,8 @@ public class Database {
         PRICES = (HashMap<MoviesType, Double>) object;
       } else if (fileType == FileType.HOLIDAYS) {
         HOLIDAYS = (HashSet<String>) object;
+      } else if (fileType == FileType.SYSTEM) {
+        SYSTEM = (String) object;
       }
 
       objectInputStream.close();
@@ -216,6 +227,8 @@ public class Database {
         objectOutputStream.writeObject(PRICES);
       } else if (fileType == FileType.HOLIDAYS) {
         objectOutputStream.writeObject(HOLIDAYS);
+      } else if (fileType == FileType.SYSTEM) {
+        objectOutputStream.writeObject(SYSTEM);
       }
 
       objectOutputStream.close();
@@ -348,6 +361,9 @@ public class Database {
     HOLIDAYS = new HashSet<String>();
     Database.initializeHoliday();
     writeSerializedObject(FileType.HOLIDAYS);
+
+    SYSTEM = new String("0");
+    writeSerializedObject(FileType.SYSTEM);
 
     return true;
   }
