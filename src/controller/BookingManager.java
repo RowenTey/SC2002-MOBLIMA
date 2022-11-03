@@ -327,7 +327,16 @@ public class BookingManager {
       System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14 || row == -1 || col > 17);
 
-    showtime.getSeatAt(row + 1, col).setPosition(position);
+    if(position.equals("I1") || position.equals("I2")){
+      showtime.getSeatAt(9, 1).setPosition("I1");
+      showtime.getSeatAt(9, 2).setPosition("I2");
+    }else if(position.equals("I3") || position.equals("I4")){
+      showtime.getSeatAt(9, 3).setPosition("I3");
+      showtime.getSeatAt(9, 4).setPosition("I4");
+    }else{
+      showtime.getSeatAt(row + 1, col).setPosition(position);
+    }
+    
     return showtime.getSeatAt(row + 1, col);
   }
 
@@ -345,13 +354,28 @@ public class BookingManager {
     do {
       do {
         newSeat = promptSeat(showtime, seatList);
-        if (newSeat.getBooked()) {
-          System.out.println("The selected seat is booked!!");
+        if (newSeat.getBooked() || seatList.contains(newSeat)) {
+          System.out.println("The selected seat is booked or selected!!");
         }
-      } while (newSeat.getBooked());
+      } while (newSeat.getBooked() || seatList.contains(newSeat));
 
-      System.out.println("\n" + newSeat.getSeatType().getLabel() + " Seat " + newSeat.getPosition() + " selected...");
-      seatList.add(newSeat);
+      if(newSeat.getPosition().equals("I1") || newSeat.getPosition().equals("I2")){
+        Seat couple1 = showtime.getSeatAt(9, 1);
+        Seat couple2 = showtime.getSeatAt(9, 2);
+        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & " + couple2.getPosition()  + " selected...");
+        seatList.add(couple1);
+        seatList.add(couple2);
+      }else if(newSeat.getPosition().equals("I3") || newSeat.getPosition().equals("I4")){
+        Seat couple1 = showtime.getSeatAt(9, 3);
+        Seat couple2 = showtime.getSeatAt(9, 4);
+        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & " + couple2.getPosition() + " selected...");
+        seatList.add(couple1);
+        seatList.add(couple2);        
+      }else{
+        System.out.println("\n" + newSeat.getSeatType().getLabel() + " Seat " + newSeat.getPosition() + " selected...");
+        seatList.add(newSeat);
+      }
+
       System.out.println("(1) Select another seat");
       System.out.println("(2) Proceed to payment");
       opt = Helper.readInt(1, 2);

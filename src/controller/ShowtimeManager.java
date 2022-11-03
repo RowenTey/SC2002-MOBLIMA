@@ -242,6 +242,7 @@ public class ShowtimeManager {
    * Display the layout of the specified {@link Showtime}
    * 
    * @param showtime to be displayed
+   * @param seat that is already selected
    */
   protected static void displayShowtimeLayout(Showtime showtime, ArrayList<Seat> seat) {
     System.out.println();
@@ -268,7 +269,7 @@ public class ShowtimeManager {
     }
     System.out.println();
     System.out.println("Note:");
-    System.out.println("I1-I4 >> Couple Seat");
+    System.out.println("I1-I4 >> Couple Seat (I1 & I2 must be booked together, I3 & I4 must be booked together)");
     System.out.println("I6-I13 >> Elite Seat");
     System.out.println("I15-I17 >> Ultima Seat");
     System.out.println();
