@@ -102,9 +102,8 @@ public class BookingManager {
   /**
    * Creates a booking {@link Ticket}
    * 
-   * @param movie     of booking
+   * @param showtime of movie
    * @param seat      of booking
-   * @param cinema    of movie
    * @param movieGoer of the booking
    * 
    * @return {@link Ticket} of the booking
@@ -125,10 +124,8 @@ public class BookingManager {
   /**
    * Creates a new {@link Booking} and stores it to {@link Database}
    *
-   * @param seat       of the booking
    * @param ticket     of the booking
    * @param movieGoer  of the booking
-   * @param movieTitle of the booking
    */
   public static void createBooking(Ticket ticket, MovieGoer movieGoer) {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
@@ -307,9 +304,10 @@ public class BookingManager {
   /**
    * Prompts user for {@link Seat} details
    * 
-   * @param showtime
+   * @param showtime of the movie
+   * @param seat list of {@link Seat}
    * 
-   * @return {@link Seat} selected
+   * @return {@link Seat} that is selected
    */
   protected static Seat promptSeat(Showtime showtime, ArrayList<Seat> seat) {
     ShowtimeManager.displayShowtimeLayout(showtime, seat);
@@ -343,6 +341,7 @@ public class BookingManager {
   /**
    * Prompts user for {@link Booking} details
    * 
+   * @param username of the moviegoer
    * @param showtimeId of showtime
    */
   public static void promptBooking(String showtimeId, String username) {
@@ -417,8 +416,7 @@ public class BookingManager {
   /**
    * Books the seat at that position for that showtime
    * 
-   * @param row      of the seat
-   * @param column   of the seat
+   * @param seat that is selected
    * @param showtime of the booking
    * 
    * @return boolean {@code true} when seat is booked
@@ -436,6 +434,7 @@ public class BookingManager {
    * Updates the ticket sales of {@link Movie}
    * 
    * @param showtime of the movie
+   * @param ticket of the booking
    * 
    * @return boolean {@code true} when ticket sales is updated
    */

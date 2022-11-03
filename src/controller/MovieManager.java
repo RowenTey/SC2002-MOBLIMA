@@ -481,7 +481,6 @@ public class MovieManager {
         // 0 - default
         // 1 - ticket sales only
         // 2 - rating only
-        // TODO can help me change to modify value in database
         System.out.println("(1) Show Top 5 Movies by Ticket Sales only");
         System.out.println("(2) Show Top 5 Movies by Overall Rating only");
         System.out.println("(3) Change back to default");
