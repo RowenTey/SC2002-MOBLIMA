@@ -273,6 +273,10 @@ public class ShowtimeManager {
     System.out.println("I6-I13 >> Elite Seat");
     System.out.println("I15-I17 >> Ultima Seat");
     System.out.println();
+    System.out.println("[X] >> Booked Seat");
+    System.out.println("[O] >> Selected Seat");
+    System.out.println("[ ] >> Empty Seat");
+    System.out.println();
   }
 
   /**
