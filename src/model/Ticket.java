@@ -1,8 +1,7 @@
 package src.model;
 
 import java.io.Serializable;
-
-import src.model.enums.MoviesType;
+import java.util.ArrayList;
 
 /**
  * The class that stores the movie ticket
@@ -19,9 +18,9 @@ public class Ticket implements Serializable {
     protected static final long serialVersionUID = 9L;
 
     /**
-     * Movie title corresponding to ticket bought
+     * Showtime of ticket
      */
-    private String movieTitle;
+    private Showtime showtime;
 
     /**
      * Price of ticket
@@ -29,41 +28,45 @@ public class Ticket implements Serializable {
     private double price;
 
     /**
-     * {@link Seat} of ticket
+     * lis of {@link Seat} of ticket
      */
-    private Seat seat;
-
-    /**
-     * {@link Cinema} of ticket
-     */
-    private Cinema cinema;
+    private ArrayList<Seat> seat;
 
     /**
      * Status of the ticket (paid/ready for payment)
      */
     private boolean isPaid;
 
-    /**
-     * {@link MoviesType} of ticket
-     */
-    private MoviesType movieType;
 
     /**
      * Constructor of Ticket
      *
+     * @param showtime of the ticket
      * @param price      of the ticket
      * @param seat       of ticket
-     * @param cinema     of ticket
-     * @param movieTitle corresponding to ticket bought
-     * @param movieType  of ticket
      */
-    public Ticket(double price, Seat seat, Cinema cinema, String movieTitle, MoviesType movieType) {
+    public Ticket(Showtime showtime,double price, ArrayList<Seat> seat) {
+        setShowtime(showtime);
         setPrice(price);
         setSeat(seat);
-        setCinema(cinema);
-        setMovieTitle(movieTitle);
         setIsPaid(false);
-        setMovieType(movieType);
+    }
+
+    /**
+     * Gets showtime of the ticket
+     * @return {@link Showtime} of the ticket
+     */
+    public Showtime getShowtime(){
+        return this.showtime;
+    }
+
+    /**
+     * Sets the showtime of ticket
+     * 
+     * @param showtime of the ticket
+     */
+    public void setShowtime(Showtime showtime){
+        this.showtime = showtime;
     }
 
     /**
@@ -85,57 +88,21 @@ public class Ticket implements Serializable {
     }
 
     /**
-     * Gets the title of the movie of ticket bought
-     * 
-     * @return movie title corresponding to ticket bought
-     */
-    public String getMovieTitle() {
-        return movieTitle;
-    }
-
-    /**
-     * Sets the movie title of ticket bought
-     * 
-     * @param movieTitle corresponding to ticket bought
-     */
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
-
-    /**
-     * Gets the {@link Seat} of ticket
+     * Gets the list of {@link Seat} of ticket
      *
-     * @return seat of ticket
+     * @return list of seat of ticket
      */
-    public Seat getSeat() {
+    public ArrayList<Seat> getSeat() {
         return seat;
     }
 
     /**
      * Sets the {@link Seat} of ticket
      *
-     * @param seat of ticket
+     * @param seat list of seat of ticket
      */
-    public void setSeat(Seat seat) {
+    public void setSeat(ArrayList<Seat> seat) {
         this.seat = seat;
-    }
-
-    /**
-     * Gets the {@link Cinema} of ticket
-     *
-     * @return cinema of ticket
-     */
-    public Cinema getCinema() {
-        return cinema;
-    }
-
-    /**
-     * Sets the {@link Cinema} of ticket
-     *
-     * @param cinema of ticket
-     */
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
     }
 
     /**
@@ -156,23 +123,4 @@ public class Ticket implements Serializable {
     public void setIsPaid(boolean status) {
         this.isPaid = status;
     }
-
-    /**
-     * Get the {@link MoviesType} of ticket
-     * 
-     * @return movie type of ticket
-     */
-    public String getMovieType() {
-        return movieType.getLabel();
-    }
-
-    /**
-     * Sets the {@link MoviesType} of ticket
-     * 
-     * @param movieType of ticket
-     */
-    public void setMovieType(MoviesType movieType) {
-        this.movieType = movieType;
-    }
-
 }

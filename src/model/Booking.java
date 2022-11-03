@@ -1,6 +1,7 @@
 package src.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * The class that stores a booking
@@ -32,16 +33,23 @@ public class Booking implements Serializable {
     private MovieGoer movieGoer;
 
     /**
+     * list of booked seat
+     */
+    private ArrayList<Seat> seat;
+
+    /**
      * Constructor of Booking
      *
      * @param transactionId of the booking
      * @param ticket        of the booking
      * @param movieGoer     of the booking
+     * @param seat of the booking
      */
-    public Booking(String transactionId, Ticket ticket, MovieGoer movieGoer) {
+    public Booking(String transactionId, Ticket ticket, MovieGoer movieGoer, ArrayList<Seat> seat) {
         setTransactionId(transactionId);
         setTicket(ticket);
         setMovieGoer(movieGoer);
+        setSeat(seat);
     }
 
     /**
@@ -72,6 +80,14 @@ public class Booking implements Serializable {
     }
 
     /**
+     * Sets the {@link Seat} of the booking
+     * @param seat of the booking
+     */
+    public void setSeat(ArrayList<Seat> seat){
+        this.seat = seat;
+    }
+
+    /**
      * Gets the transaction ID of the booking
      *
      * @return transaction ID of the booking
@@ -96,6 +112,15 @@ public class Booking implements Serializable {
      */
     public MovieGoer getMovieGoer() {
         return movieGoer;
+    }
+
+    /**
+     * Gets the list of {@link Seat} of the booking
+     * 
+     * @return list of seats of the booking
+     */
+    public ArrayList<Seat> getSeat(){
+        return this.seat;
     }
     
 }
