@@ -127,5 +127,4 @@ public class CineplexAppView extends MainView {
         UserManager.onSignUp();
         Helper.pressAnyKeyToContinue();
     }
-
 }

@@ -1,6 +1,7 @@
 package src.view;
 
 import src.controller.BookingManager;
+import src.controller.SystemManager;
 import src.helper.Helper;
 
 /**
@@ -42,7 +43,7 @@ public class MovieGoerView extends MainView {
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or List Cineplexes");
         System.out.println("(2) Search or List Movies");
-        System.out.println("(3) List ticket prices");
+        System.out.println("(3) List Ticket Prices");
         System.out.println("(4) View Booking History");
         System.out.println("(5) Exit");
     }
@@ -69,8 +70,10 @@ public class MovieGoerView extends MainView {
                     movieView.viewApp();
                     continue;
                 case 3:
+                    Helper.clearScreen();
                     printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
                             + " > View Ticket Prices");
+                    SystemManager.displayTicketPrices();
                     break;
                 case 4:
                     Helper.clearScreen();
