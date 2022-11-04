@@ -31,7 +31,7 @@ public class ShowtimeView extends MainView {
      */
     public ShowtimeView(String path, String username) {
         super();
-        this.path = path;
+        this.path = path + " > Showtime";
         this.username = username;
     }
 
@@ -40,7 +40,7 @@ public class ShowtimeView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Showtime");
+        printRoute(this.path);
         System.out.println("What would you like to do ?");
         System.out.println("(1) Create Showtime");
         System.out.println("(2) Remove Showtime");
@@ -86,7 +86,7 @@ public class ShowtimeView extends MainView {
                     break;
                 case 4:
                     Helper.clearScreen();
-                    printRoute(this.path + " > Showtime > Showtime Listing");
+                    printRoute(this.path + " > Showtime Listing");
                     ShowtimeManager.displayAllShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;

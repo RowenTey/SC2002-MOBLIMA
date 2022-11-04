@@ -1,6 +1,5 @@
 package src.view;
 
-import src.controller.UserManager;
 import src.helper.Helper;
 
 /**

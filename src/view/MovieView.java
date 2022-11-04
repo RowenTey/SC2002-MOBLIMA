@@ -39,7 +39,7 @@ public class MovieView extends MainView {
      */
     public MovieView(String path, boolean isStaff, String username) {
         super();
-        this.path = path;
+        this.path = path + " > Movie";
         this.isStaff = isStaff;
         this.username = username;
     }
@@ -49,7 +49,7 @@ public class MovieView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Movie");
+        printRoute(this.path);
         System.out.println("What would you like to do ?");
         if (this.isStaff) {
             System.out.println("(1) Add Movie");
@@ -147,36 +147,34 @@ public class MovieView extends MainView {
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Book Movie");
+                        printRoute(this.path + " > Book Movie");
                         if (handleBookMovie()) {
                             ShowtimeView showtimeView = new ShowtimeView(path, this.username);
                             showtimeView.viewApp(MovieManager.selectMovie());
                         }
                         break;
                     case 2:
-                        Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Movie Reviews");
-                        MovieManager.displayExistingMovies();
-                        MovieManager.handleViewPastMovieReviews(this.path + " > Movie");
+                        ReviewView reviewView = new ReviewView(this.path);
+                        reviewView.viewApp();
                         break;
                     case 3:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > NOW SHOWING");
+                        printRoute(this.path + " > NOW SHOWING");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 4:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > PREVIEW");
+                        printRoute(this.path + " > PREVIEW");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 5:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > COMING SOON");
+                        printRoute(this.path + " > COMING SOON");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 6:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Top 5 Movies");
+                        printRoute(this.path + " > Top 5 Movies");
                         MovieManager.handleTop5Movies();
                         break;
                     case 7:
@@ -184,7 +182,7 @@ public class MovieView extends MainView {
                     default:
                         break;
                 }
-                if (choice != 7) {
+                if (choice != 7 && choice != 2) {
                     System.out.println();
                     Helper.pressAnyKeyToContinue();
                 }

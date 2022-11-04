@@ -8,7 +8,6 @@ import src.database.*;
 import src.helper.Helper;
 import src.model.*;
 import src.model.enums.*;
-import src.view.ReviewView;
 
 /**
  * MovieManager is a controller class that acts as a "middleman" between the
@@ -228,17 +227,6 @@ public class MovieManager {
         MovieManager.displayMovieDetails(selectedMovie);
         Helper.pressAnyKeyToContinue();
         return selectedMovie;
-    }
-
-    /**
-     * Handles View Past Movie Reviews
-     * 
-     * @param path of entry
-     */
-    public static void handleViewPastMovieReviews(String path) {
-        Movie selectedMovie = MovieManager.selectMovie();
-        ReviewView reviewView = new ReviewView(selectedMovie, path);
-        reviewView.viewApp();
     }
 
     /**

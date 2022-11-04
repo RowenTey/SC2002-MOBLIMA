@@ -2,7 +2,6 @@ package src.view;
 
 import src.helper.Helper;
 import src.controller.MovieManager;
-import src.model.Movie;
 
 /**
  * Viewing interface for Reviews
@@ -18,20 +17,13 @@ public class ReviewView extends MainView {
     private String path;
 
     /**
-     * {@link Movie} to be reviewed
-     */
-    private Movie movie;
-
-    /**
      * Default contructor for the ReviewView
      * 
-     * @param movie to be reviewed
      * @param path  of entry for ReviewView
      */
-    public ReviewView(Movie movie, String path) {
+    public ReviewView(String path) {
         super();
-        this.movie = movie;
-        this.path = path;
+        this.path = path + " > Review";
     }
 
     /**
@@ -39,11 +31,9 @@ public class ReviewView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Review > " + this.movie.getTitle());
-        System.out.println("What would you like to do ?");
-        System.out.println("(1) View past reviews");
-        System.out.println("(2) Make a review");
-        System.out.println("(3) Exit");
+        printRoute(this.path);
+        MovieManager.displayExistingMovies();
+        System.out.println("("+ (MovieManager.getTotalNumOfMovie()+1) +") Exit");
     }
 
     /**
@@ -53,27 +43,43 @@ public class ReviewView extends MainView {
         int choice = -1;
         do {
             this.printMenu();
-            choice = Helper.readInt(1, 3);
+            choice = Helper.readInt(1, MovieManager.getTotalNumOfMovie()+1);
+            if(choice == MovieManager.getTotalNumOfMovie()+1){
+                break;
+            }else{
+                handleMovieReview(choice);
+            }
+        } while (choice != MovieManager.getTotalNumOfMovie()+1);
+    }
+
+    private void handleMovieReview(int i){
+        int choice = -1;
+        do{
+            Helper.clearScreen();
+            printRoute(path + " > "+ MovieManager.getAllMovieList().get(i-1).getTitle());
+            System.out.println("What would you like to do ?");
+            System.out.println("(1) View past reviews");
+            System.out.println("(2) Make a review");
+            System.out.println("(3) Exit");
+            choice = Helper.readInt(1,3);
             switch (choice) {
                 case 1:
                     System.out.println("\nReviews:");
-                    MovieManager.displayReviews(this.movie);
+                    MovieManager.displayReviews(MovieManager.getAllMovieList().get(i-1));
                     break;
                 case 2:
                     System.out.println("Enter your rating (1.0 - 5.0 [worst - best]):");
                     double rating = Helper.readDouble(1, 5);
                     System.out.println("Enter your review in words:");
                     String review = Helper.readString();
-                    MovieManager.addReview(this.movie, rating, review);
-                    break;
-                case 3:
+                    MovieManager.addReview(MovieManager.getAllMovieList().get(i-1), rating, review);
                     break;
                 default:
                     break;
             }
-            if (choice != 3) {
+            if(choice != 3){
                 Helper.pressAnyKeyToContinue();
             }
-        } while (choice != 3);
+        }while(choice != 3);
     }
 }

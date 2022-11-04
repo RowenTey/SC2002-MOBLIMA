@@ -36,7 +36,7 @@ public class CineplexView extends MainView {
      */
     public CineplexView(String path, boolean isStaff, String username) {
         super();
-        this.path = path;
+        this.path = path + " > Cineplex";
         this.isStaff = isStaff;
         this.username = username;
     }
@@ -47,14 +47,14 @@ public class CineplexView extends MainView {
     public void printMenu() {
         if (this.isStaff) {
             Helper.clearScreen();
-            printRoute(this.path + " > Cineplex");
+            printRoute(this.path);
             System.out.println("Which would you like to do ?");
             System.out.println("(1) Add Cineplex");
             System.out.println("(2) Remove Cineplex");
             System.out.println("(3) Exit");
         } else {
             Helper.clearScreen();
-            printRoute(this.path + " > Cineplex");
+            printRoute(this.path);
             if (CineplexManager.getTotalNumOfCineplex() == 0) {
                 System.out.println("We don't have any Cineplex at this time");
                 System.out.println("(1) Exit");
@@ -81,12 +81,12 @@ public class CineplexView extends MainView {
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Cineplex > Add New Cineplex");
+                        printRoute(this.path + " > Add New Cineplex");
                         handleAddCineplex();
                         break;
                     case 2:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Cineplex > Remove Cineplex");
+                        printRoute(this.path + " > Remove Cineplex");
                         handleRemoveCineplex();
                         break;
                     case 3:
