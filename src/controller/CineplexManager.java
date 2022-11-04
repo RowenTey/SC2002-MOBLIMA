@@ -86,7 +86,7 @@ public class CineplexManager {
     /**
      * Handles the removal of {@link Cineplex} from {@link Database}.
      */
-    public static void removeCineplex() {
+    public static void handleRemoveCineplex() {
         int opt = -1;
         if (CineplexManager.getTotalNumOfCineplex() == 0) {
             System.out.println("No cineplex found!");
@@ -205,5 +205,17 @@ public class CineplexManager {
                             + (selectedCineplex.getCinemaList().get(i).getIsPlatinum() ? "Platinum" : "Normal")
                             + ")");
         }
+    }
+
+    /**
+     * Handles addition of cineplex
+     */
+    public static void handleAddCineplex(){
+        int opt = -1;
+        opt = CineplexManager.promptLocation();
+        if (opt == -1) {
+            return;
+        }
+        CineplexManager.addCineplex(opt);
     }
 }
