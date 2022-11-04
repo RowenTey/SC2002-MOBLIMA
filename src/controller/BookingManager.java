@@ -452,19 +452,16 @@ public class BookingManager {
   }
 
   /**
-   * Handles {@link Booking} checking
+   * Gets email from {@link Database}
    * 
-   * @param username of current user
+   * @param username of the moviegoer
+   * @return email of the moviegoer
    */
-  public static void handleCheckBooking(String username) {
-    String email;
-    if (username.equals("")) {
-      System.out.print("Enter your email: ");
-      email = Helper.readString();
-    } else {
-      MovieGoer currentUser = (MovieGoer) UserManager.getUser(username);
-      email = currentUser.getEmail();
-    }
-    BookingManager.findBooking(email);
+  public static String getEmailByUsername(String username){
+    MovieGoer currentUser = (MovieGoer) UserManager.getUser(username);
+    String email = currentUser.getEmail();
+
+    return email;
   }
+
 }

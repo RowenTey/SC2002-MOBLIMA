@@ -79,7 +79,7 @@ public class MovieGoerView extends MainView {
                     Helper.clearScreen();
                     printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
                             + " > View Booking History");
-                    BookingManager.handleCheckBooking(this.username);
+                    handleCheckBooking(this.username);
                     break;
                 case 5:
                     break;
@@ -91,5 +91,21 @@ public class MovieGoerView extends MainView {
                 Helper.pressAnyKeyToContinue();
             }
         } while (choice != 5);
+    }
+
+    /**
+     * Handles {@link Booking} checking
+     * 
+     * @param username of current user
+     */
+    private void handleCheckBooking(String username) {
+        String email;
+        if (username.equals("")) {
+            System.out.print("Enter your email: ");
+            email = Helper.readString();
+        } else {
+            email = BookingManager.getEmailByUsername(username);
+        }
+        BookingManager.findBooking(email);
     }
 }

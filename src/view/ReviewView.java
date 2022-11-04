@@ -76,8 +76,4 @@ public class ReviewView extends MainView {
             }
         } while (choice != 3);
     }
-
-    public static void printSomething(){
-        System.out.println("Hello");
-    }
 }

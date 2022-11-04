@@ -82,12 +82,12 @@ public class CineplexView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Add New Cineplex");
-                        CineplexManager.handleAddCineplex();
+                        handleAddCineplex();
                         break;
                     case 2:
                         Helper.clearScreen();
                         printRoute(this.path + " > Cineplex > Remove Cineplex");
-                        CineplexManager.handleRemoveCineplex();
+                        handleRemoveCineplex();
                         break;
                     case 3:
                         break;
@@ -113,6 +113,36 @@ public class CineplexView extends MainView {
                     showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
                 }
             } while (choice != (numOfCineplex + 1));
+        }
+    }
+
+    /**
+     * Handles addition of {@link Cineplex}
+     */
+    private void handleAddCineplex(){
+        int opt = -1;
+        opt = CineplexManager.promptLocation();
+        if (opt == -1) {
+            return;
+        }
+        CineplexManager.addCineplex(opt);
+    }
+
+    /**
+     * Handles the removal of {@link Cineplex}.
+     */
+    private void handleRemoveCineplex() {
+        int opt = -1;
+        if (CineplexManager.getTotalNumOfCineplex() == 0) {
+            System.out.println("No cineplex found!");
+        } else {
+            System.out.println("Which cineplex do you want to remove ?");
+            CineplexManager.displayExistingCineplex();
+            System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
+            opt = Helper.readInt(1, CineplexManager.getTotalNumOfCineplex() + 1);
+            if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
+                CineplexManager.removeCineplex(opt);
+            }
         }
     }
 }
