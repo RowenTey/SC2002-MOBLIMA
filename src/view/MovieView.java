@@ -83,7 +83,7 @@ public class MovieView extends MainView {
                     case 1:
                         Helper.clearScreen();
                         printRoute(this.path + " > Movie > Add Movie");
-                        MovieManager.handleAddMovie();
+                        MovieManager.onAddMovie();
                         break;
                     case 2:
                         Helper.clearScreen();

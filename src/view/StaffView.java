@@ -36,7 +36,7 @@ public class StaffView extends MainView {
         System.out.println("(1) Manage Cineplex");
         System.out.println("(2) Manage Movies");
         System.out.println("(3) Manage Showtimes");
-        System.out.println("(4) Configure System Settings");
+        System.out.println("(4) Configure Database & System Settings");
         System.out.println("(5) Exit");
     }
 

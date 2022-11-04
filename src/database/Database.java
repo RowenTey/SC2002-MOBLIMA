@@ -28,37 +28,37 @@ import java.io.ObjectOutputStream;
  */
 public class Database {
   /**
-   * The folder name to contain .dat files.
+   * The folder name to contain .dat files
    */
   private static final String folder = "data";
 
   /**
-   * HashMap to contain {@link User} objects.
+   * HashMap to contain {@link User} objects
    */
   public static HashMap<String, User> USERS = new HashMap<String, User>();
 
   /**
-   * HashMap to contain {@link Booking} objects.
+   * HashMap to contain {@link Booking} objects
    */
   public static HashMap<String, Booking> BOOKINGS = new HashMap<String, Booking>();
 
   /**
-   * HashMap to contain {@link Cineplex} objects.
+   * HashMap to contain {@link Cineplex} objects
    */
   public static HashMap<String, Cineplex> CINEPLEX = new HashMap<String, Cineplex>();
 
   /**
-   * HashMap to contain {@link Showtime} objects.
+   * HashMap to contain {@link Showtime} objects
    */
   public static HashMap<String, Showtime> SHOWTIME = new HashMap<String, Showtime>();
 
   /**
-   * HashMap to contain {@link Movie} objects.
+   * HashMap to contain {@link Movie} objects
    */
   public static HashMap<String, Movie> MOVIES = new HashMap<String, Movie>();
 
   /**
-   * HashMap to contain movie prices according to type.
+   * HashMap to contain movie prices according to type
    */
   public static HashMap<MoviesType, Double> PRICES = new HashMap<MoviesType, Double>();
 

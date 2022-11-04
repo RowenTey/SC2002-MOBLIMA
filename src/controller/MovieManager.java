@@ -375,7 +375,7 @@ public class MovieManager {
     /**
      * Handles the addition of {@link Movie}
      */
-    public static void handleAddMovie() {
+    public static void onAddMovie() {
         System.out.println("Enter movie title: ");
         String title = Helper.readString();
 
@@ -475,7 +475,7 @@ public class MovieManager {
     }
 
     /**
-     * Shows or hides the top 5 movies that are viewable to the moviegoer
+     * Shows or hides the top 5 movies that are viewable to the movie goer
      */
     public static void setViewableTop5() {
         // 0 - default
