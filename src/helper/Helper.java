@@ -351,6 +351,22 @@ public class Helper {
   }
 
   /**
+   * Method to check if the time is at night
+   * 
+   * @param dateToCheck Date to check in String
+   * @return {@code true} if the time is at night. Otherwise,
+   *         {@code false}.
+   */
+  public static boolean checkIsTimeNight(String dateToCheck) {
+    System.out.println(dateToCheck.substring(11, 13));
+    int time = Integer.parseInt(dateToCheck.substring(11, 13));
+    if (time >= 19 && time <= 23) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Method to pause the application and prompt user to press the ENTER key to
    * continue using the app.
    */

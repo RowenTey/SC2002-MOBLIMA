@@ -76,6 +76,8 @@ public class BookingManager {
     String formattedDate = seat.getShowtime().getTime().substring(0, 10);
     if (Database.HOLIDAYS.contains(formattedDate) || Helper.checkIsDateWeekend(seat.getShowtime().getTime())) {
       multiplier *= 1.3; // 30% surcharge for holiday or weekend
+    } else if (Helper.checkIsTimeNight(seat.getShowtime().getTime())) {
+      multiplier *= 1.15; // 15% surcharge for night time
     }
 
     // include GST
@@ -102,7 +104,7 @@ public class BookingManager {
   /**
    * Creates a booking {@link Ticket}
    * 
-   * @param showtime of movie
+   * @param showtime  of movie
    * @param seat      of booking
    * @param movieGoer of the booking
    * 
@@ -124,8 +126,8 @@ public class BookingManager {
   /**
    * Creates a new {@link Booking} and stores it to {@link Database}
    *
-   * @param ticket     of the booking
-   * @param movieGoer  of the booking
+   * @param ticket    of the booking
+   * @param movieGoer of the booking
    */
   public static void createBooking(Ticket ticket, MovieGoer movieGoer) {
     ArrayList<Booking> bookingList = BookingManager.getBookingList();
@@ -305,7 +307,7 @@ public class BookingManager {
    * Prompts user for {@link Seat} details
    * 
    * @param showtime of the movie
-   * @param seat list of {@link Seat}
+   * @param seat     list of {@link Seat}
    * 
    * @return {@link Seat} that is selected
    */
@@ -325,23 +327,23 @@ public class BookingManager {
       System.out.println("\nInvalid row and column!");
     } while (row == 3 || row == 7 || col == 5 || col == 14 || row == -1 || col > 17);
 
-    if(position.equals("I1") || position.equals("I2")){
+    if (position.equals("I1") || position.equals("I2")) {
       showtime.getSeatAt(9, 1).setPosition("I1");
       showtime.getSeatAt(9, 2).setPosition("I2");
-    }else if(position.equals("I3") || position.equals("I4")){
+    } else if (position.equals("I3") || position.equals("I4")) {
       showtime.getSeatAt(9, 3).setPosition("I3");
       showtime.getSeatAt(9, 4).setPosition("I4");
-    }else{
+    } else {
       showtime.getSeatAt(row + 1, col).setPosition(position);
     }
-    
+
     return showtime.getSeatAt(row + 1, col);
   }
 
   /**
    * Prompts user for {@link Booking} details
    * 
-   * @param username of the moviegoer
+   * @param username   of the moviegoer
    * @param showtimeId of showtime
    */
   public static void promptBooking(String showtimeId, String username) {
@@ -358,19 +360,21 @@ public class BookingManager {
         }
       } while (newSeat.getBooked() || seatList.contains(newSeat));
 
-      if(newSeat.getPosition().equals("I1") || newSeat.getPosition().equals("I2")){
+      if (newSeat.getPosition().equals("I1") || newSeat.getPosition().equals("I2")) {
         Seat couple1 = showtime.getSeatAt(9, 1);
         Seat couple2 = showtime.getSeatAt(9, 2);
-        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & " + couple2.getPosition()  + " selected...");
+        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & "
+            + couple2.getPosition() + " selected...");
         seatList.add(couple1);
         seatList.add(couple2);
-      }else if(newSeat.getPosition().equals("I3") || newSeat.getPosition().equals("I4")){
+      } else if (newSeat.getPosition().equals("I3") || newSeat.getPosition().equals("I4")) {
         Seat couple1 = showtime.getSeatAt(9, 3);
         Seat couple2 = showtime.getSeatAt(9, 4);
-        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & " + couple2.getPosition() + " selected...");
+        System.out.println("\n" + couple1.getSeatType().getLabel() + " Seat " + couple1.getPosition() + " & "
+            + couple2.getPosition() + " selected...");
         seatList.add(couple1);
-        seatList.add(couple2);        
-      }else{
+        seatList.add(couple2);
+      } else {
         System.out.println("\n" + newSeat.getSeatType().getLabel() + " Seat " + newSeat.getPosition() + " selected...");
         seatList.add(newSeat);
       }
@@ -416,7 +420,7 @@ public class BookingManager {
   /**
    * Books the seat at that position for that showtime
    * 
-   * @param seat that is selected
+   * @param seat     that is selected
    * @param showtime of the booking
    * 
    * @return boolean {@code true} when seat is booked
@@ -434,7 +438,7 @@ public class BookingManager {
    * Updates the ticket sales of {@link Movie}
    * 
    * @param showtime of the movie
-   * @param ticket of the booking
+   * @param ticket   of the booking
    * 
    * @return boolean {@code true} when ticket sales is updated
    */

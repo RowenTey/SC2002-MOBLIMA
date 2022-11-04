@@ -51,7 +51,7 @@ public class SystemManager {
    * @return {@code true} if ticket price was updated, {@code false} otherwise
    */
   public static boolean updateTicketPrices() {
-    displayTicketPrices();
+    displayTicketPricesStaff();
     ArrayList<MoviesType> ticketTypes = getTicketTypes();
     int opt = -1;
 
@@ -119,15 +119,42 @@ public class SystemManager {
   }
 
   /**
-   * Display current ticket prices
+   * Display current ticket prices for staff to manage
    */
-  protected static void displayTicketPrices() {
+  protected static void displayTicketPricesStaff() {
     System.out.println("List of Current Ticket Prices");
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
     for (Map.Entry<MoviesType, Double> currentTicketType : Database.PRICES.entrySet()) {
       System.out.println(String.format("%-30s: %s", currentTicketType.getKey(),
           Helper.df2.format(currentTicketType.getValue())));
     }
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+  }
+
+  /**
+   * Display usual ticket prices to movie goer
+   */
+  public static void displayTicketPrices() {
+    double price = Database.PRICES.get(MoviesType.TWO_D);
+
+    System.out.println("List of Normal Ticket Prices Inclusive of GST (Non-Blockbuster and Non-3D)");
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    System.out.println(String.format("%-30s: %s", "Monday-Friday before 7pm",
+        "$" + Helper.df2.format(price * 1.07)));
+    System.out.println(String.format("%-30s: %s", "Monday-Friday after 7pm",
+        "$" + Helper.df2.format(price * 1.15 * 1.07)));
+    System.out.println(String.format("%-30s: %s", "Weekends & Public Holidays",
+        "$" + Helper.df2.format(price * 1.3 * 1.07)));
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+
+    System.out.println();
+
+    System.out.println("*Special Note");
+    System.out.println(String.format("%-40s", "").replace(" ", "-"));
+    System.out.println(String.format("%-30s: %s", "Children & Senior Citizens",
+        "50% of all sessions"));
+    System.out.println(String.format("%-30s: %s", "Platinum Cinemas",
+        "Addtional charge of SGD5"));
     System.out.println(String.format("%-40s", "").replace(" ", "-"));
   }
 }
