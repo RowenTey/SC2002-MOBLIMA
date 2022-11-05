@@ -1,6 +1,8 @@
 package src.view;
 
+import src.controller.MovieManager;
 import src.controller.ShowtimeManager;
+import src.database.Database;
 import src.helper.Helper;
 import src.model.Cineplex;
 import src.model.Movie;
@@ -14,25 +16,10 @@ import src.model.Movie;
  */
 public class ShowtimeView extends MainView {
     /**
-     * Path of entry for ShowtimeView
+     * Default contructor for the ShowtimeView
      */
-    public String path;
-
-    /**
-     * Name of current user
-     */
-    private String username;
-
-    /**
-     * Overrided contructor for the ShowtimeView
-     * 
-     * @param path     of entry for StaffView
-     * @param username of current user
-     */
-    public ShowtimeView(String path, String username) {
+    public ShowtimeView() {
         super();
-        this.path = path;
-        this.username = username;
     }
 
     /**
@@ -40,7 +27,7 @@ public class ShowtimeView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Showtime");
+        printRoute(Database.path);
         System.out.println("What would you like to do ?");
         System.out.println("(1) Create Showtime");
         System.out.println("(2) Remove Showtime");
@@ -60,13 +47,13 @@ public class ShowtimeView extends MainView {
             switch (choice) {
                 case 1:
                     Helper.clearScreen();
-                    printRoute(path + " > Create Showtime");
+                    printRoute(Database.path + " > Create Showtime");
                     handleCreateShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
                 case 2:
                     Helper.clearScreen();
-                    printRoute(path + " > Remove Showtime");
+                    printRoute(Database.path + " > Remove Showtime");
                     if (ShowtimeManager.removeShowtime()) {
                         System.out.println("\nRemoved showtime successfully!");
                     } else {
@@ -76,7 +63,7 @@ public class ShowtimeView extends MainView {
                     break;
                 case 3:
                     Helper.clearScreen();
-                    printRoute(path + " > Update Showtime");
+                    printRoute(Database.path + " > Update Showtime");
                     if (ShowtimeManager.updateShowtime()) {
                         System.out.println("Showtime successfully updated!");
                     } else {
@@ -86,7 +73,7 @@ public class ShowtimeView extends MainView {
                     break;
                 case 4:
                     Helper.clearScreen();
-                    printRoute(this.path + " > Showtime > Showtime Listing");
+                    printRoute(Database.path + " > Showtime Listing");
                     ShowtimeManager.displayAllShowtime();
                     Helper.pressAnyKeyToContinue();
                     break;
@@ -99,26 +86,15 @@ public class ShowtimeView extends MainView {
     }
 
     /**
-     * Overrided View App - from movie view (MovieGoer)
+     * Overrided View App - from movie view / cineplex view (MovieGoer)
      * 
-     * @param movie to select showtime from
+     * @param objId of movie/cineplex to select showtime from
+     * @param from  path method was called from
      */
-    protected void viewApp(Movie movie) {
+    protected void viewApp(String objId, String from) {
         Helper.clearScreen();
-        printRoute(path + " > " + movie.getTitle());
-        ShowtimeManager.handleShowtimeSelection(movie, this.username);
-        return;
-    }
-
-    /**
-     * Overrided View App - from cineplex view (MovieGoer)
-     * 
-     * @param cineplex to select showtime from
-     */
-    protected void viewApp(Cineplex cineplex) {
-        Helper.clearScreen();
-        printRoute(path + " > " + cineplex.getLocation());
-        ShowtimeManager.handleShowtimeSelection(cineplex, this.username);
+        printRoute(Database.path);
+        ShowtimeManager.onShowtimeSelection(objId, from);
         return;
     }
 

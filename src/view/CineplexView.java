@@ -1,6 +1,7 @@
 package src.view;
 
 import src.controller.CineplexManager;
+import src.database.Database;
 import src.helper.Helper;
 
 /**
@@ -12,21 +13,6 @@ import src.helper.Helper;
  */
 public class CineplexView extends MainView {
     /**
-     * Path of entry for cineplex view
-     */
-    private String path;
-
-    /**
-     * boolean {@code true} if current user is staff, {@code false} otherwise
-     */
-    private boolean isStaff;
-
-    /**
-     * Name of current user
-     */
-    private String username;
-
-    /**
      * Default contructor for the CineplexView
      * 
      * @param path     of entry for CineplexView
@@ -34,27 +20,22 @@ public class CineplexView extends MainView {
      * @param username of current user
      * 
      */
-    public CineplexView(String path, boolean isStaff, String username) {
+    public CineplexView() {
         super();
-        this.path = path;
-        this.isStaff = isStaff;
-        this.username = username;
     }
 
     /**
      * View Menu of the CineplexView
      */
     public void printMenu() {
-        if (this.isStaff) {
-            Helper.clearScreen();
-            printRoute(this.path + " > Cineplex");
+        Helper.clearScreen();
+        printRoute(Database.path);
+        if (Database.isStaff) {
             System.out.println("Which would you like to do ?");
             System.out.println("(1) Add Cineplex");
             System.out.println("(2) Remove Cineplex");
             System.out.println("(3) Exit");
         } else {
-            Helper.clearScreen();
-            printRoute(this.path + " > Cineplex");
             if (CineplexManager.getTotalNumOfCineplex() == 0) {
                 System.out.println("We don't have any Cineplex at this time");
                 System.out.println("(1) Exit");
@@ -73,7 +54,8 @@ public class CineplexView extends MainView {
     public void viewApp() {
         int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
-        if (this.isStaff) {
+        String toRestore = Database.path;
+        if (Database.isStaff) {
             do {
                 this.printMenu();
                 numOfCineplex = CineplexManager.getTotalNumOfCineplex();
@@ -81,13 +63,13 @@ public class CineplexView extends MainView {
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Cineplex > Add New Cineplex");
-                        CineplexManager.handleAddCineplex();
+                        printRoute(Database.path + " > Add New Cineplex");
+                        handleAddCineplex();
                         break;
                     case 2:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Cineplex > Remove Cineplex");
-                        CineplexManager.handleRemoveCineplex();
+                        printRoute(Database.path + " > Remove Cineplex");
+                        handleRemoveCineplex();
                         break;
                     case 3:
                         break;
@@ -109,10 +91,43 @@ public class CineplexView extends MainView {
                     System.out.println(
                             "\n" + CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Showtimes", this.username);
-                    showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
+                    String selectedCineplexId = CineplexManager.getCineplexList().get(choice - 1).getCineplexId();
+                    Database.path = Database.path + " > "
+                            + CineplexManager.getCineplexById(selectedCineplexId).getLocationStr();
+                    CineplexAppView.showtimeView.viewApp(selectedCineplexId, "cineplex");
+                    Database.path = toRestore;
                 }
             } while (choice != (numOfCineplex + 1));
+        }
+    }
+
+    /**
+     * Handles addition of {@link Cineplex}
+     */
+    private void handleAddCineplex() {
+        int opt = -1;
+        opt = CineplexManager.promptLocation();
+        if (opt == -1) {
+            return;
+        }
+        CineplexManager.addCineplex(opt);
+    }
+
+    /**
+     * Handles the removal of {@link Cineplex}.
+     */
+    private void handleRemoveCineplex() {
+        int opt = -1;
+        if (CineplexManager.getTotalNumOfCineplex() == 0) {
+            System.out.println("No cineplex found!");
+        } else {
+            System.out.println("Which cineplex do you want to remove ?");
+            CineplexManager.displayExistingCineplex();
+            System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
+            opt = Helper.readInt(1, CineplexManager.getTotalNumOfCineplex() + 1);
+            if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
+                CineplexManager.removeCineplex(opt);
+            }
         }
     }
 }

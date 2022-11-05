@@ -43,6 +43,19 @@ public class CineplexManager {
     }
 
     /**
+     * Retrives the {@link Cineplex} by it's ID
+     * 
+     * @param cineplexId of cineplex
+     * @return cineplex object corresponding to that ID
+     */
+    public static Cineplex getCineplexById(String cineplexId) {
+        if (Database.CINEPLEX.containsKey(cineplexId)) {
+            return Database.CINEPLEX.get(cineplexId);
+        }
+        return null;
+    }
+
+    /**
      * Prints the complete details of the {@link Cineplex}.
      * 
      * @param cineplex to be printed.
@@ -84,25 +97,14 @@ public class CineplexManager {
     }
 
     /**
-     * Handles the removal of {@link Cineplex} from {@link Database}.
+     * Removes a {@link Cineplex} from {@link Database}
      */
-    public static void handleRemoveCineplex() {
-        int opt = -1;
-        if (CineplexManager.getTotalNumOfCineplex() == 0) {
-            System.out.println("No cineplex found!");
-        } else {
-            System.out.println("Which cineplex do you want to remove ?");
-            CineplexManager.displayExistingCineplex();
-            System.out.println("(" + (CineplexManager.getTotalNumOfCineplex() + 1) + ") Exit");
-            opt = Helper.readInt(1, CineplexManager.getTotalNumOfCineplex() + 1);
-            if (opt != CineplexManager.getTotalNumOfCineplex() + 1) {
-                Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
-                Database.CINEPLEX.remove(old.getCineplexId());
-                ShowtimeManager.removeShowtimeByCineplex(old);
-                Database.saveFileIntoDatabase(FileType.CINEPLEX);
-                System.out.println("Removed cineplex!");
-            }
-        }
+    public static void removeCineplex(int opt) {
+        Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
+        Database.CINEPLEX.remove(old.getCineplexId());
+        ShowtimeManager.removeShowtimeByCineplex(old);
+        Database.saveFileIntoDatabase(FileType.CINEPLEX);
+        System.out.println("Removed cineplex!");
     }
 
     /**
@@ -207,15 +209,4 @@ public class CineplexManager {
         }
     }
 
-    /**
-     * Handles addition of cineplex
-     */
-    public static void handleAddCineplex(){
-        int opt = -1;
-        opt = CineplexManager.promptLocation();
-        if (opt == -1) {
-            return;
-        }
-        CineplexManager.addCineplex(opt);
-    }
 }

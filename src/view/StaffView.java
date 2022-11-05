@@ -1,6 +1,6 @@
 package src.view;
 
-import src.controller.UserManager;
+import src.database.Database;
 import src.helper.Helper;
 
 /**
@@ -12,18 +12,10 @@ import src.helper.Helper;
  */
 public class StaffView extends MainView {
     /**
-     * Path of entry for StaffView
+     * Default contructor for the StaffView
      */
-    public String path;
-
-    /**
-     * Overrided contructor for the StaffView
-     * 
-     * @param path of entry for StaffView
-     */
-    public StaffView(String path) {
+    public StaffView() {
         super();
-        this.path = path;
     }
 
     /**
@@ -31,7 +23,7 @@ public class StaffView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > Staff");
+        printRoute(Database.path);
         System.out.println("What would you like to do?");
         System.out.println("(1) Manage Cineplex");
         System.out.println("(2) Manage Movies");
@@ -45,25 +37,28 @@ public class StaffView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
+        String toRestore = Database.path;
         do {
             this.printMenu();
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView(this.path + " > Staff", true, "");
-                    cineplexView.viewApp();
+                    Database.path = Database.path + " > Manage Cineplex";
+                    CineplexAppView.cineplexView.viewApp();
+                    Database.path = toRestore;
                     continue;
                 case 2:
-                    MovieView movieView = new MovieView(this.path + " > Staff", true, "");
-                    movieView.viewApp();
+                    Database.path = Database.path + " > Manage Movies";
+                    CineplexAppView.movieView.viewApp();
+                    Database.path = toRestore;
                     continue;
                 case 3:
-                    ShowtimeView showtimeView = new ShowtimeView(this.path + " > Staff", "");
-                    showtimeView.viewApp();
+                    Database.path = Database.path + " > Manage Showtimes";
+                    CineplexAppView.showtimeView.viewApp();
+                    Database.path = toRestore;
                     continue;
                 case 4:
-                    DatabaseView databaseView = new DatabaseView();
-                    databaseView.viewApp();
+                    CineplexAppView.databaseView.viewApp();
                     continue;
                 case 5:
                     break;

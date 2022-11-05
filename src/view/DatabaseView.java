@@ -78,6 +78,7 @@ public class DatabaseView extends MainView {
           handleAddHoliday();
           break;
         case 5:
+          Helper.clearScreen();
           printRoute("Cineplex App > Staff > Database > Update Ticket Prices");
           SystemManager.updateTicketPrices();
           break;

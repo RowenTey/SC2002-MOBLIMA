@@ -2,6 +2,7 @@ package src.view;
 
 import src.controller.BookingManager;
 import src.controller.SystemManager;
+import src.database.Database;
 import src.helper.Helper;
 
 /**
@@ -13,25 +14,10 @@ import src.helper.Helper;
  */
 public class MovieGoerView extends MainView {
     /**
-     * Path of entry for showtime view
-     */
-    private String path;
-
-    /**
-     * Name of current user
-     */
-    private String username;
-
-    /**
      * Overrided contructor for the MovieGoerView
-     * 
-     * @param path     of entry for MovieGoerView
-     * @param username of current user
      */
-    public MovieGoerView(String path, String username) {
+    public MovieGoerView() {
         super();
-        this.path = path;
-        this.username = username;
     }
 
     /**
@@ -39,7 +25,7 @@ public class MovieGoerView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username));
+        printRoute(Database.path);
         System.out.println("What would you like to do ?");
         System.out.println("(1) Search or List Cineplexes");
         System.out.println("(2) Search or List Movies");
@@ -53,33 +39,30 @@ public class MovieGoerView extends MainView {
      */
     public void viewApp() {
         int choice = -1;
+        String toRestore = Database.path;
         do {
             this.printMenu();
             choice = Helper.readInt(1, 5);
             switch (choice) {
                 case 1:
-                    CineplexView cineplexView = new CineplexView(
-                            this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username), false,
-                            this.username);
-                    cineplexView.viewApp();
+                    Database.path = Database.path + " > Cineplex";
+                    CineplexAppView.cineplexView.viewApp();
+                    Database.path = toRestore;
                     continue;
                 case 2:
-                    MovieView movieView = new MovieView(
-                            this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username), false,
-                            this.username);
-                    movieView.viewApp();
+                    Database.path = Database.path + " > Movie";
+                    CineplexAppView.movieView.viewApp();
+                    Database.path = toRestore;
                     continue;
                 case 3:
                     Helper.clearScreen();
-                    printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
-                            + " > View Ticket Prices");
+                    printRoute(Database.path + " > View Ticket Prices");
                     SystemManager.displayTicketPrices();
                     break;
                 case 4:
                     Helper.clearScreen();
-                    printRoute(this.path + " > " + (this.username.equals("") ? "MovieGoer" : this.username)
-                            + " > View Booking History");
-                    BookingManager.handleCheckBooking(this.username);
+                    printRoute(Database.path + " > View Booking History");
+                    handleCheckBooking(Database.username);
                     break;
                 case 5:
                     break;
@@ -91,5 +74,21 @@ public class MovieGoerView extends MainView {
                 Helper.pressAnyKeyToContinue();
             }
         } while (choice != 5);
+    }
+
+    /**
+     * Handles {@link Booking} checking
+     * 
+     * @param username of current user
+     */
+    private void handleCheckBooking(String username) {
+        String email;
+        if (username.equals("")) {
+            System.out.print("Enter your email: ");
+            email = Helper.readString();
+        } else {
+            email = BookingManager.getEmailByUsername(username);
+        }
+        BookingManager.findBooking(email);
     }
 }

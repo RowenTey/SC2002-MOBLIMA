@@ -3,7 +3,6 @@ package src.controller;
 import src.database.Database;
 import src.database.FileType;
 import src.helper.Helper;
-import src.model.Movie;
 import src.model.MovieGoer;
 import src.model.Staff;
 import src.model.User;

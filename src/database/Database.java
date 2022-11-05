@@ -83,12 +83,27 @@ public class Database {
   public static int numOfShowtimes = 0;
 
   /**
+   * Current path of navigation for user
+   */
+  public static String path;
+
+  /**
+   * Name of current user
+   */
+  public static String username = "";
+
+  /**
+   * boolean {@code true} if current user is staff, {@code false} otherwise
+   */
+  public static boolean isStaff;
+
+  /**
    * Constructor that reads all the data from the data file during initialization
    * of program.
    */
   public Database() {
     if (!readSerializedObject(FileType.USERS)) {
-      System.out.println("Read into Users1 failed!");
+      System.out.println("Read into Users failed!");
     }
     if (!readSerializedObject(FileType.BOOKINGS)) {
       System.out.println("Read into Bookings failed!");
