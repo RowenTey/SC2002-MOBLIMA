@@ -14,14 +14,14 @@ import src.helper.Helper;
  */
 public class MovieGoerView extends MainView {
     /**
-     * Overrided contructor for the MovieGoerView
+     * Default contructor for the MovieGoerView
      */
     public MovieGoerView() {
         super();
     }
 
     /**
-     * View Menu
+     * View Menu of MovieGoerView
      */
     public void printMenu() {
         Helper.clearScreen();

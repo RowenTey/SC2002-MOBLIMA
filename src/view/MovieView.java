@@ -18,10 +18,6 @@ import src.model.enums.ShowStatus;
 public class MovieView extends MainView {
     /**
      * Default contructor for the MovieView
-     * 
-     * @param path     of entry for cineplex view
-     * @param isStaff  boolean value if the current user is staff
-     * @param username of current user
      */
     public MovieView() {
         super();
@@ -178,7 +174,7 @@ public class MovieView extends MainView {
     }
 
     /**
-     * Handles the addition of {@link Movie}
+     * Handles the addition of a {@link Movie}
      */
     private void handleAddMovie() {
         System.out.println("Enter movie title: ");
@@ -225,7 +221,7 @@ public class MovieView extends MainView {
     }
 
     /**
-     * Handles the removal of movie
+     * Handles the removal of {@link Movie}
      */
     private void handleRemoveMovie() {
         int opt = -1;
@@ -243,7 +239,7 @@ public class MovieView extends MainView {
     }
 
     /**
-     * Hanldes the update of movie
+     * Handles the update of {@link Movie}
      */
     private void updateMovie() {
         int opt = -1;
@@ -261,7 +257,7 @@ public class MovieView extends MainView {
     }
 
     /**
-     * Handles the booking of movie
+     * Handles the booking of {@link Movie}
      * 
      * @return boolean {@code true} if the list of bookable {@link Movie} is not
      *         empty, {@code false} otherwise

@@ -46,6 +46,10 @@ public class ReviewView extends MainView {
         } while (choice != MovieManager.getTotalNumOfMovie() + 1);
     }
 
+    /**
+     * Handles the {@link Movie} review
+     * @param i is the index of {@link Movie} in the list of all {@link Movie} from the {@link Database}
+     */
     private void handleMovieReview(int i) {
         int choice = -1;
         do {

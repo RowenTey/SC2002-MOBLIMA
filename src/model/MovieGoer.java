@@ -1,6 +1,5 @@
 package src.model;
 
-import java.util.ArrayList;
 import src.model.enums.AgeGroup;
 
 /**

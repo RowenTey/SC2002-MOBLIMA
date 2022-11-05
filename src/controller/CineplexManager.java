@@ -98,6 +98,7 @@ public class CineplexManager {
 
     /**
      * Removes a {@link Cineplex} from {@link Database}
+     * @param opt the index of {@link Cineplex} from the list of all {@link Cineplex} getting from the {@link Database}
      */
     public static void removeCineplex(int opt) {
         Cineplex old = CineplexManager.getCineplexList().get(opt - 1);

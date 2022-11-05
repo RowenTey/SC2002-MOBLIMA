@@ -24,6 +24,10 @@ public class UserManager {
    * 
    * @param username of the staff
    * @param password of the staff
+   * @param mobile number of member
+   * @param email of member
+   * @param ageGroup of member
+   * @param isStaff boolean {@code true} if the current user is staff, {@code false} otherwise
    */
   public static boolean createUser(String username, String password, String mobile, String email, AgeGroup ageGroup,
       boolean isStaff) {
@@ -76,9 +80,9 @@ public class UserManager {
   }
 
   /**
-   * Print the complete details of the {@link Staff}
+   * Print the complete details of the {@link User}
    * 
-   * @param staff object to print
+   * @param user object to print
    */
   protected static void displayUserDetails(User user) {
     System.out.println();

@@ -1,11 +1,8 @@
 package src.view;
 
-import src.controller.MovieManager;
 import src.controller.ShowtimeManager;
 import src.database.Database;
 import src.helper.Helper;
-import src.model.Cineplex;
-import src.model.Movie;
 
 /**
  * ShowtimeView provides the view to manage and select showtime
@@ -23,7 +20,7 @@ public class ShowtimeView extends MainView {
     }
 
     /**
-     * View Menu
+     * View Menu of ShowtimeView
      */
     public void printMenu() {
         Helper.clearScreen();
