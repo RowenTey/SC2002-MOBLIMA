@@ -56,7 +56,7 @@ java -jar ./build/SC2002-MOBLIMA.jar
 javadoc -d ./docs/ ./src/*java ./src/controller/*java ./src/database/*java ./src/helper/*java ./src/model/*java ./src/model/enums/*java ./src/view/*java -encoding ISO-8859-1
 ```
 
-Launch the `index.html` under ./javadoc/index.html
+Launch the `index.html` under ./docs/index.html
 
 ## 🧠 Contributors
 
