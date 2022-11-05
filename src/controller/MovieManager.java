@@ -28,7 +28,7 @@ public class MovieManager {
     public static int getTotalNumOfMovie() {
         return Database.numOfMovies;
     }
-    
+
     /**
      * Gets the list of all {@link Movie}
      * 
@@ -183,7 +183,7 @@ public class MovieManager {
     /**
      * Removes a {@link Movie} from {@link Database}
      */
-    public static void removeMovie(int opt){
+    public static void removeMovie(int opt) {
         Movie oldMovie = MovieManager.getAllMovieList().get(opt - 1);
         Database.MOVIES.remove(oldMovie.getMovieId());
         Database.numOfMovies--;
@@ -195,7 +195,7 @@ public class MovieManager {
     /**
      * Updates the {@link ShowStatus} of a {@link Movie}
      */
-    public static void updateMovie(int opt){
+    public static void updateMovie(int opt) {
         Movie movie = MovieManager.getAllMovieList().get(opt - 1);
         String movieId = movie.getMovieId();
         System.out.println("\nUpdate Show Status to: ");
@@ -275,7 +275,7 @@ public class MovieManager {
      * Displays existing {@link Movie}
      */
     public static void displayExistingMovies() {
-        System.out.println("Current Movie(es) we have: ");
+        System.out.println("Current movie(es) we have: ");
         for (int i = 0; i < MovieManager.getTotalNumOfMovie(); i++) {
             System.out.println("(" + (i + 1) + ") " + MovieManager.getAllMovieList().get(i).getTitle() + " ("
                     + MovieManager.getAllMovieList().get(i).getStatus() + ")");
@@ -353,9 +353,9 @@ public class MovieManager {
     }
 
     /**
-     * Handles Top 5 Movies viewed by MovieGoer
+     * Handles Top 5 Movies viewed by {@link MovieGoer}
      */
-    public static void handleTop5Movies() {
+    public static void onDisplayTop5Movie() {
         // 0 - default
         // 1 - ticket sales only
         // 2 - rating only
@@ -365,9 +365,9 @@ public class MovieManager {
         } else if (currentStatus == 2) {
             MovieManager.printTop5ByOverallRating();
         } else {
+            System.out.println("Which option would you like to select?");
             System.out.println("(1) List Top 5 Movies by Ticket Sales");
             System.out.println("(2) List Top 5 Movies by Overall Rating");
-            System.out.println("Which option would you like to select?");
             int opt = Helper.readInt(1, 2);
             if (opt == 1) {
                 System.out.println();

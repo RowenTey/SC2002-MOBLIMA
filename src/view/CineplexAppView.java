@@ -1,6 +1,7 @@
 package src.view;
 
 import src.controller.*;
+import src.database.Database;
 import src.helper.Helper;
 
 /**
@@ -11,15 +12,27 @@ import src.helper.Helper;
  * @since 2022-10-19
  */
 public class CineplexAppView extends MainView {
+    protected static StaffView staffView;
+    protected static MovieGoerView movieGoerView;
+    protected static DatabaseView databaseView;
+    protected static MovieView movieView;
+    protected static CineplexView cineplexView;
+    protected static ShowtimeView showtimeView;
+    protected static ReviewView reviewView;
+
     /**
      * Default contructor for the CineplexAppView
      */
     public CineplexAppView() {
         super();
-        new MovieManager();
+        staffView = new StaffView();
+        movieGoerView = new MovieGoerView();
+        databaseView = new DatabaseView();
+        movieView = new MovieView();
+        cineplexView = new CineplexView();
+        showtimeView = new ShowtimeView();
+        reviewView = new ReviewView();
         new ShowtimeManager();
-        new CineplexManager();
-        new BookingManager();
     }
 
     /**
@@ -46,10 +59,12 @@ public class CineplexAppView extends MainView {
             switch (choice) {
                 case 1:
                     this.handleLogin();
+                    Database.path = "Cineplex App";
                     break;
                 case 2:
-                    MovieGoerView movieGoerView = new MovieGoerView("Cineplex App", "");
+                    Database.path = "Cineplex App > MovieGoer";
                     movieGoerView.viewApp();
+                    Database.path = "Cineplex App";
                     break;
                 case 3:
                     break;
@@ -92,10 +107,11 @@ public class CineplexAppView extends MainView {
         String key = username.substring(0, 1);
         if (key.equals("$")) {
             if (UserManager.validateUser(username, password)) {
+                Database.isStaff = true;
                 System.out.println(
                         "Login successfully! Welcome staff " + username.substring(1) + " to the MOBLIMA system.\n");
                 Helper.pressAnyKeyToContinue();
-                StaffView staffView = new StaffView("Cineplex App");
+                Database.path = "Cineplex App > Staff";
                 staffView.viewApp();
             } else {
                 System.out.println("Invalid user!");
@@ -103,9 +119,11 @@ public class CineplexAppView extends MainView {
             }
         } else {
             if (UserManager.validateUser(username, password)) {
+                Database.isStaff = false;
+                Database.username = username;
                 System.out.println("Login successfully! Welcome member " + username + " to the MOBLIMA system.\n");
                 Helper.pressAnyKeyToContinue();
-                MovieGoerView movieGoerView = new MovieGoerView("Cineplex App", username);
+                Database.path = "Cineplex App > " + username;
                 movieGoerView.viewApp();
             } else {
                 System.out.println("Invalid user!");

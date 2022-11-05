@@ -45,7 +45,7 @@ D:\uni_tute\sc2002_java\Project\SC2002_HRPS>
 2. Run the jar file using command line
 
 ```terminal
-java -jar ./build/SC2002_HRPS.jar
+java -jar ./build/SC2002_MOBLIMA.jar
 ```
 
 3. Reset our database first before using our interface, steps are as follows

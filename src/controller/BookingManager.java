@@ -343,10 +343,9 @@ public class BookingManager {
   /**
    * Prompts user for {@link Booking} details
    * 
-   * @param username   of the moviegoer
    * @param showtimeId of showtime
    */
-  public static void promptBooking(String showtimeId, String username) {
+  public static void promptBooking(String showtimeId) {
     ArrayList<Seat> seatList = new ArrayList<Seat>();
     Seat newSeat;
     int opt = -1;
@@ -384,8 +383,8 @@ public class BookingManager {
       opt = Helper.readInt(1, 2);
     } while (opt != 2);
 
-    MovieGoer newMovieGoer = username.equals("") ? promptUserDetails()
-        : (MovieGoer) UserManager.getUser(username);
+    MovieGoer newMovieGoer = Database.username.equals("") ? promptUserDetails()
+        : (MovieGoer) UserManager.getUser(Database.username);
 
     Ticket newTicket = createBookingTicket(showtime, seatList, newMovieGoer);
     printTicketDetails(newTicket, newMovieGoer);
@@ -457,7 +456,7 @@ public class BookingManager {
    * @param username of the moviegoer
    * @return email of the moviegoer
    */
-  public static String getEmailByUsername(String username){
+  public static String getEmailByUsername(String username) {
     MovieGoer currentUser = (MovieGoer) UserManager.getUser(username);
     String email = currentUser.getEmail();
 

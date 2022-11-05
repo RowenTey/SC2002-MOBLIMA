@@ -242,7 +242,7 @@ public class ShowtimeManager {
    * Display the layout of the specified {@link Showtime}
    * 
    * @param showtime to be displayed
-   * @param seat that is already selected
+   * @param seat     that is already selected
    */
   protected static void displayShowtimeLayout(Showtime showtime, ArrayList<Seat> seat) {
     System.out.println();
@@ -257,9 +257,9 @@ public class ShowtimeManager {
           if (showtime.getSeatAt(row + 1, col + 1).getBooked()) {
             System.out.print(" [X] ");
           } else {
-            if(seat.contains(showtime.getSeatAt(row + 1, col + 1))){
+            if (seat.contains(showtime.getSeatAt(row + 1, col + 1))) {
               System.out.print(" [O] ");
-            }else{
+            } else {
               System.out.print(" [ ] ");
             }
           }
@@ -464,10 +464,9 @@ public class ShowtimeManager {
    * Action function to handle {@link Showtime} selection from a specific
    * {@link Movie}
    * 
-   * @param movie    to select showtime from
-   * @param username of current user
+   * @param movie to select showtime from
    */
-  public static void handleShowtimeSelection(Movie movie, String username) {
+  public static void handleShowtimeSelection(Movie movie) {
     ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
     if (movieShowtimes.size() == 0 || movieShowtimes == null) {
       System.out.println("No showtimes available for this movie...");
@@ -477,7 +476,7 @@ public class ShowtimeManager {
       ShowtimeManager.displayShowtime(movieShowtimes, "movie");
     }
     String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-    BookingManager.promptBooking(showtimeId, username);
+    BookingManager.promptBooking(showtimeId);
   }
 
   /**
@@ -485,9 +484,8 @@ public class ShowtimeManager {
    * {@link Cineplex}
    * 
    * @param cineplex to select showtime from
-   * @param username of current user
    */
-  public static void handleShowtimeSelection(Cineplex cineplex, String username) {
+  public static void handleShowtimeSelection(Cineplex cineplex) {
     ArrayList<Showtime> movieShowtimes = ShowtimeManager.getCineplexShowtime(cineplex);
     if (movieShowtimes.size() == 0 || movieShowtimes == null) {
       System.out.println("No showtimes available for this cineplex...");
@@ -496,7 +494,7 @@ public class ShowtimeManager {
       ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
     }
     String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-    BookingManager.promptBooking(showtimeId, username);
+    BookingManager.promptBooking(showtimeId);
   }
 
 }

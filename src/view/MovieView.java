@@ -3,6 +3,7 @@ package src.view;
 import java.util.ArrayList;
 
 import src.controller.MovieManager;
+import src.database.Database;
 import src.helper.Helper;
 import src.model.enums.MoviesType;
 import src.model.enums.ShowStatus;
@@ -16,32 +17,14 @@ import src.model.enums.ShowStatus;
  */
 public class MovieView extends MainView {
     /**
-     * Path of entry for MovieView
-     */
-    private String path;
-
-    /**
-     * boolean {@code true} if current user is staff, {@code false} otherwise
-     */
-    private boolean isStaff;
-
-    /**
-     * Name of current user
-     */
-    private String username;
-
-    /**
      * Default contructor for the MovieView
      * 
      * @param path     of entry for cineplex view
      * @param isStaff  boolean value if the current user is staff
      * @param username of current user
      */
-    public MovieView(String path, boolean isStaff, String username) {
+    public MovieView() {
         super();
-        this.path = path + " > Movie";
-        this.isStaff = isStaff;
-        this.username = username;
     }
 
     /**
@@ -49,9 +32,9 @@ public class MovieView extends MainView {
      */
     public void printMenu() {
         Helper.clearScreen();
-        printRoute(this.path);
+        printRoute(Database.path);
         System.out.println("What would you like to do ?");
-        if (this.isStaff) {
+        if (Database.isStaff) {
             System.out.println("(1) Add Movie");
             System.out.println("(2) Update Movie");
             System.out.println("(3) Remove Movie");
@@ -78,54 +61,55 @@ public class MovieView extends MainView {
      */
     public void viewApp() {
         int choice;
-        if (this.isStaff) {
+        String toRestore = Database.path;
+        if (Database.isStaff) {
             do {
                 this.printMenu();
                 choice = Helper.readInt(1, 10);
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Add Movie");
+                        printRoute(Database.path + " > Add Movie");
                         handleAddMovie();
                         break;
                     case 2:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Update Movie");
+                        printRoute(Database.path + " > Update Movie");
                         updateMovie();
                         break;
                     case 3:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Remove Movie");
+                        printRoute(Database.path + " > Remove Movie");
                         handleRemoveMovie();
                         break;
                     case 4:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > NOW SHOWING");
+                        printRoute(Database.path + " > NOW SHOWING");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 5:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > PREVIEW");
+                        printRoute(Database.path + " > PREVIEW");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 6:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > COMING SOON");
+                        printRoute(Database.path + " > COMING SOON");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 7:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Top 5 Movies by Ticket Sales");
+                        printRoute(Database.path + " > Top 5 Movies by Ticket Sales");
                         MovieManager.printTop5ByTicketSales();
                         break;
                     case 8:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Top 5 Movies by Overall Rating");
+                        printRoute(Database.path + " > Top 5 Movies by Overall Rating");
                         MovieManager.printTop5ByOverallRating();
                         break;
                     case 9:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Movie > Show/Hide Top 5 Movies");
+                        printRoute(Database.path + " > Show/Hide Top 5 Movies");
                         MovieManager.setViewableTop5();
                         break;
                     case 10:
@@ -147,35 +131,35 @@ public class MovieView extends MainView {
                 switch (choice) {
                     case 1:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Book Movie");
+                        printRoute(Database.path + " > Book Movie");
                         if (handleBookMovie()) {
-                            ShowtimeView showtimeView = new ShowtimeView(path, this.username);
-                            showtimeView.viewApp(MovieManager.selectMovie());
+                            CineplexAppView.showtimeView.viewApp(MovieManager.selectMovie());
                         }
                         break;
                     case 2:
-                        ReviewView reviewView = new ReviewView(this.path);
-                        reviewView.viewApp();
+                        Database.path = Database.path + " > Reviews ";
+                        CineplexAppView.reviewView.viewApp();
+                        Database.path = toRestore;
                         break;
                     case 3:
                         Helper.clearScreen();
-                        printRoute(this.path + " > NOW SHOWING");
+                        printRoute(Database.path + " > NOW SHOWING");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.NOW_SHOWING);
                         break;
                     case 4:
                         Helper.clearScreen();
-                        printRoute(this.path + " > PREVIEW");
+                        printRoute(Database.path + " > PREVIEW");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.PREVIEW);
                         break;
                     case 5:
                         Helper.clearScreen();
-                        printRoute(this.path + " > COMING SOON");
+                        printRoute(Database.path + " > COMING SOON");
                         MovieManager.displayMovieBasedOnStatus(ShowStatus.COMING_SOON);
                         break;
                     case 6:
                         Helper.clearScreen();
-                        printRoute(this.path + " > Top 5 Movies");
-                        MovieManager.handleTop5Movies();
+                        printRoute(Database.path + " > Top 5 Movies");
+                        MovieManager.onDisplayTop5Movie();
                         break;
                     case 7:
                         break;
@@ -240,7 +224,7 @@ public class MovieView extends MainView {
     /**
      * Handles the removal of movie
      */
-    private void handleRemoveMovie(){
+    private void handleRemoveMovie() {
         int opt = -1;
         if (MovieManager.getTotalNumOfMovie() == 0) {
             System.out.println("No movies found!");
