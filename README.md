@@ -11,7 +11,7 @@
 ```terminal
 .
 ├── build                   # Compiled jar file
-├── docs                    # Javadocs generated as html
+├── docs                    # Javadocs generated as HTML
 ├── src                     # Source files (all the codes)
 ├── LICENSE
 └── README.md
@@ -22,13 +22,13 @@
 ```terminal
 .
 ├── ...
-├── src                    # Source files (all the codes)
+├── src                    
 │   ├── controller         # Managers classes
 │   ├── database           # Database classes
 │   ├── helper             # Helper classes
 │   ├── model              # Model classes
 │   ├── view               # View/Interface classes
-│   └── HotelApp.java      # Main Driver file (HRPS App)
+│   └── HotelApp.java      # Main Driver file (MOBLIMA App)
 └── ...
 ```
 
@@ -36,72 +36,17 @@
 
 > How to run our project
 
-1. In your command line change directory into SC2002_HRPS
+1. In your command line change directory into SC2002-MOBLIMA
 
 ```terminal
-D:\uni_tute\sc2002_java\Project\SC2002_HRPS>
+cd SC2002-MOBLIMA
 ```
 
-2. Run the jar file using command line
+2. Run the `.jar` file using command line
 
 ```terminal
-java -jar ./build/SC2002_MOBLIMA.jar
+java -jar ./build/SC2002-MOBLIMA.jar
 ```
-
-3. Reset our database first before using our interface, steps are as follows
-
-```terminal
-╔═════════════════════════════════════════════════════════════════╗
-║ Hotel App View                                                  ║
-╚═════════════════════════════════════════════════════════════════╝
-What would you like to do ?
-(1) Manage Guest
-(2) Manage Room
-(3) Manage Reservation
-(4) Manage Orders
-(5) Manage Hotel Menu
-(6) Manage Check In / Check Out
-(7) Manage Promotion Details
-(8) Manage Invoices
-(9) Manage Database
-(10) Exit HRPS
-```
-
-`Press "9" then <ENTER>`
-
-```terminal
-╔═════════════════════════════════════════════════════════════════╗
-║ Hotel App View > Database View                                  ║
-╚═════════════════════════════════════════════════════════════════╝
-What would you like to do ?
-(1) Initialize guests
-(2) Initialize menu
-(3) Reset database
-(4) Exit Database View
-```
-
-`Press "3" then <ENTER>`
-
-```terminal
-╔═════════════════════════════════════════════════════════════════╗
-║ Hotel App View > Database View > Reset database                 ║
-╚═════════════════════════════════════════════════════════════════╝
-Are you sure you want to reset the database? (yes/no)
-```
-
-`Type "yes" then <ENTER>`
-
-```terminal
-╔═════════════════════════════════════════════════════════════════╗
-║ Hotel App View > Database View > Reset database                 ║
-╚═════════════════════════════════════════════════════════════════╝
-Are you sure you want to reset the database? (yes/no)
-yes
-Database cleared
-Press Enter key to continue...
-```
-
-`Database is cleared successfully if the above message is shown`
 
 ## 📃 Documentation
 
