@@ -103,7 +103,7 @@ public class Database {
    */
   public Database() {
     if (!readSerializedObject(FileType.USERS)) {
-      System.out.println("Read into Users1 failed!");
+      System.out.println("Read into Users failed!");
     }
     if (!readSerializedObject(FileType.BOOKINGS)) {
       System.out.println("Read into Bookings failed!");

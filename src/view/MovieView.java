@@ -133,7 +133,10 @@ public class MovieView extends MainView {
                         Helper.clearScreen();
                         printRoute(Database.path + " > Book Movie");
                         if (handleBookMovie()) {
-                            CineplexAppView.showtimeView.viewApp(MovieManager.selectMovie());
+                            String movieId = MovieManager.selectMovie();
+                            Database.path = Database.path + " > " + MovieManager.getMovieById(movieId).getTitle();
+                            CineplexAppView.showtimeView.viewApp(movieId, "movie");
+                            Database.path = toRestore;
                         }
                         break;
                     case 2:

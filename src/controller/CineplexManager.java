@@ -43,6 +43,19 @@ public class CineplexManager {
     }
 
     /**
+     * Retrives the {@link Cineplex} by it's ID
+     * 
+     * @param cineplexId of cineplex
+     * @return cineplex object corresponding to that ID
+     */
+    public static Cineplex getCineplexById(String cineplexId) {
+        if (Database.CINEPLEX.containsKey(cineplexId)) {
+            return Database.CINEPLEX.get(cineplexId);
+        }
+        return null;
+    }
+
+    /**
      * Prints the complete details of the {@link Cineplex}.
      * 
      * @param cineplex to be printed.
@@ -86,7 +99,7 @@ public class CineplexManager {
     /**
      * Removes a {@link Cineplex} from {@link Database}
      */
-    public static void removeCineplex(int opt){
+    public static void removeCineplex(int opt) {
         Cineplex old = CineplexManager.getCineplexList().get(opt - 1);
         Database.CINEPLEX.remove(old.getCineplexId());
         ShowtimeManager.removeShowtimeByCineplex(old);
@@ -195,6 +208,5 @@ public class CineplexManager {
                             + ")");
         }
     }
-
 
 }

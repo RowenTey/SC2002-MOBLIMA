@@ -54,6 +54,7 @@ public class CineplexView extends MainView {
     public void viewApp() {
         int numOfCineplex = CineplexManager.getTotalNumOfCineplex();
         int choice = -1;
+        String toRestore = Database.path;
         if (Database.isStaff) {
             do {
                 this.printMenu();
@@ -90,7 +91,11 @@ public class CineplexView extends MainView {
                     System.out.println(
                             "\n" + CineplexManager.getCineplexList().get(choice - 1).getLocation() + " selected");
                     Helper.pressAnyKeyToContinue();
-                    CineplexAppView.showtimeView.viewApp(CineplexManager.getCineplexList().get(choice - 1));
+                    String selectedCineplexId = CineplexManager.getCineplexList().get(choice - 1).getCineplexId();
+                    Database.path = Database.path + " > "
+                            + CineplexManager.getCineplexById(selectedCineplexId).getLocationStr();
+                    CineplexAppView.showtimeView.viewApp(selectedCineplexId, "cineplex");
+                    Database.path = toRestore;
                 }
             } while (choice != (numOfCineplex + 1));
         }

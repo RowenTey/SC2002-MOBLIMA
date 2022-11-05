@@ -88,16 +88,21 @@ public class ShowtimeManager {
   }
 
   /**
-   * Get the list of {@link Showtime} for a {@link Movie}
+   * Get the list of {@link Showtime} for a {@link Movie}/{@link Cineplex}
    * 
-   * @param movie object to retrieve showtimes of
+   * @param objId of movie/cineplex to retrieve showtime og
+   * @param which to handle (movie/cineplex)
    * @return {@code ArrayList<Showtime>} of {@link Showtime}
    */
-  private static ArrayList<Showtime> getMovieShowtime(Movie movie) {
+  private static ArrayList<Showtime> getShowtimeFor(String objId, String which) {
     ArrayList<Showtime> showtimes = new ArrayList<Showtime>();
 
+    Cineplex toFind = which.equals("cineplex") ? CineplexManager.getCineplexById(objId) : null;
+
     for (Showtime showtime : Database.SHOWTIME.values()) {
-      if (showtime.getMovie().getTitle().equals(movie.getTitle())) {
+      if (which.equals("movie") && showtime.getMovie().getMovieId().equals(objId)) {
+        showtimes.add(showtime);
+      } else if (which.equals("cineplex") && showtime.getCinema().getCineplex() == toFind.getLocation()) {
         showtimes.add(showtime);
       }
     }
@@ -160,7 +165,7 @@ public class ShowtimeManager {
 
     // movie list not empty
     if (MovieManager.displayListOfBookableMovies()) {
-      Movie selectedMovie = MovieManager.selectMovie();
+      String selectedMovieId = MovieManager.selectMovie();
       String date;
       do {
         date = Helper.setDate(false, false);
@@ -171,7 +176,7 @@ public class ShowtimeManager {
       Cineplex selectedCineplex = CineplexManager.selectCineplex();
       System.out.println("Which cinema in this cineplex would you like to pick?\n");
       Cinema cinema = CineplexManager.selectCinema(selectedCineplex);
-      ShowtimeManager.createShowtime(date, selectedMovie, cinema);
+      ShowtimeManager.createShowtime(date, MovieManager.getMovieById(selectedMovieId), cinema);
       return true;
     }
 
@@ -335,28 +340,6 @@ public class ShowtimeManager {
   }
 
   /**
-   * Get the list of {@link Showtime} for a {@link Cineplex}
-   * 
-   * @param cineplex object to retrieve showtimes of
-   * @return {@code ArrayList<Showtime>} of {@link Showtime}
-   */
-  public static ArrayList<Showtime> getCineplexShowtime(Cineplex cineplex) {
-    ArrayList<Showtime> toReturn = new ArrayList<Showtime>();
-
-    for (Showtime showtime : Database.SHOWTIME.values()) {
-      if (showtime.getCinema().getCineplex() == cineplex.getLocation()) {
-        toReturn.add(showtime);
-      }
-    }
-
-    if (toReturn.size() == 0) {
-      return null;
-    } else {
-      return toReturn;
-    }
-  }
-
-  /**
    * Remove a {@link Showtime}
    * 
    * @return boolean {@code true} if showtime was removed, {@code false}
@@ -462,39 +445,22 @@ public class ShowtimeManager {
 
   /**
    * Action function to handle {@link Showtime} selection from a specific
-   * {@link Movie}
+   * {@link Movie}/{@link Cineplex}
    * 
-   * @param movie to select showtime from
+   * @param objId of movie/cineplex to select showtime from
+   * @param which to handle (movie/cineplex)
    */
-  public static void handleShowtimeSelection(Movie movie) {
-    ArrayList<Showtime> movieShowtimes = ShowtimeManager.getMovieShowtime(movie);
+  public static void onShowtimeSelection(String objId, String which) {
+    ArrayList<Showtime> movieShowtimes = ShowtimeManager.getShowtimeFor(objId, which);
     if (movieShowtimes.size() == 0 || movieShowtimes == null) {
-      System.out.println("No showtimes available for this movie...");
+      String toDisplay = which.equals("movie") ? "movie" : "cineplex";
+      System.out.println("No showtimes available for this " + toDisplay + "...");
       Helper.pressAnyKeyToContinue();
       return;
     } else {
-      ShowtimeManager.displayShowtime(movieShowtimes, "movie");
+      ShowtimeManager.displayShowtime(movieShowtimes, which);
     }
     String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
     BookingManager.promptBooking(showtimeId);
   }
-
-  /**
-   * Action function to handle {@link Showtime} selection from a specific
-   * {@link Cineplex}
-   * 
-   * @param cineplex to select showtime from
-   */
-  public static void handleShowtimeSelection(Cineplex cineplex) {
-    ArrayList<Showtime> movieShowtimes = ShowtimeManager.getCineplexShowtime(cineplex);
-    if (movieShowtimes.size() == 0 || movieShowtimes == null) {
-      System.out.println("No showtimes available for this cineplex...");
-      Helper.pressAnyKeyToContinue();
-    } else {
-      ShowtimeManager.displayShowtime(movieShowtimes, "cineplex");
-    }
-    String showtimeId = ShowtimeManager.selectShowtime(movieShowtimes);
-    BookingManager.promptBooking(showtimeId);
-  }
-
 }

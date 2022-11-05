@@ -1,5 +1,6 @@
 package src.view;
 
+import src.controller.MovieManager;
 import src.controller.ShowtimeManager;
 import src.database.Database;
 import src.helper.Helper;
@@ -85,26 +86,15 @@ public class ShowtimeView extends MainView {
     }
 
     /**
-     * Overrided View App - from movie view (MovieGoer)
+     * Overrided View App - from movie view / cineplex view (MovieGoer)
      * 
-     * @param movie to select showtime from
+     * @param objId of movie/cineplex to select showtime from
+     * @param from  path method was called from
      */
-    protected void viewApp(Movie movie) {
+    protected void viewApp(String objId, String from) {
         Helper.clearScreen();
-        printRoute(Database.path + " > " + movie.getTitle());
-        ShowtimeManager.handleShowtimeSelection(movie);
-        return;
-    }
-
-    /**
-     * Overrided View App - from cineplex view (MovieGoer)
-     * 
-     * @param cineplex to select showtime from
-     */
-    protected void viewApp(Cineplex cineplex) {
-        Helper.clearScreen();
-        printRoute(Database.path + " > " + cineplex.getLocation());
-        ShowtimeManager.handleShowtimeSelection(cineplex);
+        printRoute(Database.path);
+        ShowtimeManager.onShowtimeSelection(objId, from);
         return;
     }
 

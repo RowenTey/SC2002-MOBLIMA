@@ -42,6 +42,19 @@ public class MovieManager {
     }
 
     /**
+     * Retrives the {@link Movie} by it's ID
+     * 
+     * @param movieId of movie
+     * @return movie object corresponding to that ID
+     */
+    public static Movie getMovieById(String movieId) {
+        if (Database.MOVIES.containsKey(movieId)) {
+            return Database.MOVIES.get(movieId);
+        }
+        return null;
+    }
+
+    /**
      * Gets a list of bookable {@link Movie}
      * 
      * @return list of bookable {@link Movie}
@@ -217,16 +230,16 @@ public class MovieManager {
     /**
      * Allows user to select a specific {@link Movie} by index
      * 
-     * @return {@link Movie} that is selected
+     * @return id of movie that is selected
      */
-    public static Movie selectMovie() {
+    public static String selectMovie() {
         System.out.println("Select a movie by entering it's index:");
         int choice = Helper.readInt(1, (MovieManager.getBookableMovies().size() + 1));
         Movie selectedMovie = MovieManager.getBookableMovies().get(choice - 1);
         System.out.println("\nYou selected:");
         MovieManager.displayMovieDetails(selectedMovie);
         Helper.pressAnyKeyToContinue();
-        return selectedMovie;
+        return selectedMovie.getMovieId();
     }
 
     /**
