@@ -61,6 +61,7 @@ public class CineplexAppView extends MainView {
                     Database.path = "Cineplex App";
                     break;
                 case 2:
+                    Database.isStaff = false;
                     Database.path = "Cineplex App > MovieGoer";
                     movieGoerView.viewApp();
                     Database.path = "Cineplex App";
