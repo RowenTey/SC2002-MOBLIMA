@@ -299,7 +299,7 @@ public class MovieManager {
         System.out.println("Top 5 Movies by Overall Rating: ");
         for (int i = 5; i > 0; i--) {
             System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
-                    res.get(i - 1).getOverallRating() == -1 ? "N/A"
+                    (res.get(i - 1).getOverallRating() == -1 || res.get(i - 1).getReviews().size() <= 1) ? "N/A"
                             : Helper.df1.format(res.get(i - 1).getOverallRating())));
         }
     }

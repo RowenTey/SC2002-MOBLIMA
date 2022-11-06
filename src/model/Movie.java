@@ -305,6 +305,16 @@ public abstract class Movie implements Serializable, Comparable<Movie> {
         if (this == movie) {
             return 0;
         }
+
+        int thisReviewSize = this.getReviews().size();
+        int thatReviewSize = movie.getReviews().size();
+
+        if (thisReviewSize <= 1 && thatReviewSize > 1) {
+            return -1;
+        } else if (!(thisReviewSize <= 1 && thatReviewSize > 1)) {
+            return 1;
+        }
+
         double thisOverallRating = this.getOverallRating();
         double thatOverallRating = movie.getOverallRating();
 
