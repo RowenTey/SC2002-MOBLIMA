@@ -20,19 +20,19 @@ public class TwoDMovie extends Movie {
     /**
      * Constructor of 2D movie
      * 
-     * @param movieId of the movie
-     * @param title   of the movie
-     * @param status  of the movie
+     * @param movieId  of the movie
+     * @param title    of the movie
+     * @param status   of the movie
      * @param synopsis of the movie
      * @param director of the movie
      * @param cast     of the movie
-     * @param type     of the movie
      * @param price    of the movie
      */
     public TwoDMovie(String movieId, String title, ShowStatus status, String synopsis, String director, String[] cast,
-            MoviesType type, double price) {
-        super(movieId, title, status, synopsis, director, cast, type);
+            double price) {
+        super(movieId, title, status, synopsis, director, cast);
         setPrice(price);
+        setType(MoviesType.TWO_D);
     }
 
     /**
@@ -40,6 +40,7 @@ public class TwoDMovie extends Movie {
      * 
      * @param price of movie
      */
+    @Override
     public void setPrice(double price) {
         this.price = price;
     }
@@ -49,7 +50,29 @@ public class TwoDMovie extends Movie {
      * 
      * @return base price of movie
      */
+    @Override
     public double getPrice() {
         return price;
     }
+
+    /**
+     * Sets the {@link MoviesType} of the movie
+     *
+     * @param type of the movie
+     */
+    @Override
+    public void setType(MoviesType type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the {@link MoviesType} of the movie
+     *
+     * @return {@link MoviesType} of the movie
+     */
+    @Override
+    public MoviesType getType() {
+        return type;
+    }
+
 }

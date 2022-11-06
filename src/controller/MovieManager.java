@@ -168,20 +168,19 @@ public class MovieManager {
         Movie newMovie = null;
         switch (type) {
             case TWO_D:
-                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, MoviesType.TWO_D,
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast,
                         TWODMovieDefaultPrice);
                 break;
             case THREE_D:
-                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast, MoviesType.THREE_D,
+                newMovie = new ThreeDMovie(movieId, title, status, synopsis, director, cast,
                         THREEDMovieDefaultPrice);
                 break;
             case BLOCKBUSTER:
                 newMovie = new BlockbusterMovie(movieId, title, status, synopsis, director, cast,
-                        MoviesType.BLOCKBUSTER,
                         BlockbusterMovieDefaultPrice);
                 break;
             default:
-                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast, MoviesType.TWO_D,
+                newMovie = new TwoDMovie(movieId, title, status, synopsis, director, cast,
                         TWODMovieDefaultPrice);
                 break;
         }
@@ -195,7 +194,9 @@ public class MovieManager {
 
     /**
      * Removes a {@link Movie} from {@link Database}
-     * @param opt the index of {@link Movie} from the list of all {@link Movie} getting from the {@link Database}
+     * 
+     * @param opt the index of {@link Movie} from the list of all {@link Movie}
+     *            getting from the {@link Database}
      */
     public static void removeMovie(int opt) {
         Movie oldMovie = MovieManager.getAllMovieList().get(opt - 1);
@@ -208,7 +209,9 @@ public class MovieManager {
 
     /**
      * Updates the {@link ShowStatus} of a {@link Movie}
-     * @param opt the index of {@link Movie} from the list of all {@link Movie} getting from the {@link Database}
+     * 
+     * @param opt the index of {@link Movie} from the list of all {@link Movie}
+     *            getting from the {@link Database}
      */
     public static void updateMovie(int opt) {
         Movie movie = MovieManager.getAllMovieList().get(opt - 1);

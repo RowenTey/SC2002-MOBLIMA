@@ -25,13 +25,13 @@ public class BlockbusterMovie extends Movie {
      * @param synopsis of the movie
      * @param director of the movie
      * @param cast     of the movie
-     * @param type     of the movie
      * @param price    of the movie
      */
     public BlockbusterMovie(String movieId, String title, ShowStatus status, String synopsis, String director,
-            String[] cast, MoviesType type, double price) {
-        super(movieId, title, status, synopsis, director, cast, type);
+            String[] cast, double price) {
+        super(movieId, title, status, synopsis, director, cast);
         setPrice(price);
+        setType(MoviesType.BLOCKBUSTER);
     }
 
     /**
@@ -39,6 +39,7 @@ public class BlockbusterMovie extends Movie {
      * 
      * @param price of the movie
      */
+    @Override
     public void setPrice(double price) {
         this.price = price;
     }
@@ -48,7 +49,29 @@ public class BlockbusterMovie extends Movie {
      * 
      * @return base price of the movie
      */
+    @Override
     public double getPrice() {
         return price;
     }
+
+    /**
+     * Sets the {@link MoviesType} of the movie
+     *
+     * @param type of the movie
+     */
+    @Override
+    public void setType(MoviesType type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the {@link MoviesType} of the movie
+     *
+     * @return {@link MoviesType} of the movie
+     */
+    @Override
+    public MoviesType getType() {
+        return type;
+    }
+
 }
