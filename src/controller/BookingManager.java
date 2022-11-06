@@ -194,7 +194,7 @@ public class BookingManager {
     System.out
         .println(String.format("%-25s: %s", "Cinema", booking.getTicket().getShowtime().getCinema().getCinemaCode()));
     System.out.println(String.format("%-25s: %s", "Cinema Type",
-        booking.getTicket().getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+        booking.getTicket().getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Normal"));
     System.out.println(
         String.format("%-25s: %s", "Location", booking.getTicket().getShowtime().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(booking.getTicket())));
@@ -226,7 +226,7 @@ public class BookingManager {
     System.out.println(String.format("%-25s: %s", "Cinema", ticket.getShowtime().getCinema().getCinemaCode()));
     System.out.println(
         String.format("%-25s: %s", "Cinema Type",
-            ticket.getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Not Platinum"));
+            ticket.getShowtime().getCinema().getIsPlatinum() ? "Platinum" : "Normal"));
     System.out
         .println(String.format("%-25s: %s", "Location", ticket.getShowtime().getCinema().getCineplex().getLabel()));
     System.out.println(String.format("%-25s: %s", "Seat(s)", BookingManager.getAllSeatsInString(ticket)));
@@ -253,9 +253,9 @@ public class BookingManager {
     System.out.print("Enter your age: ");
     int age = Helper.readInt(1, 100);
     AgeGroup ageGroup;
-    if (age >= 55) {
+    if (age > 55) {
       ageGroup = AgeGroup.SENIOR_CITIZEN;
-    } else if (age >= 21) {
+    } else if (age > 12) {
       ageGroup = AgeGroup.ADULT;
     } else {
       ageGroup = AgeGroup.CHILD;

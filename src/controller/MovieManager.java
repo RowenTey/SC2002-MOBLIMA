@@ -39,7 +39,7 @@ public class MovieManager {
         for (Movie movie : Database.MOVIES.values()) {
             movieList.add(movie);
         }
-        
+
         return movieList;
     }
 
@@ -54,7 +54,6 @@ public class MovieManager {
         movieList.addAll(MovieManager.getComingSoonMovies());
         return movieList;
     }
-
 
     /**
      * Retrives the {@link Movie} by it's ID
@@ -280,7 +279,7 @@ public class MovieManager {
         System.out.println("Top 5 Movies by Ticket Sales: ");
         for (int i = 5; i > 0; i--) {
             System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
-                    Helper.df1.format(res.get(i - 1).getTicketSales())));
+                    res.get(i - 1).getTicketSales()));
         }
     }
 
@@ -300,7 +299,8 @@ public class MovieManager {
         System.out.println("Top 5 Movies by Overall Rating: ");
         for (int i = 5; i > 0; i--) {
             System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
-                    res.get(i - 1).getOverallRating() == -1 ? "N/A" : Helper.df1.format(res.get(i - 1).getOverallRating())));
+                    res.get(i - 1).getOverallRating() == -1 ? "N/A"
+                            : Helper.df1.format(res.get(i - 1).getOverallRating())));
         }
     }
 

@@ -24,10 +24,11 @@ public class UserManager {
    * 
    * @param username of the staff
    * @param password of the staff
-   * @param mobile number of member
-   * @param email of member
+   * @param mobile   number of member
+   * @param email    of member
    * @param ageGroup of member
-   * @param isStaff boolean {@code true} if the current user is staff, {@code false} otherwise
+   * @param isStaff  boolean {@code true} if the current user is staff,
+   *                 {@code false} otherwise
    */
   public static boolean createUser(String username, String password, String mobile, String email, AgeGroup ageGroup,
       boolean isStaff) {
@@ -136,9 +137,9 @@ public class UserManager {
     System.out.print("Enter your age: ");
     int age = Helper.readInt(1, 100);
     AgeGroup ageGroup;
-    if (age >= 55) {
+    if (age > 55) {
       ageGroup = AgeGroup.SENIOR_CITIZEN;
-    } else if (age >= 21) {
+    } else if (age > 12) {
       ageGroup = AgeGroup.ADULT;
     } else {
       ageGroup = AgeGroup.CHILD;
