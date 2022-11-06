@@ -48,7 +48,9 @@ public class ReviewView extends MainView {
 
     /**
      * Handles the {@link Movie} review
-     * @param i is the index of {@link Movie} in the list of all {@link Movie} from the {@link Database}
+     * 
+     * @param i is the index of {@link Movie} in the list of all {@link Movie} from
+     *          the {@link Database}
      */
     private void handleMovieReview(int i) {
         int choice = -1;
@@ -66,7 +68,7 @@ public class ReviewView extends MainView {
                     MovieManager.displayReviews(MovieManager.getAllMovieList().get(i - 1));
                     break;
                 case 2:
-                    System.out.println("Enter your rating (1.0 - 5.0 [worst - best]):");
+                    System.out.println("\nEnter your rating (1.0 - 5.0 [worst - best]):");
                     double rating = Helper.readDouble(1, 5);
                     System.out.println("Enter your review in words:");
                     String review = Helper.readString();
