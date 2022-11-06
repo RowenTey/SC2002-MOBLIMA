@@ -36,10 +36,25 @@ public class MovieManager {
      */
     public static ArrayList<Movie> getAllMovieList() {
         ArrayList<Movie> movieList = new ArrayList<Movie>();
+        for (Movie movie : Database.MOVIES.values()) {
+            movieList.add(movie);
+        }
+        
+        return movieList;
+    }
+
+    /**
+     * Gets the list of all {@link Movie} that is viewable by the moviegoer
+     * 
+     * @return list of all {@link Movie} that is viewable by the moviegoer
+     */
+    public static ArrayList<Movie> getViewableMovieList() {
+        ArrayList<Movie> movieList = new ArrayList<Movie>();
         movieList.addAll(MovieManager.getBookableMovies());
         movieList.addAll(MovieManager.getComingSoonMovies());
         return movieList;
     }
+
 
     /**
      * Retrives the {@link Movie} by it's ID
@@ -265,7 +280,7 @@ public class MovieManager {
         System.out.println("Top 5 Movies by Ticket Sales: ");
         for (int i = 5; i > 0; i--) {
             System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
-                    res.get(i - 1).getTicketSales()));
+                    Helper.df1.format(res.get(i - 1).getTicketSales())));
         }
     }
 
@@ -285,7 +300,7 @@ public class MovieManager {
         System.out.println("Top 5 Movies by Overall Rating: ");
         for (int i = 5; i > 0; i--) {
             System.out.println(String.format("(%d) %-30s: %s", (5 - i + 1), res.get(i - 1).getTitle(),
-                    res.get(i - 1).getOverallRating() == -1 ? "N/A" : res.get(i - 1).getOverallRating()));
+                    res.get(i - 1).getOverallRating() == -1 ? "N/A" : Helper.df1.format(res.get(i - 1).getOverallRating())));
         }
     }
 
