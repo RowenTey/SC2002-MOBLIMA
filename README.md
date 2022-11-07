@@ -1,6 +1,8 @@
-# SC2002-MOBLIMA 🛌🏼
+# SC2002-MOBLIMA 🎬
 
 > Movie Booking and Listing Management Application (MOBLIMA) for SC2002
+
+![MOBLIMA Image](https://i.imgur.com/taKl0RI.jpeg)
 
 ## 📂 Project Folder Structure
 
