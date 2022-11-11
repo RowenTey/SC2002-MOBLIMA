@@ -21,6 +21,12 @@ import src.model.enums.*;
  */
 public class MovieManager {
     /**
+     * Default constructor for Movie Manager
+     */
+    public MovieManager() {
+    }
+
+    /**
      * Gets the total number of movies
      * 
      * @return total number of movies

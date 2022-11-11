@@ -21,6 +21,12 @@ import src.model.enums.SeatType;
  */
 public class BookingManager {
   /**
+   * Default constructor for Booking Manager
+   */
+  public BookingManager() {
+  }
+
+  /**
    * Gets the list of {@link Booking}
    * 
    * @return list of {@link Booking}

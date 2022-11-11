@@ -430,6 +430,13 @@ public class Helper {
     return true;
   }
 
+  /**
+   * Get a random number in a certain range
+   * 
+   * @param min of the range
+   * @param max of the range
+   * @return int random number in the given range
+   */
   public static int getRandomNumber(int min, int max) {
     Random random = new Random();
     return random.nextInt(max - min) + min;

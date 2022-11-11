@@ -20,6 +20,12 @@ import src.model.enums.AgeGroup;
  */
 public class UserManager {
   /**
+   * Default constructor for User Manager
+   */
+  public UserManager() {
+  }
+
+  /**
    * Create a staff account
    * 
    * @param username of the staff
@@ -29,6 +35,8 @@ public class UserManager {
    * @param ageGroup of member
    * @param isStaff  boolean {@code true} if the current user is staff,
    *                 {@code false} otherwise
+   * @return boolean {@code true} if user was successfully created,
+   *         {@code false} otherwise
    */
   public static boolean createUser(String username, String password, String mobile, String email, AgeGroup ageGroup,
       boolean isStaff) {
@@ -151,6 +159,7 @@ public class UserManager {
   /**
    * Get {@link User} from database
    * 
+   * @param username of user
    * @return {@code User} object if exist, {@code null} otherwise
    */
   protected static User getUser(String username) {

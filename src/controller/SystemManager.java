@@ -18,6 +18,11 @@ import src.model.enums.MoviesType;
  * @since 2022-10-31
  */
 public class SystemManager {
+  /**
+   * Default constructor for System Manager
+   */
+  public SystemManager() {
+  }
 
   /**
    * Add a holiday

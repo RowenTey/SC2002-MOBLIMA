@@ -1,5 +1,7 @@
 package src.database;
 
+import src.model.*;
+
 /**
  * An Enum that corresponds to the different file types that the database will
  * read from and write to.

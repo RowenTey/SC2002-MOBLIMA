@@ -13,7 +13,14 @@ import src.view.CineplexAppView;
  */
 public class CineplexApp {
         /**
+         * Default constructor for CineplexApp
+         */
+        public CineplexApp() {
+        }
+
+        /**
          * Main function that is the starting point of the application
+         * 
          * @param args Arguments passed to the app
          * @throws Exception handles exception
          */

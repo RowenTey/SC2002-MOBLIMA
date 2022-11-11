@@ -20,7 +20,7 @@ public class Cinema implements Serializable {
     /**
      * {@link Location} of the cinema
      */
-    private Location location;
+    private Location cineplex;
 
     /**
      * Unique code of the cinema
@@ -35,12 +35,12 @@ public class Cinema implements Serializable {
     /**
      * Constructor of Cinema
      * 
-     * @param location   of the Cinema
+     * @param cineplex   of the Cinema
      * @param cinemaCode of the cinema
      * @param isPlatinum (type) of cinema
      */
-    public Cinema(Location location, String cinemaCode, boolean isPlatinum) {
-        setCineplex(location);
+    public Cinema(Location cineplex, String cinemaCode, boolean isPlatinum) {
+        setCineplex(cineplex);
         setCinemaCode(cinemaCode);
         setIsPlatinum(isPlatinum);
     }
@@ -69,7 +69,7 @@ public class Cinema implements Serializable {
      * @param location of the cinema
      */
     public void setCineplex(Location location) {
-        this.location = location;
+        this.cineplex = location;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Cinema implements Serializable {
      * @return {@link Location} of the cinema
      */
     public Location getCineplex() {
-        return location;
+        return cineplex;
     }
 
     /**

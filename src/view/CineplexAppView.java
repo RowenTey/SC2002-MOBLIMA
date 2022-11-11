@@ -1,6 +1,7 @@
 package src.view;
 
 import src.controller.*;
+import src.model.*;
 import src.database.Database;
 import src.helper.Helper;
 
@@ -12,12 +13,39 @@ import src.helper.Helper;
  * @since 2022-10-19
  */
 public class CineplexAppView extends MainView {
+    /**
+     * View Menu for managing {@link Staff}.
+     */
     protected static StaffView staffView;
+
+    /**
+     * View Menu for managing {@link MovieGoer}.
+     */
     protected static MovieGoerView movieGoerView;
+
+    /**
+     * View Menu for managing {@link Database}.
+     */
     protected static DatabaseView databaseView;
+
+    /**
+     * View Menu for managing {@link Movie}.
+     */
     protected static MovieView movieView;
+
+    /**
+     * View Menu for managing {@link Cineplex}.
+     */
     protected static CineplexView cineplexView;
+
+    /**
+     * View Menu for managing {@link Showtime}.
+     */
     protected static ShowtimeView showtimeView;
+
+    /**
+     * View Menu for managing {@link Review}.
+     */
     protected static ReviewView reviewView;
 
     /**
