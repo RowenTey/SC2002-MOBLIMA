@@ -79,5 +79,5 @@ Launch the `index.html` under ./docs/index.html
 - [@amiyang](https://github.com/amiyang)
 - [@ScatteredThunderstorms](https://github.com/ScatteredThunderstorms)
 
-## 🥂 Acknowledgements 
-- [@limivann](https://github.com/limivann)
+<!-- ## 🥂 Acknowledgements 
+- [@limivann](https://github.com/limivann) -->
