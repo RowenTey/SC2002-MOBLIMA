@@ -50,6 +50,17 @@ cd SC2002-MOBLIMA
 java -jar ./build/SC2002-MOBLIMA.jar
 ```
 
+## 🌊 Flowchart
+```mermaid
+flowchart LR
+A(CIneplexApp) --> B(CineplexAppView)
+B --> C{Which route?}
+C --> D(Login)
+C --> E(Continue As Guest)
+D --> F(Staff)
+D --> G(Member)
+```
+
 ## 📃 Documentation
 
 > Create Javadocs - make sure you are at SC2002-MOBLIMA directory
