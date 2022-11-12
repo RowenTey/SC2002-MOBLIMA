@@ -1,4 +1,4 @@
-# SC2002-MOBLIMA 🎬
+# 🎬 SC2002-MOBLIMA
 
 > Movie Booking and Listing Management Application (MOBLIMA) for SC2002
 
@@ -12,7 +12,7 @@
 
 ```terminal
 .
-├── build                   # Compiled jar file
+├── build                   # Compiled .jar file
 ├── docs                    # Javadocs generated as HTML
 ├── src                     # Source files (all the codes)
 ├── LICENSE
@@ -25,7 +25,7 @@
 .
 ├── ...
 ├── src
-│   ├── controller         # Managers classes
+│   ├── controller         # Manager classes
 │   ├── database           # Database classes
 │   ├── helper             # Helper classes
 │   ├── model              # Model classes
@@ -50,6 +50,18 @@ cd SC2002-MOBLIMA
 java -jar ./build/SC2002-MOBLIMA.jar
 ```
 
+## 🌊 Flowchart
+
+```mermaid
+flowchart LR
+A(CIneplexApp) --> B(CineplexAppView)
+B --> C{Which route?}
+C --> D(Login)
+C --> E(Continue As Guest)
+D --> F(Staff)
+D --> G(Member)
+```
+
 ## 📃 Documentation
 
 > Create Javadocs - make sure you are at SC2002-MOBLIMA directory
@@ -67,3 +79,6 @@ Launch the `index.html` under ./docs/index.html
 - [@SLAU925](https://github.com/SLAU925)
 - [@amiyang](https://github.com/amiyang)
 - [@ScatteredThunderstorms](https://github.com/ScatteredThunderstorms)
+
+<!-- ## 🥂 Acknowledgements
+- [@limivann](https://github.com/limivann) -->
