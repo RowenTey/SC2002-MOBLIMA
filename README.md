@@ -12,7 +12,7 @@
 
 ```terminal
 .
-├── build                   # Compiled jar file
+├── build                   # Compiled .jar file
 ├── docs                    # Javadocs generated as HTML
 ├── src                     # Source files (all the codes)
 ├── LICENSE
@@ -25,7 +25,7 @@
 .
 ├── ...
 ├── src                    
-│   ├── controller         # Managers classes
+│   ├── controller         # Manager classes
 │   ├── database           # Database classes
 │   ├── helper             # Helper classes
 │   ├── model              # Model classes
