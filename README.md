@@ -1,4 +1,4 @@
-# SC2002-MOBLIMA 🎬
+# 🎬 SC2002-MOBLIMA 
 
 > Movie Booking and Listing Management Application (MOBLIMA) for SC2002
 
