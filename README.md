@@ -24,13 +24,13 @@
 ```terminal
 .
 ├── ...
-├── src                    
+├── src
 │   ├── controller         # Managers classes
 │   ├── database           # Database classes
 │   ├── helper             # Helper classes
 │   ├── model              # Model classes
 │   ├── view               # View/Interface classes
-│   └── HotelApp.java      # Main Driver file (MOBLIMA App)
+│   └── CineplexApp.java      # Main Driver file (MOBLIMA App)
 └── ...
 ```
 
