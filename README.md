@@ -30,7 +30,7 @@
 │   ├── helper             # Helper classes
 │   ├── model              # Model classes
 │   ├── view               # View/Interface classes
-│   └── CineplexApp.java      # Main Driver file (MOBLIMA App)
+│   └── CineplexApp.java   # Main Driver file (MOBLIMA App)
 └── ...
 ```
 
