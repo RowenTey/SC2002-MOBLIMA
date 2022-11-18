@@ -7,7 +7,6 @@ import src.database.Database;
 import src.database.FileType;
 import src.helper.Helper;
 import src.model.Movie;
-import src.model.User;
 import src.model.enums.MoviesType;
 
 /**
@@ -94,22 +93,6 @@ public class SystemManager {
       }
     }
     return true;
-  }
-
-  /**
-   * Validates the user authentication
-   * 
-   * @param username entered
-   * @param password entered
-   * @return {@code true} is valid user, {@code false} otherwise
-   */
-  public static boolean validateStaff(String username, String password) {
-    for (User staff : Database.USERS.values()) {
-      if (staff.getName().equals(username) && staff.getPassword().equals(password)) {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**

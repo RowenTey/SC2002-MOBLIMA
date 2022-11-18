@@ -275,7 +275,6 @@ public class BookingManager {
    * Removes hyphen and semi-colon from Date
    * 
    * @param date to be formatted
-   * 
    * @return formatted date in string
    */
   public static String formatDate(String date) {
